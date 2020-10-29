@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "sihywtcamd",
+  "version": "${version}",
+  "name": "Sihywtcamd",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/sihywtcamd/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "com.github.galatynf.sihywtcamd.client.SihywtcamdClient"
+    ],
+    "main": [
+      "com.github.galatynf.sihywtcamd.Sihywtcamd"
+    ]
+  },
+  "mixins": [
+    "sihywtcamd.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.10.5+build.213",
+    "fabric": "*",
+    "minecraft": "1.16.3"
+  }
+}
