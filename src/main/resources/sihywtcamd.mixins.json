@@ -4,7 +4,8 @@
   "package": "com.github.galatynf.sihywtcamd.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "ZombieMixin"
+    "ZombieMixin",
+    "husk.ProjectileMixin"
   ],
   "client": [
   ],
