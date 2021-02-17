@@ -4,6 +4,7 @@
   "package": "com.github.galatynf.sihywtcamd.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "ZombieMixin"
   ],
   "client": [
   ],
