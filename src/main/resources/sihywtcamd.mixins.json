@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "ZombieMixin",
+    "husk.PlayerFireHuskMixin",
     "husk.ProjectileMixin"
   ],
   "client": [
