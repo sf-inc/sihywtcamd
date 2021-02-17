@@ -7,17 +7,19 @@ So I heard you were talking crap about Minecraft's difficulty ?
 
 ### Zombie
 
-The more you hit a zombie, the less damage it deals
+(Perhaps later : The more you hit a zombie, the less damage it deals)
 
 Only takes 1 damage from regular attacks
 
 #### Husk
 
+Is no longer affected by Flame and Fire aspect
+
 #### Drowned
 
-(Spawn more often with a trident)
+Spawn more often with a trident
 
-Increased drop chance for trident
+Increased velocity in water
 
 ### Skeleton
 
@@ -29,11 +31,11 @@ Deal slowness 2 instead of 1
 
 ### Creeper
 
-N/A
+Download Creeper AI updated
 
 ### Enderman
 
-Player gets blindness when staring at an enderman
+Player gets blindness (5 seconds) when staring at an enderman
 
 ### Spider
 
@@ -59,9 +61,7 @@ Phases through blocks but is repelled by light
 
 ### Wither skeleton
 
-Is sometimes only 1.8 blocks tall
-
-OR : is faster
+Can be baby (but taller than baby zombies)
 
 ### Blaze
 
@@ -71,11 +71,19 @@ Sets entities on fire on collision
 
 Has double the health
 
+### Piglin
+
+Can spawn riding a hoglin
+
+### Hoglin
+
+N/A
+
 ### Pillager
 
 Can sometimes be faster
 
-OR/AND Increased chance for punch-through on his crossbow
+AND Increased chance for punch-through on his crossbow
 
 ### Evoker
 
@@ -85,14 +93,16 @@ Has 1.5* the health
 
 ### Vindicator
 
-N/A
+Can sometimes be faster
 
 ### Witch
 
 Slightly increased spawn chance
 
+Flees the player
+
 ### Shulker
 
-Nausea/blindness when struck by a projectile
+Blindness (5 seconds) when struck by a projectile
 
 ## Player changes
