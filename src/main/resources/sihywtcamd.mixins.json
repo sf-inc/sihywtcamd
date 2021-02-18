@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "DrownedMixin",
+    "EndermanMixin",
     "StrayMixin",
     "ZombieMixin",
     "husk.PlayerFireHuskMixin",
