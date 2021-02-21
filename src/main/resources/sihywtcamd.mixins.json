@@ -6,6 +6,7 @@
   "mixins": [
     "DrownedMixin",
     "EndermanMixin",
+    "ShulkerBulletMixin",
     "StrayMixin",
     "ZombieMixin",
     "husk.PlayerFireHuskMixin",
