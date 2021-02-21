@@ -4,10 +4,12 @@
   "package": "com.github.galatynf.sihywtcamd.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "BlazeMixin",
     "DrownedMixin",
     "EndermanMixin",
     "GhastMixin",
     "ShulkerBulletMixin",
+    "SkeletonMixin",
     "StrayMixin",
     "ZombieMixin",
     "husk.PlayerFireHuskMixin",
