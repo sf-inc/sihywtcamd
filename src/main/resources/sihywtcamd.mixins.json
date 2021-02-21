@@ -6,6 +6,7 @@
   "mixins": [
     "DrownedMixin",
     "EndermanMixin",
+    "GhastMixin",
     "ShulkerBulletMixin",
     "StrayMixin",
     "ZombieMixin",
