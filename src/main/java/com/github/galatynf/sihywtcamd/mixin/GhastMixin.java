@@ -14,7 +14,7 @@ public class GhastMixin {
     @Inject(method = "createGhastAttributes", at = @At("HEAD"), cancellable = true)
     private static void changeHealth(CallbackInfoReturnable<DefaultAttributeContainer.Builder> cir) {
         cir.setReturnValue(MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 20.0D)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 42.0D)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 100.0D));
     }
 }
