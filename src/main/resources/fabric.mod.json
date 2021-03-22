@@ -2,10 +2,17 @@
   "schemaVersion": 1,
   "id": "sihywtcamd",
   "version": "${version}",
-  "name": "So I heard you were talking crap about Minecraft's difficulty ?",
-  "description": "",
-  "authors": [],
-  "contact": {},
+  "name": "sihywtcamd",
+  "description": "So I heard you were talking crap about Minecraft's difficulty?",
+  "authors": [
+    "GalatynF",
+    "Pardys"
+  ],
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/sihywtcamd",
+    "issues": "https://github.com/sf-inc/sihywtcamd/issues",
+    "sources": "https://github.com/sf-inc/sihywtcamd"
+  },
   "license": "MIT",
   "icon": "assets/sihywtcamd/icon.png",
   "environment": "*",
