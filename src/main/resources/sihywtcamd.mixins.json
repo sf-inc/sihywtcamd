@@ -13,9 +13,12 @@
     "StrayMixin",
     "ZombieMixin",
     "husk.PlayerFireHuskMixin",
-    "husk.ProjectileMixin"
+    "husk.ProjectileMixin",
+    "phantom.EntityMixin",
+    "phantom.LivingEntityMixin"
   ],
   "client": [
+    "phantom.PhantomRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
