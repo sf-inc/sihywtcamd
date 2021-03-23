@@ -15,7 +15,10 @@
     "husk.PlayerFireHuskMixin",
     "husk.ProjectileMixin",
     "phantom.EntityMixin",
-    "phantom.LivingEntityMixin"
+    "phantom.LivingEntityMixin",
+    "phantom.PhantomAttackGoalMixin",
+    "phantom.PhantomSwoopGoalMixin",
+    "phantom.PhantomTargetGoalMixin"
   ],
   "client": [
     "phantom.PhantomRendererMixin"
