@@ -12,6 +12,7 @@
     "ShulkerBulletMixin",
     "SkeletonMixin",
     "StrayMixin",
+    "WitchMixin",
     "ZombieMixin",
     "husk.PlayerFireHuskMixin",
     "husk.ProjectileMixin",
