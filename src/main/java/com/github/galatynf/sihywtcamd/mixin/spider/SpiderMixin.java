@@ -3,6 +3,9 @@ package com.github.galatynf.sihywtcamd.mixin.spider;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.attribute.EntityAttributeInstance;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
@@ -14,7 +17,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.Objects;
 
 @Mixin(SpiderEntity.class)
 public class SpiderMixin extends HostileEntity {
@@ -38,7 +42,13 @@ public class SpiderMixin extends HostileEntity {
     public void setBaby(boolean baby) {
         this.getDataTracker().set(BABY, baby);
         if (baby) {
-            this.setHealth(this.getMaxHealth() / 2);
+            EntityAttributeInstance attackDamage = this.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE);
+            EntityAttributeInstance maxHealth = this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
+
+            Objects.requireNonNull(attackDamage).addPersistentModifier(new EntityAttributeModifier(
+                    "Baby spawn malus", -0.5F * attackDamage.getValue(), EntityAttributeModifier.Operation.ADDITION));
+            Objects.requireNonNull(maxHealth).addPersistentModifier(new EntityAttributeModifier(
+                    "Baby spawn malus", -0.5F * maxHealth.getValue(), EntityAttributeModifier.Operation.ADDITION));
         }
     }
 
@@ -63,10 +73,13 @@ public class SpiderMixin extends HostileEntity {
         tag.putBoolean("IsBaby", this.isBaby());
     }
 
-    @Inject(method = "getActiveEyeHeight", at = @At("HEAD"), cancellable = true)
-    private void changeBabyEyeHeight(EntityPose pose, EntityDimensions dimensions, CallbackInfoReturnable<Float> cir) {
-        if (this.isBaby()) {
-            cir.setReturnValue(0.325F);
-        }
+    @Override
+    public float getScaleFactor() {
+        return this.isBaby() ? 0.33F : 1.0F;
+    }
+
+    @Override
+    public float getActiveEyeHeight(EntityPose pose, EntityDimensions dimensions) {
+        return 0.65F * this.getScaleFactor();
     }
 }

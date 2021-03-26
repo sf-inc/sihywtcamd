@@ -27,8 +27,8 @@ public abstract class LivingEntityMixin extends Entity {
         if (!this.world.isClient
                 && this.getType().equals(EntityType.SPIDER)
                 && !this.isBaby()
-                && this.random.nextBoolean()) {
-            int numberBabies = this.random.nextInt(3) + 1;
+                && this.random.nextFloat() < 0.1F) {
+            int numberBabies = this.random.nextInt(5) + 4;
             for (int i=0; i < numberBabies; i++) {
                 MobEntity mob = (MobEntity) this.getType().spawn((ServerWorld) world, null, null, null, this.getBlockPos(), SpawnReason.NATURAL, false, false);
                 if (mob != null) mob.setBaby(true);
