@@ -16,4 +16,10 @@ public class BiomeFeatMixin {
                                              int skeletonWeight, CallbackInfo ci) {
         builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.WITCH, 3, 1, 1));
     }
+
+    @Inject(method = "addOceanMobs", at = @At("TAIL"))
+    private static void spawnGuardianNaturally(SpawnSettings.Builder builder, int squidWeight, int squidMaxGroupSize,
+                                               int codWeight, CallbackInfo ci) {
+        builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.GUARDIAN, 2, 1, 2));
+    }
 }
