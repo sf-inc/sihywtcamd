@@ -9,6 +9,7 @@
     "DrownedMixin",
     "EndermanMixin",
     "EntityRenderDispatcherMixin",
+    "EvokerMixin",
     "GhastMixin",
     "ShulkerBulletMixin",
     "SkeletonMixin",
