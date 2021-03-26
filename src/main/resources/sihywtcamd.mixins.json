@@ -8,6 +8,7 @@
     "BlazeMixin",
     "DrownedMixin",
     "EndermanMixin",
+    "EntityRenderDispatcherMixin",
     "GhastMixin",
     "ShulkerBulletMixin",
     "SkeletonMixin",
@@ -20,7 +21,9 @@
     "phantom.LivingEntityMixin",
     "phantom.PhantomAttackGoalMixin",
     "phantom.PhantomSwoopGoalMixin",
-    "phantom.PhantomTargetGoalMixin"
+    "phantom.PhantomTargetGoalMixin",
+    "spider.LivingEntityMixin",
+    "spider.SpiderMixin"
   ],
   "client": [
     "phantom.PhantomRendererMixin"
