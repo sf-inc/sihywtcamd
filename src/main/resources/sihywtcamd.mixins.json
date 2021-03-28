@@ -11,6 +11,7 @@
     "EntityRenderDispatcherMixin",
     "EvokerMixin",
     "GhastMixin",
+    "PiglinMixin",
     "PillagerMixin",
     "ShulkerBulletMixin",
     "SkeletonMixin",
