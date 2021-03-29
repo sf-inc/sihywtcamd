@@ -27,6 +27,7 @@
     "phantom.PhantomAttackGoalMixin",
     "phantom.PhantomSwoopGoalMixin",
     "phantom.PhantomTargetGoalMixin",
+    "SlimeMixin",
     "spider.LivingEntityMixin",
     "spider.SpiderMixin"
   ],
