@@ -19,8 +19,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(WitherEntity.class)
 public abstract class WitherMixin extends HostileEntity {
-    @Shadow public abstract boolean shouldRenderOverlay();
-
     @Shadow public abstract int getInvulnerableTimer();
 
     @Unique
@@ -45,7 +43,7 @@ public abstract class WitherMixin extends HostileEntity {
                 && (this.world.getDifficulty().equals(Difficulty.NORMAL) || this.world.getDifficulty().equals(Difficulty.HARD))
                 && this.getInvulnerableTimer() < 1
                 && !sihywtcamd_hasSpawned
-                && this.shouldRenderOverlay()) {
+                && this.getHealth() < this.getMaxHealth() / 2.0D) {
             int witherSummoned = 3;
             if (this.random.nextFloat() < this.world.getLocalDifficulty(this.getBlockPos()).getClampedLocalDifficulty()) {
                 ++witherSummoned;
