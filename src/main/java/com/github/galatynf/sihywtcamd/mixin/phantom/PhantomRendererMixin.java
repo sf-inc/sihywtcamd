@@ -14,16 +14,19 @@ import net.minecraft.entity.mob.PhantomEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PhantomEntityRenderer.class)
-public class PhantomRendererMixin extends MobEntityRenderer<PhantomEntity, PhantomEntityModel<PhantomEntity>> {
+public abstract class PhantomRendererMixin extends MobEntityRenderer<PhantomEntity, PhantomEntityModel<PhantomEntity>> {
     public PhantomRendererMixin(EntityRenderDispatcher entityRenderDispatcher, PhantomEntityModel<PhantomEntity> entityModel, float f) {
         super(entityRenderDispatcher, entityModel, f);
     }
 
-    @Override
-    public Identifier getTexture(PhantomEntity entity) {
-        return new Identifier("sihywtcamd", "textures/phantom.png");
+    @Inject(method = "getTexture", at = @At("HEAD"), cancellable = true)
+    private void getTexture(PhantomEntity phantomEntity, CallbackInfoReturnable<Identifier> cir) {
+        cir.setReturnValue(new Identifier("sihywtcamd", "textures/phantom.png"));
     }
 
     @Override
