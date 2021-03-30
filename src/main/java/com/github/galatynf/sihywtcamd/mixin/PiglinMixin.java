@@ -30,7 +30,7 @@ public abstract class PiglinMixin extends AbstractPiglinEntity {
     @Inject(method = "initialize", at = @At("HEAD"))
     private void spawnOnHoglin(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, EntityData entityData,
                                CompoundTag entityTag, CallbackInfoReturnable<EntityData> cir) {
-        if (world.getRandom().nextFloat() < 0.07F) {
+        if (world.getRandom().nextFloat() < 0.05F + 0.05F * world.getLocalDifficulty(this.getBlockPos()).getClampedLocalDifficulty()) {
             this.setCannotHunt(true);
             List<HoglinEntity> list = world.getEntitiesByClass(HoglinEntity.class, this.getBoundingBox().expand(5.0D, 3.0D, 5.0D), EntityPredicates.NOT_MOUNTED);
             if (!list.isEmpty()) {
