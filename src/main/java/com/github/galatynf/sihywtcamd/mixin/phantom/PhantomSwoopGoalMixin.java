@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(targets = "net.minecraft.entity.mob.PhantomEntity$SwoopMovementGoal")
 public class PhantomSwoopGoalMixin {
     @Shadow private PhantomEntity field_7333;
-    @Inject(method = "shouldContinue", at = @At("TAIL"), cancellable = true)
+    @Inject(method = "Lnet/minecraft/entity/mob/PhantomEntity$SwoopMovementGoal;shouldContinue()Z", at = @At("TAIL"), cancellable = true)
     private void changePredicateContinue(CallbackInfoReturnable<Boolean> cir) {
         if (field_7333.world.getLightLevel(field_7333.getBlockPos()) > 7) {
             cir.setReturnValue(false);
