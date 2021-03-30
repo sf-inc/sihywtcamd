@@ -27,7 +27,7 @@ public class EndermanMixin extends HostileEntity {
         vec3d2 = vec3d2.normalize();
         double e = vec3d.dotProduct(vec3d2);
         if (e > 1.0D - 0.025D / d && player.canSee(this)) {
-            player.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS, 100));
+            player.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS, 150));
         }
     }
 }

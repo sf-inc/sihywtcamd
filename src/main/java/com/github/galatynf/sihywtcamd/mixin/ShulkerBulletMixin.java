@@ -15,7 +15,7 @@ public class ShulkerBulletMixin {
     @Inject(method = "onEntityHit", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;addStatusEffect(Lnet/minecraft/entity/effect/StatusEffectInstance;)Z"))
     private void addBlindnessS(EntityHitResult entityHitResult, CallbackInfo ci) {
         if (entityHitResult.getEntity() instanceof PlayerEntity) {
-            ((PlayerEntity) entityHitResult.getEntity()).addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS, 50));
+            ((PlayerEntity) entityHitResult.getEntity()).addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS, 100));
         }
     }
 }
