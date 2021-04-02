@@ -2,43 +2,38 @@ package com.github.galatynf.sihywtcamd.mixin;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.MovementType;
 import net.minecraft.entity.mob.DrownedEntity;
 import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(DrownedEntity.class)
 public abstract class DrownedMixin extends ZombieEntity {
-    @Shadow protected abstract boolean isTargetingUnderwater();
 
     public DrownedMixin(EntityType<? extends ZombieEntity> entityType, World world) {
         super(entityType, world);
     }
 
-    @Override
-    public void initEquipment(LocalDifficulty difficulty) {
+    @Inject(method = "initEquipment", at = @At("HEAD"), cancellable = true)
+    public void changeProbability(LocalDifficulty difficulty, CallbackInfo ci) {
         int rand = this.random.nextInt(100);
         if (rand < 15) {
             this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.TRIDENT));
         } else if (rand < 18 ) {
             this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.FISHING_ROD));
         }
+        ci.cancel();
     }
 
-    @Override
-    public void travel(Vec3d movementInput) {
-        if (this.canMoveVoluntarily() && this.isTouchingWater() && this.isTargetingUnderwater()) {
-            this.updateVelocity(0.1F, movementInput);
-            this.move(MovementType.SELF, this.getVelocity());
-            this.setVelocity(this.getVelocity().multiply(0.9D));
-        } else {
-            super.travel(movementInput);
-        }
+    @ModifyArg(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/DrownedEntity;updateVelocity(FLnet/minecraft/util/math/Vec3d;)V"))
+    private float increaseVelocity(float speed) {
+        return 0.1F;
     }
 }
