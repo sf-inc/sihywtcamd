@@ -14,7 +14,7 @@ public class PhantomSwoopGoalMixin {
 
     @Inject(method = "Lnet/minecraft/entity/mob/PhantomEntity$SwoopMovementGoal;shouldContinue()Z", at = @At("TAIL"), cancellable = true)
     private void changePredicateContinue(CallbackInfoReturnable<Boolean> cir) {
-        if (ModConfig.get().phantomLightFear && field_7333.world.getLightLevel(field_7333.getBlockPos()) > 7) {
+        if (ModConfig.get().phantomLightFear && field_7333.world.getLightLevel(field_7333.getBlockPos()) > 10) {
             cir.setReturnValue(false);
         }
     }
