@@ -1,9 +1,7 @@
 package com.github.galatynf.sihywtcamd.mixin;
 
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
@@ -17,6 +15,7 @@ import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Objects;
@@ -37,10 +36,8 @@ public abstract class PillagerMixin extends IllagerEntity {
         }
     }
 
-    @Override
-    public void method_30759(float f) {
-        if (!this.getMainHandStack().isEmpty() && this.random.nextFloat() < 0.5F * f) {
-            this.equipStack(EquipmentSlot.MAINHAND, EnchantmentHelper.enchant(this.random, this.getMainHandStack(), (int)(5.0F + f * (float)this.random.nextInt(18)), false));
-        }
+    @ModifyArg(method = "method_30759", at = @At(value = "INVOKE", target = "Ljava/util/Random;nextInt(I)I"))
+    private int changeProbabilityMoreEnchant(int range) {
+        return range / 3;
     }
 }
