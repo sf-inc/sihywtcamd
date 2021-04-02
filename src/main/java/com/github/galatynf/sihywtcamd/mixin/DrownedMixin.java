@@ -1,5 +1,6 @@
 package com.github.galatynf.sihywtcamd.mixin;
 
+import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.mob.DrownedEntity;
@@ -23,17 +24,19 @@ public abstract class DrownedMixin extends ZombieEntity {
 
     @Inject(method = "initEquipment", at = @At("HEAD"), cancellable = true)
     public void changeProbability(LocalDifficulty difficulty, CallbackInfo ci) {
-        int rand = this.random.nextInt(100);
-        if (rand < 15) {
-            this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.TRIDENT));
-        } else if (rand < 18 ) {
-            this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.FISHING_ROD));
+        if (ModConfig.get().drownedTridentSpawn) {
+            int rand = this.random.nextInt(100);
+            if (rand < 15) {
+                this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.TRIDENT));
+            } else if (rand < 18) {
+                this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.FISHING_ROD));
+            }
+            ci.cancel();
         }
-        ci.cancel();
     }
 
     @ModifyArg(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/DrownedEntity;updateVelocity(FLnet/minecraft/util/math/Vec3d;)V"))
     private float increaseVelocity(float speed) {
-        return 0.1F;
+        return ModConfig.get().drownedHighVelocity ? 0.1F : speed;
     }
 }

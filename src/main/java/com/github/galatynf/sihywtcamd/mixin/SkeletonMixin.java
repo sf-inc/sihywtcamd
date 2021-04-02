@@ -1,5 +1,6 @@
 package com.github.galatynf.sihywtcamd.mixin;
 
+import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.FleeEntityGoal;
 import net.minecraft.entity.mob.*;
@@ -19,6 +20,9 @@ public abstract class SkeletonMixin extends HostileEntity {
 
     @Inject(at=@At("HEAD"), method = "initGoals")
     private void fleePlayer(CallbackInfo ci) {
-        this.goalSelector.add(3, new FleeEntityGoal<>(this, PlayerEntity.class, 4, 1.2, 1.5, (livingEntity) -> (this.getMainHandStack().getItem() == Items.BOW)));
+        if (ModConfig.get().skeletonFleeGoal) {
+            this.goalSelector.add(3, new FleeEntityGoal<>(this, PlayerEntity.class, 4, 1.2, 1.5,
+                    (livingEntity) -> (this.getMainHandStack().getItem().equals(Items.BOW))));
+        }
     }
 }

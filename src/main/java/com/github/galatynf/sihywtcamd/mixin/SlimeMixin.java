@@ -1,5 +1,6 @@
 package com.github.galatynf.sihywtcamd.mixin;
 
+import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
@@ -30,7 +31,8 @@ public abstract class SlimeMixin extends MobEntity {
     @Override
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable CompoundTag entityTag) {
         int i = this.random.nextInt(3);
-        if (this.random.nextFloat() < 0.5F * difficulty.getClampedLocalDifficulty()) {
+        if ((ModConfig.get().slimeBiggerSize || i < 2)
+                && this.random.nextFloat() < 0.5F * difficulty.getClampedLocalDifficulty()) {
             ++i;
         }
 
@@ -42,6 +44,7 @@ public abstract class SlimeMixin extends MobEntity {
     @Inject(method = "tick", at = @At("TAIL"))
     private void tryToFuse(CallbackInfo ci) {
         if (!this.world.isClient
+                && ModConfig.get().slimeCanMerge
                 && this.isAlive()
                 && this.getSize() < 4
                 && (this.world.getTime() % 5) == 0) {

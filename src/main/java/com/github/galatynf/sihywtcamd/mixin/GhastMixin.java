@@ -1,5 +1,6 @@
 package com.github.galatynf.sihywtcamd.mixin;
 
+import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.GhastEntity;
@@ -13,8 +14,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class GhastMixin {
     @Inject(method = "createGhastAttributes", at = @At("HEAD"), cancellable = true)
     private static void changeHealth(CallbackInfoReturnable<DefaultAttributeContainer.Builder> cir) {
-        cir.setReturnValue(MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 42.0D)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 100.0D));
+        if (ModConfig.get().ghastIncreasedHealth) {
+            cir.setReturnValue(MobEntity.createMobAttributes()
+                    .add(EntityAttributes.GENERIC_MAX_HEALTH, 42.0D)
+                    .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 100.0D));
+        }
     }
 }

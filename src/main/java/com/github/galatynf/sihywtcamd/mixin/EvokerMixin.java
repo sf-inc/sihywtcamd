@@ -1,5 +1,6 @@
 package com.github.galatynf.sihywtcamd.mixin;
 
+import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -21,14 +22,17 @@ public abstract class EvokerMixin extends SpellcastingIllagerEntity {
 
     @Inject(method = "createEvokerAttributes", at = @At("HEAD"), cancellable = true)
     private static void changeHealthE(CallbackInfoReturnable<DefaultAttributeContainer.Builder> cir) {
-        cir.setReturnValue(HostileEntity.createHostileAttributes()
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.5D)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 12.0D)
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 36.0D));
+        if (ModConfig.get().evokerIncreasedHealth) {
+            cir.setReturnValue(HostileEntity.createHostileAttributes()
+                    .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.5D)
+                    .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 12.0D)
+                    .add(EntityAttributes.GENERIC_MAX_HEALTH, 36.0D));
+        }
     }
 
     @Override
     public boolean isInvulnerableTo(DamageSource damageSource) {
-        return damageSource.isProjectile() || super.isInvulnerableTo(damageSource);
+        return ModConfig.get().evokerStopArrows ? damageSource.isProjectile() || super.isInvulnerableTo(damageSource)
+                : super.isInvulnerableTo(damageSource);
     }
 }

@@ -1,5 +1,6 @@
 package com.github.galatynf.sihywtcamd.mixin;
 
+import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -20,8 +21,10 @@ public abstract class BlazeMixin extends Entity{
 
     @Inject(at=@At("HEAD"), method="damage")
     private void setFire(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
-        Entity atker = source.getAttacker();
-        if(atker instanceof BlazeEntity && !source.isProjectile()) {
+        Entity attacker = source.getAttacker();
+        if(ModConfig.get().blazeFireCollision
+                && attacker instanceof BlazeEntity
+                && !source.isProjectile()) {
             this.setOnFireFor(5);
         }
     }

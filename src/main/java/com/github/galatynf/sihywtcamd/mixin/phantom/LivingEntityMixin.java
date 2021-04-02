@@ -1,5 +1,6 @@
 package com.github.galatynf.sihywtcamd.mixin.phantom;
 
+import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -18,7 +19,7 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(method = "damage", at = @At("HEAD"), cancellable = true)
     private void cancelSuffocationDamagePhantom(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
-        if (this.getType().equals(EntityType.PHANTOM)
+        if (ModConfig.get().phantomThroughBlocks && this.getType().equals(EntityType.PHANTOM)
                 && (source.equals(DamageSource.IN_WALL) || source.equals(DamageSource.FLY_INTO_WALL))) {
             cir.setReturnValue(false);
         }

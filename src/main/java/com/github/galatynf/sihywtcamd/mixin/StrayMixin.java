@@ -1,5 +1,6 @@
 package com.github.galatynf.sihywtcamd.mixin;
 
+import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.StrayEntity;
@@ -13,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 public class StrayMixin {
     @ModifyVariable(method = "createArrowProjectile", at = @At("TAIL"))
     private PersistentProjectileEntity arrowSlownessIncreased(PersistentProjectileEntity projectileEntity) {
-        if (projectileEntity instanceof ArrowEntity) {
+        if (ModConfig.get().strayBetterSlowness && projectileEntity instanceof ArrowEntity) {
             ((ArrowEntity) projectileEntity).addEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 600, 1));
         }
         return projectileEntity;

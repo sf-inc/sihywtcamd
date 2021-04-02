@@ -1,6 +1,7 @@
 package com.github.galatynf.sihywtcamd.mixin;
 
 import com.github.galatynf.sihywtcamd.Sihywtcamd;
+import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
@@ -23,7 +24,8 @@ public abstract class ZombieMixin extends Entity {
             target = "Lnet/minecraft/entity/LivingEntity;applyDamage(Lnet/minecraft/entity/damage/DamageSource;F)V"))
     private float reduceDamage(DamageSource source, float amount) {
         Entity attacker = source.getAttacker();
-        if (Sihywtcamd.isZombieType(this.getType())
+        if (ModConfig.get().zombieBuffedProtection
+                && Sihywtcamd.isZombieType(this.getType())
                 && attacker instanceof LivingEntity
                 && !this.isOnFire()
                 && EnchantmentHelper.getLevel(Enchantments.SMITE, ((LivingEntity) attacker).getMainHandStack()) < 1) {

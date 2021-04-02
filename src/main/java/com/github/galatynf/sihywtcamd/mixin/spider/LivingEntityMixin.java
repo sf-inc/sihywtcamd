@@ -1,5 +1,6 @@
 package com.github.galatynf.sihywtcamd.mixin.spider;
 
+import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -25,6 +26,7 @@ public abstract class LivingEntityMixin extends Entity {
     @Inject(method = "onDeath", at = @At("HEAD"))
     private void spawnBabies(DamageSource source, CallbackInfo ci) {
         if (!this.world.isClient
+                && ModConfig.get().babySpiders
                 && this.getType().equals(EntityType.SPIDER)
                 && !this.isBaby()
                 && this.random.nextFloat() < 0.1F) {

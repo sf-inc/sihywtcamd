@@ -1,5 +1,6 @@
 package com.github.galatynf.sihywtcamd.mixin;
 
+import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.entity.*;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
@@ -27,7 +28,7 @@ public class WitherSkeletonMixin extends HostileEntity {
     @Inject(method = "initialize", at = @At("TAIL"))
     private void canSpawnBaby(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, EntityData entityData,
                               CompoundTag entityTag, CallbackInfoReturnable<EntityData> cir) {
-        this.setBaby(this.random.nextFloat() < 0.2F);
+        this.setBaby(ModConfig.get().babyWitherSkeleton && this.random.nextFloat() < 0.2F);
     }
 
     @Override

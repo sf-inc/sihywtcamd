@@ -1,5 +1,6 @@
 package com.github.galatynf.sihywtcamd.mixin.phantom;
 
+import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
@@ -26,7 +27,9 @@ public abstract class PhantomRendererMixin extends MobEntityRenderer<PhantomEnti
 
     @Inject(method = "getTexture", at = @At("HEAD"), cancellable = true)
     private void getTexture(PhantomEntity phantomEntity, CallbackInfoReturnable<Identifier> cir) {
-        cir.setReturnValue(new Identifier("sihywtcamd", "textures/phantom.png"));
+        if (ModConfig.get().phantomTranslucent) {
+            cir.setReturnValue(new Identifier("sihywtcamd", "textures/phantom.png"));
+        }
     }
 
     @Override

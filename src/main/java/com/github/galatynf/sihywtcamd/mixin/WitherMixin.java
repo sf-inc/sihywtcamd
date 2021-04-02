@@ -1,5 +1,6 @@
 package com.github.galatynf.sihywtcamd.mixin;
 
+import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -30,16 +31,19 @@ public abstract class WitherMixin extends HostileEntity {
 
     @Inject(method = "createWitherAttributes", at = @At("HEAD"), cancellable = true)
     private static void changeHealth(CallbackInfoReturnable<DefaultAttributeContainer.Builder> cir) {
-        cir.setReturnValue(HostileEntity.createHostileAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 400.0D)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.6000000238418579D)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 40.0D)
-                .add(EntityAttributes.GENERIC_ARMOR, 4.0D));
+        if (ModConfig.get().witherIncreasedHealth) {
+            cir.setReturnValue(HostileEntity.createHostileAttributes()
+                    .add(EntityAttributes.GENERIC_MAX_HEALTH, 400.0D)
+                    .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.6000000238418579D)
+                    .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 40.0D)
+                    .add(EntityAttributes.GENERIC_ARMOR, 4.0D));
+        }
     }
 
     @Inject(method = "mobTick", at = @At("HEAD"))
     private void spawnWitherSkeletons(CallbackInfo ci) {
         if (!this.world.isClient
+                && ModConfig.get().witherSpawnSkeletons
                 && (this.world.getDifficulty().equals(Difficulty.NORMAL) || this.world.getDifficulty().equals(Difficulty.HARD))
                 && this.getInvulnerableTimer() < 1
                 && !sihywtcamd_hasSpawned

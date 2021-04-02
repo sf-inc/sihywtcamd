@@ -1,5 +1,6 @@
 package com.github.galatynf.sihywtcamd.mixin;
 
+import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.FleeEntityGoal;
 import net.minecraft.entity.mob.WitchEntity;
@@ -19,6 +20,9 @@ public abstract class WitchMixin extends RaiderEntity {
 
     @Inject(at=@At("HEAD"), method = "initGoals")
     private void fleePlayer(CallbackInfo ci) {
-        this.goalSelector.add(1, new FleeEntityGoal<>(this, PlayerEntity.class, 3, 1.2, 1.5, (livingEntity) -> true));
+        if (ModConfig.get().witchFleeGoal) {
+            this.goalSelector.add(1, new FleeEntityGoal<>(this, PlayerEntity.class, 3, 1.2, 1.5,
+                    (livingEntity) -> true));
+        }
     }
 }
