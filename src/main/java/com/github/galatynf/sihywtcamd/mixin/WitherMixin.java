@@ -1,22 +1,26 @@
 package com.github.galatynf.sihywtcamd.mixin;
 
 import com.github.galatynf.sihywtcamd.config.ModConfig;
+import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.mob.HostileEntity;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.Difficulty;
+import net.minecraft.world.LocalDifficulty;
+import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(WitherEntity.class)
 public abstract class WitherMixin extends HostileEntity {
@@ -29,15 +33,15 @@ public abstract class WitherMixin extends HostileEntity {
         super(entityType, world);
     }
 
-    @Inject(method = "createWitherAttributes", at = @At("HEAD"), cancellable = true)
-    private static void increaseHealthW(CallbackInfoReturnable<DefaultAttributeContainer.Builder> cir) {
-        if (ModConfig.get().witherIncreasedHealth) {
-            cir.setReturnValue(HostileEntity.createHostileAttributes()
-                    .add(EntityAttributes.GENERIC_MAX_HEALTH, 400.0D)
-                    .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.6000000238418579D)
-                    .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 40.0D)
-                    .add(EntityAttributes.GENERIC_ARMOR, 4.0D));
+    @Nullable
+    @Override
+    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable CompoundTag entityTag) {
+        EntityAttributeInstance instance = this.getAttributes().getCustomInstance(EntityAttributes.GENERIC_MAX_HEALTH);
+        if (instance != null && ModConfig.get().witherIncreasedHealth) {
+            instance.setBaseValue(400.0D);
+            this.setHealth(this.getMaxHealth());
         }
+        return super.initialize(world, difficulty, spawnReason, entityData, entityTag);
     }
 
     @Inject(method = "mobTick", at = @At("HEAD"))
