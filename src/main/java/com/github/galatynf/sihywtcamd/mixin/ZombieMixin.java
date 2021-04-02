@@ -25,6 +25,7 @@ public abstract class ZombieMixin extends Entity {
         Entity attacker = source.getAttacker();
         if (Sihywtcamd.isZombieType(this.getType())
                 && attacker instanceof LivingEntity
+                && !this.isOnFire()
                 && EnchantmentHelper.getLevel(Enchantments.SMITE, ((LivingEntity) attacker).getMainHandStack()) < 1) {
             return 1;
         }
