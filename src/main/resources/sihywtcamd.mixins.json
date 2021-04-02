@@ -12,7 +12,6 @@
     "EvokerMixin",
     "GhastMixin",
     "HuskMixin",
-    "PiglinMixin",
     "PillagerMixin",
     "ShulkerBulletMixin",
     "SkeletonMixin",
@@ -28,6 +27,8 @@
     "phantom.PhantomAttackGoalMixin",
     "phantom.PhantomSwoopGoalMixin",
     "phantom.PhantomTargetGoalMixin",
+    "piglin.PiglinBrainMixin",
+    "piglin.PiglinMixin",
     "spider.LivingEntityMixin",
     "spider.SpiderMixin"
   ],
