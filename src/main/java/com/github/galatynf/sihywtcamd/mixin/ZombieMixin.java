@@ -15,7 +15,6 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 @Mixin(LivingEntity.class)
 public abstract class ZombieMixin extends Entity {
-
     public ZombieMixin(EntityType<?> type, World world) {
         super(type, world);
     }

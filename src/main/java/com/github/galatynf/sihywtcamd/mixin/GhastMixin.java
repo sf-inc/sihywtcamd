@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(GhastEntity.class)
 public class GhastMixin {
     @Inject(method = "createGhastAttributes", at = @At("HEAD"), cancellable = true)
-    private static void changeHealth(CallbackInfoReturnable<DefaultAttributeContainer.Builder> cir) {
+    private static void increaseHealthG(CallbackInfoReturnable<DefaultAttributeContainer.Builder> cir) {
         if (ModConfig.get().ghastIncreasedHealth) {
             cir.setReturnValue(MobEntity.createMobAttributes()
                     .add(EntityAttributes.GENERIC_MAX_HEALTH, 42.0D)

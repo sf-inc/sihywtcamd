@@ -30,7 +30,7 @@ public abstract class WitherMixin extends HostileEntity {
     }
 
     @Inject(method = "createWitherAttributes", at = @At("HEAD"), cancellable = true)
-    private static void changeHealth(CallbackInfoReturnable<DefaultAttributeContainer.Builder> cir) {
+    private static void increaseHealthW(CallbackInfoReturnable<DefaultAttributeContainer.Builder> cir) {
         if (ModConfig.get().witherIncreasedHealth) {
             cir.setReturnValue(HostileEntity.createHostileAttributes()
                     .add(EntityAttributes.GENERIC_MAX_HEALTH, 400.0D)

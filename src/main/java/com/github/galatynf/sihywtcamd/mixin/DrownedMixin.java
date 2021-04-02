@@ -17,7 +17,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(DrownedEntity.class)
 public abstract class DrownedMixin extends ZombieEntity {
-
     public DrownedMixin(EntityType<? extends ZombieEntity> entityType, World world) {
         super(entityType, world);
     }

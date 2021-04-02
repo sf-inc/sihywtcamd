@@ -42,7 +42,7 @@ public abstract class SlimeMixin extends MobEntity {
     }
 
     @Inject(method = "tick", at = @At("TAIL"))
-    private void tryToFuse(CallbackInfo ci) {
+    private void tryToMerge(CallbackInfo ci) {
         if (!this.world.isClient
                 && ModConfig.get().slimeCanMerge
                 && this.isAlive()

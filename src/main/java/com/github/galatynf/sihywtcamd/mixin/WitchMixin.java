@@ -18,8 +18,8 @@ public abstract class WitchMixin extends RaiderEntity {
         super(entityType, world);
     }
 
-    @Inject(at=@At("HEAD"), method = "initGoals")
-    private void fleePlayer(CallbackInfo ci) {
+    @Inject(method = "initGoals", at = @At("HEAD"))
+    private void fleePlayerW(CallbackInfo ci) {
         if (ModConfig.get().witchFleeGoal) {
             this.goalSelector.add(1, new FleeEntityGoal<>(this, PlayerEntity.class, 3, 1.2, 1.5,
                     (livingEntity) -> true));
