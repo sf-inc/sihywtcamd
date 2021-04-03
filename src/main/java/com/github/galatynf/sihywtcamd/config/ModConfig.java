@@ -3,11 +3,13 @@ package com.github.galatynf.sihywtcamd.config;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.ConfigData;
 import me.sargunvohra.mcmods.autoconfig1u.annotation.Config;
+import me.sargunvohra.mcmods.autoconfig1u.annotation.ConfigEntry;
 
 @Config(name = "sihywtcamd")
 public class ModConfig implements ConfigData {
     public boolean mobsLessFear = true;
 
+    @ConfigEntry.Gui.Tooltip
     public boolean zombieBuffedProtection = true;
     public boolean huskFireProtection = true;
     public boolean drownedTridentSpawn = true;
