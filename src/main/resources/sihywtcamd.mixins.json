@@ -10,6 +10,7 @@
     "EndermanMixin",
     "EntityRenderDispatcherMixin",
     "EvokerMixin",
+    "FleeGoalMixin",
     "GhastMixin",
     "HuskMixin",
     "PillagerMixin",
