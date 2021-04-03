@@ -6,6 +6,8 @@ import me.sargunvohra.mcmods.autoconfig1u.annotation.Config;
 
 @Config(name = "sihywtcamd")
 public class ModConfig implements ConfigData {
+    public boolean mobsLessFear = true;
+
     public boolean zombieBuffedProtection = true;
     public boolean huskFireProtection = true;
     public boolean drownedTridentSpawn = true;
