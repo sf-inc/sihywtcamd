@@ -1,0 +1,46 @@
+{
+  "text.autoconfig.sihywtcamd.title": "SIHYWTCAMD Configuration",
+
+  "text.autoconfig.sihywtcamd.option.mobsLessFear": "Les mobs ne fuient plus les entités mid-life",
+
+  "text.autoconfig.sihywtcamd.option.zombieBuffedProtection": "Les mobs zombies ne prennent plus de dégâts facilement",
+  "text.autoconfig.sihywtcamd.option.zombieBuffedProtection.@Tooltip": "Inclus: zombie, zombie villageois, momifié, noyé",
+  "text.autoconfig.sihywtcamd.option.huskFireProtection": "Les zombies momifiés en feu ne prennent pas de dégâts",
+  "text.autoconfig.sihywtcamd.option.drownedTridentSpawn": "Les noyés apparaissent plus souvent avec un trident",
+  "text.autoconfig.sihywtcamd.option.drownedHighVelocity": "Les noyés nagent plus vite",
+
+  "text.autoconfig.sihywtcamd.option.skeletonFleeGoal": "Les squelettes fuient les joueurs trop proches",
+  "text.autoconfig.sihywtcamd.option.strayBetterSlowness": "Les vagabonds infligent lenteur 2",
+
+  "text.autoconfig.sihywtcamd.option.endermanBlindness": "Regarder un enderman donne cécité",
+  "text.autoconfig.sihywtcamd.option.shulkerBlindness": "Les projectiles de shulker donnent cécité",
+
+  "text.autoconfig.sihywtcamd.option.babySpiders": "Les araignées peuvent faire apparaître des bébés à leur mort",
+
+  "text.autoconfig.sihywtcamd.option.slimeBiggerSize": "Les slimes peuvent apparaître avec une taille en plus",
+  "text.autoconfig.sihywtcamd.option.slimeCanMerge": "Les slimes de taille petit/normal peuvent fusionner",
+
+  "text.autoconfig.sihywtcamd.option.guardianNaturalSpawn": "Les gardiens peuvent apparaître naturellement",
+
+  "text.autoconfig.sihywtcamd.option.phantomThroughBlocks": "Les fantômes peuvent voir/passer à travers les blocs",
+  "text.autoconfig.sihywtcamd.option.phantomLightFear": "Les fantômes sont repoussés par la lumière",
+  "text.autoconfig.sihywtcamd.option.phantomTranslucent": "La texture des fantômes est transparente (client config)",
+
+  "text.autoconfig.sihywtcamd.option.babyWitherSkeleton": "Les wither squelettes peuvent apparaître bébé",
+  "text.autoconfig.sihywtcamd.option.blazeFireCollision": "Les blazes mettent en feu lors de collisions",
+  "text.autoconfig.sihywtcamd.option.ghastIncreasedHealth": "Les ghasts ont bien plus de vie",
+  "text.autoconfig.sihywtcamd.option.piglinFullGold": "Les piglins attaquent si le joueur n'est pas full armure en or",
+  "text.autoconfig.sihywtcamd.option.piglinRideHoglin": "Les piglins peuvent apparaître sur un hoglin",
+
+  "text.autoconfig.sihywtcamd.option.pillagerMoreEnchants": "Les pillards ont plus souvent l'enchantement perforation",
+  "text.autoconfig.sihywtcamd.option.pillagerSpeedBonus": "Les pillars peuvent apparaître avec un bonus de vitesse",
+  "text.autoconfig.sihywtcamd.option.vindicatorSpeedBonus": "Les vindicateurs peuvent apparaître avec un bonus de vitesse",
+  "text.autoconfig.sihywtcamd.option.evokerStopArrows": "Les évocateurs arrêtent les flèches",
+  "text.autoconfig.sihywtcamd.option.evokerIncreasedHealth": "Les évocateurs ont un peu plus de vie",
+
+  "text.autoconfig.sihywtcamd.option.witchFleeGoal": "Les sorcières fuient les joueurs trop proches",
+  "text.autoconfig.sihywtcamd.option.witchMoreSpawn": "Les sorcières apparaissent un peu plus souvent",
+
+  "text.autoconfig.sihywtcamd.option.witherIncreasedHealth": "Les withers ont un peu plus de vie",
+  "text.autoconfig.sihywtcamd.option.witherSpawnSkeletons": "Les withers peuvent faire apparaître des withers squelettes"
+}
