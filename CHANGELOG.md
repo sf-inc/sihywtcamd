@@ -6,7 +6,34 @@ Currently, every **stable** mod version should work on **1.16.x** Minecraft vers
 * **x.X versions** are either updates that add content or major bug fixes
 * **x.x.X versions** are either small content updates (language translation, new textures, ...) or bug fixes
 
-# v1.0
+## v1.1
+
+* Mod is now fully configurable: you can (de)activate only features you want
+* One exception is the spawn mob modification: witches and guardians. Impossible to deactivate for now
+
+### Zombie
+
+* Zombie takes regular damage if attacked while they are on fire
+
+### Husk
+
+* Same than before rewritten so that they look on fire but are immune to on fire damage
+
+### Phantom
+
+* Is repelled by brighter light: above 10 luminance level
+
+### Piglin
+
+* Are hostile to players who don't wear full golden armor
+
+### Mobs
+
+* Mobs that have a flee entity goal don't flee if the entity has less than half health
+* So this applies to skeletons, witch, creeper, ...
+* This also apply to phantoms even though it's not a flee goal
+
+## v1.0
 
 ### Zombie
 
