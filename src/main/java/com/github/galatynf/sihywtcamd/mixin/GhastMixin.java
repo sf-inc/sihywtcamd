@@ -26,7 +26,7 @@ public class GhastMixin extends FlyingEntity {
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable CompoundTag entityTag) {
         EntityAttributeInstance instance = this.getAttributes().getCustomInstance(EntityAttributes.GENERIC_MAX_HEALTH);
         if (instance != null && ModConfig.get().ghastIncreasedHealth) {
-            instance.setBaseValue(42.0D);
+            instance.setBaseValue(30.0D);
             this.setHealth(this.getMaxHealth());
         }
         return super.initialize(world, difficulty, spawnReason, entityData, entityTag);
