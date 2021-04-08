@@ -6,6 +6,18 @@ Currently, every **stable** mod version should work on **1.16.x** Minecraft vers
 * **x.X versions** are either updates that add content or major bug fixes
 * **x.x.X versions** are either small content updates (language translation, new textures, ...) or bug fixes
 
+## v1.2
+
+* Mod is now fully configurable: you can (de)activate only features you want **(no exception)**
+
+### Magma cube
+
+* Stay vanilla! Changes for slimes are not anymore applied to them
+
+### Ghast
+
+* Reduce their health: now it's 3x their normal health (which is already enough)
+
 ## v1.1
 
 * Mod is now fully configurable: you can (de)activate only features you want
