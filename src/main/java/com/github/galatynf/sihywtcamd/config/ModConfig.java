@@ -1,9 +1,11 @@
 package com.github.galatynf.sihywtcamd.config;
 
+import com.github.galatynf.sihywtcamd.Sihywtcamd;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.ConfigData;
 import me.sargunvohra.mcmods.autoconfig1u.annotation.Config;
 import me.sargunvohra.mcmods.autoconfig1u.annotation.ConfigEntry;
+import me.sargunvohra.mcmods.autoconfig1u.serializer.JanksonConfigSerializer;
 
 @Config(name = "sihywtcamd")
 public class ModConfig implements ConfigData {
@@ -52,6 +54,10 @@ public class ModConfig implements ConfigData {
 
 
     public static ModConfig get() {
+        if (!Sihywtcamd.areConfigsInit) {
+            AutoConfig.register(ModConfig.class, JanksonConfigSerializer::new);
+            Sihywtcamd.areConfigsInit = true;
+        }
         return AutoConfig.getConfigHolder(ModConfig.class).getConfig();
     }
 }
