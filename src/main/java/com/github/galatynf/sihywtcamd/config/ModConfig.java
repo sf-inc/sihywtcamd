@@ -28,7 +28,7 @@ public class ModConfig implements ConfigData {
     public boolean slimeBiggerSize = true;
     public boolean slimeCanMerge = true;
 
-    // public boolean guardianNaturalSpawn = true;
+    public boolean guardianNaturalSpawn = true;
 
     public boolean phantomThroughBlocks = true;
     public boolean phantomLightFear = true;
@@ -47,7 +47,7 @@ public class ModConfig implements ConfigData {
     public boolean evokerIncreasedHealth = true;
 
     public boolean witchFleeGoal = true;
-    // public boolean witchMoreSpawn = true;
+    public boolean witchMoreSpawn = true;
 
     public boolean witherIncreasedHealth = true;
     public boolean witherSpawnSkeletons = true;
