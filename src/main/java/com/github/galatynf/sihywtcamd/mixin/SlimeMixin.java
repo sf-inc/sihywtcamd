@@ -24,6 +24,8 @@ public abstract class SlimeMixin extends MobEntity {
 
     @Shadow protected abstract void setSize(int size, boolean heal);
 
+    @Shadow public abstract EntityType<? extends SlimeEntity> getType();
+
     protected SlimeMixin(EntityType<? extends MobEntity> entityType, World world) {
         super(entityType, world);
     }
@@ -31,7 +33,7 @@ public abstract class SlimeMixin extends MobEntity {
     @Override
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable CompoundTag entityTag) {
         int i = this.random.nextInt(3);
-        if ((ModConfig.get().slimeBiggerSize || i < 2)
+        if (((ModConfig.get().slimeBiggerSize && this.getType().equals(EntityType.SLIME)) || i < 2)
                 && this.random.nextFloat() < 0.5F * difficulty.getClampedLocalDifficulty()) {
             ++i;
         }
@@ -44,6 +46,7 @@ public abstract class SlimeMixin extends MobEntity {
     @Inject(method = "tick", at = @At("TAIL"))
     private void tryToMerge(CallbackInfo ci) {
         if (!this.world.isClient
+                && this.getType().equals(EntityType.SLIME)
                 && ModConfig.get().slimeCanMerge
                 && this.isAlive()
                 && this.getSize() < 4
