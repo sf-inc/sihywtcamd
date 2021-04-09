@@ -6,6 +6,13 @@ Currently, every **stable** mod version should work on **1.16.x** Minecraft vers
 * **x.X versions** are either updates that add content or major bug fixes
 * **x.x.X versions** are either small content updates (language translation, new textures, ...) or bug fixes
 
+## v1.3
+
+### Zombie
+
+* Fixed damage so that they can get 0 damage instead of 1 if the damage was initially lesser than 1
+* Take true damage from iron golems
+
 ## v1.2
 
 * Mod is now fully configurable: you can (de)activate only features you want **(no exception)**
