@@ -8,7 +8,6 @@
     "BlazeMixin",
     "DrownedMixin",
     "EndermanMixin",
-    "EntityRenderDispatcherMixin",
     "EvokerMixin",
     "FleeGoalMixin",
     "GhastMixin",
@@ -34,6 +33,7 @@
     "spider.SpiderMixin"
   ],
   "client": [
+    "EntityRenderDispatcherMixin",
     "phantom.PhantomRendererMixin"
   ],
   "injectors": {
