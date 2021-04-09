@@ -28,7 +28,7 @@ public abstract class ZombieMixin extends Entity {
                 && attacker instanceof LivingEntity
                 && !this.isOnFire()
                 && EnchantmentHelper.getLevel(Enchantments.SMITE, ((LivingEntity) attacker).getMainHandStack()) < 1) {
-            return 1;
+            return Math.min(1.0F, amount);
         }
         return amount;
     }
