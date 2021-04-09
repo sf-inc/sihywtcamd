@@ -8,6 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -26,6 +27,7 @@ public abstract class ZombieMixin extends Entity {
         if (ModConfig.get().zombieBuffedProtection
                 && Sihywtcamd.isZombieType(this.getType())
                 && attacker instanceof LivingEntity
+                && !(attacker instanceof IronGolemEntity)
                 && !this.isOnFire()
                 && EnchantmentHelper.getLevel(Enchantments.SMITE, ((LivingEntity) attacker).getMainHandStack()) < 1) {
             return Math.min(1.0F, amount);
