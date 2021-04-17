@@ -6,6 +6,14 @@ Currently, every **stable** mod version should work on **1.16.x** Minecraft vers
 * **x.X versions** are either updates that add content or major bug fixes
 * **x.x.X versions** are either small content updates (language translation, new textures, ...) or bug fixes
 
+## v1.3.1
+
+### Zombies
+
+* Not immune to explosions anymore
+* Not immune to bypassing armor damages: magic (potions), fall damage, ...
+* Takes 1 damage from player under conditions, or half damage from mobs under those, true damage if not (includes iron golems)
+
 ## v1.3
 
 ### Zombie
