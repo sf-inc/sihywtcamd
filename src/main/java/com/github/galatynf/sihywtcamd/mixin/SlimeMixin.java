@@ -7,7 +7,7 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.SlimeEntity;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
@@ -31,7 +31,7 @@ public abstract class SlimeMixin extends MobEntity {
     }
 
     @Override
-    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable CompoundTag entityTag) {
+    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityTag) {
         int i = this.random.nextInt(3);
         if (((ModConfig.get().slimeBiggerSize && this.getType().equals(EntityType.SLIME)) || i < 2)
                 && this.random.nextFloat() < 0.5F * difficulty.getClampedLocalDifficulty()) {
@@ -55,7 +55,7 @@ public abstract class SlimeMixin extends MobEntity {
                     this.getX(), this.getY(), this.getZ(), this.getBoundingBox());
             if (slimeEntity != null
                     && this.getSize() == slimeEntity.getSize()) {
-                slimeEntity.remove();
+                slimeEntity.remove(RemovalReason.DISCARDED);
                 this.setSize(this.getSize() * 2, true);
             }
         }

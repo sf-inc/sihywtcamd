@@ -7,7 +7,7 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.mob.AbstractPiglinEntity;
 import net.minecraft.entity.mob.HoglinEntity;
 import net.minecraft.entity.mob.PiglinEntity;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
@@ -30,7 +30,7 @@ public abstract class PiglinMixin extends AbstractPiglinEntity {
 
     @Inject(method = "initialize", at = @At("HEAD"))
     private void spawnOnHoglin(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, EntityData entityData,
-                               CompoundTag entityTag, CallbackInfoReturnable<EntityData> cir) {
+                               NbtCompound entityTag, CallbackInfoReturnable<EntityData> cir) {
         if (ModConfig.get().piglinRideHoglin
                 && world.getRandom().nextFloat() < 0.05F + 0.05F * world.getLocalDifficulty(this.getBlockPos()).getClampedLocalDifficulty()) {
             this.setCannotHunt(true);
@@ -41,7 +41,7 @@ public abstract class PiglinMixin extends AbstractPiglinEntity {
             } else {
                 HoglinEntity hoglinEntity2 = EntityType.HOGLIN.create(this.world);
                 if (hoglinEntity2 != null) {
-                    hoglinEntity2.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), this.yaw, 0.0F);
+                    hoglinEntity2.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), this.getYaw(), 0.0F);
                     hoglinEntity2.initialize(world, difficulty, SpawnReason.JOCKEY, null, null);
                     this.startRiding(hoglinEntity2);
                     world.spawnEntity(hoglinEntity2);

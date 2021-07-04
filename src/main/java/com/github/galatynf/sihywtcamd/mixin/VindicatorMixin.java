@@ -9,7 +9,7 @@ import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.IllagerEntity;
 import net.minecraft.entity.mob.VindicatorEntity;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
@@ -28,7 +28,7 @@ public abstract class VindicatorMixin extends IllagerEntity {
 
     @Inject(method = "initialize", at = @At("HEAD"))
     private void addSpeedBonusV(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, EntityData entityData,
-                                CompoundTag entityTag, CallbackInfoReturnable<EntityData> cir) {
+                                NbtCompound entityTag, CallbackInfoReturnable<EntityData> cir) {
         if (ModConfig.get().vindicatorSpeedBonus && world.getRandom().nextFloat() < 0.2F) {
             EntityAttributeInstance speed = this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED);
             Objects.requireNonNull(speed).addPersistentModifier(new EntityAttributeModifier(

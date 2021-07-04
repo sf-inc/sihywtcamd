@@ -9,7 +9,7 @@ import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.IllagerEntity;
 import net.minecraft.entity.mob.PillagerEntity;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
@@ -29,7 +29,7 @@ public abstract class PillagerMixin extends IllagerEntity {
 
     @Inject(method = "initialize", at = @At("HEAD"))
     private void addSpeedBonusP(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, EntityData entityData,
-                                CompoundTag entityTag, CallbackInfoReturnable<EntityData> cir) {
+                                NbtCompound entityTag, CallbackInfoReturnable<EntityData> cir) {
         if (ModConfig.get().pillagerSpeedBonus && world.getRandom().nextFloat() < 0.25F) {
             EntityAttributeInstance speed = this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED);
             Objects.requireNonNull(speed).addPersistentModifier(new EntityAttributeModifier(
@@ -37,7 +37,7 @@ public abstract class PillagerMixin extends IllagerEntity {
         }
     }
 
-    @ModifyArg(method = "method_30759", at = @At(value = "INVOKE", target = "Ljava/util/Random;nextInt(I)I"))
+    @ModifyArg(method = "enchantMainHandItem", at = @At(value = "INVOKE", target = "Ljava/util/Random;nextInt(I)I"))
     private int changeProbabilityMoreEnchant(int range) {
         return ModConfig.get().pillagerMoreEnchants ? range / 3 : range;
     }

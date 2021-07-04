@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ShulkerBulletEntity.class)
 public class ShulkerBulletMixin {
-    @Inject(method = "onEntityHit", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;addStatusEffect(Lnet/minecraft/entity/effect/StatusEffectInstance;)Z"))
+    @Inject(method = "onEntityHit", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;addStatusEffect(Lnet/minecraft/entity/effect/StatusEffectInstance;Lnet/minecraft/entity/Entity;)Z"))
     private void addBlindnessS(EntityHitResult entityHitResult, CallbackInfo ci) {
         if (ModConfig.get().shulkerBlindness && entityHitResult.getEntity() instanceof PlayerEntity) {
             ((PlayerEntity) entityHitResult.getEntity()).addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS, 100));

@@ -24,7 +24,7 @@ public class FleeGoalMixin<T extends LivingEntity> {
     private void changeFleePredicate(PathAwareEntity mob, Class<T> fleeFromType, Predicate<LivingEntity> extraInclusionSelector, float distance,
                                      double slowSpeed, double fastSpeed, Predicate<LivingEntity> inclusionSelector, CallbackInfo ci) {
         if (ModConfig.get().mobsLessFear) {
-            this.withinRangePredicate = (new TargetPredicate()).setBaseMaxDistance(distance).setPredicate(
+            this.withinRangePredicate = (TargetPredicate.createAttackable()).setBaseMaxDistance(distance).setPredicate(
                     inclusionSelector.and(extraInclusionSelector).and(livingEntity -> livingEntity.getHealth() > livingEntity.getMaxHealth() / 2.0F));
         }
     }

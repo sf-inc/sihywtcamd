@@ -5,7 +5,7 @@ import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.entity.EntityRenderDispatcher;
+import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.render.entity.PhantomEntityRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
@@ -21,8 +21,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PhantomEntityRenderer.class)
 public abstract class PhantomRendererMixin extends MobEntityRenderer<PhantomEntity, PhantomEntityModel<PhantomEntity>> {
-    public PhantomRendererMixin(EntityRenderDispatcher entityRenderDispatcher, PhantomEntityModel<PhantomEntity> entityModel, float f) {
-        super(entityRenderDispatcher, entityModel, f);
+    public PhantomRendererMixin(EntityRendererFactory.Context context, PhantomEntityModel<PhantomEntity> entityModel, float f) {
+        super(context, entityModel, f);
     }
 
     @Inject(method = "getTexture", at = @At("HEAD"), cancellable = true)
@@ -44,7 +44,7 @@ public abstract class PhantomRendererMixin extends MobEntityRenderer<PhantomEnti
         float k = j - h;
         float o = this.getAnimationProgress(mobEntity, g);
 
-        float m = MathHelper.lerp(g, mobEntity.prevPitch, mobEntity.pitch);
+        float m = MathHelper.lerp(g, mobEntity.prevPitch, mobEntity.getPitch());
         float p = 0.0F;
 
         this.setupTransforms(mobEntity, matrixStack, o, h, g);
