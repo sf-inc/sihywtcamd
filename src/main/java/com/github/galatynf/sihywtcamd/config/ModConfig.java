@@ -42,7 +42,9 @@ public class ModConfig implements ConfigData {
 
     public boolean pillagerMoreEnchants = true;
     public boolean pillagerSpeedBonus = true;
+    public boolean vindicatorInPatrols = true;
     public boolean vindicatorSpeedBonus = true;
+    public boolean ravagerInPatrols = true;
     public boolean evokerStopArrows = true;
     public boolean evokerIncreasedHealth = true;
 

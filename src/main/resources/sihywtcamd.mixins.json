@@ -13,6 +13,7 @@
     "GhastMixin",
     "HuskMixin",
     "PillagerMixin",
+    "PillagerSpawnerMixin",
     "ShulkerBulletMixin",
     "SkeletonMixin",
     "SlimeMixin",
