@@ -20,6 +20,14 @@ public class BiomeFeatMixin {
         }
     }
 
+    @Inject(method = "addMonsters", at = @At("TAIL"))
+    private static void spawnCaveSpiderNaturally(SpawnSettings.Builder builder, int zombieWeight, int zombieVillagerWeight,
+                                             int skeletonWeight, CallbackInfo ci) {
+        if (ModConfig.get().caveSpiderNaturalSpawn) {
+            builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.CAVE_SPIDER, 80, 1, 3));
+        }
+    }
+
     @Inject(method = "addOceanMobs", at = @At("TAIL"))
     private static void spawnGuardianNaturally(SpawnSettings.Builder builder, int squidWeight, int squidMaxGroupSize,
                                                int codWeight, CallbackInfo ci) {

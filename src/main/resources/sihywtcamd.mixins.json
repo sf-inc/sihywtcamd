@@ -12,6 +12,7 @@
     "EvokerMixin",
     "FleeGoalMixin",
     "GhastMixin",
+    "HostileMixin",
     "HuskMixin",
     "PillagerMixin",
     "PillagerSpawnerMixin",

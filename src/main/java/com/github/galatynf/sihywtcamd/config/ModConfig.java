@@ -25,6 +25,7 @@ public class ModConfig implements ConfigData {
 
     public boolean babySpiders = true;
     public boolean caveSpiderJockey = true;
+    public boolean caveSpiderNaturalSpawn = true;
 
     public boolean slimeBiggerSize = true;
     public boolean slimeCanMerge = true;
