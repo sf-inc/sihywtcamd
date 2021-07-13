@@ -39,7 +39,9 @@ public class ModConfig implements ConfigData {
     public boolean babyWitherSkeleton = true;
     public boolean blazeFireCollision = true;
     public boolean ghastIncreasedHealth = true;
-    public boolean piglinFullGold = true;
+
+    @ConfigEntry.BoundedDiscrete(min = 1, max = 4)
+    public int piglinGoldenArmor = 4;
     public boolean piglinRideHoglin = true;
 
     public boolean pillagerMoreEnchants = true;

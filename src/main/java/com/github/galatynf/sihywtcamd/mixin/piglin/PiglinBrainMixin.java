@@ -15,17 +15,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class PiglinBrainMixin {
     @Inject(method = "wearsGoldArmor", at = @At("HEAD"), cancellable = true)
     private static void needFullGoldenArmor(LivingEntity entity, CallbackInfoReturnable<Boolean> cir) {
-        if (ModConfig.get().piglinFullGold) {
-            boolean isFullGold = true;
+        if (ModConfig.get().piglinGoldenArmor > 1) {
+            int goldenArmorPiece = 0;
 
             for (ItemStack itemStack: entity.getArmorItems()) {
-                if (!(itemStack.getItem() instanceof ArmorItem) || ((ArmorItem) itemStack.getItem()).getMaterial() != ArmorMaterials.GOLD) {
-                    isFullGold = false;
-                    break;
+                if ((itemStack.getItem() instanceof ArmorItem) && ((ArmorItem) itemStack.getItem()).getMaterial().equals(ArmorMaterials.GOLD)) {
+                    goldenArmorPiece++;
                 }
             }
 
-            cir.setReturnValue(isFullGold);
+            cir.setReturnValue(goldenArmorPiece >= ModConfig.get().piglinGoldenArmor);
         }
     }
 }
