@@ -27,7 +27,7 @@ public abstract class PhantomRendererMixin extends MobEntityRenderer<PhantomEnti
 
     @Inject(method = "getTexture", at = @At("HEAD"), cancellable = true)
     private void getTexture(PhantomEntity phantomEntity, CallbackInfoReturnable<Identifier> cir) {
-        if (ModConfig.get().phantomTranslucent) {
+        if (ModConfig.get().overworld.phantomTranslucent) {
             cir.setReturnValue(new Identifier("sihywtcamd", "textures/phantom.png"));
         }
     }

@@ -21,7 +21,7 @@ public abstract class BlazeMixin extends Entity {
     @Inject(method="damage", at = @At("HEAD"))
     private void setOnFireOnCollision(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         Entity attacker = source.getAttacker();
-        if (ModConfig.get().blazeFireCollision
+        if (ModConfig.get().nether.blazeFireCollision
                 && attacker instanceof BlazeEntity
                 && !source.isProjectile()) {
             this.setOnFireFor(5);

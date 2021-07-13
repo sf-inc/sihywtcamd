@@ -22,7 +22,7 @@ public abstract class PhantomSwoopGoalMixin {
 
     @Inject(method = "Lnet/minecraft/entity/mob/PhantomEntity$SwoopMovementGoal;shouldContinue()Z", at = @At("HEAD"), cancellable = true)
     private void changePredicateContinue(CallbackInfoReturnable<Boolean> cir) {
-        if (ModConfig.get().mobsLessFear || ModConfig.get().phantomLightFear) {
+        if (ModConfig.get().overworld.mobsLessFear || ModConfig.get().overworld.phantomLightFear) {
             boolean shouldContinue = true;
             LivingEntity livingEntity = field_7333.getTarget();
             if (livingEntity == null) {
@@ -33,14 +33,14 @@ public abstract class PhantomSwoopGoalMixin {
                 shouldContinue = false;
             } else if (!this.canStart()) {
                 shouldContinue = false;
-            } else if (ModConfig.get().phantomLightFear && field_7333.world.getLightLevel(field_7333.getBlockPos()) > 10) {
+            } else if (ModConfig.get().overworld.phantomLightFear && field_7333.world.getLightLevel(field_7333.getBlockPos()) > 10) {
                 shouldContinue = false;
             } else {
                 if (field_7333.age % 20 == 0) {
                     List<CatEntity> list = field_7333.world.getEntitiesByClass(CatEntity.class, field_7333.getBoundingBox().expand(16.0D), EntityPredicates.VALID_ENTITY);
                     for (CatEntity catEntity : list) {
                         catEntity.hiss();
-                        if (!(ModConfig.get().mobsLessFear && catEntity.getHealth() <= catEntity.getMaxHealth() / 2.0F)) {
+                        if (!(ModConfig.get().overworld.mobsLessFear && catEntity.getHealth() <= catEntity.getMaxHealth() / 2.0F)) {
                             shouldContinue = false;
                         }
                     }

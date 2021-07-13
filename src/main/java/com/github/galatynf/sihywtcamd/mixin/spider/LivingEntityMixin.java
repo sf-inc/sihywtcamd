@@ -26,7 +26,7 @@ public abstract class LivingEntityMixin extends Entity {
     @Inject(method = "onDeath", at = @At("HEAD"))
     private void spawnBabies(DamageSource source, CallbackInfo ci) {
         if (!this.world.isClient
-                && ModConfig.get().babySpiders
+                && ModConfig.get().overworld.babySpiders
                 && this.getType().equals(EntityType.SPIDER)
                 && !this.isBaby()
                 && this.random.nextFloat() < 0.1F) {

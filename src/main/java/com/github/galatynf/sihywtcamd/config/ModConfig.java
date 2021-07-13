@@ -2,66 +2,34 @@ package com.github.galatynf.sihywtcamd.config;
 
 import com.github.galatynf.sihywtcamd.Sihywtcamd;
 import me.shedaniel.autoconfig.AutoConfig;
-import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
-import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
+import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
+import me.shedaniel.autoconfig.serializer.PartitioningSerializer;
 
 @Config(name = "sihywtcamd")
-public class ModConfig implements ConfigData {
-    public boolean mobsLessFear = true;
+public class ModConfig extends PartitioningSerializer.GlobalData {
 
-    @ConfigEntry.Gui.Tooltip
-    public boolean zombieBuffedProtection = true;
-    public boolean huskFireProtection = true;
-    public boolean drownedTridentSpawn = true;
-    public boolean drownedHighVelocity = true;
+    @ConfigEntry.Category("overworld")
+    @ConfigEntry.Gui.TransitiveObject
+    public OverworldConfig overworld = new OverworldConfig();
 
-    public boolean skeletonFleeGoal = true;
-    public boolean strayBetterSlowness = true;
+    @ConfigEntry.Category("nether")
+    @ConfigEntry.Gui.TransitiveObject
+    public NetherConfig nether = new NetherConfig();
 
-    public boolean endermanBlindness = true;
-    public boolean shulkerBlindness = true;
+    @ConfigEntry.Category("end")
+    @ConfigEntry.Gui.TransitiveObject
+    public EndConfig end = new EndConfig();
 
-    public boolean babySpiders = true;
-    public boolean caveSpiderJockey = true;
-    public boolean caveSpiderNaturalSpawn = true;
-
-    public boolean slimeBiggerSize = true;
-    public boolean slimeCanMerge = true;
-
-    public boolean guardianNaturalSpawn = true;
-
-    public boolean phantomThroughBlocks = true;
-    public boolean phantomLightFear = true;
-    public boolean phantomTranslucent = true;
-
-    public boolean babyWitherSkeleton = true;
-    public boolean blazeFireCollision = true;
-    public boolean ghastIncreasedHealth = true;
-
-    @ConfigEntry.BoundedDiscrete(min = 1, max = 4)
-    public int piglinGoldenArmor = 4;
-    public boolean piglinRideHoglin = true;
-
-    public boolean pillagerMoreEnchants = true;
-    public boolean pillagerSpeedBonus = true;
-    public boolean vindicatorInPatrols = true;
-    public boolean vindicatorSpeedBonus = true;
-    public boolean ravagerInPatrols = true;
-    public boolean evokerStopArrows = true;
-    public boolean evokerIncreasedHealth = true;
-
-    public boolean witchFleeGoal = true;
-    public boolean witchMoreSpawn = true;
-
-    public boolean witherIncreasedHealth = true;
-    public boolean witherSpawnSkeletons = true;
+    @ConfigEntry.Category("boss")
+    @ConfigEntry.Gui.TransitiveObject
+    public BossConfig boss = new BossConfig();
 
 
     public static ModConfig get() {
         if (!Sihywtcamd.areConfigsInit) {
-            AutoConfig.register(ModConfig.class, JanksonConfigSerializer::new);
+            AutoConfig.register(ModConfig.class, PartitioningSerializer.wrap(GsonConfigSerializer::new));
             Sihywtcamd.areConfigsInit = true;
         }
         return AutoConfig.getConfigHolder(ModConfig.class).getConfig();

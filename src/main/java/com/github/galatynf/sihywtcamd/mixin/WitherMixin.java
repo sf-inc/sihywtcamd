@@ -37,7 +37,7 @@ public abstract class WitherMixin extends HostileEntity {
     @Override
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityTag) {
         EntityAttributeInstance instance = this.getAttributes().getCustomInstance(EntityAttributes.GENERIC_MAX_HEALTH);
-        if (instance != null && ModConfig.get().witherIncreasedHealth) {
+        if (instance != null && ModConfig.get().boss.witherIncreasedHealth) {
             instance.setBaseValue(400.0D);
             this.setHealth(this.getMaxHealth());
         }
@@ -47,7 +47,7 @@ public abstract class WitherMixin extends HostileEntity {
     @Inject(method = "mobTick", at = @At("HEAD"))
     private void spawnWitherSkeletons(CallbackInfo ci) {
         if (!this.world.isClient
-                && ModConfig.get().witherSpawnSkeletons
+                && ModConfig.get().boss.witherSpawnSkeletons
                 && (this.world.getDifficulty().equals(Difficulty.NORMAL) || this.world.getDifficulty().equals(Difficulty.HARD))
                 && this.getInvulnerableTimer() < 1
                 && !sihywtcamd_hasSpawned

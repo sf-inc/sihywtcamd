@@ -15,7 +15,7 @@ public class BiomeFeatMixin {
     @Inject(method = "addMonsters", at = @At("TAIL"))
     private static void changeWitchSpawnrate(SpawnSettings.Builder builder, int zombieWeight, int zombieVillagerWeight,
                                              int skeletonWeight, CallbackInfo ci) {
-        if (ModConfig.get().witchMoreSpawn) {
+        if (ModConfig.get().overworld.witchMoreSpawn) {
             builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.WITCH, 3, 1, 1));
         }
     }
@@ -23,7 +23,7 @@ public class BiomeFeatMixin {
     @Inject(method = "addMonsters", at = @At("TAIL"))
     private static void spawnCaveSpiderNaturally(SpawnSettings.Builder builder, int zombieWeight, int zombieVillagerWeight,
                                              int skeletonWeight, CallbackInfo ci) {
-        if (ModConfig.get().caveSpiderNaturalSpawn) {
+        if (ModConfig.get().overworld.caveSpiderNaturalSpawn) {
             builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.CAVE_SPIDER, 80, 1, 3));
         }
     }
@@ -31,7 +31,7 @@ public class BiomeFeatMixin {
     @Inject(method = "addOceanMobs", at = @At("TAIL"))
     private static void spawnGuardianNaturally(SpawnSettings.Builder builder, int squidWeight, int squidMaxGroupSize,
                                                int codWeight, CallbackInfo ci) {
-        if (ModConfig.get().guardianNaturalSpawn) {
+        if (ModConfig.get().overworld.guardianNaturalSpawn) {
             builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.GUARDIAN, 2, 1, 2));
         }
     }

@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class PiglinBrainMixin {
     @Inject(method = "wearsGoldArmor", at = @At("HEAD"), cancellable = true)
     private static void needFullGoldenArmor(LivingEntity entity, CallbackInfoReturnable<Boolean> cir) {
-        if (ModConfig.get().piglinGoldenArmor > 1) {
+        if (ModConfig.get().nether.piglinGoldenArmor > 1) {
             int goldenArmorPiece = 0;
 
             for (ItemStack itemStack: entity.getArmorItems()) {
@@ -24,7 +24,7 @@ public class PiglinBrainMixin {
                 }
             }
 
-            cir.setReturnValue(goldenArmorPiece >= ModConfig.get().piglinGoldenArmor);
+            cir.setReturnValue(goldenArmorPiece >= ModConfig.get().nether.piglinGoldenArmor);
         }
     }
 }

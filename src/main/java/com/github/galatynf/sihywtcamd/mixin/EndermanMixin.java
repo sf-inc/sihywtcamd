@@ -22,7 +22,7 @@ public class EndermanMixin extends HostileEntity {
 
     @Inject(method = "isPlayerStaring", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;getRotationVec(F)Lnet/minecraft/util/math/Vec3d;"))
     private void addBlindnessE(PlayerEntity player, CallbackInfoReturnable<Boolean> cir) {
-        if (ModConfig.get().endermanBlindness) {
+        if (ModConfig.get().end.endermanBlindness) {
             Vec3d vec3d = player.getRotationVec(1.0F).normalize();
             Vec3d vec3d2 = new Vec3d(this.getX() - player.getX(), this.getEyeY() - player.getEyeY(), this.getZ() - player.getZ());
             double d = vec3d2.length();

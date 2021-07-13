@@ -25,7 +25,7 @@ public abstract class ZombieMixin extends Entity {
             target = "Lnet/minecraft/entity/LivingEntity;applyDamage(Lnet/minecraft/entity/damage/DamageSource;F)V"))
     private float reduceDamage(DamageSource source, float amount) {
         Entity attacker = source.getAttacker();
-        if (ModConfig.get().zombieBuffedProtection
+        if (ModConfig.get().overworld.zombieBuffedProtection
                 && Sihywtcamd.isZombieType(this.getType())
                 && !source.bypassesArmor()
                 && !source.isExplosive()
