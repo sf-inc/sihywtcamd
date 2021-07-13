@@ -6,6 +6,7 @@
   "mixins": [
     "BiomeFeatMixin",
     "BlazeMixin",
+    "CaveSpiderMixin",
     "DrownedMixin",
     "EndermanMixin",
     "EvokerMixin",
