@@ -1,6 +1,6 @@
 package com.github.galatynf.sihywtcamd.mixin;
 
-import com.github.galatynf.sihywtcamd.Sihywtcamd;
+import com.github.galatynf.sihywtcamd.Utils;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
@@ -26,7 +26,7 @@ public abstract class ZombieMixin extends Entity {
     private float reduceDamage(DamageSource source, float amount) {
         Entity attacker = source.getAttacker();
         if (ModConfig.get().overworld.zombieBuffedProtection
-                && Sihywtcamd.isZombieType(this.getType())
+                && Utils.isZombieType(this.getType())
                 && !source.bypassesArmor()
                 && !source.isExplosive()
                 && attacker instanceof LivingEntity
