@@ -8,8 +8,8 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 public class OverworldConfig implements ConfigData {
     public boolean mobsLessFear = true;
 
-    @ConfigEntry.Gui.Tooltip
-    public boolean zombieBuffedProtection = true;
+    @ConfigEntry.Gui.EnumHandler(option = ConfigEntry.Gui.EnumHandler.EnumDisplayOption.BUTTON)
+    public ZombieType zombieTypeBuffed = ZombieType.ALL;
     public boolean huskFireProtection = true;
     public boolean drownedTridentSpawn = true;
     public boolean drownedHighVelocity = true;

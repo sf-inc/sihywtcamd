@@ -6,8 +6,7 @@
 
   "text.autoconfig.sihywtcamd.option.overworld.mobsLessFear": "Les mobs ne fuient plus les entités mid-life",
 
-  "text.autoconfig.sihywtcamd.option.overworld.zombieBuffedProtection": "Les mobs zombies ne prennent plus de dégâts facilement",
-  "text.autoconfig.sihywtcamd.option.overworld.zombieBuffedProtection.@Tooltip": "Inclus: zombie, zombie villageois, momifié, noyé",
+  "text.autoconfig.sihywtcamd.option.overworld.zombieTypeBuffed": "Les mobs zombies ne prennent plus de dégâts facilement",
   "text.autoconfig.sihywtcamd.option.overworld.huskFireProtection": "Les zombies momifiés ne prennent pas de dégâts de feu",
   "text.autoconfig.sihywtcamd.option.overworld.drownedTridentSpawn": "Les noyés apparaissent plus souvent avec un trident",
   "text.autoconfig.sihywtcamd.option.overworld.drownedHighVelocity": "Les noyés nagent plus vite",
