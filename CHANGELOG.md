@@ -6,6 +6,31 @@ Currently, every **stable** mod version should work on **1.16.x** Minecraft vers
 * **x.X versions** are either updates that add content or major bug fixes
 * **x.x.X versions** are either small content updates (language translation, new textures, ...) or bug fixes
 
+## v1.4
+
+### Patrols
+
+* Vindicators can now spawn in patrols. They have 10 to 20% chance to spawn instead of a 
+  pillager (depending local difficulty). 
+* If it didn't spawn a vindicator, it has 5 to 10% chance to spawn a ravager. The ravager 
+  may spawn with a pillager riding it or not.
+
+### Cave spiders
+
+* Cave spider can spawn naturally in caves. The deeper they try to spawn, the most 
+  possible it is for them to really spawn. So they should be more rare at higher Y 
+  positions. They can spawn in group of 1 to 3.
+* Cave spider jockey can spawn with a chance of 1/50 (can't spawn from a cave spider 
+  spawner!)
+
+### Configs
+
+* Configs are now in different menus to find what you want more quickly. They are
+  separated by associated dimension
+* You can now set the number of golden armor you need to be safe with piglins
+* You can now choose which types of zombie are affected by the zombie buff. You can 
+  choose between NONE, ZOMBIE_ONLY, NO_DROWNED, NO_PIGLIN, and ALL
+
 ## v1.3.1
 
 ### Zombies
