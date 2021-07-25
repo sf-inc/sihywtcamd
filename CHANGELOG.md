@@ -6,6 +6,22 @@ Currently, every **stable** mod version should work on **1.16.x** Minecraft vers
 * **x.X versions** are either updates that add content or major bug fixes
 * **x.x.X versions** are either small content updates (language translation, new textures, ...) or bug fixes
 
+## v1.4.1
+
+### Cave spider
+
+* Fixed the spawn light level: now spawn if light <= to 7
+* Fixed crash when using the 1.18 preview datapacks, for the cave spider spawn in negative 
+  Y positions. Note that they may not spawn at all with the official datapack, as it override 
+  mob spawns for every biomes!
+  
+### Enderman
+
+* When you get the blindness effect, you are now sure that you aggro the enderman
+* You will now get the effect only when you aggro it, after staring at it. So it's now a bit 
+  easier to deal with them, as you can stare at them to stop them without getting blindness 
+  effect every time. You won't get the effect if you aggro them without staring at them
+
 ## v1.4
 
 ### Patrols
