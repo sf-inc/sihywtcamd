@@ -18,7 +18,9 @@ public class Utils {
         } else if (world.getLightLevel(pos) > 7) {
             return false;
         } else {
-            return random.nextInt((int) Math.cbrt(pos.getY()) + ((pos.getY() < 0) ? Math.abs(world.getBottomY()) : 0)) == 0
+            double cbrt = Math.cbrt(pos.getY() + Math.abs(world.getBottomY()));
+            return cbrt < 4.0D
+                    && random.nextDouble() > cbrt / 4.0D
                     && canMobSpawn(type, world, spawnReason, pos, random);
         }
     }
