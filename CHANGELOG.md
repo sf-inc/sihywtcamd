@@ -6,6 +6,19 @@ Currently, every **stable** mod version should work on **1.16.x** Minecraft vers
 * **x.X versions** are either updates that add content or major bug fixes
 * **x.x.X versions** are either small content updates (language translation, new textures, ...) or bug fixes
 
+# v1.5
+
+### Cave spider
+
+* REALLY fixed crash when using the 1.18 preview datapacks, for the cave spider spawn in negative
+  Y positions.
+
+### Mobs
+
+* Most hostile mobs are now hostile to villagers: includes spiders (only at night), skeletons, strays, 
+  creepers and witches. Also includes zombies, husks, drowned, vindicators, pillagers... but was 
+  already the case
+
 ## v1.4.1
 
 ### Cave spider
