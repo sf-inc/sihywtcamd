@@ -1,4 +1,4 @@
-package com.github.galatynf.sihywtcamd.mixin;
+package com.github.galatynf.sihywtcamd.mixin.zombie;
 
 import com.github.galatynf.sihywtcamd.Utils;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -15,8 +15,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 @Mixin(LivingEntity.class)
-public abstract class ZombieMixin extends Entity {
-    public ZombieMixin(EntityType<?> type, World world) {
+public abstract class LivingEntityMixin extends Entity {
+    public LivingEntityMixin(EntityType<?> type, World world) {
         super(type, world);
     }
 
