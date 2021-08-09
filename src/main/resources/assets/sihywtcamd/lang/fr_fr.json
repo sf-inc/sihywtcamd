@@ -5,6 +5,7 @@
   "text.autoconfig.sihywtcamd.category.overworld": "Overworld",
 
   "text.autoconfig.sihywtcamd.option.overworld.mobsLessFear": "Les mobs ne fuient plus les entités mid-life",
+  "text.autoconfig.sihywtcamd.option.overworld.merchantHostility": "La plupart des mobs hostiles le sont avec les villageois",
 
   "text.autoconfig.sihywtcamd.option.overworld.zombieTypeBuffed": "Les mobs zombies ne prennent plus de dégâts facilement",
   "text.autoconfig.sihywtcamd.option.overworld.huskFireProtection": "Les zombies momifiés ne prennent pas de dégâts de feu",

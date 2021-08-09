@@ -7,6 +7,7 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 @Config(name = "overworld")
 public class OverworldConfig implements ConfigData {
     public boolean mobsLessFear = true;
+    public boolean merchantHostility = true;
 
     @ConfigEntry.Gui.EnumHandler(option = ConfigEntry.Gui.EnumHandler.EnumDisplayOption.BUTTON)
     public ZombieType zombieTypeBuffed = ZombieType.ALL;

@@ -7,6 +7,7 @@
     "BiomeFeatMixin",
     "BlazeMixin",
     "CaveSpiderMixin",
+    "CreeperMixin",
     "EndermanMixin",
     "EvokerMixin",
     "FleeGoalMixin",

@@ -5,6 +5,7 @@
   "text.autoconfig.sihywtcamd.category.overworld": "Overworld",
 
   "text.autoconfig.sihywtcamd.option.overworld.mobsLessFear": "Mobs don't flee if target is half health",
+  "text.autoconfig.sihywtcamd.option.overworld.merchantHostility": "Most hostile mobs are hostile to villagers",
 
   "text.autoconfig.sihywtcamd.option.overworld.zombieTypeBuffed": "Zombie-like mobs can't be damaged easily",
   "text.autoconfig.sihywtcamd.option.overworld.huskFireProtection": "Husks are immune to on-fire damage",

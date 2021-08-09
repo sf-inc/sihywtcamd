@@ -30,6 +30,7 @@
   "mixins": [
     "sihywtcamd.mixins.json"
   ],
+  "accessWidener": "sihywtcamd.accesswidener",
   "depends": {
     "fabricloader": ">=0.11.1",
     "fabric": "*"

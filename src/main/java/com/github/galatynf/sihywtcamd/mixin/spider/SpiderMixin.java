@@ -1,5 +1,6 @@
 package com.github.galatynf.sihywtcamd.mixin.spider;
 
+import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
@@ -11,6 +12,7 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.SpiderEntity;
+import net.minecraft.entity.passive.MerchantEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -26,6 +28,13 @@ public class SpiderMixin extends HostileEntity {
 
     protected SpiderMixin(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
+    }
+
+    @Inject(method = "initGoals", at = @At("HEAD"))
+    private void targetMerchantSp(CallbackInfo ci) {
+        if (ModConfig.get().overworld.merchantHostility) {
+            this.targetSelector.add(3, new SpiderEntity.FollowTargetGoal<>((SpiderEntity) (Object) this, MerchantEntity.class));
+        }
     }
 
     @Inject(method = "initDataTracker", at = @At("TAIL"))
