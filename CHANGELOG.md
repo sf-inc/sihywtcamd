@@ -6,7 +6,14 @@ Currently, every **stable** mod version should work on **1.16.x** Minecraft vers
 * **x.X versions** are either updates that add content or major bug fixes
 * **x.x.X versions** are either small content updates (language translation, new textures, ...) or bug fixes
 
-# v1.5
+## v1.5.1
+
+### Mobs
+
+* Most hostile mobs are now hostile to villagers: same than previous version but excludes creepers as 
+  they can't be targeted by iron golems
+
+## v1.5
 
 ### Cave spider
 
