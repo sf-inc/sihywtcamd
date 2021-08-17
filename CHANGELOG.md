@@ -6,6 +6,14 @@ Currently, every **stable** mod version should work on **1.16.x** Minecraft vers
 * **x.X versions** are either updates that add content or major bug fixes
 * **x.x.X versions** are either small content updates (language translation, new textures, ...) or bug fixes
 
+## v1.5.2
+
+### Configs
+
+* Configs have been reorganized for more clarity: created sub-categories
+* Zombie buff is more configurable: you can choose the percentage of damage dealt from players and from mobs 
+  (separately) to zombies under the specified conditions
+
 ## v1.5.1
 
 ### Mobs
