@@ -16,7 +16,7 @@ public class HuskMixin extends ZombieEntity {
 
     @Override
     public boolean isInvulnerableTo(DamageSource damageSource) {
-        return ModConfig.get().overworld.huskFireProtection ? damageSource.equals(DamageSource.ON_FIRE) || super.isInvulnerableTo(damageSource)
+        return ModConfig.get().overworld.zombies.huskFireProtection ? damageSource.equals(DamageSource.ON_FIRE) || super.isInvulnerableTo(damageSource)
                 : super.isInvulnerableTo(damageSource);
     }
 }

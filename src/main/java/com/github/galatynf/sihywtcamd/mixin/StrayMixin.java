@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 public class StrayMixin {
     @ModifyVariable(method = "createArrowProjectile", at = @At("TAIL"))
     private PersistentProjectileEntity arrowSlownessIncreased(PersistentProjectileEntity projectileEntity) {
-        if (ModConfig.get().overworld.strayBetterSlowness && projectileEntity instanceof ArrowEntity) {
+        if (ModConfig.get().overworld.skeletons.strayBetterSlowness && projectileEntity instanceof ArrowEntity) {
             ((ArrowEntity) projectileEntity).addEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 600, 1));
         }
         return projectileEntity;

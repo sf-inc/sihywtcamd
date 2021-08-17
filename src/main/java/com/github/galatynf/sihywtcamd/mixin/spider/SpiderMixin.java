@@ -32,7 +32,7 @@ public class SpiderMixin extends HostileEntity {
 
     @Inject(method = "initGoals", at = @At("HEAD"))
     private void targetMerchantSp(CallbackInfo ci) {
-        if (ModConfig.get().overworld.merchantHostility) {
+        if (ModConfig.get().overworld.mobs.merchantHostility) {
             this.targetSelector.add(3, new SpiderEntity.FollowTargetGoal<>((SpiderEntity) (Object) this, MerchantEntity.class));
         }
     }

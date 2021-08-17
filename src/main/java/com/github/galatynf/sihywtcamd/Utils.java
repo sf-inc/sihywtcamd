@@ -35,7 +35,7 @@ public class Utils {
         boolean isHusk = entityType.equals(EntityType.HUSK);
         boolean res = false;
 
-        switch (ModConfig.get().overworld.zombieTypeBuffed) {
+        switch (ModConfig.get().overworld.zombies.zombieTypeBuffed) {
             case NONE -> {
             }
             case ZOMBIE_ONLY -> res = zombieOnly;

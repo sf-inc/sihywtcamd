@@ -10,7 +10,12 @@ public class NetherConfig implements ConfigData {
     public boolean ghastIncreasedHealth = true;
     public boolean babyWitherSkeleton = true;
 
-    @ConfigEntry.BoundedDiscrete(min = 1, max = 4)
-    public int piglinGoldenArmor = 4;
-    public boolean piglinRideHoglin = true;
+    @ConfigEntry.Gui.CollapsibleObject
+    public Piglins piglins = new Piglins();
+
+    public static class Piglins {
+        @ConfigEntry.BoundedDiscrete(min = 1, max = 4)
+        public int piglinGoldenArmor = 4;
+        public boolean piglinRideHoglin = true;
+    }
 }

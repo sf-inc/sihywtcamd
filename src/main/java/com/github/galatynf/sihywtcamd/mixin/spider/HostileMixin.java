@@ -19,7 +19,7 @@ public class HostileMixin {
     @Inject(method = "canSpawnInDark", at = @At("HEAD"), cancellable = true)
     private static void changeCaveSpiderSpawn(EntityType<? extends HostileEntity> type, ServerWorldAccess world, SpawnReason spawnReason,
                                               BlockPos pos, Random random, CallbackInfoReturnable<Boolean> cir) {
-        if (ModConfig.get().overworld.caveSpiderNaturalSpawn
+        if (ModConfig.get().overworld.spiders.caveSpiderNaturalSpawn
                 && type.equals(EntityType.CAVE_SPIDER)
                 && !spawnReason.equals(SpawnReason.SPAWNER)) {
             cir.setReturnValue(Utils.canCaveSpiderSpawn(type, world, spawnReason, pos, random));
