@@ -10,6 +10,8 @@
 
   "text.autoconfig.sihywtcamd.option.overworld.zombies": "Les zombies",
   "text.autoconfig.sihywtcamd.option.overworld.zombies.zombieTypeBuffed": "Les mobs zombies ne prennent plus de dégâts facilement",
+  "text.autoconfig.sihywtcamd.option.overworld.zombies.zombiePlayersAttack": "- dégât infligé par les joueurs (%)",
+  "text.autoconfig.sihywtcamd.option.overworld.zombies.zombieMobsAttack": "- dégât infligé par les mobs (%)",
   "text.autoconfig.sihywtcamd.option.overworld.zombies.huskFireProtection": "Les zombies momifiés ne prennent pas de dégâts de feu",
   "text.autoconfig.sihywtcamd.option.overworld.zombies.drownedTridentSpawn": "Les noyés apparaissent plus souvent avec un trident",
   "text.autoconfig.sihywtcamd.option.overworld.zombies.drownedHighVelocity": "Les noyés nagent plus vite",

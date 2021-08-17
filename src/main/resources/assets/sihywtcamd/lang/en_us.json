@@ -10,6 +10,8 @@
 
   "text.autoconfig.sihywtcamd.option.overworld.zombies": "Zombies",
   "text.autoconfig.sihywtcamd.option.overworld.zombies.zombieTypeBuffed": "Zombie-like mobs can't be damaged easily",
+  "text.autoconfig.sihywtcamd.option.overworld.zombies.zombiePlayersAttack": "- damage dealt from players (%)",
+  "text.autoconfig.sihywtcamd.option.overworld.zombies.zombieMobsAttack": "- damage dealt from mobs (%)",
   "text.autoconfig.sihywtcamd.option.overworld.zombies.huskFireProtection": "Husks are immune to on-fire damage",
   "text.autoconfig.sihywtcamd.option.overworld.zombies.drownedTridentSpawn": "Drowned spawn more often with a trident",
   "text.autoconfig.sihywtcamd.option.overworld.zombies.drownedHighVelocity": "Drowned have an increased velocity in water",

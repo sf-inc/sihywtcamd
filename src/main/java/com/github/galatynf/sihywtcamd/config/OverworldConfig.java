@@ -20,6 +20,10 @@ public class OverworldConfig implements ConfigData {
     public static class Zombies {
         @ConfigEntry.Gui.EnumHandler(option = ConfigEntry.Gui.EnumHandler.EnumDisplayOption.BUTTON)
         public ZombieType zombieTypeBuffed = ZombieType.ALL;
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 100)
+        public int zombiePlayersAttack = 20;
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 100)
+        public int zombieMobsAttack = 50;
 
         public boolean huskFireProtection = true;
 
