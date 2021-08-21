@@ -1,10 +1,22 @@
 # Versions Changelog
 
-Currently, every **stable** mod version should work on **1.16.x** Minecraft versions.
-
 * **X versions** are major updates with lots of new content. Very rare
 * **x.X versions** are either updates that add content or major bug fixes
 * **x.x.X versions** are either small content updates (language translation, new textures, ...) or bug fixes
+
+## v1.6
+
+### Creeper
+
+* Don't get damage from explosions. Instead, they ignite
+* Its explosion deal blindness and tinnitus effects, duration depending on your distance with the creeper
+* Tinnitus effect reduce every sound and increase ambient and weather sounds to simulate a tinnitus. The 
+  multiplier depends on the amplifier of the effect (from 0 to 99, for percentages)
+* When a creeper gives you tinnitus, the amplifier depends also on the distance
+
+### Spider
+
+* Can launch webs at targets that spawn a cobweb on collision with an entity
 
 ## v1.5.2
 
