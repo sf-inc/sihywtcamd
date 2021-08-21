@@ -44,6 +44,7 @@ public class OverworldConfig implements ConfigData {
 
     public static class Spiders {
         public boolean babySpiders = true;
+        public boolean webProjectileGoal = true;
 
         @ConfigEntry.Gui.Tooltip
         public boolean caveSpiderJockey = true;

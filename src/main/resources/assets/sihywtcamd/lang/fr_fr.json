@@ -22,6 +22,7 @@
 
   "text.autoconfig.sihywtcamd.option.overworld.spiders": "Les araignées",
   "text.autoconfig.sihywtcamd.option.overworld.spiders.babySpiders": "Les araignées peuvent faire apparaître des bébés à leur mort",
+  "text.autoconfig.sihywtcamd.option.overworld.spiders.webProjectileGoal": "Les araignées peuvent lancer des toiles",
   "text.autoconfig.sihywtcamd.option.overworld.spiders.caveSpiderJockey": "Les araignées venimeuses chevauchées peuvent apparaître",
   "text.autoconfig.sihywtcamd.option.overworld.spiders.caveSpiderJockey.@Tooltip": "Pas depuis un spawner !",
   "text.autoconfig.sihywtcamd.option.overworld.spiders.caveSpiderNaturalSpawn": "Les araignées venimeuses peuvent apparaître naturellement en caverne",

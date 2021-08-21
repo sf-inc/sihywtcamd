@@ -22,6 +22,7 @@
 
   "text.autoconfig.sihywtcamd.option.overworld.spiders": "Spiders",
   "text.autoconfig.sihywtcamd.option.overworld.spiders.babySpiders": "Spiders can spawn baby spiders on death",
+  "text.autoconfig.sihywtcamd.option.overworld.spiders.webProjectileGoal": "Spiders can launch webs",
   "text.autoconfig.sihywtcamd.option.overworld.spiders.caveSpiderJockey": "Cave spider jockeys can spawn",
   "text.autoconfig.sihywtcamd.option.overworld.spiders.caveSpiderJockey.@Tooltip": "Not from spawners!",
   "text.autoconfig.sihywtcamd.option.overworld.spiders.caveSpiderNaturalSpawn": "Cave spiders can spawn naturally in caves",
