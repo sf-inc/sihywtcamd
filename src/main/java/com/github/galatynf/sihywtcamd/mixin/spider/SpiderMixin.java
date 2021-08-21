@@ -1,9 +1,13 @@
 package com.github.galatynf.sihywtcamd.mixin.spider;
 
 import com.github.galatynf.sihywtcamd.config.ModConfig;
+import com.github.galatynf.sihywtcamd.entity.CobwebAttackGoal;
+import com.github.galatynf.sihywtcamd.entity.CobwebProjectileEntity;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.RangedAttackMob;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -14,6 +18,7 @@ import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.SpiderEntity;
 import net.minecraft.entity.passive.MerchantEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -23,7 +28,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.Objects;
 
 @Mixin(SpiderEntity.class)
-public class SpiderMixin extends HostileEntity {
+public class SpiderMixin extends HostileEntity implements RangedAttackMob {
     private static final TrackedData<Boolean> BABY = DataTracker.registerData(SpiderEntity .class, TrackedDataHandlerRegistry.BOOLEAN);
 
     protected SpiderMixin(EntityType<? extends HostileEntity> entityType, World world) {
@@ -35,6 +40,7 @@ public class SpiderMixin extends HostileEntity {
         if (ModConfig.get().overworld.mobs.merchantHostility) {
             this.targetSelector.add(3, new SpiderEntity.FollowTargetGoal<>((SpiderEntity) (Object) this, MerchantEntity.class));
         }
+        this.goalSelector.add(4, new CobwebAttackGoal<>(this, 1.0D, 40, 15.0F));
     }
 
     @Inject(method = "initDataTracker", at = @At("TAIL"))
@@ -90,5 +96,17 @@ public class SpiderMixin extends HostileEntity {
     @Override
     public float getActiveEyeHeight(EntityPose pose, EntityDimensions dimensions) {
         return 0.65F * this.getScaleFactor();
+    }
+
+    @Override
+    public void attack(LivingEntity target, float pullProgress) {
+        CobwebProjectileEntity cobwebProjectileEntity = CobwebProjectileEntity.create(this.world, this);
+        double d = target.getX() - this.getX();
+        double e = target.getBodyY(0.3333333333333333D) - this.getY();
+        double f = target.getZ() - this.getZ();
+        double g = Math.sqrt(d * d + f * f);
+        cobwebProjectileEntity.setVelocity(d, e + g * 0.20000000298023224D, f, 1.0F, (float) (14 - this.world.getDifficulty().getId() * 4));
+        this.playSound(SoundEvents.ENTITY_SKELETON_SHOOT, 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
+        this.world.spawnEntity(cobwebProjectileEntity);
     }
 }
