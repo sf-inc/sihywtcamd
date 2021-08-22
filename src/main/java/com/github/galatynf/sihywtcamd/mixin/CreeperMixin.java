@@ -3,6 +3,7 @@ package com.github.galatynf.sihywtcamd.mixin;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.CreeperEntity;
@@ -24,6 +25,8 @@ public abstract class CreeperMixin extends HostileEntity {
 
     @Shadow public abstract boolean shouldRenderOverlay();
 
+    @Shadow public abstract void ignite();
+
     protected CreeperMixin(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
     }
@@ -41,6 +44,16 @@ public abstract class CreeperMixin extends HostileEntity {
             final float coef = 1.0F - (this.distanceTo(entity) / explosionRadius);
             LivingEntity livingEntity = (LivingEntity) entity;
             livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS, (int) (effectTime * coef)), this);
+        }
+    }
+
+    @Override
+    public boolean damage(DamageSource source, float amount) {
+        if (source.isExplosive()) {
+            this.ignite();
+            return false;
+        } else {
+            return super.damage(source, amount);
         }
     }
 }
