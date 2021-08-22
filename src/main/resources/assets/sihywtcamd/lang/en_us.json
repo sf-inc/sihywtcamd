@@ -27,6 +27,12 @@
   "text.autoconfig.sihywtcamd.option.overworld.spiders.caveSpiderJockey.@Tooltip": "Not from spawners!",
   "text.autoconfig.sihywtcamd.option.overworld.spiders.caveSpiderNaturalSpawn": "Cave spiders can spawn naturally in caves",
 
+  "text.autoconfig.sihywtcamd.option.overworld.creepers": "Creepers",
+  "text.autoconfig.sihywtcamd.option.overworld.creepers.explosionBlindness": "Creepers explosions deal blindness",
+  "text.autoconfig.sihywtcamd.option.overworld.creepers.explosionTinnitus": "Creepers explosions deal tinnitus",
+  "text.autoconfig.sihywtcamd.option.overworld.creepers.explosionTinnitus.@Tooltip": "Effect that increase or decrease some sounds",
+  "text.autoconfig.sihywtcamd.option.overworld.creepers.chainExplosions": "Creepers ignite with explosion damages",
+
   "text.autoconfig.sihywtcamd.option.overworld.slimes": "Slimes",
   "text.autoconfig.sihywtcamd.option.overworld.slimes.slimeBiggerSize": "Slimes can spawn with one more size",
   "text.autoconfig.sihywtcamd.option.overworld.slimes.slimeCanMerge": "Small and normal sized slimes can merge",

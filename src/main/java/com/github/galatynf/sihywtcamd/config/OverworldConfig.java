@@ -52,6 +52,16 @@ public class OverworldConfig implements ConfigData {
     }
 
     @ConfigEntry.Gui.CollapsibleObject
+    public Creepers creepers = new Creepers();
+
+    public static class Creepers {
+        public boolean explosionBlindness = true;
+        @ConfigEntry.Gui.Tooltip
+        public boolean explosionTinnitus = true;
+        public boolean chainExplosions = true;
+    }
+
+    @ConfigEntry.Gui.CollapsibleObject
     public Slimes slimes = new Slimes();
 
     public static class Slimes {

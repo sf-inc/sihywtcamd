@@ -1,6 +1,7 @@
 package com.github.galatynf.sihywtcamd.mixin;
 
 import com.github.galatynf.sihywtcamd.Sihywtcamd;
+import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageSource;
@@ -45,14 +46,20 @@ public abstract class CreeperMixin extends HostileEntity {
         for (Entity entity : entityList) {
             final float multiplier = 1.0F - (this.distanceTo(entity) / explosionRadius);
             PlayerEntity playerEntity = (PlayerEntity) entity;
-            playerEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS, (int) (blindnessDuration * multiplier)), this);
-            playerEntity.addStatusEffect(new StatusEffectInstance(Sihywtcamd.TINNITUS, (int) (tinnitusDuration * multiplier), (int) (100 * multiplier)), this);
+            if (ModConfig.get().overworld.creepers.explosionBlindness) {
+                playerEntity.addStatusEffect(new StatusEffectInstance(
+                        StatusEffects.BLINDNESS, (int) (blindnessDuration * multiplier)), this);
+            }
+            if (ModConfig.get().overworld.creepers.explosionTinnitus) {
+                playerEntity.addStatusEffect(new StatusEffectInstance(
+                        Sihywtcamd.TINNITUS, (int) (tinnitusDuration * multiplier), (int) (100 * multiplier)), this);
+            }
         }
     }
 
     @Override
     public boolean damage(DamageSource source, float amount) {
-        if (source.isExplosive()) {
+        if (ModConfig.get().overworld.creepers.chainExplosions && source.isExplosive()) {
             this.ignite();
             return false;
         } else {
