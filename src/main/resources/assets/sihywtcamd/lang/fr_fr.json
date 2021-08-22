@@ -71,5 +71,7 @@
   "text.autoconfig.sihywtcamd.category.boss": "Boss",
 
   "text.autoconfig.sihywtcamd.option.boss.witherIncreasedHealth": "Les withers ont un peu plus de vie",
-  "text.autoconfig.sihywtcamd.option.boss.witherSpawnSkeletons": "Les withers peuvent faire apparaître des withers squelettes"
+  "text.autoconfig.sihywtcamd.option.boss.witherSpawnSkeletons": "Les withers peuvent faire apparaître des withers squelettes",
+
+  "effect.sihywtcamd.tinnitus": "Acouphènes"
 }

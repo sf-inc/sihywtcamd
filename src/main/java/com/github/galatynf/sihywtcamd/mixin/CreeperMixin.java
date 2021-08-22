@@ -1,13 +1,14 @@
 package com.github.galatynf.sihywtcamd.mixin;
 
+import com.github.galatynf.sihywtcamd.Sihywtcamd;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.entity.mob.HostileEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -33,17 +34,19 @@ public abstract class CreeperMixin extends HostileEntity {
 
     @Inject(method = "explode", at = @At("HEAD"))
     private void effectToEntities(CallbackInfo ci) {
-        final int explosionRadius = (int) (this.explosionRadius * (this.shouldRenderOverlay() ? 3 : 1.5f));
-        final int effectTime = 100;
+        final int explosionRadius = this.explosionRadius * (this.shouldRenderOverlay() ? 3 : 2);
+        final int blindnessDuration = 100;
+        final int tinnitusDuration = 150;
         Vec3d explosionRadiuses = new Vec3d(explosionRadius, explosionRadius, explosionRadius);
         List<Entity> entityList = this.world.getOtherEntities(this,
                 new Box(this.getPos().subtract(explosionRadiuses), this.getPos().add(explosionRadiuses)),
-                entity -> entity instanceof LivingEntity && this.distanceTo(entity) < explosionRadius);
+                entity -> entity instanceof PlayerEntity && this.distanceTo(entity) < explosionRadius);
 
         for (Entity entity : entityList) {
-            final float coef = 1.0F - (this.distanceTo(entity) / explosionRadius);
-            LivingEntity livingEntity = (LivingEntity) entity;
-            livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS, (int) (effectTime * coef)), this);
+            final float multiplier = 1.0F - (this.distanceTo(entity) / explosionRadius);
+            PlayerEntity playerEntity = (PlayerEntity) entity;
+            playerEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS, (int) (blindnessDuration * multiplier)), this);
+            playerEntity.addStatusEffect(new StatusEffectInstance(Sihywtcamd.TINNITUS, (int) (tinnitusDuration * multiplier), (int) (100 * multiplier)), this);
         }
     }
 
