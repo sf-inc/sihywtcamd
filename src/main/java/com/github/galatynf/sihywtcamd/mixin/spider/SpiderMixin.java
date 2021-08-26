@@ -8,6 +8,7 @@ import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.RangedAttackMob;
+import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -21,6 +22,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -30,6 +32,8 @@ import java.util.Objects;
 @Mixin(SpiderEntity.class)
 public class SpiderMixin extends HostileEntity implements RangedAttackMob {
     private static final TrackedData<Boolean> BABY = DataTracker.registerData(SpiderEntity .class, TrackedDataHandlerRegistry.BOOLEAN);
+    @Unique
+    private Goal sihywtcamd_cobwebAttackGoal;
 
     protected SpiderMixin(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
@@ -41,7 +45,8 @@ public class SpiderMixin extends HostileEntity implements RangedAttackMob {
             this.targetSelector.add(3, new SpiderEntity.FollowTargetGoal<>((SpiderEntity) (Object) this, MerchantEntity.class));
         }
         if (ModConfig.get().overworld.spiders.webProjectileGoal) {
-            this.goalSelector.add(4, new CobwebAttackGoal<>(this, 1.0D, 40, 15.0F));
+            this.sihywtcamd_cobwebAttackGoal = new CobwebAttackGoal<>(this, 1.0D, 40, 15.0F);
+            this.goalSelector.add(4, this.sihywtcamd_cobwebAttackGoal);
         }
     }
 
@@ -66,6 +71,10 @@ public class SpiderMixin extends HostileEntity implements RangedAttackMob {
                     "Baby spawn malus", -0.5F * attackDamage.getValue(), EntityAttributeModifier.Operation.ADDITION));
             Objects.requireNonNull(maxHealth).addPersistentModifier(new EntityAttributeModifier(
                     "Baby spawn malus", -0.5F * maxHealth.getValue(), EntityAttributeModifier.Operation.ADDITION));
+
+            if (ModConfig.get().overworld.spiders.webProjectileGoal) {
+                this.goalSelector.remove(this.sihywtcamd_cobwebAttackGoal);
+            }
         }
     }
 

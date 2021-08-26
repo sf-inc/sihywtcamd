@@ -25,7 +25,6 @@ public class CobwebAttackGoal<T extends HostileEntity & RangedAttackMob> extends
         this.actor = actor;
         this.speed = speed;
         this.attackInterval = attackInterval;
-        range = actor.isBaby() ? range * 0.66F : range;
         this.squaredRange = range * range;
         this.setControls(EnumSet.of(Goal.Control.MOVE, Goal.Control.LOOK));
     }
