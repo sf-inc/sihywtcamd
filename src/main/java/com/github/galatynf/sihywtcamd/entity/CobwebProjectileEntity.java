@@ -2,12 +2,10 @@ package com.github.galatynf.sihywtcamd.entity;
 
 import com.github.galatynf.sihywtcamd.Sihywtcamd;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
@@ -65,7 +63,7 @@ public class CobwebProjectileEntity extends ProjectileEntity {
             }
         }
 
-        if (this.isOnFire()) {
+        if (this.isOnFire() || this.isTouchingWater()) {
             this.discard();
         }
 
@@ -113,16 +111,7 @@ public class CobwebProjectileEntity extends ProjectileEntity {
             this.setPitch((float)(MathHelper.atan2(vY, l) * 57.2957763671875D));
             this.setPitch(updateRotation(this.prevPitch, this.getPitch()));
             this.setYaw(updateRotation(this.prevYaw, this.getYaw()));
-
-            float vReducer = 0.99F;
-            if (this.isTouchingWater()) {
-                for(int o = 0; o < 4; ++o) {
-                    this.world.addParticle(ParticleTypes.BUBBLE, x2 - vX * 0.25D, y2 - vY * 0.25D, z2 - vZ * 0.25D, vX, vY, vZ);
-                }
-
-                vReducer = 0.6F;
-            }
-            this.setVelocity(velocity.multiply(vReducer));
+            this.setVelocity(velocity.multiply(0.99F));
 
             if (!this.hasNoGravity()) {
                 velocity = this.getVelocity();
@@ -141,8 +130,11 @@ public class CobwebProjectileEntity extends ProjectileEntity {
 
     @Override
     protected void onEntityHit(EntityHitResult entityHitResult) {
-        BlockPos blockPos = entityHitResult.getEntity().getBlockPos().withY(this.getBlockY());
-        this.world.setBlockState(blockPos, Blocks.COBWEB.getDefaultState());
+        if (!entityHitResult.getEntity().isTouchingWater()) {
+            BlockPos blockPos = entityHitResult.getEntity().getBlockPos().withY(this.getBlockY());
+            this.world.setBlockState(blockPos, Sihywtcamd.MESSY_COBWEB.getDefaultState());
+        }
+
         this.discard();
     }
 

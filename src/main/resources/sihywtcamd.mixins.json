@@ -32,6 +32,7 @@
     "spider.HostileMixin",
     "spider.LivingEntityMixin",
     "spider.SpiderMixin",
+    "spider.SwordMixin",
     "zombie.DrownedMixin",
     "zombie.HuskMixin",
     "zombie.LivingEntityMixin"

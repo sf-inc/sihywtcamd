@@ -3,6 +3,8 @@ package com.github.galatynf.sihywtcamd.mixin.spider;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import com.github.galatynf.sihywtcamd.entity.CobwebAttackGoal;
 import com.github.galatynf.sihywtcamd.entity.CobwebProjectileEntity;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.CobwebBlock;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
@@ -20,6 +22,7 @@ import net.minecraft.entity.mob.SpiderEntity;
 import net.minecraft.entity.passive.MerchantEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -107,6 +110,13 @@ public class SpiderMixin extends HostileEntity implements RangedAttackMob {
     @Override
     public float getActiveEyeHeight(EntityPose pose, EntityDimensions dimensions) {
         return 0.65F * this.getScaleFactor();
+    }
+
+    @Override
+    public void slowMovement(BlockState state, Vec3d multiplier) {
+        if (!(state.getBlock() instanceof CobwebBlock)) {
+            super.slowMovement(state, multiplier);
+        }
     }
 
     @Override
