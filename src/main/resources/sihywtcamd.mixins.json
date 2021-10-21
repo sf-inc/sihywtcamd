@@ -38,6 +38,7 @@
     "zombie.LivingEntityMixin"
   ],
   "client": [
+    "ClientPlayerMixin",
     "EntityRenderDispatcherMixin",
     "phantom.PhantomRendererMixin"
   ],
