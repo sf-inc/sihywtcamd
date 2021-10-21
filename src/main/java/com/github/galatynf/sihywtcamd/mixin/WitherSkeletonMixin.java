@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(WitherSkeletonEntity.class)
 public class WitherSkeletonMixin extends HostileEntity {
-    private static final TrackedData<Boolean> BABY = DataTracker.registerData(SpiderEntity .class, TrackedDataHandlerRegistry.BOOLEAN);
+    private static final TrackedData<Boolean> BABY = DataTracker.registerData(WitherSkeletonEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
     protected WitherSkeletonMixin(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
