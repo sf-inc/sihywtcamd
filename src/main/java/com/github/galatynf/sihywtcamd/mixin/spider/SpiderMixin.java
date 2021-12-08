@@ -45,7 +45,7 @@ public class SpiderMixin extends HostileEntity implements RangedAttackMob {
     @Inject(method = "initGoals", at = @At("HEAD"))
     private void addSpiderGoals(CallbackInfo ci) {
         if (ModConfig.get().overworld.mobs.merchantHostility) {
-            this.targetSelector.add(3, new SpiderEntity.FollowTargetGoal<>((SpiderEntity) (Object) this, MerchantEntity.class));
+            this.targetSelector.add(3, new SpiderEntity.TargetGoal<>((SpiderEntity) (Object) this, MerchantEntity.class));
         }
         if (ModConfig.get().overworld.spiders.webProjectileGoal) {
             this.sihywtcamd_cobwebAttackGoal = new CobwebAttackGoal<>(this, 1.0D, 40, 15.0F);

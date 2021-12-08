@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class BiomeFeatMixin {
     @Inject(method = "addMonsters", at = @At("TAIL"))
     private static void changeWitchSpawnrate(SpawnSettings.Builder builder, int zombieWeight, int zombieVillagerWeight,
-                                             int skeletonWeight, CallbackInfo ci) {
+                                             int skeletonWeight, boolean drowned, CallbackInfo ci) {
         if (ModConfig.get().overworld.illagers.witchMoreSpawn) {
             builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.WITCH, 3, 1, 1));
         }
@@ -22,7 +22,7 @@ public class BiomeFeatMixin {
 
     @Inject(method = "addMonsters", at = @At("TAIL"))
     private static void spawnCaveSpiderNaturally(SpawnSettings.Builder builder, int zombieWeight, int zombieVillagerWeight,
-                                             int skeletonWeight, CallbackInfo ci) {
+                                                 int skeletonWeight, boolean drowned, CallbackInfo ci) {
         if (ModConfig.get().overworld.spiders.caveSpiderNaturalSpawn) {
             builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.CAVE_SPIDER, 80, 1, 3));
         }

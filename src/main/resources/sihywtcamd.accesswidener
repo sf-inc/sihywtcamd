@@ -1,3 +1,3 @@
 accessWidener   v1  named
-accessible class net/minecraft/entity/mob/SpiderEntity$FollowTargetGoal
+accessible class net/minecraft/entity/mob/SpiderEntity$TargetGoal
 accessible method net/minecraft/entity/projectile/ProjectileEntity <init> (Lnet/minecraft/entity/EntityType;Lnet/minecraft/world/World;)V

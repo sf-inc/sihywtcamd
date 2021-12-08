@@ -33,31 +33,31 @@ public class CobwebEntityRenderer<T extends CobwebProjectileEntity> extends Enti
         matrixStack.translate(-4.0D, 0.0D, 0.0D);
         VertexConsumer vertexConsumer = vertexConsumerProvider.getBuffer(RenderLayer.getEntityCutout(this.getTexture(cobwebProjectileEntity)));
         MatrixStack.Entry entry = matrixStack.peek();
-        Matrix4f matrix4f = entry.getModel();
-        Matrix3f matrix3f = entry.getNormal();
-        this.method_23153(matrix4f, matrix3f, vertexConsumer, -7, -2, -2, 0.0F, 0.15625F, -1, 0, 0, i);
-        this.method_23153(matrix4f, matrix3f, vertexConsumer, -7, -2, 2, 0.15625F, 0.15625F, -1, 0, 0, i);
-        this.method_23153(matrix4f, matrix3f, vertexConsumer, -7, 2, 2, 0.15625F, 0.3125F, -1, 0, 0, i);
-        this.method_23153(matrix4f, matrix3f, vertexConsumer, -7, 2, -2, 0.0F, 0.3125F, -1, 0, 0, i);
-        this.method_23153(matrix4f, matrix3f, vertexConsumer, -7, 2, -2, 0.0F, 0.15625F, 1, 0, 0, i);
-        this.method_23153(matrix4f, matrix3f, vertexConsumer, -7, 2, 2, 0.15625F, 0.15625F, 1, 0, 0, i);
-        this.method_23153(matrix4f, matrix3f, vertexConsumer, -7, -2, 2, 0.15625F, 0.3125F, 1, 0, 0, i);
-        this.method_23153(matrix4f, matrix3f, vertexConsumer, -7, -2, -2, 0.0F, 0.3125F, 1, 0, 0, i);
+        Matrix4f position = entry.getPositionMatrix();
+        Matrix3f normal = entry.getNormalMatrix();
+        this.method_23153(position, normal, vertexConsumer, -7, -2, -2, 0.0F, 0.15625F, -1, 0, 0, i);
+        this.method_23153(position, normal, vertexConsumer, -7, -2, 2, 0.15625F, 0.15625F, -1, 0, 0, i);
+        this.method_23153(position, normal, vertexConsumer, -7, 2, 2, 0.15625F, 0.3125F, -1, 0, 0, i);
+        this.method_23153(position, normal, vertexConsumer, -7, 2, -2, 0.0F, 0.3125F, -1, 0, 0, i);
+        this.method_23153(position, normal, vertexConsumer, -7, 2, -2, 0.0F, 0.15625F, 1, 0, 0, i);
+        this.method_23153(position, normal, vertexConsumer, -7, 2, 2, 0.15625F, 0.15625F, 1, 0, 0, i);
+        this.method_23153(position, normal, vertexConsumer, -7, -2, 2, 0.15625F, 0.3125F, 1, 0, 0, i);
+        this.method_23153(position, normal, vertexConsumer, -7, -2, -2, 0.0F, 0.3125F, 1, 0, 0, i);
 
         for(int u = 0; u < 4; ++u) {
             matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(90.0F));
-            this.method_23153(matrix4f, matrix3f, vertexConsumer, -8, -2, 0, 0.0F, 0.0F, 0, 1, 0, i);
-            this.method_23153(matrix4f, matrix3f, vertexConsumer, 8, -2, 0, 0.5F, 0.0F, 0, 1, 0, i);
-            this.method_23153(matrix4f, matrix3f, vertexConsumer, 8, 2, 0, 0.5F, 0.15625F, 0, 1, 0, i);
-            this.method_23153(matrix4f, matrix3f, vertexConsumer, -8, 2, 0, 0.0F, 0.15625F, 0, 1, 0, i);
+            this.method_23153(position, normal, vertexConsumer, -8, -2, 0, 0.0F, 0.0F, 0, 1, 0, i);
+            this.method_23153(position, normal, vertexConsumer, 8, -2, 0, 0.5F, 0.0F, 0, 1, 0, i);
+            this.method_23153(position, normal, vertexConsumer, 8, 2, 0, 0.5F, 0.15625F, 0, 1, 0, i);
+            this.method_23153(position, normal, vertexConsumer, -8, 2, 0, 0.0F, 0.15625F, 0, 1, 0, i);
         }
 
         matrixStack.pop();
         super.render(cobwebProjectileEntity, f, g, matrixStack, vertexConsumerProvider, i);
     }
 
-    public void method_23153(Matrix4f matrix4f, Matrix3f matrix3f, VertexConsumer vertexConsumer, int i, int j, int k, float f, float g, int l, int m, int n, int o) {
-        vertexConsumer.vertex(matrix4f, (float)i, (float)j, (float)k).color(255, 255, 255, 255).texture(f, g).overlay(OverlayTexture.DEFAULT_UV).light(o).normal(matrix3f, (float)l, (float)n, (float)m).next();
+    public void method_23153(Matrix4f position, Matrix3f normal, VertexConsumer vertexConsumer, int i, int j, int k, float f, float g, int l, int m, int n, int o) {
+        vertexConsumer.vertex(position, (float)i, (float)j, (float)k).color(255, 255, 255, 255).texture(f, g).overlay(OverlayTexture.DEFAULT_UV).light(o).normal(normal, (float)l, (float)n, (float)m).next();
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.github.galatynf.sihywtcamd.statusEffect;
 
 import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.entity.effect.StatusEffectType;
+import net.minecraft.entity.effect.StatusEffectCategory;
 
 /*
  * Effect that reduce every sound for a player, except ambient and weather ones that will be increased.
@@ -10,7 +10,7 @@ import net.minecraft.entity.effect.StatusEffectType;
  * */
 public class TinnitusStatusEffect extends StatusEffect {
     public TinnitusStatusEffect() {
-        super(StatusEffectType.HARMFUL, 0xEBEBEB);
+        super(StatusEffectCategory.HARMFUL, 0xEBEBEB);
     }
 
     @Override

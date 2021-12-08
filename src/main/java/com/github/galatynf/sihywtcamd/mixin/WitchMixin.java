@@ -2,8 +2,8 @@ package com.github.galatynf.sihywtcamd.mixin;
 
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ai.goal.DisableableFollowTargetGoal;
 import net.minecraft.entity.ai.goal.FleeEntityGoal;
-import net.minecraft.entity.ai.goal.FollowTargetGoal;
 import net.minecraft.entity.mob.WitchEntity;
 import net.minecraft.entity.passive.MerchantEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -31,7 +31,8 @@ public abstract class WitchMixin extends RaiderEntity {
     @Inject(method = "initGoals", at = @At("HEAD"))
     private void targetMerchantW(CallbackInfo ci) {
         if (ModConfig.get().overworld.mobs.merchantHostility) {
-            this.targetSelector.add(3, new FollowTargetGoal<>(this, MerchantEntity.class, true));
+            this.targetSelector.add(3, new DisableableFollowTargetGoal<>(this, MerchantEntity.class, 10,
+                    true, false, null));
         }
     }
 }
