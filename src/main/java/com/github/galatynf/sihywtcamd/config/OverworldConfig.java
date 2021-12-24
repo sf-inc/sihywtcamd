@@ -55,7 +55,8 @@ public class OverworldConfig implements ConfigData {
     public Creepers creepers = new Creepers();
 
     public static class Creepers {
-        public boolean explosionBlindness = true;
+        public boolean explosionFatigue = true;
+        public boolean explosionWeakness = true;
         public boolean chainExplosions = true;
     }
 

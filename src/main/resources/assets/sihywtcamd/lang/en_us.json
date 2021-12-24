@@ -28,7 +28,8 @@
   "text.autoconfig.sihywtcamd.option.overworld.spiders.caveSpiderNaturalSpawn": "Cave spiders can spawn naturally in caves",
 
   "text.autoconfig.sihywtcamd.option.overworld.creepers": "Creepers",
-  "text.autoconfig.sihywtcamd.option.overworld.creepers.explosionBlindness": "Creepers explosions deal blindness",
+  "text.autoconfig.sihywtcamd.option.overworld.creepers.explosionFatigue": "Creepers explosions deal mining fatigue",
+  "text.autoconfig.sihywtcamd.option.overworld.creepers.explosionWeakness": "Creepers explosions deal weakness",
   "text.autoconfig.sihywtcamd.option.overworld.creepers.chainExplosions": "Creepers ignite with explosion damages",
 
   "text.autoconfig.sihywtcamd.option.overworld.slimes": "Slimes",

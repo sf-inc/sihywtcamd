@@ -28,7 +28,8 @@
   "text.autoconfig.sihywtcamd.option.overworld.spiders.caveSpiderNaturalSpawn": "Les araignées venimeuses peuvent apparaître naturellement en caverne",
 
   "text.autoconfig.sihywtcamd.option.overworld.creepers": "Les creepers",
-  "text.autoconfig.sihywtcamd.option.overworld.creepers.explosionBlindness": "Les explosions de creepers donnent cécité",
+  "text.autoconfig.sihywtcamd.option.overworld.creepers.explosionFatigue": "Les explosions de creepers donnent fatigue de minage",
+  "text.autoconfig.sihywtcamd.option.overworld.creepers.explosionWeakness": "Les explosions de creepers donnent faiblesse",
   "text.autoconfig.sihywtcamd.option.overworld.creepers.chainExplosions": "Les creepers s'allument avec les dégâts d'explosions",
 
   "text.autoconfig.sihywtcamd.option.overworld.slimes": "Les slimes",

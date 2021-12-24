@@ -35,7 +35,7 @@ public abstract class CreeperMixin extends HostileEntity {
     @Inject(method = "explode", at = @At("HEAD"))
     private void effectToEntities(CallbackInfo ci) {
         final int explosionRadius = this.explosionRadius * (this.shouldRenderOverlay() ? 3 : 2);
-        final int blindnessDuration = 150;
+        final int duration = 150;
         Vec3d explosionRadiuses = new Vec3d(explosionRadius, explosionRadius, explosionRadius);
         List<Entity> entityList = this.world.getOtherEntities(this,
                 new Box(this.getPos().subtract(explosionRadiuses), this.getPos().add(explosionRadiuses)),
@@ -44,9 +44,13 @@ public abstract class CreeperMixin extends HostileEntity {
         for (Entity entity : entityList) {
             final double multiplier = Math.sqrt(1.0 - (this.distanceTo(entity) / explosionRadius));
             PlayerEntity playerEntity = (PlayerEntity) entity;
-            if (ModConfig.get().overworld.creepers.explosionBlindness) {
+            if (ModConfig.get().overworld.creepers.explosionFatigue) {
                 playerEntity.addStatusEffect(new StatusEffectInstance(
-                        StatusEffects.BLINDNESS, (int) (blindnessDuration * multiplier)), this);
+                        StatusEffects.MINING_FATIGUE, (int) (duration * multiplier)), this);
+            }
+            if (ModConfig.get().overworld.creepers.explosionWeakness) {
+                playerEntity.addStatusEffect(new StatusEffectInstance(
+                        StatusEffects.WEAKNESS, (int) (duration * multiplier)), this);
             }
         }
     }
