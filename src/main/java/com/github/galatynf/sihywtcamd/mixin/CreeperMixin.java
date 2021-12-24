@@ -1,6 +1,5 @@
 package com.github.galatynf.sihywtcamd.mixin;
 
-import com.github.galatynf.sihywtcamd.Sihywtcamd;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -37,7 +36,6 @@ public abstract class CreeperMixin extends HostileEntity {
     private void effectToEntities(CallbackInfo ci) {
         final int explosionRadius = this.explosionRadius * (this.shouldRenderOverlay() ? 3 : 2);
         final int blindnessDuration = 100;
-        final int tinnitusDuration = 150;
         Vec3d explosionRadiuses = new Vec3d(explosionRadius, explosionRadius, explosionRadius);
         List<Entity> entityList = this.world.getOtherEntities(this,
                 new Box(this.getPos().subtract(explosionRadiuses), this.getPos().add(explosionRadiuses)),
@@ -49,10 +47,6 @@ public abstract class CreeperMixin extends HostileEntity {
             if (ModConfig.get().overworld.creepers.explosionBlindness) {
                 playerEntity.addStatusEffect(new StatusEffectInstance(
                         StatusEffects.BLINDNESS, (int) (blindnessDuration * multiplier)), this);
-            }
-            if (ModConfig.get().overworld.creepers.explosionTinnitus) {
-                playerEntity.addStatusEffect(new StatusEffectInstance(
-                        Sihywtcamd.TINNITUS, (int) (tinnitusDuration * multiplier), (int) (100 * multiplier)), this);
             }
         }
     }

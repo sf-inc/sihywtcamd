@@ -29,8 +29,6 @@
 
   "text.autoconfig.sihywtcamd.option.overworld.creepers": "Les creepers",
   "text.autoconfig.sihywtcamd.option.overworld.creepers.explosionBlindness": "Les explosions de creepers donnent cécité",
-  "text.autoconfig.sihywtcamd.option.overworld.creepers.explosionTinnitus": "Les explosions de creepers donnent acouphènes",
-  "text.autoconfig.sihywtcamd.option.overworld.creepers.explosionTinnitus.@Tooltip": "Effet qui augmente ou réduit certains sons",
   "text.autoconfig.sihywtcamd.option.overworld.creepers.chainExplosions": "Les creepers s'allument avec les dégâts d'explosions",
 
   "text.autoconfig.sihywtcamd.option.overworld.slimes": "Les slimes",

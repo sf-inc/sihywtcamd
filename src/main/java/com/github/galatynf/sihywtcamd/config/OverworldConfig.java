@@ -56,8 +56,6 @@ public class OverworldConfig implements ConfigData {
 
     public static class Creepers {
         public boolean explosionBlindness = true;
-        @ConfigEntry.Gui.Tooltip
-        public boolean explosionTinnitus = true;
         public boolean chainExplosions = true;
     }
 
