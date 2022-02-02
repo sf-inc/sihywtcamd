@@ -79,6 +79,7 @@ public class OverworldConfig implements ConfigData {
         public boolean ravagerInPatrols = true;
         public boolean evokerStopArrows = true;
         public boolean evokerIncreasedHealth = true;
+        public boolean illusionerInMansions = true;
 
         public boolean witchFleeGoal = true;
         public boolean witchMoreSpawn = true;

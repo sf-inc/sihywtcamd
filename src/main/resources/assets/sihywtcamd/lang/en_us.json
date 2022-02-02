@@ -44,6 +44,7 @@
   "text.autoconfig.sihywtcamd.option.overworld.illagers.ravagerInPatrols": "Ravagers can spawn in patrols",
   "text.autoconfig.sihywtcamd.option.overworld.illagers.evokerStopArrows": "Evokers stop arrows",
   "text.autoconfig.sihywtcamd.option.overworld.illagers.evokerIncreasedHealth": "Evokers health is slightly increased",
+  "text.autoconfig.sihywtcamd.option.overworld.illagers.illusionerInMansions": "Illusioners can spawn in mansions",
 
   "text.autoconfig.sihywtcamd.option.overworld.illagers.witchFleeGoal": "Witches flee player if too close",
   "text.autoconfig.sihywtcamd.option.overworld.illagers.witchMoreSpawn": "Witches can spawn a bit more often",
