@@ -12,6 +12,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class PhantomRendererMixin {
     @Inject(method = "getTexture*", at = @At("HEAD"), cancellable = true)
     private void getTexture(PhantomEntity phantomEntity, CallbackInfoReturnable<Identifier> cir) {
-        cir.setReturnValue(new Identifier("sihywtcamd", "textures/phantom.png"));
+        cir.setReturnValue(new Identifier("sihywtcamd", "textures/entity/phantom.png"));
     }
 }
