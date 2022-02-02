@@ -8,11 +8,13 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Material;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class Sihywtcamd implements ModInitializer {
     public static boolean areConfigsInit = false;
+    public static final String MOD_ID = "sihywtcamd";
 
     public static final EntityType<CobwebProjectileEntity> COBWEB  = Registry.register(Registry.ENTITY_TYPE, "cobweb", EntityType.Builder
             .create(CobwebProjectileEntity::new, SpawnGroup.MISC)
@@ -22,8 +24,12 @@ public class Sihywtcamd implements ModInitializer {
     public static final Block MESSY_COBWEB = new MessyCobweb(FabricBlockSettings
             .of(Material.COBWEB).noCollision().requiresTool().strength(3.0F));
 
+    public static final Identifier SPIDER_SPIT_ID = new Identifier(MOD_ID, "spider_spit");
+    public static SoundEvent SPIDER_SPIT_EVENT = new SoundEvent(SPIDER_SPIT_ID);
+
     @Override
     public void onInitialize() {
-        Registry.register(Registry.BLOCK, new Identifier("sihywtcamd", "messy_cobweb"), MESSY_COBWEB);
+        Registry.register(Registry.BLOCK, new Identifier(MOD_ID, "messy_cobweb"), MESSY_COBWEB);
+        Registry.register(Registry.SOUND_EVENT, SPIDER_SPIT_ID, SPIDER_SPIT_EVENT);
     }
 }

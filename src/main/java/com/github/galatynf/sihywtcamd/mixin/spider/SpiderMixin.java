@@ -1,5 +1,6 @@
 package com.github.galatynf.sihywtcamd.mixin.spider;
 
+import com.github.galatynf.sihywtcamd.Sihywtcamd;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import com.github.galatynf.sihywtcamd.entity.CobwebAttackGoal;
 import com.github.galatynf.sihywtcamd.entity.CobwebProjectileEntity;
@@ -21,7 +22,6 @@ import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.SpiderEntity;
 import net.minecraft.entity.passive.MerchantEntity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -127,7 +127,7 @@ public class SpiderMixin extends HostileEntity implements RangedAttackMob {
         double f = target.getZ() - this.getZ();
         double g = Math.sqrt(d * d + f * f);
         cobwebProjectileEntity.setVelocity(d, e + g * 0.20000000298023224D, f, 1.0F, (float) (14 - this.world.getDifficulty().getId() * 2));
-        this.playSound(SoundEvents.ENTITY_SKELETON_SHOOT, 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
+        this.playSound(Sihywtcamd.SPIDER_SPIT_EVENT, 0.33F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
         this.world.spawnEntity(cobwebProjectileEntity);
     }
 }
