@@ -4,6 +4,7 @@ import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.mob.IllagerEntity;
+import net.minecraft.structure.WoodlandMansionGenerator;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ServerWorldAccess;
@@ -13,10 +14,9 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 import java.util.Random;
 
-@Mixin(targets = "net.minecraft.structure.WoodlandMansionGenerator$Piece")
+@Mixin(WoodlandMansionGenerator.Piece.class)
 public class MansionMixin {
-    @ModifyVariable(method = "handleMetadata(Ljava/lang/String;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/world/ServerWorldAccess;Ljava/util/Random;Lnet/minecraft/util/math/BlockBox;)V",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/IllagerEntity;setPersistent()V"))
+    @ModifyVariable(method = "handleMetadata", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/IllagerEntity;setPersistent()V"))
     private IllagerEntity trySetIllusioner(IllagerEntity illager, String metadata, BlockPos pos, ServerWorldAccess world,
                                            Random random, BlockBox boundingBox) {
         if (ModConfig.get().overworld.illagers.illusionerInMansions
