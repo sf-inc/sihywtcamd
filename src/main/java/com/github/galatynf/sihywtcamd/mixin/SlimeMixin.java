@@ -11,6 +11,8 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.SlimeEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.particle.ParticleEffect;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
@@ -31,6 +33,8 @@ public abstract class SlimeMixin extends MobEntity {
     @Shadow protected abstract void setSize(int size, boolean heal);
 
     @Shadow public abstract EntityType<? extends SlimeEntity> getType();
+
+    @Shadow protected abstract ParticleEffect getParticles();
 
     protected SlimeMixin(EntityType<? extends MobEntity> entityType, World world) {
         super(entityType, world);
@@ -88,6 +92,10 @@ public abstract class SlimeMixin extends MobEntity {
                 this.setHasMerged(true);
                 slimeEntity.remove(RemovalReason.DISCARDED);
                 this.setSize(this.getSize() * 2, true);
+                this.world.addParticle(this.getParticles(), this.getX(), this.getY(), this.getZ(),
+                        0.0, 0.0, 0.0);
+                this.playSound(SoundEvents.ENTITY_SLIME_ATTACK, 1.0f,
+                        (this.random.nextFloat() - this.random.nextFloat()) * 0.2f + 1.0f);
             }
         }
     }
