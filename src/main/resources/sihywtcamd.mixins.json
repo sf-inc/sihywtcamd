@@ -25,6 +25,7 @@
     "illusioner.MansionMixin",
     "phantom.EntityMixin",
     "phantom.LivingEntityMixin",
+    "phantom.LivingEntityRendererMixin",
     "phantom.PhantomAttackGoalMixin",
     "phantom.PhantomSwoopGoalMixin",
     "phantom.PhantomTargetGoalMixin",
