@@ -9,14 +9,28 @@
 ### Creeper
 
 * Don't get damage from explosions. Instead, they ignite
-* Its explosion deal blindness and tinnitus effects, duration depending on your distance with the creeper
-* Tinnitus effect reduce every sound and increase ambient and weather sounds to simulate a tinnitus. The 
-  multiplier depends on the amplifier of the effect (from 0 to 99, for percentages)
-* When a creeper gives you tinnitus, the amplifier depends also on the distance
+* Its explosion deals mining fatigue and weakness effects, duration depending on your distance with the creeper
+
+### Illusioner
+
+* Have 40% chance to spawn in mansions when an evoker does
+* If it spawns, it has 80% chance to replace the associated evoker and 20% to spawn with it
+
+### Phantom
+
+* Fixed texture bug that removed red flash on hit
+
+### Slime
+
+* Can merge only once to avoid easy farm and lags
+* Merging plays a sound and creates particles
 
 ### Spider
 
-* Can launch webs at targets that spawn a cobweb on collision with an entity
+* Can spit webs at targets that spawn a messy cobweb on collision with an entity
+* Baby spiders can't spit webs
+* Messy cobweb can't be placed on water, so you're immune on water
+* Messy cobweb despawns after 5 to 10s and don't drop strings
 
 ## v1.5.2
 
