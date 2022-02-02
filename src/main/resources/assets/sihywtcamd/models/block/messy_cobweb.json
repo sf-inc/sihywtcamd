@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cross",
   "textures": {
-    "cross": "minecraft:block/cobweb"
+    "cross": "sihywtcamd:block/messy_cobweb"
   }
 }
