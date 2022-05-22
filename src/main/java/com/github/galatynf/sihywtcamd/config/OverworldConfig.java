@@ -96,4 +96,5 @@ public class OverworldConfig implements ConfigData {
     }
 
     public boolean guardianNaturalSpawn = true;
+    public boolean larvaeSpeedBonus = true;
 }
