@@ -14,6 +14,22 @@ public class ModConfig extends PartitioningSerializer.GlobalData {
     @ConfigEntry.Gui.TransitiveObject
     public OverworldConfig overworld = new OverworldConfig();
 
+    @ConfigEntry.Category("zombie")
+    @ConfigEntry.Gui.TransitiveObject
+    public ZombieConfig zombie = new ZombieConfig();
+
+    @ConfigEntry.Category("skeleton")
+    @ConfigEntry.Gui.TransitiveObject
+    public SkeletonConfig skeleton = new SkeletonConfig();
+
+    @ConfigEntry.Category("arthropod")
+    @ConfigEntry.Gui.TransitiveObject
+    public ArthropodConfig arthropod = new ArthropodConfig();
+
+    @ConfigEntry.Category("illager")
+    @ConfigEntry.Gui.TransitiveObject
+    public IllagerConfig illager = new IllagerConfig();
+
     @ConfigEntry.Category("nether")
     @ConfigEntry.Gui.TransitiveObject
     public NetherConfig nether = new NetherConfig();

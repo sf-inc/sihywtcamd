@@ -8,14 +8,13 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 public class NetherConfig implements ConfigData {
     public boolean blazeFireCollision = true;
     public boolean ghastIncreasedHealth = true;
-    public boolean babyWitherSkeleton = true;
 
     @ConfigEntry.Gui.CollapsibleObject
-    public Piglins piglins = new Piglins();
+    public Piglin piglin = new Piglin();
 
-    public static class Piglins {
+    public static class Piglin {
         @ConfigEntry.BoundedDiscrete(min = 1, max = 4)
-        public int piglinGoldenArmor = 4;
-        public boolean piglinRideHoglin = true;
+        public int goldenArmor = 4;
+        public boolean rideHoglin = true;
     }
 }

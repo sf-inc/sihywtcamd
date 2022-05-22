@@ -16,7 +16,7 @@ public abstract class EntityMixin {
 
     @Inject(method = "adjustMovementForCollisions(Lnet/minecraft/util/math/Vec3d;)Lnet/minecraft/util/math/Vec3d;", at = @At("HEAD"), cancellable = true)
     private void noCollisionForPhantom(Vec3d movement, CallbackInfoReturnable<Vec3d> cir) {
-        if (ModConfig.get().overworld.phantoms.phantomThroughBlocks && this.getType().equals(EntityType.PHANTOM)) {
+        if (ModConfig.get().overworld.phantom.throughBlocks && this.getType().equals(EntityType.PHANTOM)) {
             cir.setReturnValue(movement);
         }
     }

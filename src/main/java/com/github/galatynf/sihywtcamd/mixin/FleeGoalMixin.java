@@ -23,7 +23,7 @@ public class FleeGoalMixin<T extends LivingEntity> {
     @Inject(method = "<init>(Lnet/minecraft/entity/mob/PathAwareEntity;Ljava/lang/Class;Ljava/util/function/Predicate;FDDLjava/util/function/Predicate;)V", at = @At("TAIL"))
     private void changeFleePredicate(PathAwareEntity mob, Class<T> fleeFromType, Predicate<LivingEntity> extraInclusionSelector, float distance,
                                      double slowSpeed, double fastSpeed, Predicate<LivingEntity> inclusionSelector, CallbackInfo ci) {
-        if (ModConfig.get().overworld.mobs.mobsLessFear) {
+        if (ModConfig.get().overworld.general.mobsLessFear) {
             this.withinRangePredicate = (TargetPredicate.createAttackable()).setBaseMaxDistance(distance).setPredicate(
                     inclusionSelector.and(extraInclusionSelector).and(livingEntity -> livingEntity.getHealth() > livingEntity.getMaxHealth() / 2.0F));
         }

@@ -44,11 +44,11 @@ public abstract class CreeperMixin extends HostileEntity {
         for (Entity entity : entityList) {
             final double multiplier = Math.sqrt(1.0 - (this.distanceTo(entity) / explosionRadius));
             PlayerEntity playerEntity = (PlayerEntity) entity;
-            if (ModConfig.get().overworld.creepers.explosionFatigue) {
+            if (ModConfig.get().overworld.creeper.explosionFatigue) {
                 playerEntity.addStatusEffect(new StatusEffectInstance(
                         StatusEffects.MINING_FATIGUE, (int) (duration * multiplier)), this);
             }
-            if (ModConfig.get().overworld.creepers.explosionWeakness) {
+            if (ModConfig.get().overworld.creeper.explosionWeakness) {
                 playerEntity.addStatusEffect(new StatusEffectInstance(
                         StatusEffects.WEAKNESS, (int) (duration * multiplier)), this);
             }
@@ -57,7 +57,7 @@ public abstract class CreeperMixin extends HostileEntity {
 
     @Override
     public boolean damage(DamageSource source, float amount) {
-        if (ModConfig.get().overworld.creepers.chainExplosions && source.isExplosive()) {
+        if (ModConfig.get().overworld.creeper.chainExplosions && source.isExplosive()) {
             this.ignite();
             return false;
         } else {

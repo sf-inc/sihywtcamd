@@ -66,7 +66,7 @@ public abstract class SlimeMixin extends MobEntity {
     @Override
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityTag) {
         int i = this.random.nextInt(3);
-        if (((ModConfig.get().overworld.slimes.slimeBiggerSize && this.getType().equals(EntityType.SLIME)) || i < 2)
+        if (((ModConfig.get().overworld.slime.biggerSize && this.getType().equals(EntityType.SLIME)) || i < 2)
                 && this.random.nextFloat() < 0.5F * difficulty.getClampedLocalDifficulty()) {
             ++i;
         }
@@ -80,7 +80,7 @@ public abstract class SlimeMixin extends MobEntity {
     private void tryToMerge(CallbackInfo ci) {
         if (!this.world.isClient
                 && this.getType().equals(EntityType.SLIME)
-                && ModConfig.get().overworld.slimes.slimeCanMerge
+                && ModConfig.get().overworld.slime.canMerge
                 && !this.hasMerged()
                 && this.isAlive()
                 && this.getSize() < 4

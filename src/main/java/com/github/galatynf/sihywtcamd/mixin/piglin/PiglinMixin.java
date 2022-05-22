@@ -31,7 +31,7 @@ public abstract class PiglinMixin extends AbstractPiglinEntity {
     @Inject(method = "initialize", at = @At("HEAD"))
     private void spawnOnHoglin(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, EntityData entityData,
                                NbtCompound entityTag, CallbackInfoReturnable<EntityData> cir) {
-        if (ModConfig.get().nether.piglins.piglinRideHoglin
+        if (ModConfig.get().nether.piglin.rideHoglin
                 && world.getRandom().nextFloat() < 0.05F + 0.05F * world.getLocalDifficulty(this.getBlockPos()).getClampedLocalDifficulty()) {
             this.setCannotHunt(true);
             List<HoglinEntity> list = world.getEntitiesByClass(HoglinEntity.class, this.getBoundingBox().expand(5.0D, 3.0D, 5.0D), EntityPredicates.NOT_MOUNTED);

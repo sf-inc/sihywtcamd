@@ -22,7 +22,7 @@ public abstract class WitchMixin extends RaiderEntity {
 
     @Inject(method = "initGoals", at = @At("HEAD"))
     private void fleePlayerW(CallbackInfo ci) {
-        if (ModConfig.get().overworld.illagers.witchFleeGoal) {
+        if (ModConfig.get().illager.witch.fleeGoal) {
             this.goalSelector.add(1, new FleeEntityGoal<>(this, PlayerEntity.class, 3, 1.2, 1.5,
                     (livingEntity) -> true));
         }
@@ -30,7 +30,7 @@ public abstract class WitchMixin extends RaiderEntity {
 
     @Inject(method = "initGoals", at = @At("HEAD"))
     private void targetMerchantW(CallbackInfo ci) {
-        if (ModConfig.get().overworld.mobs.merchantHostility) {
+        if (ModConfig.get().overworld.general.merchantHostility) {
             this.targetSelector.add(3, new DisableableFollowTargetGoal<>(this, MerchantEntity.class, 10,
                     true, false, null));
         }

@@ -29,7 +29,7 @@ public abstract class VindicatorMixin extends IllagerEntity {
     @Inject(method = "initialize", at = @At("HEAD"))
     private void addSpeedBonusV(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, EntityData entityData,
                                 NbtCompound entityTag, CallbackInfoReturnable<EntityData> cir) {
-        if (ModConfig.get().overworld.illagers.vindicatorSpeedBonus && world.getRandom().nextFloat() < 0.2F) {
+        if (ModConfig.get().illager.vindicator.speedBonus && world.getRandom().nextFloat() < 0.2F) {
             EntityAttributeInstance speed = this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED);
             Objects.requireNonNull(speed).addPersistentModifier(new EntityAttributeModifier(
                     "Random vindicator bonus", 0.42 * difficulty.getClampedLocalDifficulty() * speed.getValue(), EntityAttributeModifier.Operation.ADDITION));

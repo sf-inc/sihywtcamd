@@ -22,7 +22,7 @@ public abstract class AbstractSkeletonMixin extends HostileEntity {
 
     @Inject(method = "initGoals", at = @At("HEAD"))
     private void fleePlayerS(CallbackInfo ci) {
-        if (ModConfig.get().overworld.skeletons.skeletonFleeGoal) {
+        if (ModConfig.get().skeleton.general.fleeGoal) {
             this.goalSelector.add(3, new FleeEntityGoal<>(this, PlayerEntity.class, 4, 1.2, 1.5,
                     (livingEntity) -> (this.getMainHandStack().getItem().equals(Items.BOW))));
         }
@@ -30,7 +30,7 @@ public abstract class AbstractSkeletonMixin extends HostileEntity {
 
     @Inject(method = "initGoals", at = @At("HEAD"))
     private void targetMerchantS(CallbackInfo ci) {
-        if (ModConfig.get().overworld.mobs.merchantHostility) {
+        if (ModConfig.get().overworld.general.merchantHostility) {
             this.targetSelector.add(3, new ActiveTargetGoal<>(this, MerchantEntity.class, true));
         }
     }

@@ -24,7 +24,7 @@ public abstract class LivingEntityRendererMixin<T extends LivingEntity>
     private void setTranslucentPhantoms(T entity, boolean showBody, boolean translucent, boolean showOutline,
                                         CallbackInfoReturnable<@Nullable RenderLayer> cir) {
         if (entity.getType().equals(EntityType.PHANTOM)
-                && ModConfig.get().overworld.phantoms.phantomTranslucent) {
+                && ModConfig.get().overworld.phantom.translucent) {
             cir.setReturnValue(RenderLayer.getEntityTranslucent(getTexture(entity)));
         }
     }

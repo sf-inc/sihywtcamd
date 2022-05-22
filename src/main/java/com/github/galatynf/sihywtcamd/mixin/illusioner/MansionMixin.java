@@ -19,7 +19,7 @@ public class MansionMixin {
     @ModifyVariable(method = "handleMetadata", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/IllagerEntity;setPersistent()V"))
     private IllagerEntity trySetIllusioner(IllagerEntity illager, String metadata, BlockPos pos, ServerWorldAccess world,
                                            Random random, BlockBox boundingBox) {
-        if (ModConfig.get().overworld.illagers.illusionerInMansions
+        if (ModConfig.get().illager.illusionerInMansions
                 && metadata.equals("Mage")
                 && random.nextFloat() < 0.4f) {
             if (random.nextFloat() < 0.2f) {

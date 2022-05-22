@@ -44,10 +44,10 @@ public class SpiderMixin extends HostileEntity implements RangedAttackMob {
 
     @Inject(method = "initGoals", at = @At("HEAD"))
     private void addSpiderGoals(CallbackInfo ci) {
-        if (ModConfig.get().overworld.mobs.merchantHostility) {
+        if (ModConfig.get().overworld.general.merchantHostility) {
             this.targetSelector.add(3, new SpiderEntity.TargetGoal<>((SpiderEntity) (Object) this, MerchantEntity.class));
         }
-        if (ModConfig.get().overworld.spiders.webProjectileGoal) {
+        if (ModConfig.get().arthropod.spider.webProjectileGoal) {
             this.sihywtcamd_cobwebAttackGoal = new CobwebAttackGoal<>(this, 1.0D, 40, 15.0F);
             this.goalSelector.add(4, this.sihywtcamd_cobwebAttackGoal);
         }
@@ -75,7 +75,7 @@ public class SpiderMixin extends HostileEntity implements RangedAttackMob {
             Objects.requireNonNull(maxHealth).addPersistentModifier(new EntityAttributeModifier(
                     "Baby spawn malus", -0.5F * maxHealth.getValue(), EntityAttributeModifier.Operation.ADDITION));
 
-            if (ModConfig.get().overworld.spiders.webProjectileGoal) {
+            if (ModConfig.get().arthropod.spider.webProjectileGoal) {
                 this.goalSelector.remove(this.sihywtcamd_cobwebAttackGoal);
             }
         }

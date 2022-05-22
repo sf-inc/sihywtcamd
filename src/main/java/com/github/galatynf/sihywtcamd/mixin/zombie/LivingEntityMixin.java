@@ -33,8 +33,8 @@ public abstract class LivingEntityMixin extends Entity {
                 && !this.isOnFire()
                 && EnchantmentHelper.getLevel(Enchantments.SMITE, ((LivingEntity) attacker).getMainHandStack()) < 1) {
             amount = attacker instanceof PlayerEntity
-                    ? amount * (ModConfig.get().overworld.zombies.zombiePlayersAttack / 100.0F)
-                    : amount * (ModConfig.get().overworld.zombies.zombieMobsAttack / 100.0F);
+                    ? amount * (ModConfig.get().zombie.general.playersAttack / 100.0F)
+                    : amount * (ModConfig.get().zombie.general.mobsAttack / 100.0F);
         }
         return amount;
     }

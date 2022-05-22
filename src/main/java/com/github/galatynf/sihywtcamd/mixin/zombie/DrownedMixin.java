@@ -23,7 +23,7 @@ public abstract class DrownedMixin extends ZombieEntity {
 
     @Inject(method = "initEquipment", at = @At("HEAD"), cancellable = true)
     public void changeProbability(LocalDifficulty difficulty, CallbackInfo ci) {
-        if (ModConfig.get().overworld.zombies.drownedTridentSpawn) {
+        if (ModConfig.get().zombie.drowned.tridentSpawn) {
             int rand = this.random.nextInt(100);
             if (rand < 15) {
                 this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.TRIDENT));
@@ -36,6 +36,6 @@ public abstract class DrownedMixin extends ZombieEntity {
 
     @ModifyArg(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/DrownedEntity;updateVelocity(FLnet/minecraft/util/math/Vec3d;)V"))
     private float increaseVelocity(float speed) {
-        return ModConfig.get().overworld.zombies.drownedHighVelocity ? 0.1F : speed;
+        return ModConfig.get().zombie.drowned.highVelocity ? 0.1F : speed;
     }
 }
