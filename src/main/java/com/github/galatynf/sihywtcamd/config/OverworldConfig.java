@@ -36,6 +36,7 @@ public class OverworldConfig implements ConfigData {
 
     public static class Skeletons {
         public boolean skeletonFleeGoal = true;
+        public boolean skeletonSpectralArrow = true;
         public boolean strayBetterSlowness = true;
     }
 

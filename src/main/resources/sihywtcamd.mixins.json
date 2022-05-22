@@ -30,6 +30,7 @@
     "piglin.PiglinBrainMixin",
     "piglin.PiglinMixin",
     "skeleton.AbstractSkeletonMixin",
+    "skeleton.SkeletonMixin",
     "skeleton.StrayMixin",
     "spider.HostileMixin",
     "spider.LivingEntityMixin",
