@@ -44,6 +44,7 @@ public class OverworldConfig implements ConfigData {
     public Vex vex = new Vex();
 
     public static class Vex {
+        public boolean dieWithEvoker = true;
         public boolean naturalSpawnDarkForest = true;
     }
 
