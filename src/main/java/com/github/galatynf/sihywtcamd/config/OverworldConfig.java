@@ -40,5 +40,12 @@ public class OverworldConfig implements ConfigData {
         public boolean canMerge = true;
     }
 
+    @ConfigEntry.Gui.CollapsibleObject
+    public Vex vex = new Vex();
+
+    public static class Vex {
+        public boolean naturalSpawnDarkForest = true;
+    }
+
     public boolean guardianNaturalSpawn = true;
 }
