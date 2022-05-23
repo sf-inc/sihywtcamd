@@ -1,4 +1,4 @@
-package com.github.galatynf.sihywtcamd.mixin;
+package com.github.galatynf.sihywtcamd.mixin.biome;
 
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.entity.EntityType;
