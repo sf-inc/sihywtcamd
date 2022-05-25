@@ -12,6 +12,7 @@
     "EvokerMixin",
     "FleeGoalMixin",
     "GhastMixin",
+    "GuardianMixin",
     "LivingEntityMixin",
     "PillagerMixin",
     "PillagerSpawnerMixin",
