@@ -69,6 +69,14 @@ public abstract class DrownedMixin extends ZombieEntity {
         }
     }
 
+    @Override
+    public void tick() {
+        super.tick();
+        if (ModConfig.get().zombie.drowned.betterAnimation) {
+            this.setPose(this.isSwimming() && !this.hasVehicle() ? EntityPose.SWIMMING : EntityPose.STANDING);
+        }
+    }
+
     @ModifyArg(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/DrownedEntity;updateVelocity(FLnet/minecraft/util/math/Vec3d;)V"))
     private float increaseVelocity(float speed) {
         return ModConfig.get().zombie.drowned.highVelocity ? 0.1F : speed;
