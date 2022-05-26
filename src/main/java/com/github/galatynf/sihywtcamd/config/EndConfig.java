@@ -7,4 +7,5 @@ import me.shedaniel.autoconfig.annotation.Config;
 public class EndConfig implements ConfigData {
     public boolean endermanBlindness = true;
     public boolean shulkerBlindness = true;
+    public boolean endermiteInChorus = true;
 }

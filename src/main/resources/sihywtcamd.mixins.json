@@ -6,6 +6,7 @@
   "mixins": [
     "BlazeMixin",
     "CaveSpiderMixin",
+    "ChorusPlantMixin",
     "CreeperMixin",
     "EndermanMixin",
     "EndermiteMixin",
