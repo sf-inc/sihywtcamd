@@ -25,6 +25,7 @@
     "WitherMixin",
     "WitherSkeletonMixin",
     "biome.BiomeFeatMixin",
+    "biome.OreFeatMixin",
     "biome.OverworldBiomeMixin",
     "illusioner.MansionMixin",
     "phantom.EntityMixin",
