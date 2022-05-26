@@ -1,6 +1,7 @@
 package com.github.galatynf.sihywtcamd.mixin.skeleton;
 
 import com.github.galatynf.sihywtcamd.config.ModConfig;
+import com.github.galatynf.sihywtcamd.entity.SkeletonSwimGoal;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;
 import net.minecraft.entity.ai.goal.FleeEntityGoal;
@@ -32,6 +33,9 @@ public abstract class AbstractSkeletonMixin extends HostileEntity {
     private void targetMerchantS(CallbackInfo ci) {
         if (ModConfig.get().overworld.general.merchantHostility) {
             this.targetSelector.add(3, new ActiveTargetGoal<>(this, MerchantEntity.class, true));
+        }
+        if (ModConfig.get().skeleton.general.swimGoal) {
+            this.goalSelector.add(2, new SkeletonSwimGoal(this));
         }
     }
 }

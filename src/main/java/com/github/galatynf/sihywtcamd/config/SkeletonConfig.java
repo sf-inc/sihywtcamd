@@ -11,6 +11,7 @@ public class SkeletonConfig implements ConfigData {
 
     public static class General {
         public boolean fleeGoal = true;
+        public boolean swimGoal = true;
     }
 
     @ConfigEntry.Gui.CollapsibleObject
