@@ -4,6 +4,52 @@
 * **x.X versions** are either updates that add content or major bug fixes
 * **x.x.X versions** are either small content updates (language translation, new textures, ...) or bug fixes
 
+## v1.7
+
+### Configs
+* Complete refacto of categories, and subcategories
+* A mob can be found in its most significant category only (ex: endermite in end, instead of arthropod)
+
+### Arthropod
+
+* Don't get fall damage
+* Larvae (silverfish and endermite) spawn with a bonus speed multiplying their speed up to 1.5 depending on local 
+  difficulty
+* Silverfishes are infesting the whole overworld (more than in mountains), and so mountains are even more infested than 
+  before
+
+### End
+* Chorus plants are infested with endermites
+
+### Nether
+* Magma cubes set on fire on collision, fire duration depends on size. No fire if blocking
+* Blazes don't set on fire if their fire is not active and if their target is blocking
+
+### Overworld
+* Vexes spawn naturally in dark forest
+* Vexes die if their summoner dies
+
+### Skeleton
+* Have 5% chance to spawn with spectral arrows only
+* Know a bit how to swim
+* Strays shoot freezing arrows
+* Wither skeletons are fire resistant (but not immune to lava, same than husks buffed a bit)
+* Wither skeletons can spawn holding a bow if adult (25% chance), so they will shoot flame arrows
+* Wither skeletons carry a netherite sword instead of a stone one
+
+### Zombies
+* Baby drowned can spawn riding a guardian (10 to 20% chance)
+* Better swimming animation
+* Old zombie changes replaced (no more zombie buff):
+  * Steal life on attack
+  * Have a natural knockback resistance
+  * Leader zombies are split into leader and siege ones, with different bonuses
+  * Can spawn as a brainless zombie, that won't attack unless you attack them
+    * Leader: 5-10% spawn chance, increased health and spawn reinforcement 
+    * Siege: 10-15% spawn chance, can break doors
+    * Brainless: 25-20% spawn chance, no target goal
+    * Normal ones: 60-55% spawn chance
+
 ## v1.6
 
 ### Creeper
