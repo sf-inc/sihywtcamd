@@ -16,6 +16,7 @@
     "LivingEntityMixin",
     "PillagerMixin",
     "PillagerSpawnerMixin",
+    "ProjectileMixin",
     "ShulkerBulletMixin",
     "SilverfishMixin",
     "SlimeMixin",
