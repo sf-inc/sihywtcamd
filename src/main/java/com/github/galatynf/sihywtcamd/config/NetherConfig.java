@@ -8,6 +8,7 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 public class NetherConfig implements ConfigData {
     public boolean blazeFireCollision = true;
     public boolean ghastIncreasedHealth = true;
+    public boolean magmaCubeFireCollision = true;
 
     @ConfigEntry.Gui.CollapsibleObject
     public Piglin piglin = new Piglin();

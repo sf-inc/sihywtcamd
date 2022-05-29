@@ -15,6 +15,7 @@
     "GhastMixin",
     "GuardianMixin",
     "LivingEntityMixin",
+    "MagmaCubeMixin",
     "PillagerMixin",
     "PillagerSpawnerMixin",
     "ProjectileMixin",
