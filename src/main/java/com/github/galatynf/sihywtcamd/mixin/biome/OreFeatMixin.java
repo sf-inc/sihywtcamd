@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 @Mixin(OrePlacedFeatures.class)
 public class OreFeatMixin {
-    @ModifyArg(method = "<clinit>", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/gen/feature/OrePlacedFeatures;modifiersWithCount(ILnet/minecraft/world/gen/decorator/PlacementModifier;)Ljava/util/List;", ordinal = 27))
+    @ModifyArg(method = "<clinit>", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/gen/feature/OrePlacedFeatures;modifiersWithCount(ILnet/minecraft/world/gen/placementmodifier/PlacementModifier;)Ljava/util/List;"))
     private static int increaseInfestedSpawn(int count) {
         return ModConfig.get().arthropod.silverfish.infestedEverywhere ? 24 : count;
     }
