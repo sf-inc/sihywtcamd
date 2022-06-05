@@ -24,7 +24,7 @@
   "text.autoconfig.sihywtcamd.option.zombie.general.playersAttack": "- dégât infligé par les joueurs (%)",
   "text.autoconfig.sihywtcamd.option.zombie.general.mobsAttack": "- dégât infligé par les mobs (%)",
   "text.autoconfig.sihywtcamd.option.zombie.husk": "Le zombie momifié",
-  "text.autoconfig.sihywtcamd.option.zombie.husk.fireProtection": "Les zombies momifiés ne prennent pas de dégâts de feu",
+  "text.autoconfig.sihywtcamd.option.zombie.husk.fireResistant": "Les zombies momifiés ne prennent pas de dégâts de feu",
   "text.autoconfig.sihywtcamd.option.zombie.drowned": "Le zombie noyé",
   "text.autoconfig.sihywtcamd.option.zombie.drowned.tridentSpawn": "Les noyés apparaissent plus souvent avec un trident",
   "text.autoconfig.sihywtcamd.option.zombie.drowned.highVelocity": "Les noyés nagent plus vite",
@@ -38,6 +38,7 @@
   "text.autoconfig.sihywtcamd.option.skeleton.stray.betterSlowness": "Les vagabonds infligent lenteur 2",
   "text.autoconfig.sihywtcamd.option.skeleton.witherSkeleton": "Le wither squelette",
   "text.autoconfig.sihywtcamd.option.skeleton.witherSkeleton.baby": "Les wither squelettes peuvent apparaître bébé",
+  "text.autoconfig.sihywtcamd.option.skeleton.witherSkeleton.fireResistant": "Les wither squelettes ne prennent pas de dégâts de feu",
 
   "text.autoconfig.sihywtcamd.category.arthropod": "Arthropode",
   "text.autoconfig.sihywtcamd.option.arthropod.general": "Les arthropodes en général",

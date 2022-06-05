@@ -1,5 +1,6 @@
 package com.github.galatynf.sihywtcamd.mixin.zombie;
 
+import com.github.galatynf.sihywtcamd.Utils;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageSource;
@@ -16,7 +17,7 @@ public class HuskMixin extends ZombieEntity {
 
     @Override
     public boolean isInvulnerableTo(DamageSource damageSource) {
-        return ModConfig.get().zombie.husk.fireProtection ? damageSource.equals(DamageSource.ON_FIRE) || super.isInvulnerableTo(damageSource)
-                : super.isInvulnerableTo(damageSource);
+        return (ModConfig.get().zombie.husk.fireResistant && Utils.isFireSource(damageSource))
+                || super.isInvulnerableTo(damageSource);
     }
 }

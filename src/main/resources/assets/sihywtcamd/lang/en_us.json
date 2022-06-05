@@ -24,7 +24,7 @@
   "text.autoconfig.sihywtcamd.option.zombie.general.playersAttack": "- damage dealt from players (%)",
   "text.autoconfig.sihywtcamd.option.zombie.general.mobsAttack": "- damage dealt from mobs (%)",
   "text.autoconfig.sihywtcamd.option.zombie.husk": "Husk",
-  "text.autoconfig.sihywtcamd.option.zombie.husk.fireProtection": "Husks are immune to on-fire damage",
+  "text.autoconfig.sihywtcamd.option.zombie.husk.fireResistant": "Husks are immune to fire damages",
   "text.autoconfig.sihywtcamd.option.zombie.drowned": "Drowned",
   "text.autoconfig.sihywtcamd.option.zombie.drowned.tridentSpawn": "Drowned spawn more often with a trident",
   "text.autoconfig.sihywtcamd.option.zombie.drowned.highVelocity": "Drowned have an increased velocity in water",
@@ -38,6 +38,7 @@
   "text.autoconfig.sihywtcamd.option.skeleton.stray.betterSlowness": "Strays deal slowness 2",
   "text.autoconfig.sihywtcamd.option.skeleton.witherSkeleton": "Wither skeleton",
   "text.autoconfig.sihywtcamd.option.skeleton.witherSkeleton.baby": "Wither skeletons can spawn baby",
+  "text.autoconfig.sihywtcamd.option.skeleton.witherSkeleton.fireResistant": "Wither skeletons are immune to fire damages",
 
   "text.autoconfig.sihywtcamd.category.arthropod": "Arthropod",
   "text.autoconfig.sihywtcamd.option.arthropod.general": "General arthropods",

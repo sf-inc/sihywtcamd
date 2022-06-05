@@ -1,12 +1,13 @@
 package com.github.galatynf.sihywtcamd.mixin;
 
+import com.github.galatynf.sihywtcamd.Utils;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.entity.*;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.SpiderEntity;
 import net.minecraft.entity.mob.WitherSkeletonEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.world.LocalDifficulty;
@@ -23,6 +24,12 @@ public class WitherSkeletonMixin extends HostileEntity {
 
     protected WitherSkeletonMixin(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
+    }
+
+    @Override
+    public boolean isInvulnerableTo(DamageSource damageSource) {
+        return (ModConfig.get().skeleton.witherSkeleton.fireResistant && Utils.isFireSource(damageSource))
+                || super.isInvulnerableTo(damageSource);
     }
 
     @Inject(method = "initialize", at = @At("TAIL"))

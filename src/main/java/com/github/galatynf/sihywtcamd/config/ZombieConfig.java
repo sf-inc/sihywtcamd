@@ -22,7 +22,7 @@ public class ZombieConfig implements ConfigData {
     public Husk husk = new Husk();
 
     public static class Husk {
-        public boolean fireProtection = true;
+        public boolean fireResistant = true;
     }
 
     @ConfigEntry.Gui.CollapsibleObject
