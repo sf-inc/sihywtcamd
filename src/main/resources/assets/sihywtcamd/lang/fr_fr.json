@@ -20,9 +20,7 @@
 
   "text.autoconfig.sihywtcamd.category.zombie": "Zombie",
   "text.autoconfig.sihywtcamd.option.zombie.general": "Les zombies en général",
-  "text.autoconfig.sihywtcamd.option.zombie.general.typesBuffed": "Les mobs zombies ne prennent plus de dégâts facilement",
-  "text.autoconfig.sihywtcamd.option.zombie.general.playersAttack": "- dégât infligé par les joueurs (%)",
-  "text.autoconfig.sihywtcamd.option.zombie.general.mobsAttack": "- dégât infligé par les mobs (%)",
+  "text.autoconfig.sihywtcamd.option.zombie.general.attackHeal": "Les zombies se soignent des dégâts qu'ils infligent",
   "text.autoconfig.sihywtcamd.option.zombie.husk": "Le zombie momifié",
   "text.autoconfig.sihywtcamd.option.zombie.husk.fireResistant": "Les zombies momifiés ne prennent pas de dégâts de feu",
   "text.autoconfig.sihywtcamd.option.zombie.drowned": "Le zombie noyé",

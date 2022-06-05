@@ -10,12 +10,7 @@ public class ZombieConfig implements ConfigData {
     public General general = new General();
 
     public static class General {
-        @ConfigEntry.Gui.EnumHandler(option = ConfigEntry.Gui.EnumHandler.EnumDisplayOption.BUTTON)
-        public ZombieType typesBuffed = ZombieType.ALL;
-        @ConfigEntry.BoundedDiscrete(min = 0, max = 100)
-        public int playersAttack = 20;
-        @ConfigEntry.BoundedDiscrete(min = 0, max = 100)
-        public int mobsAttack = 50;
+        public boolean attackHeal = true;
     }
 
     @ConfigEntry.Gui.CollapsibleObject

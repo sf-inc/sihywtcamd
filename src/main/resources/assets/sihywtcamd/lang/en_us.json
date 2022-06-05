@@ -20,9 +20,7 @@
 
   "text.autoconfig.sihywtcamd.category.zombie": "Zombie",
   "text.autoconfig.sihywtcamd.option.zombie.general": "General zombies",
-  "text.autoconfig.sihywtcamd.option.zombie.general.typesBuffed": "Zombie-like mobs can't be damaged easily",
-  "text.autoconfig.sihywtcamd.option.zombie.general.playersAttack": "- damage dealt from players (%)",
-  "text.autoconfig.sihywtcamd.option.zombie.general.mobsAttack": "- damage dealt from mobs (%)",
+  "text.autoconfig.sihywtcamd.option.zombie.general.attackHeal": "Zombies are healed with damages they make",
   "text.autoconfig.sihywtcamd.option.zombie.husk": "Husk",
   "text.autoconfig.sihywtcamd.option.zombie.husk.fireResistant": "Husks are immune to fire damages",
   "text.autoconfig.sihywtcamd.option.zombie.drowned": "Drowned",

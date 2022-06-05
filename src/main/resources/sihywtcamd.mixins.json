@@ -15,8 +15,8 @@
     "GuardianMixin",
     "LivingEntityMixin",
     "MagmaCubeMixin",
-    "PillagerMixin",
     "PatrolSpawnerMixin",
+    "PillagerMixin",
     "ProjectileMixin",
     "ShulkerBulletMixin",
     "SilverfishMixin",
@@ -48,7 +48,7 @@
     "spider.SwordMixin",
     "zombie.DrownedMixin",
     "zombie.HuskMixin",
-    "zombie.LivingEntityMixin"
+    "zombie.ZombieMixin"
   ],
   "client": [
     "EntityRenderDispatcherMixin",

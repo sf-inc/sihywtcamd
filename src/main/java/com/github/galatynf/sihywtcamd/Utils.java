@@ -1,6 +1,5 @@
 package com.github.galatynf.sihywtcamd;
 
-import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.damage.DamageSource;
@@ -24,28 +23,6 @@ public class Utils {
                     && random.nextDouble() > cbrt / 4.0D
                     && canMobSpawn(type, world, spawnReason, pos, random);
         }
-    }
-
-    public static boolean isZombieTypeBuffed(EntityType<?> entityType) {
-        boolean zombieOnly = entityType.equals(EntityType.ZOMBIE)
-                || entityType.equals(EntityType.ZOMBIE_VILLAGER)
-                || entityType.equals(EntityType.ZOMBIE_HORSE)
-                || entityType.equals(EntityType.GIANT);
-        boolean isDrowned = entityType.equals(EntityType.DROWNED);
-        boolean isPiglin = entityType.equals(EntityType.ZOMBIFIED_PIGLIN);
-        boolean isHusk = entityType.equals(EntityType.HUSK);
-        boolean res = false;
-
-        switch (ModConfig.get().zombie.general.typesBuffed) {
-            case NONE -> {
-            }
-            case ZOMBIE_ONLY -> res = zombieOnly;
-            case NO_DROWNED -> res = zombieOnly || isHusk || isPiglin;
-            case NO_PIGLIN -> res = zombieOnly || isDrowned || isHusk;
-            case ALL -> res = zombieOnly || isDrowned || isHusk || isPiglin;
-        }
-
-        return res;
     }
 
     public static boolean isFireSource(final DamageSource damageSource) {
