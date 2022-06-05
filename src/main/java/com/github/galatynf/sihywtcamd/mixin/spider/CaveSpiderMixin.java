@@ -1,4 +1,4 @@
-package com.github.galatynf.sihywtcamd.mixin;
+package com.github.galatynf.sihywtcamd.mixin.spider;
 
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.entity.EntityData;
