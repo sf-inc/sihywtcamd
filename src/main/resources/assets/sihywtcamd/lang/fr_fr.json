@@ -39,6 +39,8 @@
   "text.autoconfig.sihywtcamd.option.skeleton.witherSkeleton": "Le wither squelette",
   "text.autoconfig.sihywtcamd.option.skeleton.witherSkeleton.baby": "Les wither squelettes peuvent apparaître bébé",
   "text.autoconfig.sihywtcamd.option.skeleton.witherSkeleton.fireResistant": "Les wither squelettes ne prennent pas de dégâts de feu",
+  "text.autoconfig.sihywtcamd.option.skeleton.witherSkeleton.bow": "Les wither squelettes peuvent apparaître avec un arc (si adulte)",
+  "text.autoconfig.sihywtcamd.option.skeleton.witherSkeleton.netheriteSword": "Les wither squelettes ont une épée en netherite",
 
   "text.autoconfig.sihywtcamd.category.arthropod": "Arthropode",
   "text.autoconfig.sihywtcamd.option.arthropod.general": "Les arthropodes en général",

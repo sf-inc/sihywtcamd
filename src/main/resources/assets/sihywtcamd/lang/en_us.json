@@ -39,6 +39,8 @@
   "text.autoconfig.sihywtcamd.option.skeleton.witherSkeleton": "Wither skeleton",
   "text.autoconfig.sihywtcamd.option.skeleton.witherSkeleton.baby": "Wither skeletons can spawn baby",
   "text.autoconfig.sihywtcamd.option.skeleton.witherSkeleton.fireResistant": "Wither skeletons are immune to fire damages",
+  "text.autoconfig.sihywtcamd.option.skeleton.witherSkeleton.bow": "Wither skeletons can spawn carrying a bow (if adult)",
+  "text.autoconfig.sihywtcamd.option.skeleton.witherSkeleton.netheriteSword": "Wither skeletons have a netherite sword",
 
   "text.autoconfig.sihywtcamd.category.arthropod": "Arthropod",
   "text.autoconfig.sihywtcamd.option.arthropod.general": "General arthropods",

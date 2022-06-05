@@ -34,5 +34,7 @@ public class SkeletonConfig implements ConfigData {
     public static class WitherSkeleton {
         public boolean baby = true;
         public boolean fireResistant = true;
+        public boolean bow = true;
+        public boolean netheriteSword = true;
     }
 }

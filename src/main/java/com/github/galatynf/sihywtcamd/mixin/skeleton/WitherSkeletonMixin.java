@@ -9,6 +9,8 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.WitherSkeletonEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
@@ -16,6 +18,7 @@ import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(WitherSkeletonEntity.class)
@@ -32,10 +35,23 @@ public class WitherSkeletonMixin extends HostileEntity {
                 || super.isInvulnerableTo(damageSource);
     }
 
-    @Inject(method = "initialize", at = @At("TAIL"))
+    @Inject(method = "initialize", at = @At("HEAD"))
     private void canSpawnBaby(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, EntityData entityData,
                               NbtCompound entityTag, CallbackInfoReturnable<EntityData> cir) {
         this.setBaby(ModConfig.get().skeleton.witherSkeleton.baby && this.random.nextFloat() < 0.2F);
+    }
+
+    @Inject(method = "initEquipment", at = @At("HEAD"), cancellable = true)
+    private void useBetterEquipment(LocalDifficulty difficulty, CallbackInfo ci) {
+        if (ModConfig.get().skeleton.witherSkeleton.bow && !this.isBaby()
+                && this.random.nextFloat() < 0.25F) {
+            this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.BOW));
+            ci.cancel();
+        } else if (ModConfig.get().skeleton.witherSkeleton.netheriteSword) {
+            this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.NETHERITE_SWORD));
+            this.setEquipmentDropChance(EquipmentSlot.MAINHAND, 0);
+            ci.cancel();
+        }
     }
 
     @Override
