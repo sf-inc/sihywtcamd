@@ -11,6 +11,9 @@ public class ZombieConfig implements ConfigData {
 
     public static class General {
         public boolean attackHeal = true;
+        public boolean knockbackResistance = true;
+        public boolean brainless = true;
+        public boolean leaderAndSiege = true;
     }
 
     @ConfigEntry.Gui.CollapsibleObject
