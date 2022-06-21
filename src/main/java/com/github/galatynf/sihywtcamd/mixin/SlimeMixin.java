@@ -30,7 +30,7 @@ public abstract class SlimeMixin extends MobEntity {
 
     @Shadow public abstract int getSize();
 
-    @Shadow protected abstract void setSize(int size, boolean heal);
+    @Shadow public abstract void setSize(int size, boolean heal);
 
     @Shadow public abstract EntityType<? extends SlimeEntity> getType();
 
@@ -101,7 +101,7 @@ public abstract class SlimeMixin extends MobEntity {
     }
 
     @ModifyVariable(method = "remove", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/SlimeEntity;setInvulnerable(Z)V"))
-    private SlimeEntity transferMergedGene(SlimeEntity slime) {
+    private SlimeEntity transferMergedGene(SlimeEntity slime, RemovalReason value) {
         slime.getDataTracker().set(MERGED, this.getDataTracker().get(MERGED));
         return slime;
     }

@@ -4,10 +4,9 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.CobwebBlock;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
-
-import java.util.Random;
 
 public class MessyCobweb extends CobwebBlock {
     public MessyCobweb(Settings settings) {

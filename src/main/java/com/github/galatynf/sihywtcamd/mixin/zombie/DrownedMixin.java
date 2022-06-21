@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.predicate.entity.EntityPredicates;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
@@ -29,9 +30,9 @@ public abstract class DrownedMixin extends ZombieEntity {
     }
 
     @Inject(method = "initEquipment", at = @At("HEAD"), cancellable = true)
-    public void changeProbability(LocalDifficulty difficulty, CallbackInfo ci) {
+    public void changeProbability(Random random, LocalDifficulty localDifficulty, CallbackInfo ci) {
         if (ModConfig.get().zombie.drowned.tridentSpawn) {
-            int rand = this.random.nextInt(100);
+            int rand = random.nextInt(100);
             if (rand < 15) {
                 this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.TRIDENT));
             } else if (rand < 18) {

@@ -12,6 +12,7 @@ import net.minecraft.entity.mob.WitherSkeletonEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
@@ -42,9 +43,9 @@ public class WitherSkeletonMixin extends HostileEntity {
     }
 
     @Inject(method = "initEquipment", at = @At("HEAD"), cancellable = true)
-    private void useBetterEquipment(LocalDifficulty difficulty, CallbackInfo ci) {
+    private void useBetterEquipment(Random random, LocalDifficulty localDifficulty, CallbackInfo ci) {
         if (ModConfig.get().skeleton.witherSkeleton.bow && !this.isBaby()
-                && this.random.nextFloat() < 0.25F) {
+                && random.nextFloat() < 0.25F) {
             this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.BOW));
             ci.cancel();
         } else if (ModConfig.get().skeleton.witherSkeleton.netheriteSword) {

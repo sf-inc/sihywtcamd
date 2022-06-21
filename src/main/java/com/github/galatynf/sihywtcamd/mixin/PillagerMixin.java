@@ -37,7 +37,7 @@ public abstract class PillagerMixin extends IllagerEntity {
         }
     }
 
-    @ModifyArg(method = "enchantMainHandItem", at = @At(value = "INVOKE", target = "Ljava/util/Random;nextInt(I)I"))
+    @ModifyArg(method = "enchantMainHandItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/random/Random;nextInt(I)I"))
     private int changeProbabilityMoreEnchant(int range) {
         return ModConfig.get().illager.pillager.moreEnchants ? range / 3 : range;
     }

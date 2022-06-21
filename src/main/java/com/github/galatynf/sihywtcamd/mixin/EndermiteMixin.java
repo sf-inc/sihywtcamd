@@ -30,7 +30,7 @@ public class EndermiteMixin extends HostileEntity {
         if (ModConfig.get().arthropod.general.larvaeSpeedBonus) {
             EntityAttributeInstance speed = this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED);
             Objects.requireNonNull(speed).addPersistentModifier(new EntityAttributeModifier(
-                    "Random speed bonus",  world.getRandom().nextFloat(0.5f) * difficulty.getClampedLocalDifficulty() * speed.getValue(), EntityAttributeModifier.Operation.ADDITION));
+                    "Random speed bonus",  world.getRandom().nextFloat() * 0.5f * difficulty.getClampedLocalDifficulty() * speed.getValue(), EntityAttributeModifier.Operation.ADDITION));
         }
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
     }
