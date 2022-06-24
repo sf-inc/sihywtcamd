@@ -4,6 +4,9 @@
 * **x.X versions** are either updates that add content or major bug fixes
 * **x.x.X versions** are either small content updates (language translation, new textures, ...) or bug fixes
 
+## v1.7.1
+* Fix incompatibility issue (with OnSoulFire mod, but surely others)
+
 ## v1.7
 
 ### Configs
