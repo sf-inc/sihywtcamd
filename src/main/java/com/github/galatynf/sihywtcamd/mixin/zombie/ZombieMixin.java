@@ -16,6 +16,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(ZombieEntity.class)
 public abstract class ZombieMixin extends HostileEntity {
@@ -27,17 +29,15 @@ public abstract class ZombieMixin extends HostileEntity {
         super(entityType, world);
     }
 
-    @Override
-    public boolean tryAttack(Entity target) {
-        boolean success = super.tryAttack(target);
-        if (success && ModConfig.get().zombie.general.attackHeal) {
+    @Inject(method = "tryAttack", at = @At("TAIL"), locals = LocalCapture.CAPTURE_FAILSOFT)
+    private void stealHealth(Entity target, CallbackInfoReturnable<Boolean> cir, boolean bl) {
+        if (bl && ModConfig.get().zombie.general.attackHeal) {
             float damage = (float)this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE);
             if (target instanceof LivingEntity livingEntity) {
                 damage += EnchantmentHelper.getAttackDamage(this.getMainHandStack(), livingEntity.getGroup());
             }
             this.setHealth(Math.min(this.getHealth() + damage, this.getMaxHealth()));
         }
-        return success;
     }
 
     @Inject(method = "applyAttributeModifiers", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/ZombieEntity;initAttributes()V", shift = At.Shift.AFTER), cancellable = true)
