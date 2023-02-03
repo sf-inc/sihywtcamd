@@ -19,7 +19,8 @@
   "text.autoconfig.sihywtcamd.option.overworld.vex": "Vex",
   "text.autoconfig.sihywtcamd.option.overworld.vex.dieWithEvoker": "Vexes die with their evoker",
   "text.autoconfig.sihywtcamd.option.overworld.vex.naturalSpawnDarkForest": "Vexes can spawn naturally in dark forest",
-  "text.autoconfig.sihywtcamd.option.overworld.guardianNaturalSpawn": "Guardians can spawn naturally",
+  "text.autoconfig.sihywtcamd.option.overworld.guardian.naturalSpawn": "Guardians can spawn naturally",
+  "text.autoconfig.sihywtcamd.option.overworld.guardian.silentKill": "Guardians make a beam sound only when hurting players",
 
   "text.autoconfig.sihywtcamd.category.zombie": "Zombie",
   "text.autoconfig.sihywtcamd.option.zombie.general": "General zombies",

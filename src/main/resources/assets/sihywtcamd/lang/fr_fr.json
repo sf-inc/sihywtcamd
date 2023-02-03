@@ -19,7 +19,8 @@
   "text.autoconfig.sihywtcamd.option.overworld.vex": "Le vex",
   "text.autoconfig.sihywtcamd.option.overworld.vex.dieWithEvoker": "Les vexes meurent avec leur évoqueur",
   "text.autoconfig.sihywtcamd.option.overworld.vex.naturalSpawnDarkForest": "Les vexes pevent apparaître naturellement dans les forêts sombres",
-  "text.autoconfig.sihywtcamd.option.overworld.guardianNaturalSpawn": "Les gardiens peuvent apparaître naturellement",
+  "text.autoconfig.sihywtcamd.option.overworld.guardian.naturalSpawn": "Les gardiens peuvent apparaître naturellement",
+  "text.autoconfig.sihywtcamd.option.overworld.guardian.silentKill": "Les gardiens jouent un son d'attaque que contre les joueurs",
 
   "text.autoconfig.sihywtcamd.category.zombie": "Zombie",
   "text.autoconfig.sihywtcamd.option.zombie.general": "Les zombies en général",

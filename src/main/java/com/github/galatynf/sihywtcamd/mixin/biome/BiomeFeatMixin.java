@@ -43,7 +43,7 @@ public abstract class BiomeFeatMixin {
     @Inject(method = "addOceanMobs", at = @At("TAIL"))
     private static void spawnGuardianNaturally(SpawnSettings.Builder builder, int squidWeight, int squidMaxGroupSize,
                                                int codWeight, CallbackInfo ci) {
-        if (ModConfig.get().overworld.guardianNaturalSpawn) {
+        if (ModConfig.get().overworld.guardian.naturalSpawn) {
             builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.GUARDIAN, 2, 1, 2));
         }
     }
@@ -58,7 +58,7 @@ public abstract class BiomeFeatMixin {
     @Inject(method = "addWarmOceanMobs", at = @At("TAIL"))
     private static void spawnGuardianNaturallyWarm(SpawnSettings.Builder builder, int squidWeight, int squidMinGroupSize,
                                                    CallbackInfo ci) {
-        if (ModConfig.get().overworld.guardianNaturalSpawn) {
+        if (ModConfig.get().overworld.guardian.naturalSpawn) {
             builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.GUARDIAN, 1, 1, 2));
         }
     }

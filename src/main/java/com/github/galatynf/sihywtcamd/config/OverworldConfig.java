@@ -48,5 +48,11 @@ public class OverworldConfig implements ConfigData {
         public boolean naturalSpawnDarkForest = true;
     }
 
-    public boolean guardianNaturalSpawn = true;
+    @ConfigEntry.Gui.CollapsibleObject
+    public Guardian guardian = new Guardian();
+
+    public static class Guardian {
+        public boolean naturalSpawn = true;
+        public boolean silentKill = true;
+    }
 }

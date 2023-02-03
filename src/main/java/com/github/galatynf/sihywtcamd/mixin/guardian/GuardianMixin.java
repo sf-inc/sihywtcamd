@@ -1,4 +1,4 @@
-package com.github.galatynf.sihywtcamd.mixin;
+package com.github.galatynf.sihywtcamd.mixin.guardian;
 
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.entity.EntityType;
@@ -8,15 +8,12 @@ import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(GuardianEntity.class)
 public abstract class GuardianMixin extends HostileEntity {
-    @Shadow public abstract void travel(Vec3d movementInput);
-
     protected GuardianMixin(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
     }
