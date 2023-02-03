@@ -4,6 +4,11 @@
 * **x.X versions** are either updates that add content or major bug fixes
 * **x.x.X versions** are either small content updates (language translation, new textures, ...) or bug fixes
 
+## v1.7.2
+* Fix cobwebs replacing blocks (issue #34)
+* Increase guardian natural spawn: now also spawn in warm ocean (but rarer)
+* Guardian beam sound is played only when attacking players to avoid sound spam
+
 ## v1.7.1
 * Fix incompatibility issue (with OnSoulFire mod, but surely others)
 
