@@ -54,4 +54,12 @@ public abstract class BiomeFeatMixin {
             builder.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ORE_DEEPER_INFESTED);
         }
     }
+
+    @Inject(method = "addWarmOceanMobs", at = @At("TAIL"))
+    private static void spawnGuardianNaturallyWarm(SpawnSettings.Builder builder, int squidWeight, int squidMinGroupSize,
+                                                   CallbackInfo ci) {
+        if (ModConfig.get().overworld.guardianNaturalSpawn) {
+            builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.GUARDIAN, 1, 1, 2));
+        }
+    }
 }
