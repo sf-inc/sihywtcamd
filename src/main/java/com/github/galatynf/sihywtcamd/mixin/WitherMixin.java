@@ -57,8 +57,7 @@ public abstract class WitherMixin extends HostileEntity {
                 ++witherSummoned;
             }
             for (int i=0; i < witherSummoned; i++) {
-                EntityType.WITHER_SKELETON.spawn((ServerWorld) this.world, null, null, null, this.getBlockPos(),
-                        SpawnReason.EVENT, false, false);
+                EntityType.WITHER_SKELETON.spawn((ServerWorld) this.world, this.getBlockPos(), SpawnReason.EVENT);
             }
 
             sihywtcamd_hasSpawned = true;

@@ -17,9 +17,6 @@ import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-/*
-* Ignore constructor error!
-* */
 public class CobwebProjectileEntity extends ProjectileEntity {
     private boolean inGround = false;
     private int inGroundTime = 100;

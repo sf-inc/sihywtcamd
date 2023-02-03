@@ -11,9 +11,9 @@ import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Matrix3f;
-import net.minecraft.util.math.Matrix4f;
-import net.minecraft.util.math.Vec3f;
+import net.minecraft.util.math.RotationAxis;
+import org.joml.Matrix3f;
+import org.joml.Matrix4f;
 
 @Environment(EnvType.CLIENT)
 public class CobwebEntityRenderer<T extends CobwebProjectileEntity> extends EntityRenderer<T> {
@@ -25,39 +25,38 @@ public class CobwebEntityRenderer<T extends CobwebProjectileEntity> extends Enti
 
     public void render(T cobwebProjectileEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
         matrixStack.push();
-        matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(MathHelper.lerp(g, cobwebProjectileEntity.prevYaw, cobwebProjectileEntity.getYaw()) - 90.0F));
-        matrixStack.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(MathHelper.lerp(g, cobwebProjectileEntity.prevPitch, cobwebProjectileEntity.getPitch())));
+        matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(MathHelper.lerp(g, cobwebProjectileEntity.prevYaw, cobwebProjectileEntity.getYaw()) - 90.0f));
+        matrixStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(MathHelper.lerp(g, cobwebProjectileEntity.prevPitch, cobwebProjectileEntity.getPitch())));
 
-        matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(45.0F));
-        matrixStack.scale(0.05625F, 0.05625F, 0.05625F);
-        matrixStack.translate(-4.0D, 0.0D, 0.0D);
+        matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(45.0f));
+        matrixStack.scale(0.05625f, 0.05625f, 0.05625f);
+        matrixStack.translate(-4.0f, 0.0f, 0.0f);
         VertexConsumer vertexConsumer = vertexConsumerProvider.getBuffer(RenderLayer.getEntityCutout(this.getTexture(cobwebProjectileEntity)));
         MatrixStack.Entry entry = matrixStack.peek();
-        Matrix4f position = entry.getPositionMatrix();
-        Matrix3f normal = entry.getNormalMatrix();
-        this.method_23153(position, normal, vertexConsumer, -7, -2, -2, 0.0F, 0.15625F, -1, 0, 0, i);
-        this.method_23153(position, normal, vertexConsumer, -7, -2, 2, 0.15625F, 0.15625F, -1, 0, 0, i);
-        this.method_23153(position, normal, vertexConsumer, -7, 2, 2, 0.15625F, 0.3125F, -1, 0, 0, i);
-        this.method_23153(position, normal, vertexConsumer, -7, 2, -2, 0.0F, 0.3125F, -1, 0, 0, i);
-        this.method_23153(position, normal, vertexConsumer, -7, 2, -2, 0.0F, 0.15625F, 1, 0, 0, i);
-        this.method_23153(position, normal, vertexConsumer, -7, 2, 2, 0.15625F, 0.15625F, 1, 0, 0, i);
-        this.method_23153(position, normal, vertexConsumer, -7, -2, 2, 0.15625F, 0.3125F, 1, 0, 0, i);
-        this.method_23153(position, normal, vertexConsumer, -7, -2, -2, 0.0F, 0.3125F, 1, 0, 0, i);
-
-        for(int u = 0; u < 4; ++u) {
-            matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(90.0F));
-            this.method_23153(position, normal, vertexConsumer, -8, -2, 0, 0.0F, 0.0F, 0, 1, 0, i);
-            this.method_23153(position, normal, vertexConsumer, 8, -2, 0, 0.5F, 0.0F, 0, 1, 0, i);
-            this.method_23153(position, normal, vertexConsumer, 8, 2, 0, 0.5F, 0.15625F, 0, 1, 0, i);
-            this.method_23153(position, normal, vertexConsumer, -8, 2, 0, 0.0F, 0.15625F, 0, 1, 0, i);
+        Matrix4f matrix4f = entry.getPositionMatrix();
+        Matrix3f matrix3f = entry.getNormalMatrix();
+        this.vertex(matrix4f, matrix3f, vertexConsumer, -7, -2, -2, 0.0f, 0.15625f, -1, 0, 0, i);
+        this.vertex(matrix4f, matrix3f, vertexConsumer, -7, -2, 2, 0.15625f, 0.15625f, -1, 0, 0, i);
+        this.vertex(matrix4f, matrix3f, vertexConsumer, -7, 2, 2, 0.15625f, 0.3125f, -1, 0, 0, i);
+        this.vertex(matrix4f, matrix3f, vertexConsumer, -7, 2, -2, 0.0f, 0.3125f, -1, 0, 0, i);
+        this.vertex(matrix4f, matrix3f, vertexConsumer, -7, 2, -2, 0.0f, 0.15625f, 1, 0, 0, i);
+        this.vertex(matrix4f, matrix3f, vertexConsumer, -7, 2, 2, 0.15625f, 0.15625f, 1, 0, 0, i);
+        this.vertex(matrix4f, matrix3f, vertexConsumer, -7, -2, 2, 0.15625f, 0.3125f, 1, 0, 0, i);
+        this.vertex(matrix4f, matrix3f, vertexConsumer, -7, -2, -2, 0.0f, 0.3125f, 1, 0, 0, i);
+        for (int u = 0; u < 4; ++u) {
+            matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(90.0f));
+            this.vertex(matrix4f, matrix3f, vertexConsumer, -8, -2, 0, 0.0f, 0.0f, 0, 1, 0, i);
+            this.vertex(matrix4f, matrix3f, vertexConsumer, 8, -2, 0, 0.5f, 0.0f, 0, 1, 0, i);
+            this.vertex(matrix4f, matrix3f, vertexConsumer, 8, 2, 0, 0.5f, 0.15625f, 0, 1, 0, i);
+            this.vertex(matrix4f, matrix3f, vertexConsumer, -8, 2, 0, 0.0f, 0.15625f, 0, 1, 0, i);
         }
 
         matrixStack.pop();
         super.render(cobwebProjectileEntity, f, g, matrixStack, vertexConsumerProvider, i);
     }
 
-    public void method_23153(Matrix4f position, Matrix3f normal, VertexConsumer vertexConsumer, int i, int j, int k, float f, float g, int l, int m, int n, int o) {
-        vertexConsumer.vertex(position, (float)i, (float)j, (float)k).color(255, 255, 255, 255).texture(f, g).overlay(OverlayTexture.DEFAULT_UV).light(o).normal(normal, (float)l, (float)n, (float)m).next();
+    public void vertex(Matrix4f positionMatrix, Matrix3f normalMatrix, VertexConsumer vertexConsumer, int x, int y, int z, float u, float v, int normalX, int normalZ, int normalY, int light) {
+        vertexConsumer.vertex(positionMatrix, x, y, z).color(255, 255, 255, 255).texture(u, v).overlay(OverlayTexture.DEFAULT_UV).light(light).normal(normalMatrix, normalX, normalY, normalZ).next();
     }
 
     @Override

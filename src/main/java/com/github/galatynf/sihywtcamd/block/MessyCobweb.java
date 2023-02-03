@@ -22,7 +22,7 @@ public class MessyCobweb extends CobwebBlock {
     public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
         super.onBlockAdded(state, world, pos, oldState, notify);
         if (state.canPlaceAt(world, pos)) {
-            world.createAndScheduleBlockTick(pos, this, 100 + world.random.nextInt(100));
+            world.scheduleBlockTick(pos, this, 100 + world.random.nextInt(100));
         } else {
             world.removeBlock(pos, false);
         }

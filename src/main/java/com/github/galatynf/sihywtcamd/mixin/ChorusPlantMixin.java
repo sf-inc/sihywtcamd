@@ -18,7 +18,7 @@ public class ChorusPlantMixin {
     @Inject(method = "scheduledTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/world/ServerWorld;breakBlock(Lnet/minecraft/util/math/BlockPos;Z)Z"))
     private void trySpawnEndermite(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
         if (ModConfig.get().end.endermiteInChorus && random.nextFloat() < 0.1f) {
-            EntityType.ENDERMITE.spawn(world, null, null, null, pos, SpawnReason.TRIGGERED, false, false);
+            EntityType.ENDERMITE.spawn(world, pos, SpawnReason.TRIGGERED);
         }
     }
 }

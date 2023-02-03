@@ -33,7 +33,7 @@ public abstract class LivingEntityMixin extends Entity {
             int numberBabies = 3 + this.random.nextInt(3)
                     + Math.round(3 * this.world.getLocalDifficulty(this.getBlockPos()).getClampedLocalDifficulty());
             for (int i=0; i < numberBabies; i++) {
-                MobEntity mob = (MobEntity) this.getType().spawn((ServerWorld) world, null, null, null, this.getBlockPos(), SpawnReason.NATURAL, false, false);
+                MobEntity mob = (MobEntity) this.getType().spawn((ServerWorld) world, this.getBlockPos(), SpawnReason.NATURAL);
                 if (mob != null) mob.setBaby(true);
             }
         }
