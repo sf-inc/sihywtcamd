@@ -132,7 +132,9 @@ public class CobwebProjectileEntity extends ProjectileEntity {
     protected void onEntityHit(EntityHitResult entityHitResult) {
         if (!entityHitResult.getEntity().isTouchingWater()) {
             BlockPos blockPos = entityHitResult.getEntity().getBlockPos().withY(this.getBlockY());
-            this.world.setBlockState(blockPos, Sihywtcamd.MESSY_COBWEB.getDefaultState());
+            if (world.getBlockState(blockPos).isAir()) {
+                this.world.setBlockState(blockPos, Sihywtcamd.MESSY_COBWEB.getDefaultState());
+            }
         }
 
         this.discard();
