@@ -1,4 +1,4 @@
-package com.github.galatynf.sihywtcamd.mixin.phantom;
+package com.github.galatynf.sihywtcamd.mixin;
 
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.client.render.RenderLayer;
@@ -23,8 +23,8 @@ public abstract class LivingEntityRendererMixin<T extends LivingEntity>
     @Inject(method = "getRenderLayer", at = @At("HEAD"), cancellable = true)
     private void setTranslucentPhantoms(T entity, boolean showBody, boolean translucent, boolean showOutline,
                                         CallbackInfoReturnable<@Nullable RenderLayer> cir) {
-        if (entity.getType().equals(EntityType.PHANTOM)
-                && ModConfig.get().overworld.phantom.translucent) {
+        if ((entity.getType().equals(EntityType.GHAST) && ModConfig.get().cosmetic.translucentGhast)
+                || (entity.getType().equals(EntityType.PHANTOM) && ModConfig.get().cosmetic.translucentPhantom)) {
             cir.setReturnValue(RenderLayer.getEntityTranslucent(getTexture(entity)));
         }
     }

@@ -11,7 +11,7 @@
     "EndermiteMixin",
     "EvokerMixin",
     "FleeGoalMixin",
-    "GhastMixin",
+    "ghast.GhastMixin",
     "LivingEntityMixin",
     "MagmaCubeMixin",
     "PatrolSpawnerMixin",
@@ -20,7 +20,7 @@
     "ShulkerBulletMixin",
     "SilverfishMixin",
     "SlimeMixin",
-    "VexMixin",
+    "vex.VexMixin",
     "VindicatorMixin",
     "WitchMixin",
     "WitherMixin",
@@ -31,7 +31,7 @@
     "illusioner.MansionMixin",
     "phantom.EntityMixin",
     "phantom.LivingEntityMixin",
-    "phantom.LivingEntityRendererMixin",
+    "LivingEntityRendererMixin",
     "phantom.PhantomAttackGoalMixin",
     "phantom.PhantomSwoopGoalMixin",
     "phantom.PhantomTargetGoalMixin",
@@ -51,7 +51,10 @@
     "zombie.ZombieMixin"
   ],
   "client": [
+    "AllayRendererMixin",
     "EntityRenderDispatcherMixin",
+    "ghast.GhastRendererMixin",
+    "vex.VexRendererMixin",
     "phantom.PhantomRendererMixin"
   ],
   "injectors": {

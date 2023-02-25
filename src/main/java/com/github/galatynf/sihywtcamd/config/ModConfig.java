@@ -42,6 +42,9 @@ public class ModConfig extends PartitioningSerializer.GlobalData {
     @ConfigEntry.Gui.TransitiveObject
     public BossConfig boss = new BossConfig();
 
+    @ConfigEntry.Category("cosmetic")
+    @ConfigEntry.Gui.TransitiveObject
+    public CosmeticConfig cosmetic = new CosmeticConfig();
 
     public static ModConfig get() {
         if (!Sihywtcamd.areConfigsInit) {

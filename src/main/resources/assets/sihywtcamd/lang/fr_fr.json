@@ -12,7 +12,6 @@
   "text.autoconfig.sihywtcamd.option.overworld.phantom": "Le fantôme",
   "text.autoconfig.sihywtcamd.option.overworld.phantom.throughBlocks": "Les fantômes peuvent voir/passer à travers les blocs",
   "text.autoconfig.sihywtcamd.option.overworld.phantom.lightFear": "Les fantômes sont repoussés par la lumière",
-  "text.autoconfig.sihywtcamd.option.overworld.phantom.translucent": "La texture des fantômes est transparente (client config)",
   "text.autoconfig.sihywtcamd.option.overworld.slime": "Le slime",
   "text.autoconfig.sihywtcamd.option.overworld.slime.biggerSize": "Les slimes peuvent apparaître avec une taille en plus",
   "text.autoconfig.sihywtcamd.option.overworld.slime.canMerge": "Les slimes de taille petit/normal peuvent fusionner",
@@ -96,6 +95,12 @@
   "text.autoconfig.sihywtcamd.category.boss": "Boss",
   "text.autoconfig.sihywtcamd.option.boss.witherIncreasedHealth": "Les withers ont un peu plus de vie",
   "text.autoconfig.sihywtcamd.option.boss.witherSpawnSkeletons": "Les withers peuvent faire apparaître des withers squelettes",
+
+  "text.autoconfig.sihywtcamd.category.cosmetic": "Cosmétique",
+  "text.autoconfig.sihywtcamd.option.cosmetic.translucentAllay": "La texture des allays est transparente",
+  "text.autoconfig.sihywtcamd.option.cosmetic.translucentGhast": "La texture des ghasts est transparente",
+  "text.autoconfig.sihywtcamd.option.cosmetic.translucentPhantom": "La texture des fantômes est transparente",
+  "text.autoconfig.sihywtcamd.option.cosmetic.translucentVex": "La texture des vexes est transparente",
 
   "subtitles.sihywtcamd.spider_spit": "Araignée qui crache"
 }

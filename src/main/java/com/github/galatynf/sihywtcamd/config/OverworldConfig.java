@@ -29,7 +29,6 @@ public class OverworldConfig implements ConfigData {
     public static class Phantom {
         public boolean throughBlocks = true;
         public boolean lightFear = true;
-        public boolean translucent = true;
     }
 
     @ConfigEntry.Gui.CollapsibleObject
