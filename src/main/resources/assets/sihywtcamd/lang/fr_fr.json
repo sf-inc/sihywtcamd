@@ -93,8 +93,10 @@
   "text.autoconfig.sihywtcamd.option.end.endermiteInChorus": "Les plantes de chorus sont infestées d'endermites",
 
   "text.autoconfig.sihywtcamd.category.boss": "Boss",
-  "text.autoconfig.sihywtcamd.option.boss.witherIncreasedHealth": "Les withers ont un peu plus de vie",
-  "text.autoconfig.sihywtcamd.option.boss.witherSpawnSkeletons": "Les withers peuvent faire apparaître des withers squelettes",
+  "text.autoconfig.sihywtcamd.option.boss.wither.increasedHealth": "Les withers ont un peu plus de vie",
+  "text.autoconfig.sihywtcamd.option.boss.wither.stormyWeather": "Les withers rendent le temps orageux",
+  "text.autoconfig.sihywtcamd.option.boss.wither.explosion": "Les withers créent une explosion quand mid-life",
+  "text.autoconfig.sihywtcamd.option.boss.wither.skeletonsSpawn": "Les withers font apparaître des withers squelettes quand mid-life",
 
   "text.autoconfig.sihywtcamd.category.cosmetic": "Cosmétique",
   "text.autoconfig.sihywtcamd.option.cosmetic.translucentAllay": "La texture des allays est transparente",
