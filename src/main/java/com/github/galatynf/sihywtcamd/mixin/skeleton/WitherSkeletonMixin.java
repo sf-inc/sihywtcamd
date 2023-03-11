@@ -52,7 +52,7 @@ public class WitherSkeletonMixin extends HostileEntity {
             ci.cancel();
         } else if (ModConfig.get().skeleton.witherSkeleton.netheriteSword) {
             this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.NETHERITE_SWORD));
-            this.setEquipmentDropChance(EquipmentSlot.MAINHAND, 0);
+            this.setEquipmentDropChance(EquipmentSlot.MAINHAND, 0.025f);
             ci.cancel();
         }
     }
