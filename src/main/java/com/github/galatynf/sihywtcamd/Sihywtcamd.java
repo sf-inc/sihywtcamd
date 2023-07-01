@@ -1,7 +1,11 @@
 package com.github.galatynf.sihywtcamd;
 
 import com.github.galatynf.sihywtcamd.block.MessyCobweb;
+import com.github.galatynf.sihywtcamd.config.ModConfig;
 import com.github.galatynf.sihywtcamd.entity.CobwebProjectileEntity;
+import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
+import me.shedaniel.autoconfig.serializer.PartitioningSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
@@ -30,6 +34,11 @@ public class Sihywtcamd implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        if (!Sihywtcamd.areConfigsInit) {
+            AutoConfig.register(ModConfig.class, PartitioningSerializer.wrap(GsonConfigSerializer::new));
+            Sihywtcamd.areConfigsInit = true;
+        }
+
         Registry.register(Registries.BLOCK, new Identifier(MOD_ID, "messy_cobweb"), MESSY_COBWEB);
         Registry.register(Registries.SOUND_EVENT, SPIDER_SPIT_ID, SPIDER_SPIT_EVENT);
     }

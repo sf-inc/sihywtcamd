@@ -18,6 +18,7 @@
   "text.autoconfig.sihywtcamd.option.overworld.vex": "Vex",
   "text.autoconfig.sihywtcamd.option.overworld.vex.dieWithEvoker": "Vexes die with their evoker",
   "text.autoconfig.sihywtcamd.option.overworld.vex.naturalSpawnDarkForest": "Vexes can spawn naturally in dark forest",
+  "text.autoconfig.sihywtcamd.option.overworld.guardian": "Guardian",
   "text.autoconfig.sihywtcamd.option.overworld.guardian.naturalSpawn": "Guardians can spawn naturally",
   "text.autoconfig.sihywtcamd.option.overworld.guardian.silentKill": "Guardians make a beam sound only when hurting players",
 
@@ -93,6 +94,7 @@
   "text.autoconfig.sihywtcamd.option.end.endermiteInChorus": "Chorus plants are infested with endermites",
 
   "text.autoconfig.sihywtcamd.category.boss": "Boss",
+  "text.autoconfig.sihywtcamd.option.boss.wither": "Wither",
   "text.autoconfig.sihywtcamd.option.boss.wither.increasedHealth": "Withers health is slightly increased",
   "text.autoconfig.sihywtcamd.option.boss.wither.stormyWeather": "Withers make weather stormy",
   "text.autoconfig.sihywtcamd.option.boss.wither.explosion": "Withers creates an explosion when half health",
