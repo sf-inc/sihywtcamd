@@ -4,6 +4,11 @@
 * **x.X versions** are either updates that add content or major bug fixes
 * **x.x.X versions** are either small content updates (language translation, new textures, ...) or bug fixes
 
+## v1.7.4
+* Update to 1.19.4
+* Removed drowned better animation option, as it has been
+  fixed on this version
+
 ## v1.7.3
 * Update to 1.19.3
 * Port implies removing a feature: silverfish everywhere.
