@@ -2,7 +2,6 @@ package com.github.galatynf.sihywtcamd;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
@@ -22,11 +21,5 @@ public class Utils {
                     && random.nextDouble() > cbrt / 4.0D
                     && canMobSpawn(type, world, spawnReason, pos, random);
         }
-    }
-
-    public static boolean isFireSource(final DamageSource damageSource) {
-        return damageSource.equals(DamageSource.ON_FIRE)
-                || damageSource.equals(DamageSource.IN_FIRE)
-                || damageSource.equals(DamageSource.HOT_FLOOR);
     }
 }

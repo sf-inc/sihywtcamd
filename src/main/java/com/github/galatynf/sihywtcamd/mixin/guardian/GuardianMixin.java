@@ -1,6 +1,5 @@
 package com.github.galatynf.sihywtcamd.mixin.guardian;
 
-import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.GuardianEntity;
@@ -16,11 +15,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class GuardianMixin extends HostileEntity {
     protected GuardianMixin(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
-    }
-
-    @Override
-    public boolean canBeRiddenInWater() {
-        return ModConfig.get().zombie.drowned.guardianJockeySpawn || super.canBeRiddenInWater();
     }
 
     @Inject(method = "travel", at = @At("HEAD"))

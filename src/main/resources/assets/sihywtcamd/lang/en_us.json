@@ -33,7 +33,6 @@
   "text.autoconfig.sihywtcamd.option.zombie.drowned": "Drowned",
   "text.autoconfig.sihywtcamd.option.zombie.drowned.tridentSpawn": "Drowned spawn more often with a trident",
   "text.autoconfig.sihywtcamd.option.zombie.drowned.highVelocity": "Drowned have an increased velocity in water",
-  "text.autoconfig.sihywtcamd.option.zombie.drowned.betterAnimation": "Drowned have a better swimming animation",
   "text.autoconfig.sihywtcamd.option.zombie.drowned.guardianJockeySpawn": "Baby drowned can spawn riding a guardian",
 
   "text.autoconfig.sihywtcamd.category.skeleton": "Skeleton",

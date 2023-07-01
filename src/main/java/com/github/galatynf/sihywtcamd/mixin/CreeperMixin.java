@@ -9,6 +9,7 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -57,7 +58,7 @@ public abstract class CreeperMixin extends HostileEntity {
 
     @Override
     public boolean damage(DamageSource source, float amount) {
-        if (ModConfig.get().overworld.creeper.chainExplosions && source.isExplosive()) {
+        if (ModConfig.get().overworld.creeper.chainExplosions && source.isIn(DamageTypeTags.IS_EXPLOSION)) {
             this.ignite();
             return false;
         } else {

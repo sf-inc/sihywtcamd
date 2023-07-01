@@ -33,7 +33,6 @@
   "text.autoconfig.sihywtcamd.option.zombie.drowned": "Le zombie noyé",
   "text.autoconfig.sihywtcamd.option.zombie.drowned.tridentSpawn": "Les noyés apparaissent plus souvent avec un trident",
   "text.autoconfig.sihywtcamd.option.zombie.drowned.highVelocity": "Les noyés nagent plus vite",
-  "text.autoconfig.sihywtcamd.option.zombie.drowned.betterAnimation": "Les noyés ont une meilleure animation de nage",
   "text.autoconfig.sihywtcamd.option.zombie.drowned.guardianJockeySpawn": "Les bébés noyés peuvent apparaître sur un gardien",
 
   "text.autoconfig.sihywtcamd.category.skeleton": "Squelette",

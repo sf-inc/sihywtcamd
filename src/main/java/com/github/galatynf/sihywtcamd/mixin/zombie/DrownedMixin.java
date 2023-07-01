@@ -44,8 +44,8 @@ public abstract class DrownedMixin extends ZombieEntity {
 
     @Inject(method = "initialize", at = @At("TAIL"))
     private void trySpawnAsGuardianJockey(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, EntityData entityData, NbtCompound entityNbt, CallbackInfoReturnable<EntityData> cir) {
-        if (ModConfig.get().zombie.drowned.guardianJockeySpawn && this.isBaby()
-                && world.getRandom().nextFloat() < 0.1F + 0.1F * world.getLocalDifficulty(this.getBlockPos()).getClampedLocalDifficulty()) {
+        if (ModConfig.get().zombie.drowned.guardianJockeySpawn && this.isBaby()) {
+//                && world.getRandom().nextFloat() < 0.1F + 0.1F * world.getLocalDifficulty(this.getBlockPos()).getClampedLocalDifficulty()) {
             List<GuardianEntity> list = world.getEntitiesByClass(GuardianEntity.class, this.getBoundingBox().expand(5.0D, 3.0D, 5.0D), EntityPredicates.NOT_MOUNTED);
             if (!list.isEmpty()) {
                 GuardianEntity guardianEntity = list.get(0);
@@ -67,14 +67,6 @@ public abstract class DrownedMixin extends ZombieEntity {
         super.tickRiding();
         if (this.getVehicle() instanceof PathAwareEntity pathAwareEntity) {
             this.bodyYaw = pathAwareEntity.bodyYaw;
-        }
-    }
-
-    @Override
-    public void tick() {
-        super.tick();
-        if (ModConfig.get().zombie.drowned.betterAnimation) {
-            this.setPose(this.isSwimming() && !this.hasVehicle() ? EntityPose.SWIMMING : EntityPose.STANDING);
         }
     }
 

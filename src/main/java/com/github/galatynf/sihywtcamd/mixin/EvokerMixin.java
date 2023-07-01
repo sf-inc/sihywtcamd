@@ -10,6 +10,7 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.EvokerEntity;
 import net.minecraft.entity.mob.SpellcastingIllagerEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
@@ -35,7 +36,8 @@ public abstract class EvokerMixin extends SpellcastingIllagerEntity {
 
     @Override
     public boolean isInvulnerableTo(DamageSource damageSource) {
-        return ModConfig.get().illager.evoker.stopArrows ? damageSource.isProjectile() || super.isInvulnerableTo(damageSource)
+        return ModConfig.get().illager.evoker.stopArrows
+                ? damageSource.isIn(DamageTypeTags.IS_PROJECTILE) || super.isInvulnerableTo(damageSource)
                 : super.isInvulnerableTo(damageSource);
     }
 }

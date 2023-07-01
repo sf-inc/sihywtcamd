@@ -29,7 +29,6 @@ public class ZombieConfig implements ConfigData {
     public static class Drowned {
         public boolean tridentSpawn = true;
         public boolean highVelocity = true;
-        public boolean betterAnimation = true;
         public boolean guardianJockeySpawn = true;
     }
 }

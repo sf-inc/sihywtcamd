@@ -1,6 +1,5 @@
 package com.github.galatynf.sihywtcamd.mixin.skeleton;
 
-import com.github.galatynf.sihywtcamd.Utils;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.entity.*;
 import net.minecraft.entity.damage.DamageSource;
@@ -12,6 +11,7 @@ import net.minecraft.entity.mob.WitherSkeletonEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
@@ -32,7 +32,7 @@ public class WitherSkeletonMixin extends HostileEntity {
 
     @Override
     public boolean isInvulnerableTo(DamageSource damageSource) {
-        return (ModConfig.get().skeleton.witherSkeleton.fireResistant && Utils.isFireSource(damageSource))
+        return (ModConfig.get().skeleton.witherSkeleton.fireResistant && damageSource.isIn(DamageTypeTags.IS_FIRE))
                 || super.isInvulnerableTo(damageSource);
     }
 
