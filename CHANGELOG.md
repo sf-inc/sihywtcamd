@@ -4,6 +4,23 @@
 * **x.X versions** are either updates that add content or major bug fixes
 * **x.x.X versions** are either small content updates (language translation, new textures, ...) or bug fixes
 
+## v1.7.3
+* Update to 1.19.3
+* Port implies removing a feature: silverfish everywhere.
+  This should be put in datapacks instead. As I don't know
+  if I can load it with a config, this might be a permanent
+  removal.
+
+### Cosmetic
+* Adds more translucent textures, like for phantoms
+  * translucent allays
+  * translucent ghasts
+  * translucent vexes
+
+### Wither
+* Make the weather stormy until they die
+* Summon an explosion when half health, as when it spawns
+
 ## v1.7.2
 * Fix cobwebs replacing blocks (issue #34)
 * Increase guardian natural spawn: now also spawn in warm ocean (but rarer)
