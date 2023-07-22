@@ -18,12 +18,14 @@ import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(SkeletonEntity.class)
 public abstract class SkeletonMixin extends AbstractSkeletonEntity {
+    @Unique
     private static final TrackedData<Boolean> SPECTRAL = DataTracker.registerData(SkeletonEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
     protected SkeletonMixin(EntityType<? extends AbstractSkeletonEntity> entityType, World world) {

@@ -19,6 +19,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -26,6 +27,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(SlimeEntity.class)
 public abstract class SlimeMixin extends MobEntity {
+    @Unique
     private static final TrackedData<Boolean> MERGED = DataTracker.registerData(SlimeEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
     @Shadow public abstract int getSize();
@@ -45,10 +47,12 @@ public abstract class SlimeMixin extends MobEntity {
         this.getDataTracker().startTracking(MERGED, false);
     }
 
+    @Unique
     public boolean hasMerged() {
         return this.getDataTracker().get(MERGED);
     }
 
+    @Unique
     public void setHasMerged(boolean merged) {
         this.getDataTracker().set(MERGED, merged);
     }

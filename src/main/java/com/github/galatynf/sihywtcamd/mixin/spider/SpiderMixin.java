@@ -34,6 +34,7 @@ import java.util.Objects;
 
 @Mixin(SpiderEntity.class)
 public class SpiderMixin extends HostileEntity implements RangedAttackMob {
+    @Unique
     private static final TrackedData<Boolean> BABY = DataTracker.registerData(SpiderEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     @Unique
     private Goal sihywtcamd_cobwebAttackGoal;

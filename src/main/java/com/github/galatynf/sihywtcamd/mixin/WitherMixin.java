@@ -29,6 +29,7 @@ import java.util.Optional;
 @Mixin(WitherEntity.class)
 public abstract class WitherMixin extends HostileEntity {
     @Shadow public abstract int getInvulnerableTimer();
+    @Unique
     static private final int sihywtcamd_SKELETONS_SPAWN_DISTANCE = 5;
     @Unique
     private boolean sihywtcamd_hasSpawned = false;
