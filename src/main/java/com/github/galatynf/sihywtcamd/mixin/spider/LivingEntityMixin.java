@@ -25,16 +25,18 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(method = "onDeath", at = @At("HEAD"))
     private void spawnBabies(DamageSource source, CallbackInfo ci) {
-        if (!this.world.isClient
+        if (!this.getWorld().isClient()
                 && ModConfig.get().arthropod.spider.baby
                 && this.getType().equals(EntityType.SPIDER)
                 && !this.isBaby()
                 && this.random.nextFloat() < 0.1F) {
             int numberBabies = 3 + this.random.nextInt(3)
-                    + Math.round(3 * this.world.getLocalDifficulty(this.getBlockPos()).getClampedLocalDifficulty());
-            for (int i=0; i < numberBabies; i++) {
-                MobEntity mob = (MobEntity) this.getType().spawn((ServerWorld) world, this.getBlockPos(), SpawnReason.NATURAL);
-                if (mob != null) mob.setBaby(true);
+                    + Math.round(3 * this.getWorld().getLocalDifficulty(this.getBlockPos()).getClampedLocalDifficulty());
+            for (int i = 0; i < numberBabies; ++i) {
+                MobEntity mob = (MobEntity) this.getType().spawn((ServerWorld) this.getWorld(), this.getBlockPos(), SpawnReason.NATURAL);
+                if (mob != null) {
+                    mob.setBaby(true);
+                }
             }
         }
     }

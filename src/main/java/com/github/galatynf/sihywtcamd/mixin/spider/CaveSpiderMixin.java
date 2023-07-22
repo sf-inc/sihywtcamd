@@ -26,7 +26,7 @@ public class CaveSpiderMixin extends SpiderEntity {
         if (ModConfig.get().arthropod.spider.caveSpiderJockey
                 && !spawnReason.equals(SpawnReason.SPAWNER)
                 && world.getRandom().nextInt(50) == 0) {
-            SkeletonEntity skeletonEntity = EntityType.SKELETON.create(this.world);
+            SkeletonEntity skeletonEntity = EntityType.SKELETON.create(this.getWorld());
             if (skeletonEntity != null) {
                 skeletonEntity.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), this.getYaw(), 0.0F);
                 skeletonEntity.initialize(world, difficulty, spawnReason, null, null);

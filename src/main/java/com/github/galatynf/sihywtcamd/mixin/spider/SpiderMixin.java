@@ -121,13 +121,13 @@ public class SpiderMixin extends HostileEntity implements RangedAttackMob {
 
     @Override
     public void attack(LivingEntity target, float pullProgress) {
-        CobwebProjectileEntity cobwebProjectileEntity = CobwebProjectileEntity.create(this.world, this);
+        CobwebProjectileEntity cobwebProjectileEntity = CobwebProjectileEntity.create(this.getWorld(), this);
         double d = target.getX() - this.getX();
         double e = target.getBodyY(0.3333333333333333D) - this.getY();
         double f = target.getZ() - this.getZ();
         double g = Math.sqrt(d * d + f * f);
-        cobwebProjectileEntity.setVelocity(d, e + g * 0.20000000298023224D, f, 1.0F, (float) (14 - this.world.getDifficulty().getId() * 2));
+        cobwebProjectileEntity.setVelocity(d, e + g * 0.20000000298023224D, f, 1.0F, (float) (14 - this.getWorld().getDifficulty().getId() * 2));
         this.playSound(Sihywtcamd.SPIDER_SPIT_EVENT, 0.33F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
-        this.world.spawnEntity(cobwebProjectileEntity);
+        this.getWorld().spawnEntity(cobwebProjectileEntity);
     }
 }

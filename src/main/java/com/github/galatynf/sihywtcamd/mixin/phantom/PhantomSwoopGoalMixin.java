@@ -6,6 +6,7 @@ import net.minecraft.entity.mob.PhantomEntity;
 import net.minecraft.entity.passive.CatEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.predicate.entity.EntityPredicates;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -16,11 +17,11 @@ import java.util.List;
 
 @Mixin(targets = "net.minecraft.entity.mob.PhantomEntity$SwoopMovementGoal")
 public abstract class PhantomSwoopGoalMixin {
-    @Shadow private PhantomEntity field_7333;
+    @Final @Shadow PhantomEntity field_7333;
 
     @Shadow public abstract boolean canStart();
 
-    @Inject(method = "Lnet/minecraft/entity/mob/PhantomEntity$SwoopMovementGoal;shouldContinue()Z", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "shouldContinue()Z", at = @At("HEAD"), cancellable = true)
     private void changePredicateContinue(CallbackInfoReturnable<Boolean> cir) {
         if (ModConfig.get().overworld.general.mobsLessFear || ModConfig.get().overworld.phantom.lightFear) {
             boolean shouldContinue = true;
@@ -33,11 +34,11 @@ public abstract class PhantomSwoopGoalMixin {
                 shouldContinue = false;
             } else if (!this.canStart()) {
                 shouldContinue = false;
-            } else if (ModConfig.get().overworld.phantom.lightFear && field_7333.world.getLightLevel(field_7333.getBlockPos()) > 10) {
+            } else if (ModConfig.get().overworld.phantom.lightFear && field_7333.getWorld().getLightLevel(field_7333.getBlockPos()) > 10) {
                 shouldContinue = false;
             } else {
                 if (field_7333.age % 20 == 0) {
-                    List<CatEntity> list = field_7333.world.getEntitiesByClass(CatEntity.class, field_7333.getBoundingBox().expand(16.0D), EntityPredicates.VALID_ENTITY);
+                    List<CatEntity> list = field_7333.getWorld().getEntitiesByClass(CatEntity.class, field_7333.getBoundingBox().expand(16.0D), EntityPredicates.VALID_ENTITY);
                     for (CatEntity catEntity : list) {
                         catEntity.hiss();
                         if (!(ModConfig.get().overworld.general.mobsLessFear && catEntity.getHealth() <= catEntity.getMaxHealth() / 2.0F)) {

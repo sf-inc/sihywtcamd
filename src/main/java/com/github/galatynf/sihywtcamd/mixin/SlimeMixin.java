@@ -78,21 +78,21 @@ public abstract class SlimeMixin extends MobEntity {
 
     @Inject(method = "tick", at = @At("TAIL"))
     private void tryToMerge(CallbackInfo ci) {
-        if (!this.world.isClient
+        if (!this.getWorld().isClient()
                 && this.getType().equals(EntityType.SLIME)
                 && ModConfig.get().overworld.slime.canMerge
                 && !this.hasMerged()
                 && this.isAlive()
                 && this.getSize() < 4
-                && (this.world.getTime() % 5) == 0) {
-            SlimeEntity slimeEntity = this.world.getClosestEntity(SlimeEntity.class, TargetPredicate.DEFAULT, this,
+                && (this.getWorld().getTime() % 5) == 0) {
+            SlimeEntity slimeEntity = this.getWorld().getClosestEntity(SlimeEntity.class, TargetPredicate.DEFAULT, this,
                     this.getX(), this.getY(), this.getZ(), this.getBoundingBox());
             if (slimeEntity != null
                     && this.getSize() == slimeEntity.getSize()) {
                 this.setHasMerged(true);
                 slimeEntity.remove(RemovalReason.DISCARDED);
                 this.setSize(this.getSize() * 2, true);
-                this.world.addParticle(this.getParticles(), this.getX(), this.getY(), this.getZ(),
+                this.getWorld().addParticle(this.getParticles(), this.getX(), this.getY(), this.getZ(),
                         0.0, 0.0, 0.0);
                 this.playSound(SoundEvents.ENTITY_SLIME_ATTACK, 1.0f,
                         (this.random.nextFloat() - this.random.nextFloat()) * 0.2f + 1.0f);

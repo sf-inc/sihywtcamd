@@ -44,10 +44,10 @@ public class CobwebProjectileEntity extends ProjectileEntity {
         }
 
         BlockPos blockPos = this.getBlockPos();
-        BlockState blockState = this.world.getBlockState(blockPos);
+        BlockState blockState = this.getWorld().getBlockState(blockPos);
         Vec3d pos2;
         if (!blockState.isAir()) {
-            VoxelShape voxelShape = blockState.getCollisionShape(this.world, blockPos);
+            VoxelShape voxelShape = blockState.getCollisionShape(this.getWorld(), blockPos);
             if (!voxelShape.isEmpty()) {
                 pos2 = this.getPos();
 
@@ -71,7 +71,7 @@ public class CobwebProjectileEntity extends ProjectileEntity {
         } else {
             Vec3d pos = this.getPos();
             pos2 = pos.add(velocity);
-            HitResult hitResult = this.world.raycast(new RaycastContext(pos, pos2, RaycastContext.ShapeType.COLLIDER, RaycastContext.FluidHandling.NONE, this));
+            HitResult hitResult = this.getWorld().raycast(new RaycastContext(pos, pos2, RaycastContext.ShapeType.COLLIDER, RaycastContext.FluidHandling.NONE, this));
             if (hitResult.getType() != HitResult.Type.MISS) {
                 pos2 = hitResult.getPos();
             }
@@ -122,15 +122,16 @@ public class CobwebProjectileEntity extends ProjectileEntity {
 
     @Nullable
     protected EntityHitResult getEntityCollision(Vec3d currentPosition, Vec3d nextPosition) {
-        return ProjectileUtil.getEntityCollision(this.world, this, currentPosition, nextPosition, this.getBoundingBox().stretch(this.getVelocity()).expand(1.0D), this::canHit);
+        return ProjectileUtil.getEntityCollision(this.getWorld(), this, currentPosition, nextPosition,
+                this.getBoundingBox().stretch(this.getVelocity()).expand(1.0D), this::canHit);
     }
 
     @Override
     protected void onEntityHit(EntityHitResult entityHitResult) {
         if (!entityHitResult.getEntity().isTouchingWater()) {
             BlockPos blockPos = entityHitResult.getEntity().getBlockPos().withY(this.getBlockY());
-            if (world.getBlockState(blockPos).isAir()) {
-                this.world.setBlockState(blockPos, Sihywtcamd.MESSY_COBWEB.getDefaultState());
+            if (getWorld().getBlockState(blockPos).isAir()) {
+                this.getWorld().setBlockState(blockPos, Sihywtcamd.MESSY_COBWEB.getDefaultState());
             }
         }
 

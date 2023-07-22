@@ -38,7 +38,7 @@ public abstract class CreeperMixin extends HostileEntity {
         final int explosionRadius = this.explosionRadius * (this.shouldRenderOverlay() ? 3 : 2);
         final int duration = 150;
         Vec3d explosionRadiuses = new Vec3d(explosionRadius, explosionRadius, explosionRadius);
-        List<Entity> entityList = this.world.getOtherEntities(this,
+        List<Entity> entityList = this.getWorld().getOtherEntities(this,
                 new Box(this.getPos().subtract(explosionRadiuses), this.getPos().add(explosionRadiuses)),
                 entity -> entity instanceof PlayerEntity && this.distanceTo(entity) < explosionRadius);
 

@@ -39,7 +39,7 @@ public abstract class PiglinMixin extends AbstractPiglinEntity {
                 HoglinEntity hoglinEntity = list.get(0);
                 this.startRiding(hoglinEntity);
             } else {
-                HoglinEntity hoglinEntity2 = EntityType.HOGLIN.create(this.world);
+                HoglinEntity hoglinEntity2 = EntityType.HOGLIN.create(this.getWorld());
                 if (hoglinEntity2 != null) {
                     hoglinEntity2.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), this.getYaw(), 0.0F);
                     hoglinEntity2.initialize(world, difficulty, SpawnReason.JOCKEY, null, null);

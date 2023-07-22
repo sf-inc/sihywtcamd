@@ -22,12 +22,15 @@ public class MansionMixin {
                 && metadata.equals("Mage")
                 && random.nextFloat() < 0.4f) {
             MobEntity illusioner = EntityType.ILLUSIONER.create(world.toServerWorld());
-            illusioner.setPersistent();
-            illusioner.refreshPositionAndAngles(pos, 0.0f, 0.0f);
-            illusioner.initialize(world, world.getLocalDifficulty(illusioner.getBlockPos()), SpawnReason.STRUCTURE, null, null);
-            world.spawnEntityAndPassengers(illusioner);
-            if (random.nextFloat() < 0.8f) {
-                ci.cancel();
+            if (illusioner != null) {
+                illusioner.setPersistent();
+                illusioner.refreshPositionAndAngles(pos, 0.0f, 0.0f);
+                illusioner.initialize(world, world.getLocalDifficulty(illusioner.getBlockPos()), SpawnReason.STRUCTURE, null, null);
+
+                world.spawnEntityAndPassengers(illusioner);
+                if (random.nextFloat() < 0.8f) {
+                    ci.cancel();
+                }
             }
         }
     }
