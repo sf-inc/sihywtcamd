@@ -24,6 +24,7 @@ public class CaveSpiderMixin extends SpiderEntity {
     @Override
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
         if (ModConfig.get().arthropod.spider.caveSpiderJockey
+                && !this.hasVehicle()
                 && !spawnReason.equals(SpawnReason.SPAWNER)
                 && world.getRandom().nextInt(50) == 0) {
             SkeletonEntity skeletonEntity = EntityType.SKELETON.create(this.getWorld());
