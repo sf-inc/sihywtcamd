@@ -4,6 +4,13 @@
 * **x.X versions** are either updates that add content or major bug fixes
 * **x.x.X versions** are either small content updates (language translation, new textures, ...) or bug fixes
 
+## v1.7.5
+* Update to 1.20.1
+* Fix guardian jockey condition (babies would always ride guardians on 1.19.4)
+* Fix riding on spawn when generating chunk (issue #38)
+  * Compatibility with structures mod like "Repurposed Structures" or
+  "Unstructured" is back
+
 ## v1.7.4
 * Update to 1.19.4
 * Removed drowned better animation option, as it has been
