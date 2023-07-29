@@ -9,7 +9,7 @@
     "Pardys"
   ],
   "contact": {
-    "homepage": "https://www.curseforge.com/minecraft/mc-mods/sihywtcamd",
+    "homepage": "https://modrinth.com/mod/difficulty",
     "issues": "https://github.com/sf-inc/sihywtcamd/issues",
     "sources": "https://github.com/sf-inc/sihywtcamd"
   },
@@ -34,11 +34,5 @@
   "depends": {
     "fabricloader": ">=0.12.6",
     "fabric": "*"
-  },
-  "custom": {
-    "modupdater": {
-      "strategy": "curseforge",
-      "projectID": 460652
-    }
   }
 }
