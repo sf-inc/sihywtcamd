@@ -10,10 +10,12 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import static com.github.galatynf.sihywtcamd.Sihywtcamd.MOD_ID;
+
 @Mixin(PhantomEntityRenderer.class)
 public abstract class PhantomRendererMixin {
     @Unique
-    private static final Identifier PHANTOM_TEXTURE = new Identifier("sihywtcamd", "textures/entity/phantom.png");
+    private static final Identifier PHANTOM_TEXTURE = new Identifier(MOD_ID, "textures/entity/phantom.png");
 
     @Inject(method = "getTexture*", at = @At("HEAD"), cancellable = true)
     private void getTexture(PhantomEntity phantomEntity, CallbackInfoReturnable<Identifier> cir) {
