@@ -86,7 +86,7 @@
   "text.autoconfig.sihywtcamd.option.nether.piglin.rideHoglin": "Les piglins peuvent apparaître sur un hoglin",
 
   "text.autoconfig.sihywtcamd.category.end": "End",
-  "text.autoconfig.sihywtcamd.option.end.endermanBlindness": "Regarder un enderman donne cécité",
+  "text.autoconfig.sihywtcamd.option.end.endermanBlindness": "Les endermen donnent cécité lors d'attaque",
   "text.autoconfig.sihywtcamd.option.end.shulkerBlindness": "Les projectiles de shulker donnent cécité",
   "text.autoconfig.sihywtcamd.option.end.endermiteInChorus": "Les plantes de chorus sont infestées d'endermites",
 
