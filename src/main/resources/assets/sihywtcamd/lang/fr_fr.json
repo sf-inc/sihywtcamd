@@ -87,7 +87,7 @@
 
   "text.autoconfig.sihywtcamd.category.end": "End",
   "text.autoconfig.sihywtcamd.option.end.endermanBlindness": "Les endermen donnent cécité lors d'attaque",
-  "text.autoconfig.sihywtcamd.option.end.shulkerBlindness": "Les projectiles de shulker donnent cécité",
+  "text.autoconfig.sihywtcamd.option.end.shulkerCancelLevitation": "Les projectiles de shulker peuvent enlever la lévitation",
   "text.autoconfig.sihywtcamd.option.end.endermiteInChorus": "Les plantes de chorus sont infestées d'endermites",
 
   "text.autoconfig.sihywtcamd.category.boss": "Boss",

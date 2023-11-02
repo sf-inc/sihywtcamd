@@ -87,7 +87,7 @@
 
   "text.autoconfig.sihywtcamd.category.end": "End",
   "text.autoconfig.sihywtcamd.option.end.endermanBlindness": "Endermen gives blindness on attack",
-  "text.autoconfig.sihywtcamd.option.end.shulkerBlindness": "Get blindness when hit by a shulker projectile",
+  "text.autoconfig.sihywtcamd.option.end.shulkerCancelLevitation": "Shulkers projectiles can remove levitation",
   "text.autoconfig.sihywtcamd.option.end.endermiteInChorus": "Chorus plants are infested with endermites",
 
   "text.autoconfig.sihywtcamd.category.boss": "Boss",
