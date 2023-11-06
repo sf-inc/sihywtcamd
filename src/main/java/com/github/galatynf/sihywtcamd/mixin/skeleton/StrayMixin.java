@@ -1,7 +1,7 @@
 package com.github.galatynf.sihywtcamd.mixin.skeleton;
 
+import com.github.galatynf.sihywtcamd.cardinal.MyComponents;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
-import com.github.galatynf.sihywtcamd.imixin.FrozenProjectile;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.StrayEntity;
@@ -19,7 +19,7 @@ public class StrayMixin {
             ((ArrowEntity) projectileEntity).addEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 600, 1));
         }
         if (ModConfig.get().skeleton.stray.frozenArrows) {
-            ((FrozenProjectile) projectileEntity).setFrozen();
+            MyComponents.ARROW_COMPONENT.get(projectileEntity).setFrozen();
         }
 
         return projectileEntity;
