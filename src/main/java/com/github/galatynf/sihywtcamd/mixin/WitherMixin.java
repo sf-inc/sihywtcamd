@@ -1,5 +1,6 @@
 package com.github.galatynf.sihywtcamd.mixin;
 
+import com.github.galatynf.sihywtcamd.cardinal.MyComponents;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
@@ -31,8 +32,6 @@ public abstract class WitherMixin extends HostileEntity {
     @Shadow public abstract int getInvulnerableTimer();
     @Unique
     static private final int sihywtcamd_SKELETONS_SPAWN_DISTANCE = 5;
-    @Unique
-    private boolean sihywtcamd_hasSpawned = false;
 
     protected WitherMixin(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
@@ -58,7 +57,7 @@ public abstract class WitherMixin extends HostileEntity {
                 && (this.getWorld().getDifficulty().equals(Difficulty.NORMAL)
                     || this.getWorld().getDifficulty().equals(Difficulty.HARD))
                 && this.getInvulnerableTimer() < 1
-                && !this.sihywtcamd_hasSpawned
+                && !MyComponents.WITHER_COMPONENT.get(this).wasHalfHealthReached()
                 && this.getHealth() < this.getMaxHealth() / 2.0D) {
             if (ModConfig.get().boss.wither.explosion) {
                 this.getWorld().createExplosion(this, this.getX(), this.getEyeY(), this.getZ(), 7.0f, false, World.ExplosionSourceType.MOB);
@@ -73,7 +72,7 @@ public abstract class WitherMixin extends HostileEntity {
                 blockPos.ifPresent(pos -> EntityType.WITHER_SKELETON.spawn((ServerWorld) this.getWorld(), pos, SpawnReason.EVENT));
             }
 
-            this.sihywtcamd_hasSpawned = true;
+            MyComponents.WITHER_COMPONENT.get(this).setHalfHealthReached();
         }
         if (ModConfig.get().boss.wither.stormyWeather) {
             ((ServerWorld) this.getWorld()).setWeather(0, 50, true, true);

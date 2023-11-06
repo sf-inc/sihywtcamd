@@ -37,5 +37,10 @@
   "depends": {
     "fabricloader": ">=0.12.6",
     "fabric": "*"
+  },
+  "custom": {
+    "cardinal-components": [
+      "sihywtcamd:wither_component"
+    ]
   }
 }
