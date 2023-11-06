@@ -13,6 +13,7 @@ group = project.maven_group
 repositories {
     maven { url "https://maven.terraformersmc.com/releases/" }
     maven { url "https://maven.shedaniel.me/" }
+    maven { url "https://maven.ladysnake.org/releases" }
 }
 
 dependencies {
@@ -26,6 +27,13 @@ dependencies {
     modApi include("me.shedaniel.cloth:cloth-config-fabric:${project.clothconfig_version}") {
         exclude(group: "net.fabricmc.fabric-api")
     }
+
+    modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cardinal_version}"
+    include "dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cardinal_version}"
+    modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-item:${project.cardinal_version}"
+    include "dev.onyxstudios.cardinal-components-api:cardinal-components-item:${project.cardinal_version}"
+    modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${project.cardinal_version}"
+    include "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${project.cardinal_version}"
 }
 
 processResources {

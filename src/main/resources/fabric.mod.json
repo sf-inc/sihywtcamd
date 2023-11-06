@@ -23,6 +23,9 @@
     "main": [
       "com.github.galatynf.sihywtcamd.Sihywtcamd"
     ],
+    "cardinal-components": [
+      "com.github.galatynf.sihywtcamd.cardinal.MyComponents"
+    ],
     "modmenu": [
       "com.github.galatynf.sihywtcamd.config.ModMenuIntegration"
     ]
