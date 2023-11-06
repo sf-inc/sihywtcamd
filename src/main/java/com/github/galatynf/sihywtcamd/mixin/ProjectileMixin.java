@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PersistentProjectileEntity.class)
 public class ProjectileMixin {
-    @Inject(method = "onEntityHit", at = @At("HEAD"))
+    @Inject(method = "onEntityHit", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/projectile/PersistentProjectileEntity;onHit(Lnet/minecraft/entity/LivingEntity;)V"))
     private void freezeEntity(EntityHitResult entityHitResult, CallbackInfo ci) {
         if (MyComponents.ARROW_COMPONENT.get(this).isFrozen()) {
             Entity entity = entityHitResult.getEntity();
