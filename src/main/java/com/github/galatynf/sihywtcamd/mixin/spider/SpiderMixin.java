@@ -131,4 +131,9 @@ public class SpiderMixin extends HostileEntity implements RangedAttackMob {
         this.playSound(Sihywtcamd.SPIDER_SPIT_EVENT, 0.33F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
         this.getWorld().spawnEntity(cobwebProjectileEntity);
     }
+
+    @Override
+    protected boolean shouldDropLoot() {
+        return !this.isBaby();
+    }
 }
