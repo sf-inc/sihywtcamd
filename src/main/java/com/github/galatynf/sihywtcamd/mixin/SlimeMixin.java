@@ -24,6 +24,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(SlimeEntity.class)
 public abstract class SlimeMixin extends MobEntity {
@@ -67,17 +68,13 @@ public abstract class SlimeMixin extends MobEntity {
         nbt.putBoolean("hasMerged", this.hasMerged());
     }
 
-    @Override
-    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityTag) {
-        int i = this.random.nextInt(3);
-        if (((ModConfig.get().overworld.slime.biggerSize && this.getType().equals(EntityType.SLIME)) || i < 2)
-                && this.random.nextFloat() < 0.5F * difficulty.getClampedLocalDifficulty()) {
-            ++i;
+    @Inject(method = "initialize", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/MobEntity;initialize(Lnet/minecraft/world/ServerWorldAccess;Lnet/minecraft/world/LocalDifficulty;Lnet/minecraft/entity/SpawnReason;Lnet/minecraft/entity/EntityData;Lnet/minecraft/nbt/NbtCompound;)Lnet/minecraft/entity/EntityData;"))
+    private void spawnBigger(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, EntityData entityData,
+                             NbtCompound entityNbt, CallbackInfoReturnable<EntityData> cir) {
+        if (ModConfig.get().overworld.slime.biggerSize
+                && this.random.nextFloat() < 0.05f + 0.05f * difficulty.getClampedLocalDifficulty()) {
+            this.setSize(8, true);
         }
-
-        int j = 1 << i;
-        this.setSize(j, true);
-        return super.initialize(world, difficulty, spawnReason, entityData, entityTag);
     }
 
     @Inject(method = "tick", at = @At("TAIL"))
