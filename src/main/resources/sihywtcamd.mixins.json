@@ -23,8 +23,6 @@
     "VindicatorMixin",
     "WitchMixin",
     "WitherMixin",
-    "biome.BiomeFeatMixin",
-    "biome.OverworldBiomeMixin",
     "ghast.GhastMixin",
     "guardian.GuardianAttackGoalMixin",
     "guardian.GuardianMixin",

@@ -3,6 +3,7 @@ package com.github.galatynf.sihywtcamd;
 import com.github.galatynf.sihywtcamd.block.MessyCobweb;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import com.github.galatynf.sihywtcamd.entity.CobwebProjectileEntity;
+import com.github.galatynf.sihywtcamd.init.BiomeSpawn;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import me.shedaniel.autoconfig.serializer.PartitioningSerializer;
@@ -40,6 +41,8 @@ public class Sihywtcamd implements ModInitializer {
             AutoConfig.register(ModConfig.class, PartitioningSerializer.wrap(GsonConfigSerializer::new));
             Sihywtcamd.areConfigsInit = true;
         }
+
+        BiomeSpawn.init();
 
         Registry.register(Registries.BLOCK, new Identifier(MOD_ID, "messy_cobweb"), MESSY_COBWEB);
         Registry.register(Registries.SOUND_EVENT, SPIDER_SPIT_ID, SPIDER_SPIT_EVENT);

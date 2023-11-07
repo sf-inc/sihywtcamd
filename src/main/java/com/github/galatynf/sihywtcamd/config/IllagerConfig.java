@@ -38,6 +38,7 @@ public class IllagerConfig implements ConfigData {
 
     public static class Witch {
         public boolean fleeGoal = true;
+        @ConfigEntry.Gui.RequiresRestart
         public boolean moreSpawn = true;
     }
 }

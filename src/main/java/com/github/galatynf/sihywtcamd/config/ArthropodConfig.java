@@ -23,6 +23,7 @@ public class ArthropodConfig implements ConfigData {
 
         @ConfigEntry.Gui.Tooltip
         public boolean caveSpiderJockey = true;
+        @ConfigEntry.Gui.RequiresRestart
         public boolean caveSpiderNaturalSpawn = true;
     }
 }

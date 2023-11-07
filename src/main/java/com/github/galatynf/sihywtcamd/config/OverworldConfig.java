@@ -44,6 +44,7 @@ public class OverworldConfig implements ConfigData {
 
     public static class Vex {
         public boolean dieWithEvoker = true;
+        @ConfigEntry.Gui.RequiresRestart
         public boolean naturalSpawnDarkForest = true;
     }
 
@@ -51,6 +52,7 @@ public class OverworldConfig implements ConfigData {
     public Guardian guardian = new Guardian();
 
     public static class Guardian {
+        @ConfigEntry.Gui.RequiresRestart
         public boolean naturalSpawn = true;
         public boolean silentKill = true;
     }
