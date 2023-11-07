@@ -9,9 +9,11 @@ import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import me.shedaniel.autoconfig.serializer.PartitioningSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.MapColor;
 import net.minecraft.block.piston.PistonBehavior;
+import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registries;
@@ -23,10 +25,12 @@ public class Sihywtcamd implements ModInitializer {
     public static boolean areConfigsInit = false;
     public static final String MOD_ID = "sihywtcamd";
 
-    public static final EntityType<CobwebProjectileEntity> COBWEB  = Registry.register(Registries.ENTITY_TYPE, "cobweb", EntityType.Builder
-            .create(CobwebProjectileEntity::new, SpawnGroup.MISC)
-            .setDimensions(0.5F, 0.5F)
-            .build("cobweb"));
+    public static final EntityType<CobwebProjectileEntity> COBWEB  = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(MOD_ID, "cobweb"),
+            FabricEntityTypeBuilder
+                    .create(SpawnGroup.MISC, CobwebProjectileEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.5F, 0.5F))
+                    .build());
 
     public static final Block MESSY_COBWEB = new MessyCobweb(FabricBlockSettings
             .create().mapColor(MapColor.WHITE_GRAY).solid().noCollision().requiresTool().strength(3.0F)
