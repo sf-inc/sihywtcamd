@@ -58,7 +58,10 @@ public abstract class CreeperMixin extends HostileEntity {
 
     @Override
     public boolean damage(DamageSource source, float amount) {
-        if (ModConfig.get().overworld.creeper.chainExplosions && source.isIn(DamageTypeTags.IS_EXPLOSION)) {
+        if (ModConfig.get().overworld.creeper.chainExplosions
+                && source.isIn(DamageTypeTags.IS_EXPLOSION)
+                && (!(source.getAttacker() instanceof CreeperEntity creeper)
+                || !creeper.shouldRenderOverlay())) {
             this.ignite();
             return false;
         } else {
