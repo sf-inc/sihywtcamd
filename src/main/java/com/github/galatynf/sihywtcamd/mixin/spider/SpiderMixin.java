@@ -29,6 +29,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Objects;
 
@@ -108,9 +109,9 @@ public class SpiderMixin extends HostileEntity implements RangedAttackMob {
         return this.isBaby() ? 0.33F : 1.0F;
     }
 
-    @Override
-    public float getActiveEyeHeight(EntityPose pose, EntityDimensions dimensions) {
-        return 0.65F * this.getScaleFactor();
+    @Inject(method = "getActiveEyeHeight", at = @At("HEAD"), cancellable = true)
+    private void updateSpiderEyeHeight(EntityPose pose, EntityDimensions dimensions, CallbackInfoReturnable<Float> cir) {
+        cir.setReturnValue(0.65F * this.getScaleFactor());
     }
 
     @Override

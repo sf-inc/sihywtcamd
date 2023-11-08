@@ -1,9 +1,7 @@
 package com.github.galatynf.sihywtcamd.mixin.spider;
 
 import com.github.galatynf.sihywtcamd.config.ModConfig;
-import net.minecraft.entity.EntityData;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.*;
 import net.minecraft.entity.mob.CaveSpiderEntity;
 import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.entity.mob.SpiderEntity;
@@ -13,6 +11,9 @@ import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(CaveSpiderEntity.class)
 public class CaveSpiderMixin extends SpiderEntity {
@@ -36,5 +37,15 @@ public class CaveSpiderMixin extends SpiderEntity {
         }
 
         return entityData;
+    }
+
+    @Override
+    public float getScaleFactor() {
+        return this.isBaby() ? 0.5F : 1.0F;
+    }
+
+    @Inject(method = "getActiveEyeHeight", at = @At("HEAD"), cancellable = true)
+    private void updateCaveSpiderEyeHeight(EntityPose pose, EntityDimensions dimensions, CallbackInfoReturnable<Float> cir) {
+        cir.setReturnValue(0.45F * this.getScaleFactor());
     }
 }
