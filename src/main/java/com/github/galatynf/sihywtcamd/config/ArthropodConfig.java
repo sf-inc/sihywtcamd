@@ -15,6 +15,13 @@ public class ArthropodConfig implements ConfigData {
     }
 
     @ConfigEntry.Gui.CollapsibleObject
+    public Silverfish silverfish = new Silverfish();
+
+    public static class Silverfish {
+        public boolean infestedEverywhere = true;
+    }
+
+    @ConfigEntry.Gui.CollapsibleObject
     public Spider spider = new Spider();
 
     public static class Spider {

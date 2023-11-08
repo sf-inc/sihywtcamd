@@ -54,6 +54,8 @@
   "text.autoconfig.sihywtcamd.option.arthropod.general": "General arthropods",
   "text.autoconfig.sihywtcamd.option.arthropod.general.noFallDamage": "Arthropods have no fall damage",
   "text.autoconfig.sihywtcamd.option.arthropod.general.larvaeSpeedBonus": "Larvae have a random speed bonus",
+  "text.autoconfig.sihywtcamd.option.arthropod.silverfish": "Silverfish",
+  "text.autoconfig.sihywtcamd.option.arthropod.silverfish.infestedEverywhere": "Stone is infested everywhere",
   "text.autoconfig.sihywtcamd.option.arthropod.spider": "Spider",
   "text.autoconfig.sihywtcamd.option.arthropod.spider.baby": "Spiders can spawn baby spiders on death",
   "text.autoconfig.sihywtcamd.option.arthropod.spider.webProjectileGoal": "Spiders can launch webs",

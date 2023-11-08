@@ -54,6 +54,8 @@
   "text.autoconfig.sihywtcamd.option.arthropod.general": "Les arthropodes en général",
   "text.autoconfig.sihywtcamd.option.arthropod.general.noFallDamage": "Les arthropodes ne subissent pas de dégâts de chute",
   "text.autoconfig.sihywtcamd.option.arthropod.general.larvaeSpeedBonus": "Les larves ont un bonus de vitesse aléatoire",
+  "text.autoconfig.sihywtcamd.option.arthropod.silverfish": "Le poisson d'argent",
+  "text.autoconfig.sihywtcamd.option.arthropod.silverfish.infestedEverywhere": "La pierre est infestée de partout",
   "text.autoconfig.sihywtcamd.option.arthropod.spider": "L'araignée",
   "text.autoconfig.sihywtcamd.option.arthropod.spider.baby": "Les araignées peuvent faire apparaître des bébés à leur mort",
   "text.autoconfig.sihywtcamd.option.arthropod.spider.webProjectileGoal": "Les araignées peuvent lancer des toiles",
