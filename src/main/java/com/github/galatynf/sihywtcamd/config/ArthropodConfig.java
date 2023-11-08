@@ -19,6 +19,7 @@ public class ArthropodConfig implements ConfigData {
 
     public static class Spider {
         public boolean baby = true;
+        public boolean babyCaveSpider = true;
         public boolean webProjectileGoal = true;
 
         @ConfigEntry.Gui.Tooltip
