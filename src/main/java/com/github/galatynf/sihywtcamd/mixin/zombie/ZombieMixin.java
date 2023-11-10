@@ -1,15 +1,16 @@
 package com.github.galatynf.sihywtcamd.mixin.zombie;
 
+import com.github.galatynf.sihywtcamd.Sihywtcamd;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.goal.RevengeGoal;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.ZombieEntity;
+import net.minecraft.text.Text;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -24,6 +25,8 @@ public abstract class ZombieMixin extends HostileEntity {
     @Shadow public abstract void setCanBreakDoors(boolean canBreakDoors);
 
     @Shadow protected abstract boolean shouldBreakDoors();
+
+    @Shadow public abstract boolean isBaby();
 
     protected ZombieMixin(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
@@ -43,38 +46,43 @@ public abstract class ZombieMixin extends HostileEntity {
     @Inject(method = "applyAttributeModifiers", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/ZombieEntity;initAttributes()V", shift = At.Shift.AFTER), cancellable = true)
     private void applyDifferentAttributes(float chanceMultiplier, CallbackInfo ci) {
         float random = this.random.nextFloat();
-        if (ModConfig.get().zombie.general.knockbackResistance) {
-            this.getAttributeInstance(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE).addPersistentModifier(
-                    new EntityAttributeModifier("Random zombie bonus", chanceMultiplier * 0.05 + this.random.nextDouble() * 0.05, EntityAttributeModifier.Operation.ADDITION));
-        }
-        if (ModConfig.get().zombie.general.leaderAndSiege) {
-            if (random < 0.05F + 0.05F * chanceMultiplier) {
+        if (ModConfig.get().zombie.general.attributeVariations && !this.isBaby()) {
+            if (random < 0.1f) {
+                this.setCustomName(Text.of("Caller"));
+                double value = 0.2 + 0.15 * chanceMultiplier + 0.15 * this.random.nextDouble();
                 this.getAttributeInstance(EntityAttributes.ZOMBIE_SPAWN_REINFORCEMENTS).addPersistentModifier(
-                        new EntityAttributeModifier("Leader zombie bonus", chanceMultiplier * 0.2 + 0.3, EntityAttributeModifier.Operation.ADDITION));
-                this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).addPersistentModifier(
-                        new EntityAttributeModifier("Leader zombie bonus", 1.5, EntityAttributeModifier.Operation.MULTIPLY_TOTAL));
-                this.setHealth(this.getMaxHealth());
-                ci.cancel();
-            } else if (random < 0.15F + 0.1F * chanceMultiplier) {
+                        new EntityAttributeModifier("Caller zombie bonus", value, EntityAttributeModifier.Operation.ADDITION));
+            } else if (random < 0.3f) {
+                this.setCustomName(Text.of("Tank"));
                 this.setCanBreakDoors(this.shouldBreakDoors());
-                ci.cancel();
+                double value = 0.5 + 1.0 * chanceMultiplier + this.random.nextDouble();
+                this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).addPersistentModifier(
+                        new EntityAttributeModifier("Tank zombie bonus", value, EntityAttributeModifier.Operation.MULTIPLY_BASE));
+            } else if (random < 0.5f) {
+                this.setCustomName(Text.of("Runner"));
+                double value = 0.2 + 0.15 * chanceMultiplier + 0.15 * this.random.nextDouble();
+                this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).addPersistentModifier(
+                        new EntityAttributeModifier("Runner zombie bonus", value, EntityAttributeModifier.Operation.MULTIPLY_BASE));
+            } else if (random < 0.7f) {
+                this.setCustomName(Text.of("Unstoppable"));
+                double value = 0.2 + 0.15 * chanceMultiplier + 0.15 * this.random.nextDouble();
+                this.getAttributeInstance(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE).addPersistentModifier(
+                        new EntityAttributeModifier("Unstoppable zombie bonus", value, EntityAttributeModifier.Operation.ADDITION));
             }
-        }
-        if (ModConfig.get().zombie.general.brainless
-                && random > 0.8F - (1.F - chanceMultiplier) * 0.05F) {
-            this.targetSelector.getGoals().removeIf(goal -> !(goal.getGoal() instanceof RevengeGoal));
-            ci.cancel();
-        }
-        if (ModConfig.get().zombie.general.brainless
-                || ModConfig.get().zombie.general.leaderAndSiege) {
+
+            this.setCustomNameVisible(Sihywtcamd.DEBUG);
             ci.cancel();
         }
     }
 
-    @Inject(method = "initAttributes", at = @At("HEAD"))
-    private void increaseSpawnReinforcement(CallbackInfo ci) {
-        if (ModConfig.get().zombie.general.knockbackResistance) {
-            this.getAttributeInstance(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(0.35);
+    @Inject(method = "initAttributes", at = @At("HEAD"), cancellable = true)
+    private void initWithIncreasedAttributes(CallbackInfo ci) {
+        if (ModConfig.get().zombie.general.moreKnockbackResistance) {
+            this.getAttributeInstance(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(0.2 + 0.2 * this.random.nextDouble());
+        }
+        if (ModConfig.get().zombie.general.spawnMoreReinforcement) {
+            this.getAttributeInstance(EntityAttributes.ZOMBIE_SPAWN_REINFORCEMENTS).setBaseValue(0.2 + 0.2 * this.random.nextDouble());
+            ci.cancel();
         }
     }
 }
