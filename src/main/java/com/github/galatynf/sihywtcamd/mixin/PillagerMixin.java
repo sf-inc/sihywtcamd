@@ -1,5 +1,6 @@
 package com.github.galatynf.sihywtcamd.mixin;
 
+import com.github.galatynf.sihywtcamd.Sihywtcamd;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
@@ -10,6 +11,7 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.IllagerEntity;
 import net.minecraft.entity.mob.PillagerEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.text.Text;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
@@ -31,6 +33,8 @@ public abstract class PillagerMixin extends IllagerEntity {
     private void addSpeedBonusP(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, EntityData entityData,
                                 NbtCompound entityTag, CallbackInfoReturnable<EntityData> cir) {
         if (ModConfig.get().illager.pillager.speedBonus && world.getRandom().nextFloat() < 0.25F) {
+            this.setCustomName(Text.of("Runner"));
+            this.setCustomNameVisible(Sihywtcamd.DEBUG);
             EntityAttributeInstance speed = this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED);
             Objects.requireNonNull(speed).addPersistentModifier(new EntityAttributeModifier(
                     "Random pillager bonus", 0.69 * difficulty.getClampedLocalDifficulty() * speed.getValue(), EntityAttributeModifier.Operation.ADDITION));

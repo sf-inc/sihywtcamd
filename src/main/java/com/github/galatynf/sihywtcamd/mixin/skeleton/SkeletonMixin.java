@@ -1,5 +1,6 @@
 package com.github.galatynf.sihywtcamd.mixin.skeleton;
 
+import com.github.galatynf.sihywtcamd.Sihywtcamd;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
@@ -13,6 +14,7 @@ import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.text.Text;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
@@ -61,7 +63,9 @@ public abstract class SkeletonMixin extends AbstractSkeletonEntity {
         if (ModConfig.get().skeleton.skeleton.spectralArrow
                 && world.getRandom().nextFloat() < 0.05f) {
             this.getDataTracker().set(SPECTRAL, true);
+            this.setCustomName(Text.of("Spectral"));
         }
+        this.setCustomNameVisible(Sihywtcamd.DEBUG);
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
     }
 }

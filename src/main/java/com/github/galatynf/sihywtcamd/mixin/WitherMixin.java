@@ -1,5 +1,6 @@
 package com.github.galatynf.sihywtcamd.mixin;
 
+import com.github.galatynf.sihywtcamd.Sihywtcamd;
 import com.github.galatynf.sihywtcamd.cardinal.MyComponents;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.entity.EntityData;
@@ -11,6 +12,7 @@ import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Difficulty;
@@ -73,6 +75,8 @@ public abstract class WitherMixin extends HostileEntity {
             }
 
             MyComponents.WITHER_COMPONENT.get(this).setHalfHealthReached();
+            this.setCustomName(Text.of("Half Health Reached"));
+            this.setCustomNameVisible(Sihywtcamd.DEBUG);
         }
         if (ModConfig.get().boss.wither.stormyWeather) {
             ((ServerWorld) this.getWorld()).setWeather(0, 50, true, true);
