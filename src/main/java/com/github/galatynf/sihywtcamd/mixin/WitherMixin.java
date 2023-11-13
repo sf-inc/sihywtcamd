@@ -43,7 +43,7 @@ public abstract class WitherMixin extends HostileEntity {
     @Override
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityTag) {
         EntityAttributeInstance instance = this.getAttributes().getCustomInstance(EntityAttributes.GENERIC_MAX_HEALTH);
-        if (instance != null && ModConfig.get().boss.wither.increasedHealth) {
+        if (instance != null && ModConfig.get().bosses.wither.increasedHealth) {
             instance.setBaseValue(400.0D);
             this.setHealth(this.getMaxHealth());
         }
@@ -55,13 +55,13 @@ public abstract class WitherMixin extends HostileEntity {
         if (this.getWorld().isClient()) {
             return;
         }
-        if (ModConfig.get().boss.wither.skeletonsSpawn
+        if (ModConfig.get().bosses.wither.skeletonsSpawn
                 && (this.getWorld().getDifficulty().equals(Difficulty.NORMAL)
                     || this.getWorld().getDifficulty().equals(Difficulty.HARD))
                 && this.getInvulnerableTimer() < 1
                 && !MyComponents.WITHER_COMPONENT.get(this).wasHalfHealthReached()
                 && this.getHealth() < this.getMaxHealth() / 2.0D) {
-            if (ModConfig.get().boss.wither.explosion) {
+            if (ModConfig.get().bosses.wither.explosion) {
                 this.getWorld().createExplosion(this, this.getX(), this.getEyeY(), this.getZ(), 7.0f, false, World.ExplosionSourceType.MOB);
             }
             int nbWitherSkeletons = 3 + Math.round(2 * this.getWorld().getLocalDifficulty(this.getBlockPos()).getClampedLocalDifficulty());
@@ -78,7 +78,7 @@ public abstract class WitherMixin extends HostileEntity {
             this.setCustomName(Text.of("Half Health Reached"));
             this.setCustomNameVisible(Sihywtcamd.DEBUG);
         }
-        if (ModConfig.get().boss.wither.stormyWeather) {
+        if (ModConfig.get().bosses.wither.stormyWeather) {
             ((ServerWorld) this.getWorld()).setWeather(0, 50, true, true);
         }
     }

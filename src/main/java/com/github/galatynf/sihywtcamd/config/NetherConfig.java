@@ -6,9 +6,26 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 
 @Config(name = "nether")
 public class NetherConfig implements ConfigData {
-    public boolean blazeFireCollision = true;
-    public boolean ghastIncreasedHealth = true;
-    public boolean magmaCubeFireCollision = true;
+    @ConfigEntry.Gui.CollapsibleObject
+    public Blaze blaze = new Blaze();
+
+    public static class Blaze {
+        public boolean fireAttack = true;
+    }
+
+    @ConfigEntry.Gui.CollapsibleObject
+    public Ghast ghast = new Ghast();
+
+    public static class Ghast {
+        public boolean increasedHealth = true;
+    }
+
+    @ConfigEntry.Gui.CollapsibleObject
+    public MagmaCube magmaCube = new MagmaCube();
+
+    public static class MagmaCube {
+        public boolean fireCollision = true;
+    }
 
     @ConfigEntry.Gui.CollapsibleObject
     public Piglin piglin = new Piglin();

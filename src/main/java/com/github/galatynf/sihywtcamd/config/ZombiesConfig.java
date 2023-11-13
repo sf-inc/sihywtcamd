@@ -4,8 +4,8 @@ import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 
-@Config(name = "zombie")
-public class ZombieConfig implements ConfigData {
+@Config(name = "zombies")
+public class ZombiesConfig implements ConfigData {
     @ConfigEntry.Gui.CollapsibleObject
     public General general = new General();
 

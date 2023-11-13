@@ -25,7 +25,7 @@ public class GhastMixin extends FlyingEntity {
     @Override
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityTag) {
         EntityAttributeInstance instance = this.getAttributes().getCustomInstance(EntityAttributes.GENERIC_MAX_HEALTH);
-        if (instance != null && ModConfig.get().nether.ghastIncreasedHealth) {
+        if (instance != null && ModConfig.get().nether.ghast.increasedHealth) {
             instance.setBaseValue(30.0D);
             this.setHealth(this.getMaxHealth());
         }

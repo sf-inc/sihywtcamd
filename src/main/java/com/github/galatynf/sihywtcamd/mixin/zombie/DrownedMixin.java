@@ -31,7 +31,7 @@ public abstract class DrownedMixin extends ZombieEntity {
 
     @Inject(method = "initEquipment", at = @At("HEAD"), cancellable = true)
     public void changeProbability(Random random, LocalDifficulty localDifficulty, CallbackInfo ci) {
-        if (ModConfig.get().zombie.drowned.tridentSpawn) {
+        if (ModConfig.get().zombies.drowned.tridentSpawn) {
             int rand = random.nextInt(100);
             if (rand < 15) {
                 this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.TRIDENT));
@@ -44,7 +44,7 @@ public abstract class DrownedMixin extends ZombieEntity {
 
     @Inject(method = "initialize", at = @At("TAIL"))
     private void trySpawnAsGuardianJockey(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, EntityData entityData, NbtCompound entityNbt, CallbackInfoReturnable<EntityData> cir) {
-        if (ModConfig.get().zombie.drowned.guardianJockeySpawn && this.isBaby() && !this.hasVehicle()
+        if (ModConfig.get().zombies.drowned.guardianJockeySpawn && this.isBaby() && !this.hasVehicle()
                 && world.getRandom().nextFloat() < 0.1F + 0.1F * world.getLocalDifficulty(this.getBlockPos()).getClampedLocalDifficulty()) {
             List<GuardianEntity> list = world.getEntitiesByClass(GuardianEntity.class, this.getBoundingBox().expand(5.0D, 3.0D, 5.0D), EntityPredicates.NOT_MOUNTED);
             if (!list.isEmpty()) {
@@ -72,6 +72,6 @@ public abstract class DrownedMixin extends ZombieEntity {
 
     @ModifyArg(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/DrownedEntity;updateVelocity(FLnet/minecraft/util/math/Vec3d;)V"))
     private float increaseVelocity(float speed) {
-        return ModConfig.get().zombie.drowned.highVelocity ? 0.1F : speed;
+        return ModConfig.get().zombies.drowned.highVelocity ? 0.1F : speed;
     }
 }

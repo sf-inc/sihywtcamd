@@ -8,7 +8,7 @@ import net.minecraft.world.gen.feature.OrePlacedFeatures;
 
 public class BiomeFeatures {
     public static void init() {
-        if (ModConfig.get().arthropod.silverfish.infestedEverywhere) {
+        if (ModConfig.get().arthropods.silverfish.infestedEverywhere) {
             BiomeModifications.addFeature(
                     BiomeSelectors.foundInOverworld(),
                     GenerationStep.Feature.UNDERGROUND_ORES,

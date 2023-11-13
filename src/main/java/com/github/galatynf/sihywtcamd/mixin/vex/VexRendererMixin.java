@@ -21,7 +21,7 @@ public abstract class VexRendererMixin {
 
     @Inject(method = "getTexture*", at = @At("HEAD"), cancellable = true)
     private void getTexture(VexEntity vexEntity, CallbackInfoReturnable<Identifier> cir) {
-        if (ModConfig.get().cosmetic.translucentVex) {
+        if (ModConfig.get().cosmetics.translucentVex) {
             cir.setReturnValue(vexEntity.isCharging() ? VEX_CHARGING_TEXTURE : VEX_TEXTURE);
         }
     }

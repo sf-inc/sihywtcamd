@@ -19,7 +19,7 @@ public abstract class AllayRendererMixin {
 
     @Inject(method = "getTexture*", at = @At("HEAD"), cancellable = true)
     private void getTexture(AllayEntity allayEntity, CallbackInfoReturnable<Identifier> cir) {
-        if (ModConfig.get().cosmetic.translucentAllay) {
+        if (ModConfig.get().cosmetics.translucentAllay) {
             cir.setReturnValue(ALLAY_TEXTURE);
         }
     }

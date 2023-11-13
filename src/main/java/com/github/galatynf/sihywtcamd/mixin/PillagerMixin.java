@@ -32,7 +32,7 @@ public abstract class PillagerMixin extends IllagerEntity {
     @Inject(method = "initialize", at = @At("HEAD"))
     private void addSpeedBonusP(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, EntityData entityData,
                                 NbtCompound entityTag, CallbackInfoReturnable<EntityData> cir) {
-        if (ModConfig.get().illager.pillager.speedBonus && world.getRandom().nextFloat() < 0.25F) {
+        if (ModConfig.get().illagers.pillager.speedBonus && world.getRandom().nextFloat() < 0.25F) {
             this.setCustomName(Text.of("Runner"));
             this.setCustomNameVisible(Sihywtcamd.DEBUG);
             EntityAttributeInstance speed = this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED);
@@ -43,6 +43,6 @@ public abstract class PillagerMixin extends IllagerEntity {
 
     @ModifyArg(method = "enchantMainHandItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/random/Random;nextInt(I)I"))
     private int changeProbabilityMoreEnchant(int range) {
-        return ModConfig.get().illager.pillager.moreEnchants ? range / 3 : range;
+        return ModConfig.get().illagers.pillager.moreEnchants ? range / 3 : range;
     }
 }

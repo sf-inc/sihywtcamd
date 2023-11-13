@@ -22,7 +22,7 @@ public abstract class MobEntityMixin extends LivingEntity {
 
     @Inject(method = "tryAttack", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/MobEntity;onAttacking(Lnet/minecraft/entity/Entity;)V"))
     private void endermanBlindnessAttack(Entity target, CallbackInfoReturnable<Boolean> cir) {
-        if (ModConfig.get().end.endermanBlindness
+        if (ModConfig.get().end.enderman.blindnessAttack
                 && this.getType().equals(EntityType.ENDERMAN)
                 && target instanceof PlayerEntity playerEntity) {
             playerEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS, 100));

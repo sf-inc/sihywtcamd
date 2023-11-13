@@ -10,14 +10,14 @@ import net.minecraft.world.biome.BiomeKeys;
 
 public class BiomeSpawn {
     public static void init() {
-        if (ModConfig.get().arthropod.spider.caveSpiderNaturalSpawn) {
+        if (ModConfig.get().arthropods.spider.caveSpiderNaturalSpawn) {
             BiomeModifications.addSpawn(
                     BiomeSelectors.spawnsOneOf(EntityType.SPIDER),
                     SpawnGroup.MONSTER,
                     EntityType.CAVE_SPIDER,
                     80, 1, 3);
         }
-        if (ModConfig.get().illager.witch.moreSpawn) {
+        if (ModConfig.get().illagers.witch.moreSpawn) {
             BiomeModifications.addSpawn(
                     BiomeSelectors.spawnsOneOf(EntityType.WITCH),
                     SpawnGroup.MONSTER,

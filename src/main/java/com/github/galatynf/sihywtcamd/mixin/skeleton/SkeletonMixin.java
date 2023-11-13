@@ -60,7 +60,7 @@ public abstract class SkeletonMixin extends AbstractSkeletonEntity {
     @Nullable
     @Override
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
-        if (ModConfig.get().skeleton.skeleton.spectralArrow
+        if (ModConfig.get().skeletons.skeleton.spectralArrow
                 && world.getRandom().nextFloat() < 0.05f) {
             this.getDataTracker().set(SPECTRAL, true);
             this.setCustomName(Text.of("Spectral"));

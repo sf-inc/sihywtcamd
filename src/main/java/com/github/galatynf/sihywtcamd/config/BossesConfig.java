@@ -4,8 +4,8 @@ import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 
-@Config(name = "boss")
-public class BossConfig implements ConfigData {
+@Config(name = "bosses")
+public class BossesConfig implements ConfigData {
     @ConfigEntry.Gui.CollapsibleObject
     public Wither wither = new Wither();
 

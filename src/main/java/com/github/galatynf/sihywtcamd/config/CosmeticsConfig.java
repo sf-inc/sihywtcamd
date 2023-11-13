@@ -3,8 +3,8 @@ package com.github.galatynf.sihywtcamd.config;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 
-@Config(name = "cosmetic")
-public class CosmeticConfig implements ConfigData {
+@Config(name = "cosmetics")
+public class CosmeticsConfig implements ConfigData {
     public boolean translucentAllay = true;
     public boolean translucentGhast = true;
     public boolean translucentPhantom = true;

@@ -23,8 +23,8 @@ public abstract class LivingEntityRendererMixin<T extends LivingEntity>
     @Inject(method = "getRenderLayer", at = @At("HEAD"), cancellable = true)
     private void setTranslucentPhantoms(T entity, boolean showBody, boolean translucent, boolean showOutline,
                                         CallbackInfoReturnable<@Nullable RenderLayer> cir) {
-        if ((entity.getType().equals(EntityType.GHAST) && ModConfig.get().cosmetic.translucentGhast)
-                || (entity.getType().equals(EntityType.PHANTOM) && ModConfig.get().cosmetic.translucentPhantom)) {
+        if ((entity.getType().equals(EntityType.GHAST) && ModConfig.get().cosmetics.translucentGhast)
+                || (entity.getType().equals(EntityType.PHANTOM) && ModConfig.get().cosmetics.translucentPhantom)) {
             cir.setReturnValue(RenderLayer.getEntityTranslucent(getTexture(entity)));
         }
     }

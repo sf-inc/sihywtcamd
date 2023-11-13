@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class MansionMixin {
     @Inject(method = "handleMetadata", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/MobEntity;setPersistent()V"), cancellable = true)
     private void trySetIllusioner(String metadata, BlockPos pos, ServerWorldAccess world, Random random, BlockBox boundingBox, CallbackInfo ci) {
-        if (ModConfig.get().illager.illusionerInMansions
+        if (ModConfig.get().illagers.illusioner.spawnInMansions
                 && metadata.equals("Mage")
                 && random.nextFloat() < 0.4f) {
             MobEntity illusioner = EntityType.ILLUSIONER.create(world.toServerWorld());

@@ -21,7 +21,7 @@ public abstract class GhastRendererMixin {
 
     @Inject(method = "getTexture*", at = @At("HEAD"), cancellable = true)
     private void getTexture(GhastEntity ghastEntity, CallbackInfoReturnable<Identifier> cir) {
-        if (ModConfig.get().cosmetic.translucentGhast) {
+        if (ModConfig.get().cosmetics.translucentGhast) {
             cir.setReturnValue(ghastEntity.isShooting() ? GHAST_SHOOTING_TEXTURE : GHAST_TEXTURE);
         }
     }

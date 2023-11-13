@@ -27,7 +27,7 @@ public abstract class EvokerMixin extends SpellcastingIllagerEntity {
     @Override
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityTag) {
         EntityAttributeInstance instance = this.getAttributes().getCustomInstance(EntityAttributes.GENERIC_MAX_HEALTH);
-        if (instance != null && ModConfig.get().illager.evoker.increasedHealth) {
+        if (instance != null && ModConfig.get().illagers.evoker.increasedHealth) {
             instance.setBaseValue(36.0D);
             this.setHealth(this.getMaxHealth());
         }
@@ -36,7 +36,7 @@ public abstract class EvokerMixin extends SpellcastingIllagerEntity {
 
     @Override
     public boolean isInvulnerableTo(DamageSource damageSource) {
-        return ModConfig.get().illager.evoker.stopArrows
+        return ModConfig.get().illagers.evoker.stopArrows
                 ? damageSource.isIn(DamageTypeTags.IS_PROJECTILE) || super.isInvulnerableTo(damageSource)
                 : super.isInvulnerableTo(damageSource);
     }

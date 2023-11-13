@@ -19,7 +19,7 @@ public abstract class PhantomRendererMixin {
 
     @Inject(method = "getTexture*", at = @At("HEAD"), cancellable = true)
     private void getTexture(PhantomEntity phantomEntity, CallbackInfoReturnable<Identifier> cir) {
-        if (ModConfig.get().cosmetic.translucentPhantom) {
+        if (ModConfig.get().cosmetics.translucentPhantom) {
             cir.setReturnValue(PHANTOM_TEXTURE);
         }
     }

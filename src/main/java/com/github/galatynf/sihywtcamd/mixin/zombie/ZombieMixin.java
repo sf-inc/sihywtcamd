@@ -34,7 +34,7 @@ public abstract class ZombieMixin extends HostileEntity {
 
     @Inject(method = "tryAttack", at = @At("TAIL"), locals = LocalCapture.CAPTURE_FAILSOFT)
     private void stealHealth(Entity target, CallbackInfoReturnable<Boolean> cir, boolean bl) {
-        if (bl && ModConfig.get().zombie.general.attackHeal) {
+        if (bl && ModConfig.get().zombies.general.attackHeal) {
             float damage = (float)this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE);
             if (target instanceof LivingEntity livingEntity) {
                 damage += EnchantmentHelper.getAttackDamage(this.getMainHandStack(), livingEntity.getGroup());
@@ -46,7 +46,7 @@ public abstract class ZombieMixin extends HostileEntity {
     @Inject(method = "applyAttributeModifiers", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/ZombieEntity;initAttributes()V", shift = At.Shift.AFTER), cancellable = true)
     private void applyDifferentAttributes(float chanceMultiplier, CallbackInfo ci) {
         float random = this.random.nextFloat();
-        if (ModConfig.get().zombie.general.attributeVariations && !this.isBaby()) {
+        if (ModConfig.get().zombies.general.attributeVariations && !this.isBaby()) {
             if (random < 0.1f) {
                 this.setCustomName(Text.of("Caller"));
                 double value = 0.2 + 0.15 * chanceMultiplier + 0.15 * this.random.nextDouble();
@@ -77,10 +77,10 @@ public abstract class ZombieMixin extends HostileEntity {
 
     @Inject(method = "initAttributes", at = @At("HEAD"), cancellable = true)
     private void initWithIncreasedAttributes(CallbackInfo ci) {
-        if (ModConfig.get().zombie.general.moreKnockbackResistance) {
+        if (ModConfig.get().zombies.general.moreKnockbackResistance) {
             this.getAttributeInstance(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(0.2 + 0.2 * this.random.nextDouble());
         }
-        if (ModConfig.get().zombie.general.spawnMoreReinforcement) {
+        if (ModConfig.get().zombies.general.spawnMoreReinforcement) {
             this.getAttributeInstance(EntityAttributes.ZOMBIE_SPAWN_REINFORCEMENTS).setBaseValue(0.2 + 0.2 * this.random.nextDouble());
             ci.cancel();
         }

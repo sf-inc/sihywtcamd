@@ -4,8 +4,8 @@ import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 
-@Config(name = "illager")
-public class IllagerConfig implements ConfigData {
+@Config(name = "illagers")
+public class IllagersConfig implements ConfigData {
     @ConfigEntry.Gui.CollapsibleObject
     public Pillager pillager = new Pillager();
 
@@ -30,8 +30,19 @@ public class IllagerConfig implements ConfigData {
         public boolean increasedHealth = true;
     }
 
-    public boolean illusionerInMansions = true;
-    public boolean ravagerInPatrols = true;
+    @ConfigEntry.Gui.CollapsibleObject
+    public Illusioner illusioner = new Illusioner();
+
+    public static class Illusioner {
+        public boolean spawnInMansions = true;
+    }
+
+    @ConfigEntry.Gui.CollapsibleObject
+    public Ravager ravager = new Ravager();
+
+    public static class Ravager {
+        public boolean spawnInPatrols = true;
+    }
 
     @ConfigEntry.Gui.CollapsibleObject
     public Witch witch = new Witch();

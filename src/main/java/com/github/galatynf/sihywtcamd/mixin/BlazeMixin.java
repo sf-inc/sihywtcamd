@@ -21,7 +21,7 @@ public abstract class BlazeMixin extends HostileEntity {
     @Override
     public boolean tryAttack(Entity target) {
         boolean success = super.tryAttack(target);
-        if (ModConfig.get().nether.blazeFireCollision && success
+        if (ModConfig.get().nether.blaze.fireAttack && success
                 && this.isFireActive() && !((LivingEntity) target).isBlocking()) {
             target.setOnFireFor(5);
         }

@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class PatrolSpawnerMixin {
     @Inject(method = "spawnPillager", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/EntityType;create(Lnet/minecraft/world/World;)Lnet/minecraft/entity/Entity;"), cancellable = true)
     private void spawnVindicatorOrRavager(ServerWorld world, BlockPos pos, Random random, boolean captain, CallbackInfoReturnable<Boolean> cir) {
-        if (ModConfig.get().illager.vindicator.spawnInPatrols
+        if (ModConfig.get().illagers.vindicator.spawnInPatrols
                 && random.nextFloat() < 0.1F + 0.1F * world.getLocalDifficulty(pos).getClampedLocalDifficulty()) {
             PatrolEntity patrolEntity = EntityType.VINDICATOR.create(world);
             if (patrolEntity != null) {
@@ -36,7 +36,7 @@ public class PatrolSpawnerMixin {
             return;
         }
 
-        if (ModConfig.get().illager.ravagerInPatrols
+        if (ModConfig.get().illagers.ravager.spawnInPatrols
                 && random.nextFloat() < 0.05F + 0.05F * world.getLocalDifficulty(pos).getClampedLocalDifficulty()) {
             PatrolEntity patrolEntity1 = EntityType.RAVAGER.create(world);
             PatrolEntity patrolEntity2 = captain || random.nextBoolean() ? EntityType.PILLAGER.create(world) : null;

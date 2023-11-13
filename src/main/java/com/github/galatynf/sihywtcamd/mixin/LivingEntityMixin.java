@@ -15,7 +15,7 @@ public abstract class LivingEntityMixin {
 
     @Inject(method = "computeFallDamage", at = @At("HEAD"), cancellable = true)
     private void cancelArthropodFallDamage(float fallDistance, float damageMultiplier, CallbackInfoReturnable<Integer> cir) {
-        if (ModConfig.get().arthropod.general.noFallDamage && this.getGroup().equals(EntityGroup.ARTHROPOD)) {
+        if (ModConfig.get().arthropods.general.noFallDamage && this.getGroup().equals(EntityGroup.ARTHROPOD)) {
             cir.setReturnValue(0);
         }
     }

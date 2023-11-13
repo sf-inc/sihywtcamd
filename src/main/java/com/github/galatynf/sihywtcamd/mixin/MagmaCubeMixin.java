@@ -16,7 +16,7 @@ public class MagmaCubeMixin extends SlimeEntity {
 
     @Override
     protected void damage(LivingEntity target) {
-        if (ModConfig.get().nether.magmaCubeFireCollision
+        if (ModConfig.get().nether.magmaCube.fireCollision
                 && this.isAlive() && !target.isBlocking()
                 && this.squaredDistanceTo(target) < 0.36 * this.getSize() * this.getSize()) {
             target.setOnFireFor(this.getSize());

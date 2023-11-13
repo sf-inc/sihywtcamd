@@ -54,7 +54,7 @@ public class EndermiteMixin extends HostileEntity {
     @Nullable
     @Override
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
-        if (ModConfig.get().arthropod.general.larvaeSpeedBonus) {
+        if (ModConfig.get().arthropods.general.larvaeSpeedBonus) {
             EntityAttributeInstance speed = this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED);
             Objects.requireNonNull(speed).addPersistentModifier(new EntityAttributeModifier(
                     "Random speed bonus",  world.getRandom().nextFloat() * 0.5f * difficulty.getClampedLocalDifficulty() * speed.getValue(), EntityAttributeModifier.Operation.ADDITION));

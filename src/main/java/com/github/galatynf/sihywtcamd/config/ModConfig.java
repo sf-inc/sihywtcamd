@@ -14,21 +14,21 @@ public class ModConfig extends PartitioningSerializer.GlobalData {
     @ConfigEntry.Gui.TransitiveObject
     public OverworldConfig overworld = new OverworldConfig();
 
-    @ConfigEntry.Category("zombie")
+    @ConfigEntry.Category("zombies")
     @ConfigEntry.Gui.TransitiveObject
-    public ZombieConfig zombie = new ZombieConfig();
+    public ZombiesConfig zombies = new ZombiesConfig();
 
-    @ConfigEntry.Category("skeleton")
+    @ConfigEntry.Category("skeletons")
     @ConfigEntry.Gui.TransitiveObject
-    public SkeletonConfig skeleton = new SkeletonConfig();
+    public SkeletonsConfig skeletons = new SkeletonsConfig();
 
-    @ConfigEntry.Category("arthropod")
+    @ConfigEntry.Category("arthropods")
     @ConfigEntry.Gui.TransitiveObject
-    public ArthropodConfig arthropod = new ArthropodConfig();
+    public ArthropodsConfig arthropods = new ArthropodsConfig();
 
-    @ConfigEntry.Category("illager")
+    @ConfigEntry.Category("illagers")
     @ConfigEntry.Gui.TransitiveObject
-    public IllagerConfig illager = new IllagerConfig();
+    public IllagersConfig illagers = new IllagersConfig();
 
     @ConfigEntry.Category("nether")
     @ConfigEntry.Gui.TransitiveObject
@@ -38,13 +38,13 @@ public class ModConfig extends PartitioningSerializer.GlobalData {
     @ConfigEntry.Gui.TransitiveObject
     public EndConfig end = new EndConfig();
 
-    @ConfigEntry.Category("boss")
+    @ConfigEntry.Category("bosses")
     @ConfigEntry.Gui.TransitiveObject
-    public BossConfig boss = new BossConfig();
+    public BossesConfig bosses = new BossesConfig();
 
-    @ConfigEntry.Category("cosmetic")
+    @ConfigEntry.Category("cosmetics")
     @ConfigEntry.Gui.TransitiveObject
-    public CosmeticConfig cosmetic = new CosmeticConfig();
+    public CosmeticsConfig cosmetics = new CosmeticsConfig();
 
     public static ModConfig get() {
         if (!Sihywtcamd.areConfigsInit) {

@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class ShulkerBulletMixin {
     @Inject(method = "onEntityHit", at = @At(value = "INVOKE", shift = At.Shift.AFTER, target = "Lnet/minecraft/entity/LivingEntity;addStatusEffect(Lnet/minecraft/entity/effect/StatusEffectInstance;Lnet/minecraft/entity/Entity;)Z"))
     private void cancelLevitation(EntityHitResult entityHitResult, CallbackInfo ci) {
-        if (ModConfig.get().end.shulkerCancelLevitation
+        if (ModConfig.get().end.shulker.cancelLevitation
                 && entityHitResult.getEntity() instanceof PlayerEntity playerEntity
                 && playerEntity.hasStatusEffect(StatusEffects.LEVITATION)
                 && playerEntity.getRandom().nextFloat() < 0.33f) {

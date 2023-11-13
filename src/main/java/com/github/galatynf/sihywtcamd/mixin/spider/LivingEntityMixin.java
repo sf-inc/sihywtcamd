@@ -27,12 +27,12 @@ public abstract class LivingEntityMixin extends Entity {
     private void spawnBabies(DamageSource source, CallbackInfo ci) {
         if (!this.getWorld().isClient() && !this.isBaby()) {
             int nbBabies = 0;
-            if (ModConfig.get().arthropod.spider.baby
+            if (ModConfig.get().arthropods.spider.baby
                     && this.getType().equals(EntityType.SPIDER)
                     && this.random.nextFloat() < 0.15F) {
                 nbBabies = 2 + this.random.nextInt(3)
                         + Math.round(3 * this.getWorld().getLocalDifficulty(this.getBlockPos()).getClampedLocalDifficulty());
-            } else if (ModConfig.get().arthropod.spider.babyCaveSpider
+            } else if (ModConfig.get().arthropods.spider.babyCaveSpider
                     && this.getType().equals(EntityType.CAVE_SPIDER)
                     && this.random.nextFloat() < 0.1F) {
                 nbBabies = 1 + this.random.nextInt(3)

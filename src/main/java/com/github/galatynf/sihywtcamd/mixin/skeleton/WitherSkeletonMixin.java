@@ -34,23 +34,23 @@ public class WitherSkeletonMixin extends HostileEntity {
 
     @Override
     public boolean isInvulnerableTo(DamageSource damageSource) {
-        return (ModConfig.get().skeleton.witherSkeleton.fireResistant && damageSource.isIn(DamageTypeTags.IS_FIRE))
+        return (ModConfig.get().skeletons.witherSkeleton.fireResistant && damageSource.isIn(DamageTypeTags.IS_FIRE))
                 || super.isInvulnerableTo(damageSource);
     }
 
     @Inject(method = "initialize", at = @At("HEAD"))
     private void canSpawnBaby(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, EntityData entityData,
                               NbtCompound entityTag, CallbackInfoReturnable<EntityData> cir) {
-        this.setBaby(ModConfig.get().skeleton.witherSkeleton.baby && this.random.nextFloat() < 0.2F);
+        this.setBaby(ModConfig.get().skeletons.witherSkeleton.baby && this.random.nextFloat() < 0.2F);
     }
 
     @Inject(method = "initEquipment", at = @At("HEAD"), cancellable = true)
     private void useBetterEquipment(Random random, LocalDifficulty localDifficulty, CallbackInfo ci) {
-        if (ModConfig.get().skeleton.witherSkeleton.bow && !this.isBaby()
+        if (ModConfig.get().skeletons.witherSkeleton.bow && !this.isBaby()
                 && random.nextFloat() < 0.25F) {
             this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.BOW));
             ci.cancel();
-        } else if (ModConfig.get().skeleton.witherSkeleton.netheriteSword) {
+        } else if (ModConfig.get().skeletons.witherSkeleton.netheriteSword) {
             this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.NETHERITE_SWORD));
             this.setEquipmentDropChance(EquipmentSlot.MAINHAND, 0.025f);
             ci.cancel();
