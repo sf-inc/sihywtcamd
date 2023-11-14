@@ -4,6 +4,45 @@
 * **x.X versions** are either updates that add content or major bug fixes
 * **x.x.X versions** are either small content updates (language translation, new textures, ...) or bug fixes
 
+## v1.8
+
+### Important changes
+* Better config panel for mobs, with each mob having its own list.  
+  Make sure to update your config file again.
+* Enderman gives blindness on attack, instead of staring
+* Shulker projectiles has 33% chance to cancel levitation, instead of giving blindness
+* Endermites teleport target on attack, similarly to chorus fruits
+* Cave spiders has 10% chance to spawn 1-3 to 3-5 babies on death.  
+  Spiders have an increased chance to spawn babies of 15%, but spawn one less baby than before, from 2-4 to 5-7.
+* Baby spiders give poison for less time than adults. The duration of the poison is reduced by 5, falling from 7s/15s
+  (normal/hard) to 1.4s/3s
+* Readd infested everywhere option. Now use the same feature as in mountains exactly to avoid datapacks generation.
+* Fix mob spawn changes not working anymore from 1.19 versions
+* Zombies have attributes variations and updated base values
+  * Zombies knockback resistance is updated and randomized. It can be
+  greatly increased if it spawns as an "unstoppable" zombie.
+  * Zombies spawn reinforcement is increased quite a lot and randomized. It
+  can be greatly increased if it spawns as a "caller" zombie.
+  * "tank" and "runner" zombies variants are also added, with increased
+  health and speed respectively.
+  * These zombie variants can't be applied to baby zombies.
+  * Brainless, leader and siege are replaced by these new settings.
+
+### Small changes
+* Wither skeletons can drop their netherite sword, as rarely as heads
+* Frozen arrows freeze entities on damage only. Blocking now protects you from freezing
+* Update cave spider natural spawn condition. The deeper, the more common, starting
+  y=64 and below
+* Baby spiders don't drop loop anymore. They still drop experience though
+* Tweak big slime chance to spawn, so that it can spawn even with lower difficulty
+* Creeper can die from charged creeper explosion, to be able to drop their head again
+* Baby spiders have now an adapted attack reach
+
+### Technical changes
+* Adds Cardinal Component API as an internal dependency
+* Wither entity use CC API to store if it reached half health
+* Arrow entity use CC API to store if it is frozen
+
 ## v1.7.5
 * Update to 1.20.1
 * Fix guardian jockey condition (babies would always ride guardians on 1.19.4)
