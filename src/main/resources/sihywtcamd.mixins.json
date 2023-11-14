@@ -41,7 +41,6 @@
     "spider.CaveSpiderMixin",
     "spider.HostileMixin",
     "spider.LivingEntityMixin",
-    "spider.SpiderAttackGoalMixin",
     "spider.SpiderMixin",
     "spider.SwordMixin",
     "vex.VexMixin",

@@ -4,6 +4,9 @@
 * **x.X versions** are either updates that add content or major bug fixes
 * **x.x.X versions** are either small content updates (language translation, new textures, ...) or bug fixes
 
+## v1.8.1
+* Port to 1.20.2
+
 ## v1.8
 
 ### Important changes

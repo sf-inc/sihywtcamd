@@ -122,7 +122,7 @@ public class SpiderMixin extends HostileEntity implements RangedAttackMob {
     }
 
     @Override
-    public void attack(LivingEntity target, float pullProgress) {
+    public void shootAt(LivingEntity target, float pullProgress) {
         CobwebProjectileEntity cobwebProjectileEntity = CobwebProjectileEntity.create(this.getWorld(), this);
         double d = target.getX() - this.getX();
         double e = target.getBodyY(0.3333333333333333D) - this.getY();
