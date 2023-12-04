@@ -35,6 +35,10 @@ public abstract class CreeperMixin extends HostileEntity {
 
     @Inject(method = "explode", at = @At("HEAD"))
     private void effectToEntities(CallbackInfo ci) {
+        if (this.getWorld().isClient()) {
+            return;
+        }
+
         final int explosionRadius = this.explosionRadius * (this.shouldRenderOverlay() ? 3 : 2);
         final int duration = 150;
         Vec3d explosionRadiuses = new Vec3d(explosionRadius, explosionRadius, explosionRadius);
