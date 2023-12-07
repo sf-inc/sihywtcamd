@@ -63,9 +63,13 @@ public abstract class SkeletonMixin extends AbstractSkeletonEntity {
         if (ModConfig.get().skeletons.skeleton.spectralArrow
                 && world.getRandom().nextFloat() < 0.05f) {
             this.getDataTracker().set(SPECTRAL, true);
-            this.setCustomName(Text.of("Spectral"));
+
+            if (Sihywtcamd.DEBUG) {
+                this.setCustomName(Text.of("Spectral"));
+                this.setCustomNameVisible(true);
+            }
         }
-        this.setCustomNameVisible(Sihywtcamd.DEBUG);
+
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
     }
 }

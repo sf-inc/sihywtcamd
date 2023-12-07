@@ -92,8 +92,6 @@ public abstract class SlimeMixin extends MobEntity {
                     this.getX(), this.getY(), this.getZ(), this.getBoundingBox());
             if (slimeEntity != null
                     && this.getSize() == slimeEntity.getSize()) {
-                this.setCustomName(Text.of("Merged"));
-                this.setCustomNameVisible(Sihywtcamd.DEBUG);
                 this.setHasMerged(true);
                 slimeEntity.remove(RemovalReason.DISCARDED);
                 this.setSize(this.getSize() * 2, true);
@@ -101,15 +99,24 @@ public abstract class SlimeMixin extends MobEntity {
                         0.0, 0.0, 0.0);
                 this.playSound(SoundEvents.ENTITY_SLIME_ATTACK, 1.0f,
                         (this.random.nextFloat() - this.random.nextFloat()) * 0.2f + 1.0f);
+
+                if (Sihywtcamd.DEBUG) {
+                    this.setCustomName(Text.of("Merged"));
+                    this.setCustomNameVisible(true);
+                }
             }
         }
     }
 
     @ModifyVariable(method = "remove", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/SlimeEntity;setInvulnerable(Z)V"))
     private SlimeEntity transferMergedGene(SlimeEntity slime, RemovalReason value) {
-        this.setCustomName(Text.of("Merged Child"));
-        this.setCustomNameVisible(Sihywtcamd.DEBUG);
-        slime.getDataTracker().set(MERGED, this.getDataTracker().get(MERGED));
+        slime.getDataTracker().set(MERGED, this.hasMerged());
+
+        if (Sihywtcamd.DEBUG && this.hasMerged()) {
+            this.setCustomName(Text.of("Merged Child"));
+            this.setCustomNameVisible(true);
+        }
+
         return slime;
     }
 }

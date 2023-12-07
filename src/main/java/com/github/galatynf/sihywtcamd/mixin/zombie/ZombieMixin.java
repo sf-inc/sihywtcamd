@@ -47,30 +47,34 @@ public abstract class ZombieMixin extends HostileEntity {
     private void applyDifferentAttributes(float chanceMultiplier, CallbackInfo ci) {
         float random = this.random.nextFloat();
         if (ModConfig.get().zombies.general.attributeVariations && !this.isBaby()) {
+            String name = null;
             if (random < 0.1f) {
-                this.setCustomName(Text.of("Caller"));
+                name = "Caller";
                 double value = 0.2 + 0.15 * chanceMultiplier + 0.15 * this.random.nextDouble();
                 this.getAttributeInstance(EntityAttributes.ZOMBIE_SPAWN_REINFORCEMENTS).addPersistentModifier(
                         new EntityAttributeModifier("Caller zombie bonus", value, EntityAttributeModifier.Operation.ADDITION));
             } else if (random < 0.3f) {
-                this.setCustomName(Text.of("Tank"));
+                name = "Tank";
                 this.setCanBreakDoors(this.shouldBreakDoors());
                 double value = 0.5 + 1.0 * chanceMultiplier + this.random.nextDouble();
                 this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).addPersistentModifier(
                         new EntityAttributeModifier("Tank zombie bonus", value, EntityAttributeModifier.Operation.MULTIPLY_BASE));
             } else if (random < 0.5f) {
-                this.setCustomName(Text.of("Runner"));
+                name = "Runner";
                 double value = 0.2 + 0.15 * chanceMultiplier + 0.15 * this.random.nextDouble();
                 this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).addPersistentModifier(
                         new EntityAttributeModifier("Runner zombie bonus", value, EntityAttributeModifier.Operation.MULTIPLY_BASE));
             } else if (random < 0.7f) {
-                this.setCustomName(Text.of("Unstoppable"));
+                name = "Unstoppable";
                 double value = 0.2 + 0.15 * chanceMultiplier + 0.15 * this.random.nextDouble();
                 this.getAttributeInstance(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE).addPersistentModifier(
                         new EntityAttributeModifier("Unstoppable zombie bonus", value, EntityAttributeModifier.Operation.ADDITION));
             }
 
-            this.setCustomNameVisible(Sihywtcamd.DEBUG);
+            if (Sihywtcamd.DEBUG && name != null) {
+                this.setCustomName(Text.of(name));
+                this.setCustomNameVisible(true);
+            }
             ci.cancel();
         }
     }

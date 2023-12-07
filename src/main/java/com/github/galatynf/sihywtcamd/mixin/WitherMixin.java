@@ -75,8 +75,10 @@ public abstract class WitherMixin extends HostileEntity {
             }
 
             MyComponents.WITHER_COMPONENT.get(this).setHalfHealthReached();
-            this.setCustomName(Text.of("Half Health Reached"));
-            this.setCustomNameVisible(Sihywtcamd.DEBUG);
+            if (Sihywtcamd.DEBUG) {
+                this.setCustomName(Text.of("Half Health Reached"));
+                this.setCustomNameVisible(true);
+            }
         }
         if (ModConfig.get().bosses.wither.stormyWeather) {
             ((ServerWorld) this.getWorld()).setWeather(0, 50, true, true);
