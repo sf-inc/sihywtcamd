@@ -3,14 +3,15 @@ package com.github.galatynf.sihywtcamd.mixin.zombie;
 import com.github.galatynf.sihywtcamd.Sihywtcamd;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.ZombieEntity;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Text;
+import net.minecraft.world.LocalDifficulty;
+import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -40,6 +41,35 @@ public abstract class ZombieMixin extends HostileEntity {
                 damage += EnchantmentHelper.getAttackDamage(this.getMainHandStack(), livingEntity.getGroup());
             }
             this.setHealth(Math.min(this.getHealth() + damage, this.getMaxHealth()));
+        }
+    }
+
+    @Inject(method = "initialize", at = @At("TAIL"))
+    private void spawnBabyTowers(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason,
+                                 EntityData entityData, NbtCompound entityNbt, CallbackInfoReturnable<EntityData> cir) {
+        if (ModConfig.get().zombies.general.babyTowerHeight > 0
+                && this.isBaby()
+                && !this.hasVehicle()
+                && world.getRandom().nextFloat() < 0.2f) {
+            final float random = world.getRandom().nextFloat();
+            ZombieEntity lastBaby = (ZombieEntity) (Object) this;
+
+            for (int i = 0; i < ModConfig.get().zombies.general.babyTowerHeight; ++i) {
+                if (random < 1.f / Math.pow(2.f, i)) {
+                    ZombieEntity newBaby = (ZombieEntity) this.getType().create(world.toServerWorld());
+                    if (newBaby == null) {
+                        break;
+                    }
+                    newBaby.setBaby(true);
+                    newBaby.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), this.getYaw(), 0.0f);
+                    newBaby.startRiding(lastBaby, true);
+                    newBaby.initialize(world, difficulty, SpawnReason.JOCKEY, null, null);
+
+                    lastBaby = newBaby;
+                } else {
+                    break;
+                }
+            }
         }
     }
 

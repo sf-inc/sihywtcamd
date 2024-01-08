@@ -28,6 +28,7 @@
   "text.autoconfig.sihywtcamd.option.zombies.general.moreKnockbackResistance": "Les zombies ont un bonus de résistance au recul",
   "text.autoconfig.sihywtcamd.option.zombies.general.spawnMoreReinforcement": "Les zombies ont plus de chance d'appeler des renforts",
   "text.autoconfig.sihywtcamd.option.zombies.general.attributeVariations": "Les zombies peuvent apparaître avec des variations d'attributs",
+  "text.autoconfig.sihywtcamd.option.zombies.general.babyTowerHeight": "Les bébés zombies peuvent apparaître avec X bébés au-dessus",
   "text.autoconfig.sihywtcamd.option.zombies.husk": "Le zombie momifié",
   "text.autoconfig.sihywtcamd.option.zombies.husk.fireResistant": "Les zombies momifiés ne prennent pas de dégâts de feu",
   "text.autoconfig.sihywtcamd.option.zombies.drowned": "Le zombie noyé",
