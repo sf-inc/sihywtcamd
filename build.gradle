@@ -46,6 +46,19 @@ processResources {
 
 loom {
     accessWidenerPath = file("src/main/resources/sihywtcamd.accesswidener")
+
+    runs {
+        // This adds a new gradle task that runs the datagen API: "gradlew runDatagen"
+        datagen {
+            inherit server
+            name "Data Generation"
+            vmArg "-Dfabric-api.datagen"
+            vmArg "-Dfabric-api.datagen.output-dir=${file("src/main/generated")}"
+            vmArg "-Dfabric-api.datagen.modid=${archives_base_name}"
+
+            runDir "build/datagen"
+        }
+    }
 }
 
 tasks.withType(JavaCompile).configureEach {
@@ -90,5 +103,15 @@ publishing {
     repositories {
         // uncomment to publish to the local maven
         // mavenLocal()
+    }
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDirs += [
+                    'src/main/generated'
+            ]
+        }
     }
 }
