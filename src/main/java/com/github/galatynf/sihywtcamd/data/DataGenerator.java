@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
 import net.minecraft.advancement.*;
+import net.minecraft.advancement.criterion.EnterBlockCriterion;
 import net.minecraft.advancement.criterion.OnKilledCriterion;
 import net.minecraft.advancement.criterion.UsingItemCriterion;
 import net.minecraft.item.Items;
@@ -51,6 +52,21 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                     .criterion("killed_by_something", OnKilledCriterion.Conditions.createEntityKilledPlayer())
                     .requirements(AdvancementRequirements.anyOf(List.of("kill_something", "killed_by_something")))
                     .build(consumer, Sihywtcamd.MOD_ID + "/root");
+
+            AdvancementEntry enterMessyCobweb = Advancement.Builder.create()
+                    .parent(root)
+                    .display(
+                            Items.COBWEB,
+                            Text.translatable("advancements.enter_messy_cobweb.title"),
+                            Text.translatable("advancements.enter_messy_cobweb.description"),
+                            null,
+                            AdvancementFrame.TASK,
+                            true,
+                            true,
+                            false
+                    )
+                    .criterion("enter_messy_cobweb", EnterBlockCriterion.Conditions.block(Sihywtcamd.MESSY_COBWEB))
+                    .build(consumer, Sihywtcamd.MOD_ID + "/enter_messy_cobweb");
 
             AdvancementEntry babyZombiesTower1 = Advancement.Builder.create()
                     .parent(root)
