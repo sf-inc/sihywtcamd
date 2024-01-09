@@ -108,6 +108,22 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                     ))
                     .build(consumer, Sihywtcamd.MOD_ID + "/baby_cave_spider_spawn");
 
+            AdvancementEntry killIllusioner = Advancement.Builder.create()
+                    .parent(root)
+                    .display(
+                            Items.BOW,
+                            Text.translatable("advancements.kill_illusioner.title"),
+                            Text.translatable("advancements.kill_illusioner.description"),
+                            null,
+                            AdvancementFrame.TASK,
+                            true,
+                            true,
+                            false
+                    )
+                    .criterion("kill_illusioner", OnKilledCriterion.Conditions.createPlayerKilledEntity(
+                            EntityPredicate.Builder.create().type(EntityType.ILLUSIONER)))
+                    .build(consumer, Sihywtcamd.MOD_ID + "/kill_illusioner");
+
             AdvancementEntry babyZombiesTower1 = Advancement.Builder.create()
                     .parent(root)
                     .display(
