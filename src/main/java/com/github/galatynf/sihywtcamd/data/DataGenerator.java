@@ -8,7 +8,9 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
 import net.minecraft.advancement.*;
 import net.minecraft.advancement.criterion.EnterBlockCriterion;
 import net.minecraft.advancement.criterion.OnKilledCriterion;
+import net.minecraft.advancement.criterion.SummonedEntityCriterion;
 import net.minecraft.advancement.criterion.UsingItemCriterion;
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.Items;
 import net.minecraft.predicate.entity.EntityFlagsPredicate;
 import net.minecraft.predicate.entity.EntityPredicate;
@@ -67,6 +69,44 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                     )
                     .criterion("enter_messy_cobweb", EnterBlockCriterion.Conditions.block(Sihywtcamd.MESSY_COBWEB))
                     .build(consumer, Sihywtcamd.MOD_ID + "/enter_messy_cobweb");
+
+            AdvancementEntry babySpiderSpawn = Advancement.Builder.create()
+                    .parent(enterMessyCobweb)
+                    .display(
+                            Items.SPIDER_SPAWN_EGG,
+                            Text.translatable("advancements.baby_spider_spawn.title"),
+                            Text.translatable("advancements.baby_spider_spawn.description"),
+                            null,
+                            AdvancementFrame.TASK,
+                            true,
+                            true,
+                            false
+                    )
+                    .criterion("baby_spider_spawn", SummonedEntityCriterion.Conditions.create(
+                            EntityPredicate.Builder.create()
+                                    .type(EntityType.SPIDER)
+                                    .flags(EntityFlagsPredicate.Builder.create().isBaby(true))
+                    ))
+                    .build(consumer, Sihywtcamd.MOD_ID + "/baby_spider_spawn");
+
+            AdvancementEntry babyCaveSpiderSpawn = Advancement.Builder.create()
+                    .parent(babySpiderSpawn)
+                    .display(
+                            Items.CAVE_SPIDER_SPAWN_EGG,
+                            Text.translatable("advancements.baby_cave_spider_spawn.title"),
+                            Text.translatable("advancements.baby_cave_spider_spawn.description"),
+                            null,
+                            AdvancementFrame.TASK,
+                            true,
+                            true,
+                            false
+                    )
+                    .criterion("baby_cave_spider_spawn", SummonedEntityCriterion.Conditions.create(
+                            EntityPredicate.Builder.create()
+                                    .type(EntityType.CAVE_SPIDER)
+                                    .flags(EntityFlagsPredicate.Builder.create().isBaby(true))
+                    ))
+                    .build(consumer, Sihywtcamd.MOD_ID + "/baby_cave_spider_spawn");
 
             AdvancementEntry babyZombiesTower1 = Advancement.Builder.create()
                     .parent(root)
