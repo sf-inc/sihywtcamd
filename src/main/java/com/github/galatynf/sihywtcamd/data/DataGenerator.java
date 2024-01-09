@@ -6,10 +6,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
 import net.minecraft.advancement.*;
-import net.minecraft.advancement.criterion.EnterBlockCriterion;
-import net.minecraft.advancement.criterion.OnKilledCriterion;
-import net.minecraft.advancement.criterion.SummonedEntityCriterion;
-import net.minecraft.advancement.criterion.UsingItemCriterion;
+import net.minecraft.advancement.criterion.*;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Items;
 import net.minecraft.predicate.entity.EntityFlagsPredicate;
@@ -107,6 +104,22 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                                     .flags(EntityFlagsPredicate.Builder.create().isBaby(true))
                     ))
                     .build(consumer, Sihywtcamd.MOD_ID + "/baby_cave_spider_spawn");
+
+            AdvancementEntry fullGoldenArmor = Advancement.Builder.create()
+                    .parent(root)
+                    .display(
+                            Items.GOLDEN_CHESTPLATE,
+                            Text.translatable("advancements.full_golden_armor.title"),
+                            Text.translatable("advancements.full_golden_armor.description"),
+                            null,
+                            AdvancementFrame.TASK,
+                            true,
+                            true,
+                            false
+                    )
+                    .criterion("full_golden_armor", InventoryChangedCriterion.Conditions.items(
+                            Items.GOLDEN_HELMET, Items.GOLDEN_CHESTPLATE, Items.GOLDEN_LEGGINGS, Items.GOLDEN_BOOTS))
+                    .build(consumer, Sihywtcamd.MOD_ID + "/full_golden_armor");
 
             AdvancementEntry killIllusioner = Advancement.Builder.create()
                     .parent(root)
