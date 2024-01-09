@@ -1,12 +1,14 @@
 package com.github.galatynf.sihywtcamd.mixin.spider;
 
 import com.github.galatynf.sihywtcamd.config.ModConfig;
+import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -38,10 +40,16 @@ public abstract class LivingEntityMixin extends Entity {
                 nbBabies = 1 + this.random.nextInt(3)
                         + Math.round(2 * this.getWorld().getLocalDifficulty(this.getBlockPos()).getClampedLocalDifficulty());
             }
+            ServerPlayerEntity serverPlayerEntity = source.getAttacker() != null && source.getAttacker().isPlayer()
+                    ? (ServerPlayerEntity) source.getAttacker() : null;
             for (int i = 0; i < nbBabies; ++i) {
                 MobEntity mob = (MobEntity) this.getType().spawn((ServerWorld) this.getWorld(), this.getBlockPos(), SpawnReason.NATURAL);
                 if (mob != null) {
                     mob.setBaby(true);
+                    if (serverPlayerEntity != null) {
+                        Criteria.SUMMONED_ENTITY.trigger(serverPlayerEntity, mob);
+                        serverPlayerEntity = null;
+                    }
                 }
             }
         }
