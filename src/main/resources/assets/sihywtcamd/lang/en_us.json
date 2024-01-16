@@ -105,6 +105,8 @@
   "text.autoconfig.sihywtcamd.option.end.endermite.teleportAttack": "Endermites teleport target on attack",
 
   "text.autoconfig.sihywtcamd.category.bosses": "Bosses",
+  "text.autoconfig.sihywtcamd.option.bosses.enderDragon": "Ender Dragon",
+  "text.autoconfig.sihywtcamd.option.bosses.enderDragon.crystalDestructionSpawnsPhantom": "Phantoms can spawn when an end crystal is destroyed",
   "text.autoconfig.sihywtcamd.option.bosses.wither": "Wither",
   "text.autoconfig.sihywtcamd.option.bosses.wither.increasedHealth": "Withers health is slightly increased",
   "text.autoconfig.sihywtcamd.option.bosses.wither.stormyWeather": "Withers make weather stormy",

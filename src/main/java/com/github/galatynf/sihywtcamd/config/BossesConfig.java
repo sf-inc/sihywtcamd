@@ -7,6 +7,13 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 @Config(name = "bosses")
 public class BossesConfig implements ConfigData {
     @ConfigEntry.Gui.CollapsibleObject
+    public EnderDragon enderDragon = new EnderDragon();
+
+    public static class EnderDragon {
+        public boolean crystalDestructionSpawnsPhantom = true;
+    }
+
+    @ConfigEntry.Gui.CollapsibleObject
     public Wither wither = new Wither();
 
     public static class Wither {
