@@ -11,11 +11,13 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.item.Items;
 import net.minecraft.predicate.entity.EntityFlagsPredicate;
 import net.minecraft.predicate.entity.EntityPredicate;
+import net.minecraft.predicate.entity.LocationPredicate;
 import net.minecraft.predicate.entity.PlayerPredicate;
 import net.minecraft.predicate.item.ItemPredicate;
 import net.minecraft.registry.tag.EntityTypeTags;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.biome.BiomeKeys;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -136,6 +138,24 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                     .criterion("kill_illusioner", OnKilledCriterion.Conditions.createPlayerKilledEntity(
                             EntityPredicate.Builder.create().type(EntityType.ILLUSIONER)))
                     .build(consumer, Sihywtcamd.MOD_ID + "/kill_illusioner");
+
+            AdvancementEntry killPhantomEnd = Advancement.Builder.create()
+                    .parent(root)
+                    .display(
+                            Items.PHANTOM_MEMBRANE,
+                            Text.translatable("advancements.kill_phantom_end.title"),
+                            Text.translatable("advancements.kill_phantom_end.description"),
+                            null,
+                            AdvancementFrame.TASK,
+                            true,
+                            true,
+                            false
+                    )
+                    .criterion("kill_phantom_end", OnKilledCriterion.Conditions.createPlayerKilledEntity(
+                            EntityPredicate.Builder.create()
+                                    .type(EntityType.PHANTOM)
+                                    .location(LocationPredicate.Builder.createBiome(BiomeKeys.THE_END))))
+                    .build(consumer, Sihywtcamd.MOD_ID + "/kill_phantom_end");
 
             AdvancementEntry babyZombiesTower1 = Advancement.Builder.create()
                     .parent(root)
