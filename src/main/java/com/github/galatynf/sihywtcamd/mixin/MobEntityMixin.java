@@ -24,8 +24,12 @@ public abstract class MobEntityMixin extends LivingEntity {
     private void endermanBlindnessAttack(Entity target, CallbackInfoReturnable<Boolean> cir) {
         if (ModConfig.get().end.enderman.blindnessAttack
                 && this.getType().equals(EntityType.ENDERMAN)
-                && target instanceof PlayerEntity playerEntity) {
-            playerEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS, 100));
+                && target instanceof PlayerEntity playerEntity
+                && this.random.nextBoolean()) {
+            int duration = 30;
+            duration += (int) (30 * this.getWorld().getLocalDifficulty(this.getBlockPos()).getClampedLocalDifficulty());
+            duration += (int) (40 * this.random.nextFloat());
+            playerEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS, duration));
         }
     }
 }
