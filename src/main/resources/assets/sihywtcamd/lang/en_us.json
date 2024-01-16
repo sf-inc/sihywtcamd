@@ -12,6 +12,7 @@
   "text.autoconfig.sihywtcamd.option.overworld.phantom": "Phantom",
   "text.autoconfig.sihywtcamd.option.overworld.phantom.throughBlocks": "Phantoms can see/fly through blocks",
   "text.autoconfig.sihywtcamd.option.overworld.phantom.lightFear": "Phantoms are repelled by light",
+  "text.autoconfig.sihywtcamd.option.overworld.phantom.spawnInEndCities": "Phantoms can spawn in end cities",
   "text.autoconfig.sihywtcamd.option.overworld.slime": "Slime",
   "text.autoconfig.sihywtcamd.option.overworld.slime.biggerSize": "Slimes can spawn with one more size",
   "text.autoconfig.sihywtcamd.option.overworld.slime.canMerge": "Small and normal sized slimes can merge",
