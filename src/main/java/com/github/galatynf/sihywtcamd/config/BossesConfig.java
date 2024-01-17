@@ -11,6 +11,7 @@ public class BossesConfig implements ConfigData {
 
     public static class EnderDragon {
         public boolean crystalDestructionSpawnsPhantom = true;
+        public boolean controlEndermanWhenLanding = true;
     }
 
     @ConfigEntry.Gui.CollapsibleObject
