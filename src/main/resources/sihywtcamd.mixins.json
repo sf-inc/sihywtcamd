@@ -25,6 +25,7 @@
     "VindicatorMixin",
     "WitchMixin",
     "WitherMixin",
+    "enderdragon.EnderDragonMixin",
     "enderdragon.SittingFlamingPhaseMixin",
     "ghast.GhastMixin",
     "guardian.GuardianAttackGoalMixin",

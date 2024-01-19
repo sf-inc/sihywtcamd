@@ -12,6 +12,8 @@ public class BossesConfig implements ConfigData {
     public static class EnderDragon {
         public boolean crystalDestructionSpawnsPhantom = true;
         public boolean controlEndermanWhenLanding = true;
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 10)
+        public int crystalsToSummon = 4;
     }
 
     @ConfigEntry.Gui.CollapsibleObject
