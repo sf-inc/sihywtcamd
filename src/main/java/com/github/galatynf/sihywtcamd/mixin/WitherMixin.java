@@ -55,8 +55,7 @@ public abstract class WitherMixin extends HostileEntity {
         if (this.getWorld().isClient()) {
             return;
         }
-        if (ModConfig.get().bosses.wither.skeletonsSpawn
-                && (this.getWorld().getDifficulty().equals(Difficulty.NORMAL)
+        if ((this.getWorld().getDifficulty().equals(Difficulty.NORMAL)
                     || this.getWorld().getDifficulty().equals(Difficulty.HARD))
                 && this.getInvulnerableTimer() < 1
                 && !MyComponents.WITHER_COMPONENT.get(this).wasHalfHealthReached()
@@ -64,14 +63,16 @@ public abstract class WitherMixin extends HostileEntity {
             if (ModConfig.get().bosses.wither.explosion) {
                 this.getWorld().createExplosion(this, this.getX(), this.getEyeY(), this.getZ(), 7.0f, false, World.ExplosionSourceType.MOB);
             }
-            int nbWitherSkeletons = 3 + Math.round(2 * this.getWorld().getLocalDifficulty(this.getBlockPos()).getClampedLocalDifficulty());
-            float deltaAngle = (2 * MathHelper.PI) / nbWitherSkeletons;
-            for (int i=0; i < nbWitherSkeletons; ++i) {
-                int x = MathHelper.floor(sihywtcamd_SKELETONS_SPAWN_DISTANCE * MathHelper.cos(i * deltaAngle));
-                int z = MathHelper.floor(sihywtcamd_SKELETONS_SPAWN_DISTANCE * MathHelper.sin(i * deltaAngle));
-                Optional<BlockPos> blockPos = BlockPos.findClosest(this.getBlockPos().add(x, 0, z), 3, 3,
-                        pos -> this.getWorld().getBlockState(pos).isAir());
-                blockPos.ifPresent(pos -> EntityType.WITHER_SKELETON.spawn((ServerWorld) this.getWorld(), pos, SpawnReason.EVENT));
+            if (ModConfig.get().bosses.wither.skeletonsSpawn) {
+                int nbWitherSkeletons = 3 + Math.round(2 * this.getWorld().getLocalDifficulty(this.getBlockPos()).getClampedLocalDifficulty());
+                float deltaAngle = (2 * MathHelper.PI) / nbWitherSkeletons;
+                for (int i=0; i < nbWitherSkeletons; ++i) {
+                    int x = MathHelper.floor(sihywtcamd_SKELETONS_SPAWN_DISTANCE * MathHelper.cos(i * deltaAngle));
+                    int z = MathHelper.floor(sihywtcamd_SKELETONS_SPAWN_DISTANCE * MathHelper.sin(i * deltaAngle));
+                    Optional<BlockPos> blockPos = BlockPos.findClosest(this.getBlockPos().add(x, 0, z), 3, 3,
+                            pos -> this.getWorld().getBlockState(pos).isAir());
+                    blockPos.ifPresent(pos -> EntityType.WITHER_SKELETON.spawn((ServerWorld) this.getWorld(), pos, SpawnReason.EVENT));
+                }
             }
 
             MyComponents.WITHER_COMPONENT.get(this).setHalfHealthReached();
