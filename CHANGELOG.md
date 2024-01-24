@@ -4,6 +4,26 @@
 * **x.X versions** are either updates that add content or major bug fixes
 * **x.x.X versions** are either small content updates (language translation, new textures, ...) or bug fixes
 
+## v1.9
+* Port to 1.20.4
+* Baby zombies can tower up to 5 baby zombies *(4 on top)*
+* Phantoms can spawn in end cities
+* A phantom can spawn when an ender crystal is destroyed
+* Make enderman blindness attack random, as well as its duration
+* Endermen can target nearby players when a player is close to the dragon when sitting
+* Ender crystals respawn at ender dragon's health threshold
+* Fix shulker bullets not always giving levitation
+
+### Advancements
+* Add advancements
+* Add root advancement: kill or be killed by someone
+* Add spyglass at baby zombie tower advancements
+* Add entering messy cobweb advancement
+* Add spawning baby spiders advancements
+* Add killing illusioner advancement
+* Add full golden armor advancement
+* Add killing a phantom in the end advancement
+
 ## v1.8.2
 * Fix client side visual bug that could cause infinite 0s effect on creeper explosion
 * Add chinese translation
