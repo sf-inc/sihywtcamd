@@ -63,7 +63,6 @@
   "text.autoconfig.sihywtcamd.option.arthropods.spider.babyCaveSpider": "Cave spiders can spawn baby cave spiders on death",
   "text.autoconfig.sihywtcamd.option.arthropods.spider.webProjectileGoal": "Spiders can launch webs",
   "text.autoconfig.sihywtcamd.option.arthropods.spider.caveSpiderJockey": "Cave spider jockeys can spawn",
-  "text.autoconfig.sihywtcamd.option.arthropods.spider.caveSpiderJockey.@Tooltip": "Not from spawners!",
   "text.autoconfig.sihywtcamd.option.arthropods.spider.caveSpiderNaturalSpawn": "Cave spiders can spawn naturally in caves",
 
   "text.autoconfig.sihywtcamd.category.illagers": "Illagers",

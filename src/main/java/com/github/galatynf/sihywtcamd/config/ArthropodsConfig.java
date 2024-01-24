@@ -29,7 +29,6 @@ public class ArthropodsConfig implements ConfigData {
         public boolean babyCaveSpider = true;
         public boolean webProjectileGoal = true;
 
-        @ConfigEntry.Gui.Tooltip
         public boolean caveSpiderJockey = true;
         @ConfigEntry.Gui.RequiresRestart
         public boolean caveSpiderNaturalSpawn = true;
