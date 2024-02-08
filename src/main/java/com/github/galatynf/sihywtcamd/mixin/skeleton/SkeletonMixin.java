@@ -2,6 +2,7 @@ package com.github.galatynf.sihywtcamd.mixin.skeleton;
 
 import com.github.galatynf.sihywtcamd.Sihywtcamd;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
+import com.github.galatynf.sihywtcamd.imixin.SpectralSkeletonIMixin;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
@@ -26,7 +27,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(SkeletonEntity.class)
-public abstract class SkeletonMixin extends AbstractSkeletonEntity {
+public abstract class SkeletonMixin extends AbstractSkeletonEntity implements SpectralSkeletonIMixin {
     @Unique
     private static final TrackedData<Boolean> SPECTRAL = DataTracker.registerData(SkeletonEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
@@ -62,14 +63,19 @@ public abstract class SkeletonMixin extends AbstractSkeletonEntity {
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
         if (ModConfig.get().skeletons.skeleton.spectralArrow
                 && world.getRandom().nextFloat() < 0.05f) {
-            this.getDataTracker().set(SPECTRAL, true);
-
-            if (Sihywtcamd.DEBUG) {
-                this.setCustomName(Text.of("Spectral"));
-                this.setCustomNameVisible(true);
-            }
+            this.sihywtcamd$setSpectral();
         }
 
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
+    }
+
+    @Override
+    public void sihywtcamd$setSpectral() {
+        this.getDataTracker().set(SPECTRAL, true);
+
+        if (Sihywtcamd.DEBUG) {
+            this.setCustomName(Text.of("Spectral"));
+            this.setCustomNameVisible(true);
+        }
     }
 }
