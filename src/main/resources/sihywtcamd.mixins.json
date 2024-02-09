@@ -39,6 +39,7 @@
     "piglin.PiglinBrainMixin",
     "piglin.PiglinMixin",
     "skeleton.AbstractSkeletonMixin",
+    "skeleton.SkeletonHorseTrapMixin",
     "skeleton.SkeletonMixin",
     "skeleton.StrayMixin",
     "skeleton.WitherSkeletonMixin",

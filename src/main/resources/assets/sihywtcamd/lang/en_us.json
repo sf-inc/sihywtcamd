@@ -51,6 +51,8 @@
   "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton.fireResistant": "Wither skeletons are immune to fire damages",
   "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton.bow": "Wither skeletons can spawn carrying a bow (if adult)",
   "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton.netheriteSword": "Wither skeletons have a netherite sword",
+  "text.autoconfig.sihywtcamd.option.skeletons.skeletonHorse": "Skeleton horse",
+  "text.autoconfig.sihywtcamd.option.skeletons.skeletonHorse.skeletonsVariationOnTrap": "Skeletons horse trap spawn different type of skeletons",
 
   "text.autoconfig.sihywtcamd.category.arthropods": "Arthropods",
   "text.autoconfig.sihywtcamd.option.arthropods.general": "General arthropods",

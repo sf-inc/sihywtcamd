@@ -37,4 +37,11 @@ public class SkeletonsConfig implements ConfigData {
         public boolean bow = true;
         public boolean netheriteSword = true;
     }
+
+    @ConfigEntry.Gui.CollapsibleObject
+    public SkeletonHorse skeletonHorse = new SkeletonHorse();
+
+    public static class SkeletonHorse {
+        public boolean skeletonsVariationOnTrap = true;
+    }
 }
