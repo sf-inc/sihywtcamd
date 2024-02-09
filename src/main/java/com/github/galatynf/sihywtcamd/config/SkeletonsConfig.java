@@ -10,6 +10,7 @@ public class SkeletonsConfig implements ConfigData {
     public General general = new General();
 
     public static class General {
+        public boolean baby = true;
         public boolean fleeGoal = true;
         public boolean swimGoal = true;
     }

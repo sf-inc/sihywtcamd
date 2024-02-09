@@ -2,9 +2,7 @@ package com.github.galatynf.sihywtcamd.mixin.skeleton;
 
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import com.github.galatynf.sihywtcamd.entity.SkeletonSwimGoal;
-import net.minecraft.entity.EntityDimensions;
-import net.minecraft.entity.EntityPose;
-import net.minecraft.entity.EntityType;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;
 import net.minecraft.entity.ai.goal.FleeEntityGoal;
 import net.minecraft.entity.data.DataTracker;
@@ -15,6 +13,8 @@ import net.minecraft.entity.passive.MerchantEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.world.LocalDifficulty;
+import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -48,6 +48,12 @@ public abstract class AbstractSkeletonMixin extends HostileEntity {
         if (ModConfig.get().skeletons.general.swimGoal) {
             this.goalSelector.add(2, new SkeletonSwimGoal(this));
         }
+    }
+
+    @Inject(method = "initialize", at = @At("TAIL"))
+    private void canSpawnBaby(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, EntityData entityData,
+                              NbtCompound entityNbt, CallbackInfoReturnable<EntityData> cir) {
+        this.setBaby(ModConfig.get().skeletons.general.baby && this.random.nextFloat() < 0.1f);
     }
 
     @Override
