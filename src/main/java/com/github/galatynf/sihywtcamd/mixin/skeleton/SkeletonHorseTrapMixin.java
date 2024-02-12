@@ -47,6 +47,7 @@ public abstract class SkeletonHorseTrapMixin {
         // Add stray
         if ((abstractHorseEntity = this.getHorse(localDifficulty)) != null
                 && (skeletonEntity = this.getStray(localDifficulty, abstractHorseEntity)) != null) {
+            skeletonEntity.setBaby(false);
             skeletonEntity.startRiding(abstractHorseEntity);
             abstractHorseEntity.addVelocity(this.skeletonHorse.getRandom().nextTriangular(0.0, 1.1485), 0.0, this.skeletonHorse.getRandom().nextTriangular(0.0, 1.1485));
             serverWorld.spawnEntityAndPassengers(abstractHorseEntity);
@@ -55,6 +56,7 @@ public abstract class SkeletonHorseTrapMixin {
         if ((abstractHorseEntity = this.getHorse(localDifficulty)) != null
                 && (skeletonEntity = this.getSkeleton(localDifficulty, abstractHorseEntity)) != null) {
             ((SpectralSkeletonIMixin) skeletonEntity).sihywtcamd$setSpectral();
+            skeletonEntity.setBaby(false);
             skeletonEntity.startRiding(abstractHorseEntity);
             abstractHorseEntity.addVelocity(this.skeletonHorse.getRandom().nextTriangular(0.0, 1.1485), 0.0, this.skeletonHorse.getRandom().nextTriangular(0.0, 1.1485));
             serverWorld.spawnEntityAndPassengers(abstractHorseEntity);
