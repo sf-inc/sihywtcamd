@@ -113,6 +113,7 @@
   "text.autoconfig.sihywtcamd.option.bosses.enderDragon": "Ender Dragon",
   "text.autoconfig.sihywtcamd.option.bosses.enderDragon.crystalDestructionSpawnsPhantom": "Phantoms can spawn when an end crystal is destroyed",
   "text.autoconfig.sihywtcamd.option.bosses.enderDragon.controlEndermanWhenLanding": "Enderman can target its closest player when dragon is landed",
+  "text.autoconfig.sihywtcamd.option.bosses.enderDragon.crystalsToSummon": "The ender dragon summons 1 crystal for X health thresholds",
   "text.autoconfig.sihywtcamd.option.bosses.wither": "Wither",
   "text.autoconfig.sihywtcamd.option.bosses.wither.increasedHealth": "Withers health is slightly increased",
   "text.autoconfig.sihywtcamd.option.bosses.wither.stormyWeather": "Withers make weather stormy",
