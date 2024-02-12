@@ -40,6 +40,7 @@
   "text.autoconfig.sihywtcamd.category.skeletons": "Skeletons",
   "text.autoconfig.sihywtcamd.option.skeletons.general": "General skeletons",
   "text.autoconfig.sihywtcamd.option.skeletons.general.baby": "Skeletons can spawn baby",
+  "text.autoconfig.sihywtcamd.option.skeletons.general.babyQuickAttackGoal": "Baby skeletons shoot quick volleys of arrows",
   "text.autoconfig.sihywtcamd.option.skeletons.general.fleeGoal": "Skeletons flee player if too close",
   "text.autoconfig.sihywtcamd.option.skeletons.general.swimGoal": "Skeletons can swim",
   "text.autoconfig.sihywtcamd.option.skeletons.skeleton": "Skeleton",

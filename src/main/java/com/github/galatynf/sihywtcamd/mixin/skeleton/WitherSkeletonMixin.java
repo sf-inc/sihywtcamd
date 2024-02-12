@@ -31,7 +31,7 @@ public abstract class WitherSkeletonMixin extends AbstractSkeletonEntity {
                 || super.isInvulnerableTo(damageSource);
     }
 
-    @Inject(method = "initialize", at = @At("TAIL"))
+    @Inject(method = "initialize", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/WitherSkeletonEntity;updateAttackType()V"))
     private void canSpawnBaby(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, EntityData entityData,
                               NbtCompound entityTag, CallbackInfoReturnable<EntityData> cir) {
         this.setBaby(ModConfig.get().skeletons.witherSkeleton.baby && this.random.nextFloat() < 0.2F);
