@@ -18,6 +18,7 @@
     "PatrolSpawnerMixin",
     "PillagerMixin",
     "ProjectileMixin",
+    "ServerWorldMixin",
     "ShulkerBulletMixin",
     "SilverfishMixin",
     "SlimeMixin",
@@ -51,6 +52,7 @@
     "vex.VexMixin",
     "zombie.DrownedMixin",
     "zombie.HuskMixin",
+    "zombie.ZombieHorseMixin",
     "zombie.ZombieMixin"
   ],
   "client": [

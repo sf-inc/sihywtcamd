@@ -33,4 +33,11 @@ public class ZombiesConfig implements ConfigData {
         public boolean highVelocity = true;
         public boolean guardianJockeySpawn = true;
     }
+
+    @ConfigEntry.Gui.CollapsibleObject
+    public ZombieHorse zombieHorse = new ZombieHorse();
+
+    public static class ZombieHorse {
+        public boolean zombieHorseTrap = true;
+    }
 }

@@ -1,3 +1,4 @@
 accessWidener   v1  named
 accessible class net/minecraft/entity/mob/SpiderEntity$TargetGoal
 accessible method net/minecraft/entity/projectile/ProjectileEntity <init> (Lnet/minecraft/entity/EntityType;Lnet/minecraft/world/World;)V
+accessible field net/minecraft/entity/LightningEntity cosmetic Z
