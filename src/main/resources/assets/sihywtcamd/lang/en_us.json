@@ -9,10 +9,6 @@
   "text.autoconfig.sihywtcamd.option.overworld.creeper.explosionFatigue": "Creepers explosions deal mining fatigue",
   "text.autoconfig.sihywtcamd.option.overworld.creeper.explosionWeakness": "Creepers explosions deal weakness",
   "text.autoconfig.sihywtcamd.option.overworld.creeper.chainExplosions": "Creepers ignite with explosion damages",
-  "text.autoconfig.sihywtcamd.option.overworld.phantom": "Phantom",
-  "text.autoconfig.sihywtcamd.option.overworld.phantom.throughBlocks": "Phantoms can see/fly through blocks",
-  "text.autoconfig.sihywtcamd.option.overworld.phantom.lightFear": "Phantoms are repelled by light",
-  "text.autoconfig.sihywtcamd.option.overworld.phantom.spawnInEndCities": "Phantoms can spawn in end cities",
   "text.autoconfig.sihywtcamd.option.overworld.slime": "Slime",
   "text.autoconfig.sihywtcamd.option.overworld.slime.biggerSize": "Slimes can spawn with one more size",
   "text.autoconfig.sihywtcamd.option.overworld.slime.canMerge": "Small and normal sized slimes can merge",
@@ -22,6 +18,12 @@
   "text.autoconfig.sihywtcamd.option.overworld.guardian": "Guardian",
   "text.autoconfig.sihywtcamd.option.overworld.guardian.naturalSpawn": "Guardians can spawn naturally",
   "text.autoconfig.sihywtcamd.option.overworld.guardian.silentKill": "Guardians make a beam sound only when hurting players",
+
+  "text.autoconfig.sihywtcamd.category.undead": "Undead",
+  "text.autoconfig.sihywtcamd.option.undead.phantom": "Phantom",
+  "text.autoconfig.sihywtcamd.option.undead.phantom.throughBlocks": "Phantoms can see/fly through blocks",
+  "text.autoconfig.sihywtcamd.option.undead.phantom.lightFear": "Phantoms are repelled by light",
+  "text.autoconfig.sihywtcamd.option.undead.phantom.spawnInEndCities": "Phantoms can spawn in end cities",
 
   "text.autoconfig.sihywtcamd.category.zombies": "Zombies",
   "text.autoconfig.sihywtcamd.option.zombies.general": "General zombies",

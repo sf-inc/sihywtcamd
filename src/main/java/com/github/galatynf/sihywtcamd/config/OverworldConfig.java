@@ -24,15 +24,6 @@ public class OverworldConfig implements ConfigData {
     }
 
     @ConfigEntry.Gui.CollapsibleObject
-    public Phantom phantom = new Phantom();
-
-    public static class Phantom {
-        public boolean throughBlocks = true;
-        public boolean lightFear = true;
-        public boolean spawnInEndCities = true;
-    }
-
-    @ConfigEntry.Gui.CollapsibleObject
     public Slime slime = new Slime();
 
     public static class Slime {

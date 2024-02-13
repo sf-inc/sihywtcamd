@@ -14,6 +14,10 @@ public class ModConfig extends PartitioningSerializer.GlobalData {
     @ConfigEntry.Gui.TransitiveObject
     public OverworldConfig overworld = new OverworldConfig();
 
+    @ConfigEntry.Category("undead")
+    @ConfigEntry.Gui.TransitiveObject
+    public UndeadConfig undead = new UndeadConfig();
+
     @ConfigEntry.Category("zombies")
     @ConfigEntry.Gui.TransitiveObject
     public ZombiesConfig zombies = new ZombiesConfig();

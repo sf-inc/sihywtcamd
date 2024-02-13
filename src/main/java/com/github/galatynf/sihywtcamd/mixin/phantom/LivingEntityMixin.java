@@ -20,7 +20,7 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(method = "damage", at = @At("HEAD"), cancellable = true)
     private void cancelSuffocationDamagePhantom(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
-        if (ModConfig.get().overworld.phantom.throughBlocks && this.getType().equals(EntityType.PHANTOM)
+        if (ModConfig.get().undead.phantom.throughBlocks && this.getType().equals(EntityType.PHANTOM)
                 && (source.isOf(DamageTypes.IN_WALL) || source.isOf(DamageTypes.FLY_INTO_WALL))) {
             cir.setReturnValue(false);
         }

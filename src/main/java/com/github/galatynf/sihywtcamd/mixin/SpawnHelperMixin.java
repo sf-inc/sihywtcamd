@@ -33,7 +33,7 @@ public abstract class SpawnHelperMixin {
     private static void addPhantomSpawnInEnd(ServerWorld world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator,
                                                SpawnGroup spawnGroup, BlockPos pos, @Nullable RegistryEntry<Biome> biomeEntry,
                                                CallbackInfoReturnable<Pool<SpawnSettings.SpawnEntry>> cir) {
-        if (ModConfig.get().overworld.phantom.spawnInEndCities
+        if (ModConfig.get().undead.phantom.spawnInEndCities
                 && shouldUseEndCitySpawns(pos, world, spawnGroup, structureAccessor)) {
             cir.setReturnValue(END_PHANTOMS_SPAWNS);
         }

@@ -23,7 +23,7 @@ public abstract class PhantomSwoopGoalMixin {
         // Reset to ensure further check validity
         this.catsNearby = false;
 
-        if (ModConfig.get().overworld.phantom.lightFear
+        if (ModConfig.get().undead.phantom.lightFear
                 && this.field_7333.getWorld().getLightLevel(this.field_7333.getBlockPos()) > 10) {
             cir.setReturnValue(false);
         }
