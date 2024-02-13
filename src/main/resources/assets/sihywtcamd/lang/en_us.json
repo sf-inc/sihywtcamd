@@ -20,6 +20,8 @@
   "text.autoconfig.sihywtcamd.option.overworld.guardian.silentKill": "Guardians make a beam sound only when hurting players",
 
   "text.autoconfig.sihywtcamd.category.undead": "Undead",
+  "text.autoconfig.sihywtcamd.option.undead.general": "General undead",
+  "text.autoconfig.sihywtcamd.option.undead.general.ignoreUndeadAttacks": "Undead don't take revenge on other undead",
   "text.autoconfig.sihywtcamd.option.undead.phantom": "Phantom",
   "text.autoconfig.sihywtcamd.option.undead.phantom.throughBlocks": "Phantoms can see/fly through blocks",
   "text.autoconfig.sihywtcamd.option.undead.phantom.lightFear": "Phantoms are repelled by light",

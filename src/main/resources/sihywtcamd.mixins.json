@@ -18,6 +18,7 @@
     "PatrolSpawnerMixin",
     "PillagerMixin",
     "ProjectileMixin",
+    "RevengeGoalMixin",
     "ServerWorldMixin",
     "ShulkerBulletMixin",
     "SilverfishMixin",
