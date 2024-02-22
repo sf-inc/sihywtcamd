@@ -11,6 +11,7 @@ public class UndeadConfig implements ConfigData {
     public General general = new General();
 
     public static class General {
+        public boolean attackHeal = true;
         public boolean ignoreUndeadAttacks = true;
     }
 

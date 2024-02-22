@@ -10,7 +10,6 @@ public class ZombiesConfig implements ConfigData {
     public General general = new General();
 
     public static class General {
-        public boolean attackHeal = true;
         public boolean moreKnockbackResistance = true;
         public boolean spawnMoreReinforcement = true;
         public boolean attributeVariations = true;

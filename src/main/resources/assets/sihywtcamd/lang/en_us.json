@@ -21,6 +21,7 @@
 
   "text.autoconfig.sihywtcamd.category.undead": "Undead",
   "text.autoconfig.sihywtcamd.option.undead.general": "General undead",
+  "text.autoconfig.sihywtcamd.option.undead.general.attackHeal": "Undead are healed with damages they deal",
   "text.autoconfig.sihywtcamd.option.undead.general.ignoreUndeadAttacks": "Undead don't take revenge on other undead",
   "text.autoconfig.sihywtcamd.option.undead.phantom": "Phantom",
   "text.autoconfig.sihywtcamd.option.undead.phantom.throughBlocks": "Phantoms can see/fly through blocks",
@@ -29,7 +30,6 @@
 
   "text.autoconfig.sihywtcamd.category.zombies": "Zombies",
   "text.autoconfig.sihywtcamd.option.zombies.general": "General zombies",
-  "text.autoconfig.sihywtcamd.option.zombies.general.attackHeal": "Zombies are healed with damages they make",
   "text.autoconfig.sihywtcamd.option.zombies.general.moreKnockbackResistance": "Zombies have a knockback resistance bonus",
   "text.autoconfig.sihywtcamd.option.zombies.general.spawnMoreReinforcement": "Zombies have more chance to spawn reinforcement",
   "text.autoconfig.sihywtcamd.option.zombies.general.attributeVariations": "Zombies can spawn with attributes variations",

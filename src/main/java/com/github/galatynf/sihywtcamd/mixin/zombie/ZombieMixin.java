@@ -2,8 +2,9 @@ package com.github.galatynf.sihywtcamd.mixin.zombie;
 
 import com.github.galatynf.sihywtcamd.Sihywtcamd;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.*;
+import net.minecraft.entity.EntityData;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.HostileEntity;
@@ -19,7 +20,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(ZombieEntity.class)
 public abstract class ZombieMixin extends HostileEntity {
@@ -31,17 +31,6 @@ public abstract class ZombieMixin extends HostileEntity {
 
     protected ZombieMixin(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
-    }
-
-    @Inject(method = "tryAttack", at = @At("TAIL"), locals = LocalCapture.CAPTURE_FAILSOFT)
-    private void stealHealth(Entity target, CallbackInfoReturnable<Boolean> cir, boolean bl) {
-        if (bl && ModConfig.get().zombies.general.attackHeal) {
-            float damage = (float)this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE);
-            if (target instanceof LivingEntity livingEntity) {
-                damage += EnchantmentHelper.getAttackDamage(this.getMainHandStack(), livingEntity.getGroup());
-            }
-            this.setHealth(Math.min(this.getHealth() + damage, this.getMaxHealth()));
-        }
     }
 
     @Inject(method = "initialize", at = @At("TAIL"))
