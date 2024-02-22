@@ -7,7 +7,9 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.mob.CaveSpiderEntity;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.mob.SpiderEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
@@ -27,18 +29,19 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(method = "onDeath", at = @At("HEAD"))
     private void spawnBabies(DamageSource source, CallbackInfo ci) {
+        LivingEntity livingEntity = (LivingEntity) (Object) this;
         if (!this.getWorld().isClient() && !this.isBaby()) {
             int nbBabies = 0;
-            if (ModConfig.get().arthropods.spider.baby
-                    && this.getType().equals(EntityType.SPIDER)
-                    && this.random.nextFloat() < 0.15F) {
-                nbBabies = 2 + this.random.nextInt(3)
-                        + Math.round(3 * this.getWorld().getLocalDifficulty(this.getBlockPos()).getClampedLocalDifficulty());
-            } else if (ModConfig.get().arthropods.spider.babyCaveSpider
-                    && this.getType().equals(EntityType.CAVE_SPIDER)
+            if (ModConfig.get().arthropods.spider.babyCaveSpider
+                    && livingEntity instanceof CaveSpiderEntity
                     && this.random.nextFloat() < 0.1F) {
                 nbBabies = 1 + this.random.nextInt(3)
                         + Math.round(2 * this.getWorld().getLocalDifficulty(this.getBlockPos()).getClampedLocalDifficulty());
+            } else if (ModConfig.get().arthropods.spider.baby
+                    && livingEntity instanceof SpiderEntity
+                    && this.random.nextFloat() < 0.15F) {
+                nbBabies = 2 + this.random.nextInt(3)
+                        + Math.round(3 * this.getWorld().getLocalDifficulty(this.getBlockPos()).getClampedLocalDifficulty());
             }
             ServerPlayerEntity serverPlayerEntity = source.getAttacker() != null && source.getAttacker().isPlayer()
                     ? (ServerPlayerEntity) source.getAttacker() : null;
