@@ -4,6 +4,9 @@
 * **x.X versions** are either updates that add content or major bug fixes
 * **x.x.X versions** are either small content updates (language translation, new textures, ...) or bug fixes
 
+## v1.9.1
+* Fix chunk generation crash with other mods (issue #49)
+
 ## v1.9
 * Port to 1.20.4
 * Baby zombies can tower up to 5 baby zombies *(4 on top)*
