@@ -45,7 +45,7 @@ public abstract class DrownedMixin extends ZombieEntity {
     @Inject(method = "initialize", at = @At("TAIL"))
     private void trySpawnAsGuardianJockey(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, EntityData entityData, NbtCompound entityNbt, CallbackInfoReturnable<EntityData> cir) {
         if (ModConfig.get().zombies.drowned.guardianJockeySpawn && this.isBaby() && !this.hasVehicle()
-                && world.getRandom().nextFloat() < 0.1F + 0.1F * world.getLocalDifficulty(this.getBlockPos()).getClampedLocalDifficulty()) {
+                && world.getRandom().nextFloat() < 0.1F + 0.1F * difficulty.getClampedLocalDifficulty()) {
             List<GuardianEntity> list = world.getEntitiesByClass(GuardianEntity.class, this.getBoundingBox().expand(5.0D, 3.0D, 5.0D), EntityPredicates.NOT_MOUNTED);
             if (!list.isEmpty()) {
                 GuardianEntity guardianEntity = list.get(0);
