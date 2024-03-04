@@ -5,7 +5,10 @@ import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
-import net.minecraft.advancement.*;
+import net.minecraft.advancement.Advancement;
+import net.minecraft.advancement.AdvancementFrame;
+import net.minecraft.advancement.AdvancementRewards;
+import net.minecraft.advancement.CriterionMerger;
 import net.minecraft.advancement.criterion.*;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Items;
@@ -14,12 +17,10 @@ import net.minecraft.predicate.entity.EntityPredicate;
 import net.minecraft.predicate.entity.LocationPredicate;
 import net.minecraft.predicate.entity.PlayerPredicate;
 import net.minecraft.predicate.item.ItemPredicate;
-import net.minecraft.registry.tag.EntityTypeTags;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.BiomeKeys;
 
-import java.util.List;
 import java.util.function.Consumer;
 
 public class DataGenerator implements DataGeneratorEntrypoint {
@@ -37,8 +38,8 @@ public class DataGenerator implements DataGeneratorEntrypoint {
         }
 
         @Override
-        public void generateAdvancement(Consumer<AdvancementEntry> consumer) {
-            AdvancementEntry root = Advancement.Builder.create()
+        public void generateAdvancement(Consumer<Advancement> consumer) {
+            Advancement root = Advancement.Builder.create()
                     .display(
                             Items.STONE_SWORD,
                             Text.translatable("advancements.root.title"),
@@ -51,10 +52,10 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                     )
                     .criterion("kill_something", OnKilledCriterion.Conditions.createPlayerKilledEntity())
                     .criterion("killed_by_something", OnKilledCriterion.Conditions.createEntityKilledPlayer())
-                    .requirements(AdvancementRequirements.anyOf(List.of("kill_something", "killed_by_something")))
+                    .criteriaMerger(CriterionMerger.OR)
                     .build(consumer, Sihywtcamd.MOD_ID + "/root");
 
-            AdvancementEntry enterMessyCobweb = Advancement.Builder.create()
+            Advancement enterMessyCobweb = Advancement.Builder.create()
                     .parent(root)
                     .display(
                             Items.COBWEB,
@@ -69,7 +70,7 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                     .criterion("enter_messy_cobweb", EnterBlockCriterion.Conditions.block(Sihywtcamd.MESSY_COBWEB))
                     .build(consumer, Sihywtcamd.MOD_ID + "/enter_messy_cobweb");
 
-            AdvancementEntry babySpiderSpawn = Advancement.Builder.create()
+            Advancement babySpiderSpawn = Advancement.Builder.create()
                     .parent(enterMessyCobweb)
                     .display(
                             Items.SPIDER_SPAWN_EGG,
@@ -84,11 +85,11 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                     .criterion("baby_spider_spawn", SummonedEntityCriterion.Conditions.create(
                             EntityPredicate.Builder.create()
                                     .type(EntityType.SPIDER)
-                                    .flags(EntityFlagsPredicate.Builder.create().isBaby(true))
+                                    .flags(EntityFlagsPredicate.Builder.create().isBaby(true).build())
                     ))
                     .build(consumer, Sihywtcamd.MOD_ID + "/baby_spider_spawn");
 
-            AdvancementEntry babyCaveSpiderSpawn = Advancement.Builder.create()
+            Advancement babyCaveSpiderSpawn = Advancement.Builder.create()
                     .parent(babySpiderSpawn)
                     .display(
                             Items.CAVE_SPIDER_SPAWN_EGG,
@@ -103,11 +104,11 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                     .criterion("baby_cave_spider_spawn", SummonedEntityCriterion.Conditions.create(
                             EntityPredicate.Builder.create()
                                     .type(EntityType.CAVE_SPIDER)
-                                    .flags(EntityFlagsPredicate.Builder.create().isBaby(true))
+                                    .flags(EntityFlagsPredicate.Builder.create().isBaby(true).build())
                     ))
                     .build(consumer, Sihywtcamd.MOD_ID + "/baby_cave_spider_spawn");
 
-            AdvancementEntry fullGoldenArmor = Advancement.Builder.create()
+            Advancement fullGoldenArmor = Advancement.Builder.create()
                     .parent(root)
                     .display(
                             Items.GOLDEN_CHESTPLATE,
@@ -123,7 +124,7 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                             Items.GOLDEN_HELMET, Items.GOLDEN_CHESTPLATE, Items.GOLDEN_LEGGINGS, Items.GOLDEN_BOOTS))
                     .build(consumer, Sihywtcamd.MOD_ID + "/full_golden_armor");
 
-            AdvancementEntry killIllusioner = Advancement.Builder.create()
+            Advancement killIllusioner = Advancement.Builder.create()
                     .parent(root)
                     .display(
                             Items.BOW,
@@ -139,7 +140,7 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                             EntityPredicate.Builder.create().type(EntityType.ILLUSIONER)))
                     .build(consumer, Sihywtcamd.MOD_ID + "/kill_illusioner");
 
-            AdvancementEntry killPhantomEnd = Advancement.Builder.create()
+            Advancement killPhantomEnd = Advancement.Builder.create()
                     .parent(root)
                     .display(
                             Items.PHANTOM_MEMBRANE,
@@ -154,10 +155,10 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                     .criterion("kill_phantom_end", OnKilledCriterion.Conditions.createPlayerKilledEntity(
                             EntityPredicate.Builder.create()
                                     .type(EntityType.PHANTOM)
-                                    .location(LocationPredicate.Builder.createBiome(BiomeKeys.THE_END))))
+                                    .location(LocationPredicate.Builder.create().biome(BiomeKeys.THE_END).build())))
                     .build(consumer, Sihywtcamd.MOD_ID + "/kill_phantom_end");
 
-            AdvancementEntry babyZombiesTower1 = Advancement.Builder.create()
+            Advancement babyZombiesTower1 = Advancement.Builder.create()
                     .parent(root)
                     .display(
                             Items.SPYGLASS,
@@ -173,17 +174,19 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                             EntityPredicate.Builder.create()
                                     .typeSpecific(PlayerPredicate.Builder.create()
                                             .lookingAt(EntityPredicate.Builder.create()
-                                                    .type(EntityTypeTags.ZOMBIES)
-                                                    .flags(EntityFlagsPredicate.Builder.create().isBaby(true))
+                                                    .type(EntityType.ZOMBIE)
+                                                    .flags(EntityFlagsPredicate.Builder.create().isBaby(true).build())
                                                     .passenger(EntityPredicate.Builder.create()
-                                                            .type(EntityTypeTags.ZOMBIES)
-                                                            .flags(EntityFlagsPredicate.Builder.create().isBaby(true))))
+                                                            .type(EntityType.ZOMBIE)
+                                                            .flags(EntityFlagsPredicate.Builder.create().isBaby(true).build())
+                                                            .build())
+                                                    .build())
                                             .build()),
                             ItemPredicate.Builder.create().items(Items.SPYGLASS))
                     )
                     .build(consumer, Sihywtcamd.MOD_ID + "/spyglass_at_baby_1");
 
-            AdvancementEntry babyZombiesTower4 = Advancement.Builder.create()
+            Advancement babyZombiesTower4 = Advancement.Builder.create()
                     .parent(babyZombiesTower1)
                     .display(
                             Items.SPYGLASS,
@@ -199,20 +202,25 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                             EntityPredicate.Builder.create()
                                     .typeSpecific(PlayerPredicate.Builder.create()
                                             .lookingAt(EntityPredicate.Builder.create()
-                                                    .type(EntityTypeTags.ZOMBIES)
-                                                    .flags(EntityFlagsPredicate.Builder.create().isBaby(true))
+                                                    .type(EntityType.ZOMBIE)
+                                                    .flags(EntityFlagsPredicate.Builder.create().isBaby(true).build())
                                                     .passenger(EntityPredicate.Builder.create()
-                                                            .type(EntityTypeTags.ZOMBIES)
-                                                            .flags(EntityFlagsPredicate.Builder.create().isBaby(true))
+                                                            .type(EntityType.ZOMBIE)
+                                                            .flags(EntityFlagsPredicate.Builder.create().isBaby(true).build())
                                                             .passenger(EntityPredicate.Builder.create()
-                                                                    .type(EntityTypeTags.ZOMBIES)
-                                                                    .flags(EntityFlagsPredicate.Builder.create().isBaby(true))
+                                                                    .type(EntityType.ZOMBIE)
+                                                                    .flags(EntityFlagsPredicate.Builder.create().isBaby(true).build())
                                                                     .passenger(EntityPredicate.Builder.create()
-                                                                            .type(EntityTypeTags.ZOMBIES)
-                                                                            .flags(EntityFlagsPredicate.Builder.create().isBaby(true))
+                                                                            .type(EntityType.ZOMBIE)
+                                                                            .flags(EntityFlagsPredicate.Builder.create().isBaby(true).build())
                                                                             .passenger(EntityPredicate.Builder.create()
-                                                                                    .type(EntityTypeTags.ZOMBIES)
-                                                                                    .flags(EntityFlagsPredicate.Builder.create().isBaby(true)))))))
+                                                                                    .type(EntityType.ZOMBIE)
+                                                                                    .flags(EntityFlagsPredicate.Builder.create().isBaby(true).build())
+                                                                                    .build())
+                                                                            .build())
+                                                                    .build())
+                                                            .build())
+                                                    .build())
                                             .build()),
                             ItemPredicate.Builder.create().items(Items.SPYGLASS))
                     )

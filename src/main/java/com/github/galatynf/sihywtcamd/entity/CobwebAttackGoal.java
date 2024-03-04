@@ -98,7 +98,7 @@ public class CobwebAttackGoal<T extends HostileEntity & RangedAttackMob> extends
             }
 
             if (bl && --this.cooldown < 0) {
-                this.actor.shootAt(livingEntity, 1.0F);
+                this.actor.attack(livingEntity, 1.0F);
                 this.cooldown = this.attackInterval;
             }
         }
