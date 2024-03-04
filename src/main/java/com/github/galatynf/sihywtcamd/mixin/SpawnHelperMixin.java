@@ -1,7 +1,6 @@
 package com.github.galatynf.sihywtcamd.mixin;
 
 import com.github.galatynf.sihywtcamd.config.ModConfig;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.RegistryKeys;
@@ -27,26 +26,28 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class SpawnHelperMixin {
 
     @Unique
-    private static final Pool<SpawnSettings.SpawnEntry> END_PHANTOMS_SPAWNS = Pool.of(new SpawnSettings.SpawnEntry(EntityType.PHANTOM, 10, 1, 1));
+    private static final Pool<SpawnSettings.SpawnEntry> END_PHANTOMS_SPAWNS = Pool.of(new SpawnSettings.SpawnEntry(EntityType.PHANTOM, 10, 2, 3));
 
     @Inject(method = "getSpawnEntries", at = @At("HEAD"), cancellable = true)
     private static void addPhantomSpawnInEnd(ServerWorld world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator,
                                                SpawnGroup spawnGroup, BlockPos pos, @Nullable RegistryEntry<Biome> biomeEntry,
                                                CallbackInfoReturnable<Pool<SpawnSettings.SpawnEntry>> cir) {
         if (ModConfig.get().undead.phantom.spawnInEndCities
-                && shouldUseEndCitySpawns(pos, world, spawnGroup, structureAccessor)) {
+                && shouldUseEndCitySpawns(pos, spawnGroup, structureAccessor)) {
             cir.setReturnValue(END_PHANTOMS_SPAWNS);
         }
     }
 
     @Unique
-    private static boolean shouldUseEndCitySpawns(BlockPos pos, ServerWorld world, SpawnGroup spawnGroup, StructureAccessor structureAccessor) {
+    private static boolean shouldUseEndCitySpawns(BlockPos pos, SpawnGroup spawnGroup, StructureAccessor structureAccessor) {
         if (spawnGroup != SpawnGroup.MONSTER) {
             return false;
         }
-        if (!world.getBlockState(pos).isOf(Blocks.END_ROD) && !world.getBlockState(pos.north()).isOf(Blocks.END_ROD)) {
+
+        if (pos.getY() < 85) {
             return false;
         }
+
         Structure structure = structureAccessor.getRegistryManager().get(RegistryKeys.STRUCTURE).get(StructureKeys.END_CITY);
         if (structure == null) {
             return false;
