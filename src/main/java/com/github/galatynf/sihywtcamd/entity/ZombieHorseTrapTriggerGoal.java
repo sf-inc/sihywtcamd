@@ -10,6 +10,7 @@ import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.entity.mob.ZombieHorseEntity;
 import net.minecraft.entity.passive.AbstractHorseEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
@@ -46,31 +47,27 @@ public class ZombieHorseTrapTriggerGoal extends Goal {
         // Spawn zombie
         ZombieEntity zombieEntity = EntityType.ZOMBIE.create(this.zombieHorse.getWorld());
         if (zombieEntity == null) return;
-        zombieEntity.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_SWORD));
-        this.initZombie(zombieEntity, localDifficulty, this.zombieHorse);
+        this.initZombie(zombieEntity, localDifficulty, Items.IRON_SWORD, this.zombieHorse);
         serverWorld.spawnEntityAndPassengers(zombieEntity);
 
         AbstractHorseEntity abstractHorseEntity;
         // Spawn husk
         if ((abstractHorseEntity = this.getHorse(localDifficulty)) != null
                 && (zombieEntity = EntityType.HUSK.create(this.zombieHorse.getWorld())) != null) {
-            zombieEntity.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_SHOVEL));
-            this.initZombie(zombieEntity, localDifficulty, abstractHorseEntity);
+            this.initZombie(zombieEntity, localDifficulty, Items.IRON_SHOVEL, abstractHorseEntity);
             serverWorld.spawnEntityAndPassengers(abstractHorseEntity);
         }
         // Spawn drowned
         if ((abstractHorseEntity = this.getHorse(localDifficulty)) != null
                 && (zombieEntity = EntityType.DROWNED.create(this.zombieHorse.getWorld())) != null) {
-            zombieEntity.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.TRIDENT));
-            this.initZombie(zombieEntity, localDifficulty, abstractHorseEntity);
+            this.initZombie(zombieEntity, localDifficulty, Items.TRIDENT, abstractHorseEntity);
             serverWorld.spawnEntityAndPassengers(abstractHorseEntity);
         }
         // Spawn zombified piglin
         if ((abstractHorseEntity = this.getHorse(localDifficulty)) != null
                 && (zombieEntity = EntityType.ZOMBIFIED_PIGLIN.create(this.zombieHorse.getWorld())) != null) {
-            zombieEntity.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.GOLDEN_SWORD));
+            this.initZombie(zombieEntity, localDifficulty, Items.GOLDEN_SWORD, abstractHorseEntity);
             zombieEntity.setTarget(serverWorld.getClosestPlayer(this.zombieHorse, 10.0));
-            this.initZombie(zombieEntity, localDifficulty, abstractHorseEntity);
             serverWorld.spawnEntityAndPassengers(abstractHorseEntity);
         }
     }
@@ -90,18 +87,21 @@ public class ZombieHorseTrapTriggerGoal extends Goal {
         return zombieHorseEntity;
     }
 
-    private void initZombie(ZombieEntity zombieEntity, LocalDifficulty localDifficulty, AbstractHorseEntity vehicle) {
+    private void initZombie(ZombieEntity zombieEntity, LocalDifficulty localDifficulty, Item item, AbstractHorseEntity vehicle) {
         if (zombieEntity == null) return;
 
         zombieEntity.initialize((ServerWorld)vehicle.getWorld(), localDifficulty, SpawnReason.TRIGGERED, null, null);
         zombieEntity.setPosition(vehicle.getX(), vehicle.getY(), vehicle.getZ());
         zombieEntity.timeUntilRegen = 60;
         zombieEntity.setPersistent();
+
+        zombieEntity.equipStack(EquipmentSlot.MAINHAND, new ItemStack(item));
         if (zombieEntity.getEquippedStack(EquipmentSlot.HEAD).isEmpty()) {
             zombieEntity.equipStack(EquipmentSlot.HEAD, new ItemStack(Items.IRON_HELMET));
         }
         zombieEntity.equipStack(EquipmentSlot.MAINHAND, EnchantmentHelper.enchant(zombieEntity.getRandom(), this.removeEnchantments(zombieEntity.getMainHandStack()), (int)(5.0f + localDifficulty.getClampedLocalDifficulty() * (float)zombieEntity.getRandom().nextInt(18)), false));
         zombieEntity.equipStack(EquipmentSlot.HEAD, EnchantmentHelper.enchant(zombieEntity.getRandom(), this.removeEnchantments(zombieEntity.getEquippedStack(EquipmentSlot.HEAD)), (int)(5.0f + localDifficulty.getClampedLocalDifficulty() * (float)zombieEntity.getRandom().nextInt(18)), false));
+
         zombieEntity.startRiding(vehicle);
     }
 
