@@ -4,6 +4,31 @@
 * **x.X versions** are either updates that add content or major bug fixes
 * **x.x.X versions** are either small content updates (language translation, new textures, ...) or bug fixes
 
+## v1.10
+
+### Important changes
+* Skeletons can spawn baby
+* Baby skeletons shoot valve of arrows: 3 quick arrows, less charged and precise
+* Skeletons from skeleton horse trap are replaced with a Skeleton, a spectral Skeleton, a baby Skeleton, and a Stray
+* Strays can spawn in any cold biome, replacing part of the regular Skeletons
+* Add zombie horse traps, similar to skeleton horse traps. They spawn a Zombie, a Husk, a Drowned, and a Zombified
+  Piglin, all riding Zombie Horses.
+* Zombie horses and skeleton horses have increased movement speed when ridden my mobs
+* Mobs riding others path find with the accumulated dimension to avoid going through blocks
+* Undead mobs ignore other undead mobs attacks
+* Undead mobs heal with damage they make (no longer just Zombies)
+* Zombies can call reinforcement of the same type, instead of a regular zombie
+
+### Small changes
+* Silverfish infesting everywhere really readded this time (I somehow managed to not call the function)
+* Make Phantoms way more common in End Cities
+* Larvae speed bonus is no longer just random, meaning it has more chance to be greater
+* Enderman blindness attack, Slime merging ability, and Spider spawning babies are not mob-specific anymore, meaning
+  modded versions of these mobs can have these features
+* Fix Slime bigger size applying to Magma Cubes since v1.8
+* Refactor Overworld general config into its own category General
+* Refactor Spiders changes into general spiders, spider and cave spider
+
 ## v1.9.1
 * Fix chunk generation crash with other mods (issue #49)
 
