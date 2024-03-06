@@ -32,6 +32,7 @@
   "text.autoconfig.sihywtcamd.option.zombies.general": "General zombies",
   "text.autoconfig.sihywtcamd.option.zombies.general.moreKnockbackResistance": "Zombies have a knockback resistance bonus",
   "text.autoconfig.sihywtcamd.option.zombies.general.spawnMoreReinforcement": "Zombies have more chance to spawn reinforcement",
+  "text.autoconfig.sihywtcamd.option.zombies.general.sameTypeReinforcement": "Zombies can spawn reinforcement of same zombie type",
   "text.autoconfig.sihywtcamd.option.zombies.general.attributeVariations": "Zombies can spawn with attributes variations",
   "text.autoconfig.sihywtcamd.option.zombies.general.babyTowerHeight": "Baby zombies can spawn with X babies on top",
   "text.autoconfig.sihywtcamd.option.zombies.husk": "Husk",

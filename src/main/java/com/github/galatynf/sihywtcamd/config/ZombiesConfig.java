@@ -12,6 +12,7 @@ public class ZombiesConfig implements ConfigData {
     public static class General {
         public boolean moreKnockbackResistance = true;
         public boolean spawnMoreReinforcement = true;
+        public boolean sameTypeReinforcement = true;
         public boolean attributeVariations = true;
         @ConfigEntry.BoundedDiscrete(min = 0, max = 9)
         public int babyTowerHeight = 4;

@@ -18,6 +18,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -107,5 +108,12 @@ public abstract class ZombieMixin extends HostileEntity {
             this.getAttributeInstance(EntityAttributes.ZOMBIE_SPAWN_REINFORCEMENTS).setBaseValue(0.2 + 0.2 * this.random.nextDouble());
             ci.cancel();
         }
+    }
+
+    @ModifyVariable(method = "damage", at = @At("STORE"))
+    private ZombieEntity updateZombieType(ZombieEntity zombie) {
+        return ModConfig.get().zombies.general.sameTypeReinforcement && this.random.nextBoolean()
+                ? (ZombieEntity) this.getType().create(zombie.getWorld())
+                : zombie;
     }
 }
