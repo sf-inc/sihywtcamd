@@ -1,10 +1,12 @@
 package com.github.galatynf.sihywtcamd.mixin.zombie;
 
 import com.github.galatynf.sihywtcamd.config.ModConfig;
-import net.minecraft.entity.*;
+import net.minecraft.entity.EntityData;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.mob.DrownedEntity;
 import net.minecraft.entity.mob.GuardianEntity;
-import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -59,14 +61,6 @@ public abstract class DrownedMixin extends ZombieEntity {
                     world.spawnEntity(guardianEntity);
                 }
             }
-        }
-    }
-
-    @Override
-    public void tickRiding() {
-        super.tickRiding();
-        if (this.getVehicle() instanceof PathAwareEntity pathAwareEntity) {
-            this.bodyYaw = pathAwareEntity.bodyYaw;
         }
     }
 

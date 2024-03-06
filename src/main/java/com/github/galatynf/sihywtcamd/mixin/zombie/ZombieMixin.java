@@ -8,6 +8,7 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.HostileEntity;
+import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Text;
@@ -115,5 +116,13 @@ public abstract class ZombieMixin extends HostileEntity {
         return ModConfig.get().zombies.general.sameTypeReinforcement && this.random.nextBoolean()
                 ? (ZombieEntity) this.getType().create(zombie.getWorld())
                 : zombie;
+    }
+
+    @Override
+    public void tickRiding() {
+        super.tickRiding();
+        if (this.getVehicle() instanceof PathAwareEntity pathAwareEntity) {
+            this.bodyYaw = pathAwareEntity.bodyYaw;
+        }
     }
 }
