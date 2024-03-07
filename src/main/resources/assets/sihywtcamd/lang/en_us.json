@@ -43,6 +43,7 @@
   "text.autoconfig.sihywtcamd.option.zombies.drowned.guardianJockeySpawn": "Baby drowned can spawn riding a guardian",
   "text.autoconfig.sihywtcamd.option.zombies.zombieHorse": "Zombie horse",
   "text.autoconfig.sihywtcamd.option.zombies.zombieHorse.zombieHorseTrap": "Zombie horse trap can spawn during thunder",
+  "text.autoconfig.sihywtcamd.option.zombies.zombieHorse.increasedSpeed": "Mobs ride them at higher speed",
 
   "text.autoconfig.sihywtcamd.category.skeletons": "Skeletons",
   "text.autoconfig.sihywtcamd.option.skeletons.general": "General skeletons",
@@ -62,6 +63,7 @@
   "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton.netheriteSword": "Wither skeletons have a netherite sword",
   "text.autoconfig.sihywtcamd.option.skeletons.skeletonHorse": "Skeleton horse",
   "text.autoconfig.sihywtcamd.option.skeletons.skeletonHorse.skeletonsVariationOnTrap": "Skeletons horse trap spawn different type of skeletons",
+  "text.autoconfig.sihywtcamd.option.skeletons.skeletonHorse.increasedSpeed": "Mobs ride them at higher speed",
 
   "text.autoconfig.sihywtcamd.category.arthropods": "Arthropods",
   "text.autoconfig.sihywtcamd.option.arthropods.general": "General arthropods",

@@ -39,5 +39,6 @@ public class ZombiesConfig implements ConfigData {
 
     public static class ZombieHorse {
         public boolean zombieHorseTrap = true;
+        public boolean increasedSpeed = true;
     }
 }

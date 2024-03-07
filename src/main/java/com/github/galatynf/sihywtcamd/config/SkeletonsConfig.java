@@ -45,5 +45,6 @@ public class SkeletonsConfig implements ConfigData {
 
     public static class SkeletonHorse {
         public boolean skeletonsVariationOnTrap = true;
+        public boolean increasedSpeed = true;
     }
 }
