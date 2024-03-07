@@ -36,6 +36,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(AbstractSkeletonEntity.class)
 public abstract class AbstractSkeletonMixin extends HostileEntity implements RangedAttackMob {
     @Shadow @Final private BowAttackGoal<AbstractSkeletonEntity> bowAttackGoal;
+
+    @Shadow public abstract void updateAttackType();
+
     @Unique
     private final Goal bowQuickAttackGoal = new BowQuickAttackGoal<>(this, 1.0, 30, 3, 15f);
     @Unique
@@ -106,6 +109,7 @@ public abstract class AbstractSkeletonMixin extends HostileEntity implements Ran
     @Override
     public void setBaby(boolean baby) {
         this.getDataTracker().set(BABY, baby);
+        this.updateAttackType();
     }
 
     @Override
