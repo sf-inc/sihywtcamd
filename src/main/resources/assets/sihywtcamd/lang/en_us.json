@@ -136,22 +136,33 @@
 
   "advancements.root.title": "SIHYWTCAMD",
   "advancements.root.description": "So I Heard You Were Talking Crap About Minecraft's Difficulty?",
+
   "advancements.baby_spider_spawn.title": "Babies Revenge",
   "advancements.baby_spider_spawn.description": "Release the babies of a Spider when killing it",
+
   "advancements.baby_cave_spider_spawn.title": "Poisonous Revenge",
   "advancements.baby_cave_spider_spawn.description": "Release the babies of a Spider when killing it",
+
   "advancements.enter_messy_cobweb.title": "Messy Situation",
   "advancements.enter_messy_cobweb.description": "Get stuck in a Messy Cobweb while fighting with a Spider",
+
   "advancements.full_golden_armor.title": "Cover Me in Gold",
   "advancements.full_golden_armor.description": "Get a full suit of Golden armor to make Piglins neutral",
+
   "advancements.kill_illusioner.title": "Illusion or Reality?",
   "advancements.kill_illusioner.description": "Bring the Illusioner back to reality by killing it",
+
   "advancements.kill_phantom_end.title": "Got the Wrong Bird",
   "advancements.kill_phantom_end.description": "Kill a Phantom spawned from an Ender Crystal",
+
   "advancements.spyglass_at_baby_1.title": "Is It a Tree?",
   "advancements.spyglass_at_baby_1.description": "Look at a Baby Zombie holding another one through a Spyglass",
+
   "advancements.spyglass_at_baby_4.title": "Is It a Tower?",
   "advancements.spyglass_at_baby_4.description": "Look at a Baby Zombie holding four other ones through a Spyglass",
+
+  "advancements.ride_zombie_horse.title": "A Deadly Ride",
+  "advancements.ride_zombie_horse.description": "Ride a Zombie Horse after defeating its previous rider",
 
   "subtitles.sihywtcamd.spider_spit": "Spider spits"
 }
