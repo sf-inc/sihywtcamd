@@ -29,6 +29,7 @@ public class SkeletonsConfig implements ConfigData {
     public static class Stray {
         public boolean betterSlowness = true;
         public boolean frozenArrows = true;
+        public boolean coldBiomeSpawn = true;
     }
     @ConfigEntry.Gui.CollapsibleObject
     public WitherSkeleton witherSkeleton = new WitherSkeleton();

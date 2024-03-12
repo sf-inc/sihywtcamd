@@ -56,6 +56,7 @@
   "text.autoconfig.sihywtcamd.option.skeletons.stray": "Stray",
   "text.autoconfig.sihywtcamd.option.skeletons.stray.betterSlowness": "Strays deal slowness 2",
   "text.autoconfig.sihywtcamd.option.skeletons.stray.frozenArrows": "Strays shoot frozen arrows",
+  "text.autoconfig.sihywtcamd.option.skeletons.stray.coldBiomeSpawn": "Strays can spawn in any cold biome",
   "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton": "Wither skeleton",
   "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton.baby": "Wither skeletons can spawn baby",
   "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton.fireResistant": "Wither skeletons are immune to fire damages",
