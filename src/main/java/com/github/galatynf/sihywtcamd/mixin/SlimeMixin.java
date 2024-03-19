@@ -73,7 +73,9 @@ public abstract class SlimeMixin extends MobEntity {
     @Inject(method = "initialize", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/MobEntity;initialize(Lnet/minecraft/world/ServerWorldAccess;Lnet/minecraft/world/LocalDifficulty;Lnet/minecraft/entity/SpawnReason;Lnet/minecraft/entity/EntityData;Lnet/minecraft/nbt/NbtCompound;)Lnet/minecraft/entity/EntityData;"))
     private void spawnBigger(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, EntityData entityData,
                              NbtCompound entityNbt, CallbackInfoReturnable<EntityData> cir) {
+        SlimeEntity slime = (SlimeEntity) (Object) this;
         if (ModConfig.get().overworld.slime.biggerSize
+                && !(slime instanceof MagmaCubeEntity)
                 && this.random.nextFloat() < 0.05f + 0.05f * difficulty.getClampedLocalDifficulty()) {
             this.setSize(8, true);
         }
