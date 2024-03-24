@@ -7,14 +7,6 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 @Config(name = "overworld")
 public class OverworldConfig implements ConfigData {
     @ConfigEntry.Gui.CollapsibleObject
-    public General general = new General();
-
-    public static class General {
-        public boolean mobsLessFear = true;
-        public boolean merchantHostility = true;
-    }
-
-    @ConfigEntry.Gui.CollapsibleObject
     public Creeper creeper = new Creeper();
 
     public static class Creeper {

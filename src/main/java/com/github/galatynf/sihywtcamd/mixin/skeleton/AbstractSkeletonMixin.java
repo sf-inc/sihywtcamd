@@ -54,7 +54,7 @@ public abstract class AbstractSkeletonMixin extends HostileEntity implements Ran
             this.goalSelector.add(3, new FleeEntityGoal<>(this, PlayerEntity.class, 4, 1.2, 1.5,
                     (livingEntity) -> (this.getMainHandStack().getItem().equals(Items.BOW))));
         }
-        if (ModConfig.get().overworld.general.merchantHostility) {
+        if (ModConfig.get().general.merchantHostility) {
             this.targetSelector.add(3, new ActiveTargetGoal<>(this, MerchantEntity.class, true));
         }
         if (ModConfig.get().skeletons.general.swimGoal) {

@@ -1,10 +1,11 @@
 {
   "text.autoconfig.sihywtcamd.title": "SIHYWTCAMD Configuration",
 
+  "text.autoconfig.sihywtcamd.category.general": "General",
+  "text.autoconfig.sihywtcamd.option.general.mobsLessFear": "Mobs don't flee if target is half health",
+  "text.autoconfig.sihywtcamd.option.general.merchantHostility": "Most hostile mobs are hostile to villagers",
+
   "text.autoconfig.sihywtcamd.category.overworld": "Overworld",
-  "text.autoconfig.sihywtcamd.option.overworld.general": "General mobs",
-  "text.autoconfig.sihywtcamd.option.overworld.general.mobsLessFear": "Mobs don't flee if target is half health",
-  "text.autoconfig.sihywtcamd.option.overworld.general.merchantHostility": "Most hostile mobs are hostile to villagers",
   "text.autoconfig.sihywtcamd.option.overworld.creeper": "Creeper",
   "text.autoconfig.sihywtcamd.option.overworld.creeper.explosionFatigue": "Creepers explosions deal mining fatigue",
   "text.autoconfig.sihywtcamd.option.overworld.creeper.explosionWeakness": "Creepers explosions deal weakness",
