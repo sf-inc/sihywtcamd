@@ -15,6 +15,7 @@
     "LivingEntityRendererMixin",
     "MagmaCubeMixin",
     "MobEntityMixin",
+    "PathNodeMakerMixin",
     "PatrolSpawnerMixin",
     "PillagerMixin",
     "ProjectileMixin",

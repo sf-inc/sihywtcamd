@@ -8,4 +8,5 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 public class GeneralConfig implements ConfigData {
     public boolean mobsLessFear = true;
     public boolean merchantHostility = true;
+    public boolean pathPassengerAware = true;
 }
