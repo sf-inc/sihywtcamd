@@ -32,7 +32,7 @@ public abstract class LivingEntityMixin extends Entity {
         LivingEntity livingEntity = (LivingEntity) (Object) this;
         if (!this.getWorld().isClient() && !this.isBaby()) {
             int nbBabies = 0;
-            if (ModConfig.get().arthropods.spider.babyCaveSpider
+            if (ModConfig.get().arthropods.caveSpider.baby
                     && livingEntity instanceof CaveSpiderEntity
                     && this.random.nextFloat() < 0.1F) {
                 nbBabies = 1 + this.random.nextInt(3)

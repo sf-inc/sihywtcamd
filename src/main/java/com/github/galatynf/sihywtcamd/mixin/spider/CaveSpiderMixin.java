@@ -27,7 +27,7 @@ public class CaveSpiderMixin extends SpiderEntity {
     @Nullable
     @Override
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
-        if (ModConfig.get().arthropods.spider.caveSpiderJockey
+        if (ModConfig.get().arthropods.caveSpider.jockey
                 && !this.hasVehicle()
                 && !spawnReason.equals(SpawnReason.SPAWNER)
                 && world.getRandom().nextInt(50) == 0) {

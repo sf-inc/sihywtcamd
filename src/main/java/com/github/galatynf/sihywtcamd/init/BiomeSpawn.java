@@ -17,7 +17,7 @@ import java.util.function.Predicate;
 
 public class BiomeSpawn {
     public static void init() {
-        if (ModConfig.get().arthropods.spider.caveSpiderNaturalSpawn) {
+        if (ModConfig.get().arthropods.caveSpider.naturalSpawn) {
             BiomeModifications.addSpawn(
                     BiomeSelectors.spawnsOneOf(EntityType.SPIDER),
                     SpawnGroup.MONSTER,
