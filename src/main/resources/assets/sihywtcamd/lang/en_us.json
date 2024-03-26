@@ -114,7 +114,7 @@
 
   "text.autoconfig.sihywtcamd.category.end": "End",
   "text.autoconfig.sihywtcamd.option.end.enderman": "Enderman",
-  "text.autoconfig.sihywtcamd.option.end.enderman.blindnessAttack": "Endermen gives blindness on attack",
+  "text.autoconfig.sihywtcamd.option.end.enderman.blindnessAttack": "Endermen can give blindness on attack",
   "text.autoconfig.sihywtcamd.option.end.shulker": "Shulker",
   "text.autoconfig.sihywtcamd.option.end.shulker.cancelLevitation": "Shulkers projectiles can remove levitation",
   "text.autoconfig.sihywtcamd.option.end.endermite": "Endermite",
@@ -123,7 +123,7 @@
 
   "text.autoconfig.sihywtcamd.category.bosses": "Bosses",
   "text.autoconfig.sihywtcamd.option.bosses.enderDragon": "Ender Dragon",
-  "text.autoconfig.sihywtcamd.option.bosses.enderDragon.crystalDestructionSpawnsPhantom": "Phantoms can spawn when an end crystal is destroyed",
+  "text.autoconfig.sihywtcamd.option.bosses.enderDragon.crystalDestructionSpawnsPhantom": "A phantom can spawn when an end crystal is destroyed",
   "text.autoconfig.sihywtcamd.option.bosses.enderDragon.controlEndermanWhenLanding": "Enderman can target its closest player when dragon is landed",
   "text.autoconfig.sihywtcamd.option.bosses.enderDragon.crystalsToSummon": "The ender dragon summons 1 crystal for X health thresholds",
   "text.autoconfig.sihywtcamd.option.bosses.wither": "Wither",
@@ -141,7 +141,7 @@
   "advancements.root.title": "SIHYWTCAMD",
   "advancements.root.description": "So I Heard You Were Talking Crap About Minecraft's Difficulty?",
 
-  "advancements.baby_spider_spawn.title": "Babies Revenge",
+  "advancements.baby_spider_spawn.title": "Baby Revenge",
   "advancements.baby_spider_spawn.description": "Release the babies of a Spider when killing it",
 
   "advancements.baby_cave_spider_spawn.title": "Poisonous Revenge",
