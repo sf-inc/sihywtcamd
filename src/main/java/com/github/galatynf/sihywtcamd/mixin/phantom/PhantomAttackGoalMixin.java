@@ -10,6 +10,6 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 public class PhantomAttackGoalMixin {
     @ModifyArg(method = "canStart()Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/PhantomEntity;isTarget(Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/entity/ai/TargetPredicate;)Z"))
     private TargetPredicate changePredicateStart2(TargetPredicate predicate) {
-        return ModConfig.get().overworld.phantom.throughBlocks ? predicate.ignoreVisibility() : predicate;
+        return ModConfig.get().undead.phantom.throughBlocks ? predicate.ignoreVisibility() : predicate;
     }
 }

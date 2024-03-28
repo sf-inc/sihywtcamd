@@ -9,6 +9,7 @@ import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.mob.MagmaCubeEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.SlimeEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -18,7 +19,6 @@ import net.minecraft.text.Text;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -73,7 +73,9 @@ public abstract class SlimeMixin extends MobEntity {
     @Inject(method = "initialize", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/MobEntity;initialize(Lnet/minecraft/world/ServerWorldAccess;Lnet/minecraft/world/LocalDifficulty;Lnet/minecraft/entity/SpawnReason;Lnet/minecraft/entity/EntityData;Lnet/minecraft/nbt/NbtCompound;)Lnet/minecraft/entity/EntityData;"))
     private void spawnBigger(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, EntityData entityData,
                              NbtCompound entityNbt, CallbackInfoReturnable<EntityData> cir) {
+        SlimeEntity slime = (SlimeEntity) (Object) this;
         if (ModConfig.get().overworld.slime.biggerSize
+                && !(slime instanceof MagmaCubeEntity)
                 && this.random.nextFloat() < 0.05f + 0.05f * difficulty.getClampedLocalDifficulty()) {
             this.setSize(8, true);
         }
@@ -81,8 +83,9 @@ public abstract class SlimeMixin extends MobEntity {
 
     @Inject(method = "tick", at = @At("TAIL"))
     private void tryToMerge(CallbackInfo ci) {
+        SlimeEntity slime = (SlimeEntity) (Object) this;
         if (!this.getWorld().isClient()
-                && this.getType().equals(EntityType.SLIME)
+                && !(slime instanceof MagmaCubeEntity)
                 && ModConfig.get().overworld.slime.canMerge
                 && !this.hasMerged()
                 && this.isAlive()

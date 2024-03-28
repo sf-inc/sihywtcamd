@@ -10,6 +10,8 @@ public class SkeletonsConfig implements ConfigData {
     public General general = new General();
 
     public static class General {
+        public boolean baby = true;
+        public boolean babyQuickAttackGoal = true;
         public boolean fleeGoal = true;
         public boolean swimGoal = true;
     }
@@ -27,6 +29,7 @@ public class SkeletonsConfig implements ConfigData {
     public static class Stray {
         public boolean betterSlowness = true;
         public boolean frozenArrows = true;
+        public boolean coldBiomeSpawn = true;
     }
     @ConfigEntry.Gui.CollapsibleObject
     public WitherSkeleton witherSkeleton = new WitherSkeleton();
@@ -36,5 +39,13 @@ public class SkeletonsConfig implements ConfigData {
         public boolean fireResistant = true;
         public boolean bow = true;
         public boolean netheriteSword = true;
+    }
+
+    @ConfigEntry.Gui.CollapsibleObject
+    public SkeletonHorse skeletonHorse = new SkeletonHorse();
+
+    public static class SkeletonHorse {
+        public boolean skeletonsVariationOnTrap = true;
+        public boolean increasedSpeed = true;
     }
 }

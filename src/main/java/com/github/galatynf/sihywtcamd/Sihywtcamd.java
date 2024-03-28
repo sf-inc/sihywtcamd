@@ -3,6 +3,7 @@ package com.github.galatynf.sihywtcamd;
 import com.github.galatynf.sihywtcamd.block.MessyCobweb;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import com.github.galatynf.sihywtcamd.entity.CobwebProjectileEntity;
+import com.github.galatynf.sihywtcamd.init.BiomeFeatures;
 import com.github.galatynf.sihywtcamd.init.BiomeSpawn;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
@@ -47,6 +48,7 @@ public class Sihywtcamd implements ModInitializer {
             Sihywtcamd.areConfigsInit = true;
         }
 
+        BiomeFeatures.init();
         BiomeSpawn.init();
 
         Registry.register(Registries.BLOCK, new Identifier(MOD_ID, "messy_cobweb"), MESSY_COBWEB);

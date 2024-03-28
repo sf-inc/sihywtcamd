@@ -6,6 +6,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.mob.EndermanEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
@@ -22,8 +23,9 @@ public abstract class MobEntityMixin extends LivingEntity {
 
     @Inject(method = "tryAttack", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/MobEntity;onAttacking(Lnet/minecraft/entity/Entity;)V"))
     private void endermanBlindnessAttack(Entity target, CallbackInfoReturnable<Boolean> cir) {
+        MobEntity mob = (MobEntity) (Object) this;
         if (ModConfig.get().end.enderman.blindnessAttack
-                && this.getType().equals(EntityType.ENDERMAN)
+                && mob instanceof EndermanEntity
                 && target instanceof PlayerEntity playerEntity
                 && this.random.nextBoolean()) {
             int duration = 30;

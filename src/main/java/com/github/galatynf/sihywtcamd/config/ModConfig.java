@@ -10,9 +10,13 @@ import me.shedaniel.autoconfig.serializer.PartitioningSerializer;
 @Config(name = "sihywtcamd")
 public class ModConfig extends PartitioningSerializer.GlobalData {
 
-    @ConfigEntry.Category("overworld")
+    @ConfigEntry.Category("general")
     @ConfigEntry.Gui.TransitiveObject
-    public OverworldConfig overworld = new OverworldConfig();
+    public GeneralConfig general = new GeneralConfig();
+
+    @ConfigEntry.Category("undead")
+    @ConfigEntry.Gui.TransitiveObject
+    public UndeadConfig undead = new UndeadConfig();
 
     @ConfigEntry.Category("zombies")
     @ConfigEntry.Gui.TransitiveObject
@@ -29,6 +33,10 @@ public class ModConfig extends PartitioningSerializer.GlobalData {
     @ConfigEntry.Category("illagers")
     @ConfigEntry.Gui.TransitiveObject
     public IllagersConfig illagers = new IllagersConfig();
+
+    @ConfigEntry.Category("overworld")
+    @ConfigEntry.Gui.TransitiveObject
+    public OverworldConfig overworld = new OverworldConfig();
 
     @ConfigEntry.Category("nether")
     @ConfigEntry.Gui.TransitiveObject

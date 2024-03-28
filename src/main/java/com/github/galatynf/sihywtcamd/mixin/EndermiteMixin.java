@@ -19,8 +19,6 @@ import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 
-import java.util.Objects;
-
 @Mixin(EndermiteEntity.class)
 public class EndermiteMixin extends HostileEntity {
     protected EndermiteMixin(EntityType<? extends HostileEntity> entityType, World world) {
@@ -56,8 +54,12 @@ public class EndermiteMixin extends HostileEntity {
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
         if (ModConfig.get().arthropods.general.larvaeSpeedBonus) {
             EntityAttributeInstance speed = this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED);
-            Objects.requireNonNull(speed).addPersistentModifier(new EntityAttributeModifier(
-                    "Random speed bonus",  world.getRandom().nextFloat() * 0.5f * difficulty.getClampedLocalDifficulty() * speed.getValue(), EntityAttributeModifier.Operation.ADDITION));
+            if (speed != null) {
+                double random = 0.25 * world.getRandom().nextDouble() * speed.getValue();
+                double localDifficulty = 0.25 * difficulty.getClampedLocalDifficulty() * speed.getValue();
+                speed.addPersistentModifier(new EntityAttributeModifier(
+                        "Random speed bonus",  random + localDifficulty, EntityAttributeModifier.Operation.ADDITION));
+            }
         }
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
     }

@@ -10,9 +10,9 @@ public class ZombiesConfig implements ConfigData {
     public General general = new General();
 
     public static class General {
-        public boolean attackHeal = true;
         public boolean moreKnockbackResistance = true;
         public boolean spawnMoreReinforcement = true;
+        public boolean sameTypeReinforcement = true;
         public boolean attributeVariations = true;
         @ConfigEntry.BoundedDiscrete(min = 0, max = 9)
         public int babyTowerHeight = 4;
@@ -32,5 +32,13 @@ public class ZombiesConfig implements ConfigData {
         public boolean tridentSpawn = true;
         public boolean highVelocity = true;
         public boolean guardianJockeySpawn = true;
+    }
+
+    @ConfigEntry.Gui.CollapsibleObject
+    public ZombieHorse zombieHorse = new ZombieHorse();
+
+    public static class ZombieHorse {
+        public boolean zombieHorseTrap = true;
+        public boolean increasedSpeed = true;
     }
 }

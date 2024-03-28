@@ -2,11 +2,13 @@ package com.github.galatynf.sihywtcamd.mixin.zombie;
 
 import com.github.galatynf.sihywtcamd.Sihywtcamd;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.*;
+import net.minecraft.entity.EntityData;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.HostileEntity;
+import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Text;
@@ -17,9 +19,9 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(ZombieEntity.class)
 public abstract class ZombieMixin extends HostileEntity {
@@ -31,17 +33,6 @@ public abstract class ZombieMixin extends HostileEntity {
 
     protected ZombieMixin(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
-    }
-
-    @Inject(method = "tryAttack", at = @At("TAIL"), locals = LocalCapture.CAPTURE_FAILSOFT)
-    private void stealHealth(Entity target, CallbackInfoReturnable<Boolean> cir, boolean bl) {
-        if (bl && ModConfig.get().zombies.general.attackHeal) {
-            float damage = (float)this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE);
-            if (target instanceof LivingEntity livingEntity) {
-                damage += EnchantmentHelper.getAttackDamage(this.getMainHandStack(), livingEntity.getGroup());
-            }
-            this.setHealth(Math.min(this.getHealth() + damage, this.getMaxHealth()));
-        }
     }
 
     @Inject(method = "initialize", at = @At("TAIL"))
@@ -117,6 +108,21 @@ public abstract class ZombieMixin extends HostileEntity {
         if (ModConfig.get().zombies.general.spawnMoreReinforcement) {
             this.getAttributeInstance(EntityAttributes.ZOMBIE_SPAWN_REINFORCEMENTS).setBaseValue(0.2 + 0.2 * this.random.nextDouble());
             ci.cancel();
+        }
+    }
+
+    @ModifyVariable(method = "damage", at = @At("STORE"))
+    private ZombieEntity updateZombieType(ZombieEntity zombie) {
+        return ModConfig.get().zombies.general.sameTypeReinforcement && this.random.nextBoolean()
+                ? (ZombieEntity) this.getType().create(zombie.getWorld())
+                : zombie;
+    }
+
+    @Override
+    public void tickRiding() {
+        super.tickRiding();
+        if (this.getVehicle() instanceof PathAwareEntity pathAwareEntity) {
+            this.bodyYaw = pathAwareEntity.bodyYaw;
         }
     }
 }

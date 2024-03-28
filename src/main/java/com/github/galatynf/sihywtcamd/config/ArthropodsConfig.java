@@ -22,15 +22,27 @@ public class ArthropodsConfig implements ConfigData {
     }
 
     @ConfigEntry.Gui.CollapsibleObject
+    public GeneralSpiders generalSpiders = new GeneralSpiders();
+
+    public static class GeneralSpiders {
+        public boolean webProjectileGoal = true;
+    }
+
+    @ConfigEntry.Gui.CollapsibleObject
     public Spider spider = new Spider();
 
     public static class Spider {
         public boolean baby = true;
-        public boolean babyCaveSpider = true;
-        public boolean webProjectileGoal = true;
+    }
 
-        public boolean caveSpiderJockey = true;
+    @ConfigEntry.Gui.CollapsibleObject
+    public CaveSpider caveSpider = new CaveSpider();
+
+    public static class CaveSpider {
+        public boolean baby = true;
+
+        public boolean jockey = true;
         @ConfigEntry.Gui.RequiresRestart
-        public boolean caveSpiderNaturalSpawn = true;
+        public boolean naturalSpawn = true;
     }
 }

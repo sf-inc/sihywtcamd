@@ -15,9 +15,12 @@
     "LivingEntityRendererMixin",
     "MagmaCubeMixin",
     "MobEntityMixin",
+    "PathNodeMakerMixin",
     "PatrolSpawnerMixin",
     "PillagerMixin",
     "ProjectileMixin",
+    "RevengeGoalMixin",
+    "ServerWorldMixin",
     "ShulkerBulletMixin",
     "SilverfishMixin",
     "SlimeMixin",
@@ -39,6 +42,7 @@
     "piglin.PiglinBrainMixin",
     "piglin.PiglinMixin",
     "skeleton.AbstractSkeletonMixin",
+    "skeleton.SkeletonHorseTrapMixin",
     "skeleton.SkeletonMixin",
     "skeleton.StrayMixin",
     "skeleton.WitherSkeletonMixin",
@@ -50,6 +54,7 @@
     "vex.VexMixin",
     "zombie.DrownedMixin",
     "zombie.HuskMixin",
+    "zombie.ZombieHorseMixin",
     "zombie.ZombieMixin"
   ],
   "client": [

@@ -23,7 +23,7 @@ public abstract class PhantomSwoopGoalMixin {
         // Reset to ensure further check validity
         this.catsNearby = false;
 
-        if (ModConfig.get().overworld.phantom.lightFear
+        if (ModConfig.get().undead.phantom.lightFear
                 && this.field_7333.getWorld().getLightLevel(this.field_7333.getBlockPos()) > 10) {
             cir.setReturnValue(false);
         }
@@ -31,7 +31,7 @@ public abstract class PhantomSwoopGoalMixin {
 
     @Inject(method = "shouldContinue()Z", at = @At("TAIL"), cancellable = true)
     private void removeCatFear(CallbackInfoReturnable<Boolean> cir) {
-        if (ModConfig.get().overworld.general.mobsLessFear && this.catsNearby) {
+        if (ModConfig.get().general.mobsLessFear && this.catsNearby) {
             boolean shouldContinue = true;
             List<CatEntity> list = this.field_7333.getWorld().getEntitiesByClass(CatEntity.class, this.field_7333.getBoundingBox().expand(16.0), EntityPredicates.VALID_ENTITY);
             for (CatEntity catEntity : list) {

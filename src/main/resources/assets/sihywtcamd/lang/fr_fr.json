@@ -1,17 +1,16 @@
 {
   "text.autoconfig.sihywtcamd.title": "SIHYWTCAMD Configuration",
 
+  "text.autoconfig.sihywtcamd.category.general": "Général",
+  "text.autoconfig.sihywtcamd.option.general.mobsLessFear": "Les mobs ne fuient plus les entités mid-life",
+  "text.autoconfig.sihywtcamd.option.general.merchantHostility": "La plupart des mobs hostiles le sont avec les villageois",
+  "text.autoconfig.sihywtcamd.option.general.pathPassengerAware": "Les mobs avec monture ne path find pas à travers les blocs",
+
   "text.autoconfig.sihywtcamd.category.overworld": "Overworld",
-  "text.autoconfig.sihywtcamd.option.overworld.general": "Les mobs en général",
-  "text.autoconfig.sihywtcamd.option.overworld.general.mobsLessFear": "Les mobs ne fuient plus les entités mid-life",
-  "text.autoconfig.sihywtcamd.option.overworld.general.merchantHostility": "La plupart des mobs hostiles le sont avec les villageois",
   "text.autoconfig.sihywtcamd.option.overworld.creeper": "Le creeper",
   "text.autoconfig.sihywtcamd.option.overworld.creeper.explosionFatigue": "Les explosions de creepers donnent fatigue de minage",
   "text.autoconfig.sihywtcamd.option.overworld.creeper.explosionWeakness": "Les explosions de creepers donnent faiblesse",
   "text.autoconfig.sihywtcamd.option.overworld.creeper.chainExplosions": "Les creepers s'allument avec les dégâts d'explosions",
-  "text.autoconfig.sihywtcamd.option.overworld.phantom": "Le fantôme",
-  "text.autoconfig.sihywtcamd.option.overworld.phantom.throughBlocks": "Les fantômes peuvent voir/passer à travers les blocs",
-  "text.autoconfig.sihywtcamd.option.overworld.phantom.lightFear": "Les fantômes sont repoussés par la lumière",
   "text.autoconfig.sihywtcamd.option.overworld.slime": "Le slime",
   "text.autoconfig.sihywtcamd.option.overworld.slime.biggerSize": "Les slimes peuvent apparaître avec une taille en plus",
   "text.autoconfig.sihywtcamd.option.overworld.slime.canMerge": "Les slimes de taille petit/normal peuvent fusionner",
@@ -22,11 +21,20 @@
   "text.autoconfig.sihywtcamd.option.overworld.guardian.naturalSpawn": "Les gardiens peuvent apparaître naturellement",
   "text.autoconfig.sihywtcamd.option.overworld.guardian.silentKill": "Les gardiens jouent un son d'attaque que contre les joueurs",
 
+  "text.autoconfig.sihywtcamd.category.undead": "Les morts-vivants",
+  "text.autoconfig.sihywtcamd.option.undead.general": "Les morts-vivants en général",
+  "text.autoconfig.sihywtcamd.option.undead.general.attackHeal": "Les morts-vivants se soignent des dégâts qu'ils infligent",
+  "text.autoconfig.sihywtcamd.option.undead.general.ignoreUndeadAttacks": "Les morts-vivants ne se vengent pas entre eux",
+  "text.autoconfig.sihywtcamd.option.undead.phantom": "Le fantôme",
+  "text.autoconfig.sihywtcamd.option.undead.phantom.throughBlocks": "Les fantômes peuvent voir/passer à travers les blocs",
+  "text.autoconfig.sihywtcamd.option.undead.phantom.lightFear": "Les fantômes sont repoussés par la lumière",
+  "text.autoconfig.sihywtcamd.option.undead.phantom.spawnInEndCities": "Les fantômes peuvent apparaître dans les cités de l'end",
+
   "text.autoconfig.sihywtcamd.category.zombies": "Les zombies",
   "text.autoconfig.sihywtcamd.option.zombies.general": "Les zombies en général",
-  "text.autoconfig.sihywtcamd.option.zombies.general.attackHeal": "Les zombies se soignent des dégâts qu'ils infligent",
   "text.autoconfig.sihywtcamd.option.zombies.general.moreKnockbackResistance": "Les zombies ont un bonus de résistance au recul",
   "text.autoconfig.sihywtcamd.option.zombies.general.spawnMoreReinforcement": "Les zombies ont plus de chance d'appeler des renforts",
+  "text.autoconfig.sihywtcamd.option.zombies.general.sameTypeReinforcement": "Les zombies peuvent appeler des renforts du même type de zombie",
   "text.autoconfig.sihywtcamd.option.zombies.general.attributeVariations": "Les zombies peuvent apparaître avec des variations d'attributs",
   "text.autoconfig.sihywtcamd.option.zombies.general.babyTowerHeight": "Les bébés zombies peuvent apparaître avec X bébés au-dessus",
   "text.autoconfig.sihywtcamd.option.zombies.husk": "Le zombie momifié",
@@ -35,9 +43,14 @@
   "text.autoconfig.sihywtcamd.option.zombies.drowned.tridentSpawn": "Les noyés apparaissent plus souvent avec un trident",
   "text.autoconfig.sihywtcamd.option.zombies.drowned.highVelocity": "Les noyés nagent plus vite",
   "text.autoconfig.sihywtcamd.option.zombies.drowned.guardianJockeySpawn": "Les bébés noyés peuvent apparaître sur un gardien",
+  "text.autoconfig.sihywtcamd.option.zombies.zombieHorse": "Le cheval zombie",
+  "text.autoconfig.sihywtcamd.option.zombies.zombieHorse.zombieHorseTrap": "Un piège de cheval zombie peut apparaître lors d'orages",
+  "text.autoconfig.sihywtcamd.option.zombies.zombieHorse.increasedSpeed": "Les mobs les chevauchent plus vite",
 
   "text.autoconfig.sihywtcamd.category.skeletons": "Les squelettes",
   "text.autoconfig.sihywtcamd.option.skeletons.general": "Les squelettes en général",
+  "text.autoconfig.sihywtcamd.option.skeletons.general.baby": "Les squelettes peuvent apparaître bébé",
+  "text.autoconfig.sihywtcamd.option.skeletons.general.babyQuickAttackGoal": "Les bébés squelettes tirent des vollées rapides de flèches",
   "text.autoconfig.sihywtcamd.option.skeletons.general.fleeGoal": "Les squelettes fuient les joueurs trop proches",
   "text.autoconfig.sihywtcamd.option.skeletons.general.swimGoal": "Les squelettes peuvent nager",
   "text.autoconfig.sihywtcamd.option.skeletons.skeleton": "Le squelette",
@@ -45,11 +58,15 @@
   "text.autoconfig.sihywtcamd.option.skeletons.stray": "Le vagabond",
   "text.autoconfig.sihywtcamd.option.skeletons.stray.betterSlowness": "Les vagabonds infligent lenteur 2",
   "text.autoconfig.sihywtcamd.option.skeletons.stray.frozenArrows": "Les vagabonds tirent des flèches glacées",
+  "text.autoconfig.sihywtcamd.option.skeletons.stray.coldBiomeSpawn": "Les vagabonds peuvent apparaître dans n'importe quel biôme froid",
   "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton": "Le wither squelette",
   "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton.baby": "Les wither squelettes peuvent apparaître bébé",
   "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton.fireResistant": "Les wither squelettes ne prennent pas de dégâts de feu",
   "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton.bow": "Les wither squelettes peuvent apparaître avec un arc (si adulte)",
   "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton.netheriteSword": "Les wither squelettes ont une épée en netherite",
+  "text.autoconfig.sihywtcamd.option.skeletons.skeletonHorse": "Le cheval squelette",
+  "text.autoconfig.sihywtcamd.option.skeletons.skeletonHorse.skeletonsVariationOnTrap": "Le piège de cheval squelette fait apparaître différent squelettes",
+  "text.autoconfig.sihywtcamd.option.skeletons.skeletonHorse.increasedSpeed": "Les mobs les chevauchent plus vite",
 
   "text.autoconfig.sihywtcamd.category.arthropods": "Les arthropodes",
   "text.autoconfig.sihywtcamd.option.arthropods.general": "Les arthropodes en général",
@@ -57,12 +74,14 @@
   "text.autoconfig.sihywtcamd.option.arthropods.general.larvaeSpeedBonus": "Les larves ont un bonus de vitesse aléatoire",
   "text.autoconfig.sihywtcamd.option.arthropods.silverfish": "Le poisson d'argent",
   "text.autoconfig.sihywtcamd.option.arthropods.silverfish.infestedEverywhere": "La pierre est infestée de partout",
+  "text.autoconfig.sihywtcamd.option.arthropods.generalSpiders": "Les araignées en général",
+  "text.autoconfig.sihywtcamd.option.arthropods.generalSpiders.webProjectileGoal": "Les araignées peuvent lancer des toiles",
   "text.autoconfig.sihywtcamd.option.arthropods.spider": "L'araignée",
   "text.autoconfig.sihywtcamd.option.arthropods.spider.baby": "Les araignées peuvent faire apparaître des bébés à leur mort",
-  "text.autoconfig.sihywtcamd.option.arthropods.spider.babyCaveSpider": "Les araignées venimeuses peuvent faire apparaître des bébés à leur mort",
-  "text.autoconfig.sihywtcamd.option.arthropods.spider.webProjectileGoal": "Les araignées peuvent lancer des toiles",
-  "text.autoconfig.sihywtcamd.option.arthropods.spider.caveSpiderJockey": "Les araignées venimeuses chevauchées peuvent apparaître",
-  "text.autoconfig.sihywtcamd.option.arthropods.spider.caveSpiderNaturalSpawn": "Les araignées venimeuses peuvent apparaître naturellement en caverne",
+  "text.autoconfig.sihywtcamd.option.arthropods.caveSpider": "L'araignée venimeuse",
+  "text.autoconfig.sihywtcamd.option.arthropods.caveSpider.baby": "Les araignées venimeuses peuvent faire apparaître des bébés à leur mort",
+  "text.autoconfig.sihywtcamd.option.arthropods.caveSpider.jockey": "Les araignées venimeuses chevauchées peuvent apparaître",
+  "text.autoconfig.sihywtcamd.option.arthropods.caveSpider.naturalSpawn": "Les araignées venimeuses peuvent apparaître naturellement en caverne",
 
   "text.autoconfig.sihywtcamd.category.illagers": "Les illageois",
   "text.autoconfig.sihywtcamd.option.illagers.pillager": "Le pillard",
@@ -95,7 +114,7 @@
 
   "text.autoconfig.sihywtcamd.category.end": "End",
   "text.autoconfig.sihywtcamd.option.end.enderman": "L'enderman",
-  "text.autoconfig.sihywtcamd.option.end.enderman.blindnessAttack": "Les endermen donnent cécité lors d'attaque",
+  "text.autoconfig.sihywtcamd.option.end.enderman.blindnessAttack": "Les endermen peuvent donner cécité lors d'attaque",
   "text.autoconfig.sihywtcamd.option.end.shulker": "Le shulker",
   "text.autoconfig.sihywtcamd.option.end.shulker.cancelLevitation": "Les projectiles de shulker peuvent enlever la lévitation",
   "text.autoconfig.sihywtcamd.option.end.endermite": "Endermite",
@@ -103,6 +122,10 @@
   "text.autoconfig.sihywtcamd.option.end.endermite.teleportAttack": "Les endermites téléportent leur cible lors d'attaque",
 
   "text.autoconfig.sihywtcamd.category.bosses": "Les bosses",
+  "text.autoconfig.sihywtcamd.option.bosses.enderDragon": "L'Ender Dragon",
+  "text.autoconfig.sihywtcamd.option.bosses.enderDragon.crystalDestructionSpawnsPhantom": "Un fantôme peut apparaître lorsqu'un cristal de l'end est détruit",
+  "text.autoconfig.sihywtcamd.option.bosses.enderDragon.controlEndermanWhenLanding": "Les endermen peuvent cibler des joueurs proches quand le dragon est à terre",
+  "text.autoconfig.sihywtcamd.option.bosses.enderDragon.crystalsToSummon": "L'ender dragon invoque 1 cristal pour X paliers de vie",
   "text.autoconfig.sihywtcamd.option.bosses.wither": "Le wither",
   "text.autoconfig.sihywtcamd.option.bosses.wither.increasedHealth": "Les withers ont un peu plus de vie",
   "text.autoconfig.sihywtcamd.option.bosses.wither.stormyWeather": "Les withers rendent le temps orageux",
@@ -114,6 +137,36 @@
   "text.autoconfig.sihywtcamd.option.cosmetics.translucentGhast": "La texture des ghasts est transparente",
   "text.autoconfig.sihywtcamd.option.cosmetics.translucentPhantom": "La texture des fantômes est transparente",
   "text.autoconfig.sihywtcamd.option.cosmetics.translucentVex": "La texture des vexes est transparente",
+
+  "advancements.root.title": "SIHYWTCAMD",
+  "advancements.root.description": "So I Heard You Were Talking Crap About Minecraft's Difficulty?",
+
+  "advancements.baby_spider_spawn.title": "Une bébé vengeance",
+  "advancements.baby_spider_spawn.description": "Relachez les bébés d'une araignée à sa mort",
+
+  "advancements.baby_cave_spider_spawn.title": "Une vengeance venimeuse",
+  "advancements.baby_cave_spider_spawn.description": "Relachez les bébés d'une araignée venimeuse à sa mort",
+
+  "advancements.enter_messy_cobweb.title": "Atterrissage en douleur",
+  "advancements.enter_messy_cobweb.description": "Tombez dans une toile d'araignée désordonnée pendant un combat avec une araignée",
+
+  "advancements.full_golden_armor.title": "Couvrez-moi d'or",
+  "advancements.full_golden_armor.description": "Obtenez une armure complète en Or pour rendre neutre les piglins.",
+
+  "advancements.kill_illusioner.title": "Illusion ou réalité ?",
+  "advancements.kill_illusioner.description": "Ramenez l'illusioniste à la réalité en le tuant",
+
+  "advancements.kill_phantom_end.title": "Oups, mauvais oiseau",
+  "advancements.kill_phantom_end.description": "Tuez un fantôme invoqué par un cristal de l'End",
+
+  "advancements.spyglass_at_baby_1.title": "Est-ce un arbre ?",
+  "advancements.spyglass_at_baby_1.description": "Regardez un bébé zombie en porter un autre à travers une longue-vue",
+
+  "advancements.spyglass_at_baby_4.title": "Est-ce une tour ?",
+  "advancements.spyglass_at_baby_4.description": "Regardez un bébé zombie en porter quatre autres à travers une longue-vue.",
+
+  "advancements.ride_zombie_horse.title": "Une chevauchée mortelle",
+  "advancements.ride_zombie_horse.description": " Montez un cheval zombie après avoir battu son précédent cavalier",
 
   "subtitles.sihywtcamd.spider_spit": "Araignée qui crache"
 }
