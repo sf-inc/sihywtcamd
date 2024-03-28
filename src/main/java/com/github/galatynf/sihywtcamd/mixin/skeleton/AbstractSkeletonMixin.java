@@ -80,7 +80,7 @@ public abstract class AbstractSkeletonMixin extends HostileEntity implements Ran
         }
     }
 
-    @ModifyVariable(method = "shootAt", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;spawnEntity(Lnet/minecraft/entity/Entity;)Z"))
+    @ModifyVariable(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;spawnEntity(Lnet/minecraft/entity/Entity;)Z"))
     private PersistentProjectileEntity updateVelocityQuickAttackGoal(PersistentProjectileEntity persistentProjectileEntity,
                                                                      LivingEntity target, float pullProgress) {
         ItemStack itemStack = this.getStackInHand(ProjectileUtil.getHandPossiblyHolding(this, Items.BOW));

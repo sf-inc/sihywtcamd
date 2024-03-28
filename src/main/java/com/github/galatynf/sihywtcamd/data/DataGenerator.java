@@ -227,7 +227,7 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                     .rewards(AdvancementRewards.Builder.experience(50))
                     .build(consumer, Sihywtcamd.MOD_ID + "/spyglass_at_baby_4");
 
-            AdvancementEntry rideZombieHorse = Advancement.Builder.create()
+            Advancement rideZombieHorse = Advancement.Builder.create()
                     .parent(root)
                     .display(
                             Items.SADDLE,
@@ -242,7 +242,8 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                     .criterion("ride_zombie_horse", StartedRidingCriterion.Conditions.create(
                             EntityPredicate.Builder.create()
                                     .vehicle(EntityPredicate.Builder.create()
-                                            .type(EntityType.ZOMBIE_HORSE))))
+                                            .type(EntityType.ZOMBIE_HORSE)
+                                            .build())))
                     .build(consumer, Sihywtcamd.MOD_ID + "/ride_zombie_horse");
         }
     }

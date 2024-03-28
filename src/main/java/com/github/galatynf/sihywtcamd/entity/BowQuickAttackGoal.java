@@ -126,7 +126,7 @@ public class BowQuickAttackGoal<T extends HostileEntity & RangedAttackMob> exten
             if (!canSee && this.targetSeeingTicker < -60) {
                 this.actor.clearActiveItem();
             } else if (canSee && (i = this.actor.getItemUseTime()) >= this.shootInterval) {
-                this.actor.shootAt(target, BowItem.getPullProgress(i));
+                this.actor.attack(target, BowItem.getPullProgress(i));
                 this.actor.clearActiveItem();
                 if (++this.shotCount >= this.maxShots) {
                     this.shotCount = 0;
