@@ -61,7 +61,6 @@
   "text.autoconfig.sihywtcamd.option.skeletons.stray.coldBiomeSpawn": "Strays can spawn in any cold biome",
   "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton": "Wither skeleton",
   "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton.baby": "Wither skeletons can spawn baby",
-  "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton.fireResistant": "Wither skeletons are immune to fire damages",
   "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton.bow": "Wither skeletons can spawn carrying a bow (if adult)",
   "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton.netheriteSword": "Wither skeletons have a netherite sword",
   "text.autoconfig.sihywtcamd.option.skeletons.skeletonHorse": "Skeleton horse",
