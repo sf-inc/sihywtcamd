@@ -2,6 +2,7 @@ package com.github.galatynf.sihywtcamd.mixin.zombie;
 
 import com.github.galatynf.sihywtcamd.Sihywtcamd;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
+import com.github.galatynf.sihywtcamd.mixin.LivingEntityMixin;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
@@ -24,7 +25,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ZombieEntity.class)
-public abstract class ZombieMixin extends HostileEntity {
+public abstract class ZombieMixin extends LivingEntityMixin {
     @Shadow public abstract void setCanBreakDoors(boolean canBreakDoors);
 
     @Shadow protected abstract boolean shouldBreakDoors();
@@ -119,8 +120,7 @@ public abstract class ZombieMixin extends HostileEntity {
     }
 
     @Override
-    public void tickRiding() {
-        super.tickRiding();
+    protected void onTickRiding(CallbackInfo ci) {
         if (this.getVehicle() instanceof PathAwareEntity pathAwareEntity) {
             this.bodyYaw = pathAwareEntity.bodyYaw;
         }

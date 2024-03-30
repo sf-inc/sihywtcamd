@@ -4,6 +4,7 @@ import com.github.galatynf.sihywtcamd.Sihywtcamd;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.data.DataTracker;
@@ -121,5 +122,10 @@ public abstract class SlimeMixin extends MobEntity {
         }
 
         return slime;
+    }
+
+    @Inject(method = "damage", at = @At("HEAD"))
+    protected void onDamage(LivingEntity target, CallbackInfo ci) {
+
     }
 }

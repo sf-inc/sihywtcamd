@@ -11,7 +11,6 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -24,9 +23,9 @@ public class CaveSpiderMixin extends SpiderEntity {
         super(entityType, world);
     }
 
-    @Nullable
-    @Override
-    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
+    @Inject(method = "initialize", at = @At("TAIL"))
+    private void caveSpiderJockey(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason,
+                                  EntityData entityData, NbtCompound entityNbt, CallbackInfoReturnable<EntityData> cir) {
         if (ModConfig.get().arthropods.caveSpider.jockey
                 && !this.hasVehicle()
                 && !spawnReason.equals(SpawnReason.SPAWNER)
@@ -38,8 +37,6 @@ public class CaveSpiderMixin extends SpiderEntity {
                 skeletonEntity.startRiding(this);
             }
         }
-
-        return entityData;
     }
 
     @Override
