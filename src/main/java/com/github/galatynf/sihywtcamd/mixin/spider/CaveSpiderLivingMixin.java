@@ -1,12 +1,15 @@
 package com.github.galatynf.sihywtcamd.mixin.spider;
 
 import com.github.galatynf.sihywtcamd.config.ModConfig;
-import net.minecraft.entity.*;
+import com.github.galatynf.sihywtcamd.mixin.LivingEntityMixin;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import net.minecraft.entity.EntityData;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.CaveSpiderEntity;
 import net.minecraft.entity.mob.SkeletonEntity;
-import net.minecraft.entity.mob.SpiderEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
@@ -14,13 +17,12 @@ import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(CaveSpiderEntity.class)
-public class CaveSpiderMixin extends SpiderEntity {
-    public CaveSpiderMixin(EntityType<? extends SpiderEntity> entityType, World world) {
-        super(entityType, world);
+public abstract class CaveSpiderLivingMixin extends LivingEntityMixin {
+    public CaveSpiderLivingMixin(EntityType<?> type, World world) {
+        super(type, world);
     }
 
     @Inject(method = "initialize", at = @At("TAIL"))
@@ -40,18 +42,30 @@ public class CaveSpiderMixin extends SpiderEntity {
     }
 
     @Override
-    public float getScaleFactor() {
-        return this.isBaby() ? 0.5F : 1.0F;
+    public float updateScaleFactor(float original) {
+        if (ModConfig.get().arthropods.caveSpider.baby && this.isBaby()) {
+            return 0.5F;
+        } else {
+            return original;
+        }
     }
 
-    @Inject(method = "getActiveEyeHeight", at = @At("HEAD"), cancellable = true)
-    private void updateCaveSpiderEyeHeight(EntityPose pose, EntityDimensions dimensions, CallbackInfoReturnable<Float> cir) {
-        cir.setReturnValue(0.45F * this.getScaleFactor());
+    @ModifyReturnValue(method = "getActiveEyeHeight", at = @At("RETURN"))
+    private float updateCaveSpiderEyeHeight(float original) {
+        if (ModConfig.get().arthropods.caveSpider.baby) {
+            return original * this.getScaleFactor();
+        } else {
+            return original;
+        }
     }
 
-    @Redirect(method = "tryAttack", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;addStatusEffect(Lnet/minecraft/entity/effect/StatusEffectInstance;Lnet/minecraft/entity/Entity;)Z"))
-    private boolean adaptivePoison(LivingEntity target, StatusEffectInstance effect, Entity source) {
-        int duration = this.isBaby() ? effect.getDuration() / 5 : effect.getDuration();
-        return target.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, duration, 0), this);
+    @ModifyExpressionValue(method = "tryAttack", at = @At(value = "NEW", target = "(Lnet/minecraft/entity/effect/StatusEffect;II)Lnet/minecraft/entity/effect/StatusEffectInstance;"))
+    private StatusEffectInstance adaptivePoison(StatusEffectInstance original) {
+        if (ModConfig.get().arthropods.caveSpider.baby && this.isBaby()) {
+            int duration = original.getDuration() / 5;
+            return new StatusEffectInstance(original.getEffectType(), duration, original.getAmplifier());
+        } else {
+            return original;
+        }
     }
 }

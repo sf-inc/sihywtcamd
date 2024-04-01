@@ -1,6 +1,7 @@
 package com.github.galatynf.sihywtcamd.mixin.skeleton;
 
 import com.github.galatynf.sihywtcamd.config.ModConfig;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.entity.*;
 import net.minecraft.entity.mob.AbstractSkeletonEntity;
 import net.minecraft.entity.mob.WitherSkeletonEntity;
@@ -42,8 +43,12 @@ public abstract class WitherSkeletonMixin extends AbstractSkeletonEntity {
         }
     }
 
-    @Inject(method = "getActiveEyeHeight", at = @At("RETURN"), cancellable = true)
-    private void makeEyeHeightDependsOnSize(EntityPose pose, EntityDimensions dimensions, CallbackInfoReturnable<Float> cir) {
-        cir.setReturnValue(cir.getReturnValue() * this.getScaleFactor());
+    @ModifyReturnValue(method = "getActiveEyeHeight", at = @At("RETURN"))
+    private float updateWitherSkeletonEyeHeight(float original) {
+        if (ModConfig.get().skeletons.witherSkeleton.baby) {
+            return original * this.getScaleFactor();
+        } else {
+            return original;
+        }
     }
 }
