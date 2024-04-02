@@ -2,16 +2,18 @@ package com.github.galatynf.sihywtcamd.mixin.zombie;
 
 import com.github.galatynf.sihywtcamd.entity.ZombieHorseTrapTriggerGoal;
 import com.github.galatynf.sihywtcamd.imixin.ZombieHorseIMixin;
+import com.github.galatynf.sihywtcamd.mixin.MobEntityMixin;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.ZombieHorseEntity;
-import net.minecraft.entity.passive.AbstractHorseEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ZombieHorseEntity.class)
-public abstract class ZombieHorseMixin extends AbstractHorseEntity implements ZombieHorseIMixin {
+public abstract class ZombieHorseMobMixin extends MobEntityMixin implements ZombieHorseIMixin {
     @Unique
     private final ZombieHorseTrapTriggerGoal trapTriggerGoal = new ZombieHorseTrapTriggerGoal((ZombieHorseEntity)(Object) this);
     @Unique
@@ -19,30 +21,27 @@ public abstract class ZombieHorseMixin extends AbstractHorseEntity implements Zo
     @Unique
     private int trapTime = -1;
 
-    protected ZombieHorseMixin(EntityType<? extends AbstractHorseEntity> entityType, World world) {
+    protected ZombieHorseMobMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
     }
 
     @Override
-    public void tickMovement() {
-        super.tickMovement();
+    protected void onTickMovement(CallbackInfo ci) {
         if (this.trapped && this.trapTime++ >= 18000) {
             this.discard();
         }
     }
 
     @Override
-    public void writeCustomDataToNbt(NbtCompound nbt) {
-        super.writeCustomDataToNbt(nbt);
-        nbt.putBoolean("ZombieTrap", this.trapped);
-        nbt.putInt("ZombieTrapTime", this.trapTime);
+    protected void readModDataFromNbt(NbtCompound nbt, CallbackInfo ci) {
+        this.sihywtcamd$setTrapped(nbt.getBoolean("ZombieTrap"));
+        this.trapTime = nbt.getInt("ZombieTrapTime");
     }
 
     @Override
-    public void readCustomDataFromNbt(NbtCompound nbt) {
-        super.readCustomDataFromNbt(nbt);
-        this.sihywtcamd$setTrapped(nbt.getBoolean("ZombieTrap"));
-        this.trapTime = nbt.getInt("ZombieTrapTime");
+    protected void writeModDataToNbt(NbtCompound nbt, CallbackInfo ci) {
+        nbt.putBoolean("ZombieTrap", this.trapped);
+        nbt.putInt("ZombieTrapTime", this.trapTime);
     }
 
     @Override

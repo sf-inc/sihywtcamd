@@ -5,26 +5,23 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.BlazeEntity;
-import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(BlazeEntity.class)
-public abstract class BlazeMixin extends HostileEntity {
+public abstract class BlazeMixin extends MobEntityMixin {
     @Shadow protected abstract boolean isFireActive();
 
-    protected BlazeMixin(EntityType<? extends HostileEntity> entityType, World world) {
+    protected BlazeMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
     }
 
     @Override
-    public boolean tryAttack(Entity target) {
-        boolean success = super.tryAttack(target);
-        if (ModConfig.get().nether.blaze.fireAttack && success
-                && this.isFireActive() && !((LivingEntity) target).isBlocking()) {
+    protected void onTryAttackSuccess(Entity target, CallbackInfoReturnable<Boolean> cir) {
+        if (ModConfig.get().nether.blaze.fireAttack && this.isFireActive()) {
             target.setOnFireFor(5);
         }
-        return success;
     }
 }

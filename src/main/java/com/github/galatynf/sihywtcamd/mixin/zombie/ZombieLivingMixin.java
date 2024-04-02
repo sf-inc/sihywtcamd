@@ -2,12 +2,14 @@ package com.github.galatynf.sihywtcamd.mixin.zombie;
 
 import com.github.galatynf.sihywtcamd.Sihywtcamd;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
+import com.github.galatynf.sihywtcamd.mixin.LivingEntityMixin;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -19,20 +21,19 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ZombieEntity.class)
-public abstract class ZombieMixin extends HostileEntity {
+public abstract class ZombieLivingMixin extends LivingEntityMixin {
     @Shadow public abstract void setCanBreakDoors(boolean canBreakDoors);
 
     @Shadow protected abstract boolean shouldBreakDoors();
 
     @Shadow public abstract boolean isBaby();
 
-    protected ZombieMixin(EntityType<? extends HostileEntity> entityType, World world) {
-        super(entityType, world);
+    public ZombieLivingMixin(EntityType<?> type, World world) {
+        super(type, world);
     }
 
     @Inject(method = "initialize", at = @At("TAIL"))
@@ -111,16 +112,19 @@ public abstract class ZombieMixin extends HostileEntity {
         }
     }
 
-    @ModifyVariable(method = "damage", at = @At("STORE"))
-    private ZombieEntity updateZombieType(ZombieEntity zombie) {
-        return ModConfig.get().zombies.general.sameTypeReinforcement && this.random.nextBoolean()
-                ? (ZombieEntity) this.getType().create(zombie.getWorld())
-                : zombie;
+    @WrapOperation(method = "damage", at = @At(value = "NEW", target = "(Lnet/minecraft/world/World;)Lnet/minecraft/entity/mob/ZombieEntity;"))
+    private ZombieEntity updateZombieType(World world, Operation<ZombieEntity> original) {
+        if (ModConfig.get().zombies.general.sameTypeReinforcement
+                && this.getType() != EntityType.ZOMBIE
+                && this.random.nextBoolean()) {
+            return (ZombieEntity) this.getType().create(world);
+        } else {
+            return original.call(world);
+        }
     }
 
     @Override
-    public void tickRiding() {
-        super.tickRiding();
+    protected void onTickRiding(CallbackInfo ci) {
         if (this.getVehicle() instanceof PathAwareEntity pathAwareEntity) {
             this.bodyYaw = pathAwareEntity.bodyYaw;
         }

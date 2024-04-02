@@ -3,13 +3,14 @@ package com.github.galatynf.sihywtcamd.mixin.skeleton;
 import com.github.galatynf.sihywtcamd.Sihywtcamd;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import com.github.galatynf.sihywtcamd.imixin.SpectralSkeletonIMixin;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.mob.AbstractSkeletonEntity;
 import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
@@ -19,19 +20,19 @@ import net.minecraft.text.Text;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(SkeletonEntity.class)
-public abstract class SkeletonMixin extends AbstractSkeletonEntity implements SpectralSkeletonIMixin {
+public abstract class SkeletonMixin extends AbstractSkeletonMobMixin implements SpectralSkeletonIMixin {
     @Unique
     private static final TrackedData<Boolean> SPECTRAL = DataTracker.registerData(SkeletonEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
-    protected SkeletonMixin(EntityType<? extends AbstractSkeletonEntity> entityType, World world) {
+    protected SkeletonMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
     }
 
@@ -51,22 +52,20 @@ public abstract class SkeletonMixin extends AbstractSkeletonEntity implements Sp
     }
 
     @Override
-    protected PersistentProjectileEntity createArrowProjectile(ItemStack arrow, float damageModifier) {
-        if (this.getDataTracker().get(SPECTRAL)) {
-            arrow = new ItemStack(Items.SPECTRAL_ARROW);
-        }
-        return super.createArrowProjectile(arrow, damageModifier);
+    protected PersistentProjectileEntity updateArrowProjectile(LivingEntity entity, ItemStack stack, float damageModifier,
+                                                               Operation<PersistentProjectileEntity> original) {
+        return this.getDataTracker().get(SPECTRAL)
+                ? original.call(entity, new ItemStack(Items.SPECTRAL_ARROW), damageModifier)
+                : original.call(entity, stack, damageModifier);
     }
 
-    @Nullable
     @Override
-    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
+    protected void onInitialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason,
+                                EntityData entityData, NbtCompound entityNbt, CallbackInfoReturnable<EntityData> cir) {
         if (ModConfig.get().skeletons.skeleton.spectralArrow
                 && world.getRandom().nextFloat() < 0.05f) {
             this.sihywtcamd$setSpectral();
         }
-
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
     }
 
     @Override

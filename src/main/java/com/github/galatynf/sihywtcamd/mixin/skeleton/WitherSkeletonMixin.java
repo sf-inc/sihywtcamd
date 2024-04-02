@@ -1,14 +1,13 @@
 package com.github.galatynf.sihywtcamd.mixin.skeleton;
 
 import com.github.galatynf.sihywtcamd.config.ModConfig;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.entity.*;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.AbstractSkeletonEntity;
 import net.minecraft.entity.mob.WitherSkeletonEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
@@ -23,12 +22,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class WitherSkeletonMixin extends AbstractSkeletonEntity {
     protected WitherSkeletonMixin(EntityType<? extends AbstractSkeletonEntity> entityType, World world) {
         super(entityType, world);
-    }
-
-    @Override
-    public boolean isInvulnerableTo(DamageSource damageSource) {
-        return (ModConfig.get().skeletons.witherSkeleton.fireResistant && damageSource.isIn(DamageTypeTags.IS_FIRE))
-                || super.isInvulnerableTo(damageSource);
     }
 
     @Inject(method = "initialize", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/WitherSkeletonEntity;updateAttackType()V"))
@@ -50,8 +43,12 @@ public abstract class WitherSkeletonMixin extends AbstractSkeletonEntity {
         }
     }
 
-    @Inject(method = "getActiveEyeHeight", at = @At("RETURN"), cancellable = true)
-    private void makeEyeHeightDependsOnSize(EntityPose pose, EntityDimensions dimensions, CallbackInfoReturnable<Float> cir) {
-        cir.setReturnValue(cir.getReturnValue() * this.getScaleFactor());
+    @ModifyReturnValue(method = "getActiveEyeHeight", at = @At("RETURN"))
+    private float updateWitherSkeletonEyeHeight(float original) {
+        if (ModConfig.get().skeletons.witherSkeleton.baby) {
+            return original * this.getScaleFactor();
+        } else {
+            return original;
+        }
     }
 }

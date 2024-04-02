@@ -7,7 +7,6 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.CreeperEntity;
-import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.util.math.Box;
@@ -22,15 +21,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.List;
 
 @Mixin(CreeperEntity.class)
-public abstract class CreeperMixin extends HostileEntity {
+public abstract class CreeperMixin extends LivingEntityMixin {
     @Shadow private int explosionRadius;
 
     @Shadow public abstract boolean shouldRenderOverlay();
 
     @Shadow public abstract void ignite();
 
-    protected CreeperMixin(EntityType<? extends HostileEntity> entityType, World world) {
-        super(entityType, world);
+    public CreeperMixin(EntityType<?> type, World world) {
+        super(type, world);
     }
 
     @Inject(method = "explode", at = @At("HEAD"))
@@ -61,7 +60,9 @@ public abstract class CreeperMixin extends HostileEntity {
     }
 
     @Override
-    public boolean damage(DamageSource source, float amount) {
+    public boolean updateDamage(boolean original, DamageSource source, float amount) {
+        if (!original) return false;
+
         if (ModConfig.get().overworld.creeper.chainExplosions
                 && source.isIn(DamageTypeTags.IS_EXPLOSION)
                 && (!(source.getAttacker() instanceof CreeperEntity creeper)
@@ -69,7 +70,7 @@ public abstract class CreeperMixin extends HostileEntity {
             this.ignite();
             return false;
         } else {
-            return super.damage(source, amount);
+            return true;
         }
     }
 }
