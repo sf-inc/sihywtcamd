@@ -4,6 +4,15 @@
 * **x.X versions** are either updates that add content or major bug fixes
 * **x.x.X versions** are either small content updates (language translation, new textures, ...) or bug fixes
 
+## v1.10.1
+* Fix server freeze with multiple rider (#52)
+* Fix compatibility issue with Mob Variant (#51)
+* Fix wither health not updated when summoned with block pattern
+* Remove wither skeleton fire resistance feature, which was redundant
+  with vanilla since 1.19.4
+* Overall refactor to improve mod compatibility, should avoid most crash
+  from mod incompatibility
+
 ## v1.10
 
 ### Important changes
