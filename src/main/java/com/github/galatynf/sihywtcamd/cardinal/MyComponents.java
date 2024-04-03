@@ -2,7 +2,7 @@ package com.github.galatynf.sihywtcamd.cardinal;
 
 import com.github.galatynf.sihywtcamd.Sihywtcamd;
 import com.github.galatynf.sihywtcamd.cardinal.api.*;
-import com.github.galatynf.sihywtcamd.cardinal.implem.*;
+import com.github.galatynf.sihywtcamd.cardinal.impl.*;
 import dev.onyxstudios.cca.api.v3.component.ComponentKey;
 import dev.onyxstudios.cca.api.v3.component.ComponentRegistry;
 import dev.onyxstudios.cca.api.v3.entity.EntityComponentFactoryRegistry;

@@ -1,4 +1,4 @@
-package com.github.galatynf.sihywtcamd.cardinal.implem;
+package com.github.galatynf.sihywtcamd.cardinal.impl;
 
 import com.github.galatynf.sihywtcamd.cardinal.api.WitherEntityComponentAPI;
 import net.minecraft.nbt.NbtCompound;
@@ -18,11 +18,11 @@ public class WitherEntityComponent implements WitherEntityComponentAPI {
 
     @Override
     public void readFromNbt(NbtCompound tag) {
-        this.halfHealthReached = tag.getBoolean("half_health_reached");
+        this.halfHealthReached = tag.getBoolean("HalfHealthReached");
     }
 
     @Override
     public void writeToNbt(NbtCompound tag) {
-        tag.putBoolean("half_health_reached", this.halfHealthReached);
+        tag.putBoolean("HalfHealthReached", this.halfHealthReached);
     }
 }

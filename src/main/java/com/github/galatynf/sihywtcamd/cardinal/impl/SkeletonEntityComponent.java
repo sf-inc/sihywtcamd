@@ -1,4 +1,4 @@
-package com.github.galatynf.sihywtcamd.cardinal.implem;
+package com.github.galatynf.sihywtcamd.cardinal.impl;
 
 import com.github.galatynf.sihywtcamd.cardinal.api.SkeletonEntityComponentAPI;
 import net.minecraft.nbt.NbtCompound;
