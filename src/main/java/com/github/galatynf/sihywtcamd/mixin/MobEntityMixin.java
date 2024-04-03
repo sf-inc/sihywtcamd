@@ -48,11 +48,6 @@ public abstract class MobEntityMixin extends LivingEntity {
 
     }
 
-    @Inject(method = "initDataTracker", at = @At("TAIL"))
-    protected void onInitDataTracker(CallbackInfo ci) {
-
-    }
-
     @Inject(method = "readCustomDataFromNbt", at = @At("TAIL"))
     protected void readModDataFromNbt(NbtCompound nbt, CallbackInfo ci) {
 

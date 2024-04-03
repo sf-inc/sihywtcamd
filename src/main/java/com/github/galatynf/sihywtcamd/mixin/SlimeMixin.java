@@ -1,15 +1,13 @@
 package com.github.galatynf.sihywtcamd.mixin;
 
 import com.github.galatynf.sihywtcamd.Sihywtcamd;
+import com.github.galatynf.sihywtcamd.cardinal.MyComponents;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.TargetPredicate;
-import net.minecraft.entity.data.DataTracker;
-import net.minecraft.entity.data.TrackedData;
-import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.MagmaCubeEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.SlimeEntity;
@@ -22,7 +20,6 @@ import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -31,9 +28,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(SlimeEntity.class)
 public abstract class SlimeMixin extends MobEntity {
-    @Unique
-    private static final TrackedData<Boolean> MERGED = DataTracker.registerData(SlimeEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
-
     @Shadow public abstract int getSize();
 
     @Shadow public abstract void setSize(int size, boolean heal);
@@ -44,31 +38,6 @@ public abstract class SlimeMixin extends MobEntity {
 
     protected SlimeMixin(EntityType<? extends MobEntity> entityType, World world) {
         super(entityType, world);
-    }
-
-    @Inject(method = "initDataTracker", at = @At("TAIL"))
-    private void addMergedData(CallbackInfo ci) {
-        this.getDataTracker().startTracking(MERGED, false);
-    }
-
-    @Unique
-    public boolean hasMerged() {
-        return this.getDataTracker().get(MERGED);
-    }
-
-    @Unique
-    public void setHasMerged(boolean merged) {
-        this.getDataTracker().set(MERGED, merged);
-    }
-
-    @Inject(method = "readCustomDataFromNbt", at = @At("TAIL"))
-    private void readMergedData(NbtCompound nbt, CallbackInfo ci) {
-        this.setHasMerged(nbt.getBoolean("hasMerged"));
-    }
-
-    @Inject(method = "writeCustomDataToNbt", at = @At("TAIL"))
-    private void writeMergedData(NbtCompound nbt, CallbackInfo ci) {
-        nbt.putBoolean("hasMerged", this.hasMerged());
     }
 
     @Inject(method = "initialize", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/MobEntity;initialize(Lnet/minecraft/world/ServerWorldAccess;Lnet/minecraft/world/LocalDifficulty;Lnet/minecraft/entity/SpawnReason;Lnet/minecraft/entity/EntityData;Lnet/minecraft/nbt/NbtCompound;)Lnet/minecraft/entity/EntityData;"))
@@ -88,7 +57,7 @@ public abstract class SlimeMixin extends MobEntity {
         if (!this.getWorld().isClient()
                 && !(slime instanceof MagmaCubeEntity)
                 && ModConfig.get().overworld.slime.canMerge
-                && !this.hasMerged()
+                && !MyComponents.SLIME_COMPONENT.get(this).hasMerged()
                 && this.isAlive()
                 && this.getSize() < 4
                 && (this.getWorld().getTime() % 5) == 0) {
@@ -96,7 +65,7 @@ public abstract class SlimeMixin extends MobEntity {
                     this.getX(), this.getY(), this.getZ(), this.getBoundingBox());
             if (slimeEntity != null
                     && this.getSize() == slimeEntity.getSize()) {
-                this.setHasMerged(true);
+                MyComponents.SLIME_COMPONENT.get(this).setMerged(true);
                 slimeEntity.remove(RemovalReason.DISCARDED);
                 this.setSize(this.getSize() * 2, true);
                 this.getWorld().addParticle(this.getParticles(), this.getX(), this.getY(), this.getZ(),
@@ -114,9 +83,10 @@ public abstract class SlimeMixin extends MobEntity {
 
     @ModifyVariable(method = "remove", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/SlimeEntity;setInvulnerable(Z)V"))
     private SlimeEntity transferMergedGene(SlimeEntity slime, RemovalReason value) {
-        slime.getDataTracker().set(MERGED, this.hasMerged());
+        boolean hasMerged = MyComponents.SLIME_COMPONENT.get(this).hasMerged();
+        MyComponents.SLIME_COMPONENT.get(slime).setMerged(hasMerged);
 
-        if (Sihywtcamd.DEBUG && this.hasMerged()) {
+        if (Sihywtcamd.DEBUG && hasMerged) {
             this.setCustomName(Text.of("Merged Child"));
             this.setCustomNameVisible(true);
         }
