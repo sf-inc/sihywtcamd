@@ -44,7 +44,10 @@
   "custom": {
     "cardinal-components": [
       "sihywtcamd:arrow_component",
+      "sihywtcamd:baby_component",
       "sihywtcamd:ender_dragon_component",
+      "sihywtcamd:skeleton_component",
+      "sihywtcamd:slime_component",
       "sihywtcamd:wither_component"
     ]
   }

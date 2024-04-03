@@ -1,16 +1,13 @@
 package com.github.galatynf.sihywtcamd.mixin.spider;
 
+import com.github.galatynf.sihywtcamd.cardinal.MyComponents;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import com.github.galatynf.sihywtcamd.mixin.LivingEntityMixin;
+import dev.onyxstudios.cca.api.v3.component.ComponentProvider;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.SpiderEntity;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import static com.github.galatynf.sihywtcamd.Sihywtcamd.SPIDER_BABY;
 
 @Mixin(SpiderEntity.class)
 public abstract class SpiderLivingMixin extends LivingEntityMixin {
@@ -18,15 +15,11 @@ public abstract class SpiderLivingMixin extends LivingEntityMixin {
         super(type, world);
     }
 
-    @Inject(method = "initDataTracker", at = @At("TAIL"))
-    private void addBabyData(CallbackInfo ci) {
-        this.getDataTracker().startTracking(SPIDER_BABY, false);
-    }
-
     @Override
     public boolean updateBaby(boolean original) {
         return ModConfig.get().arthropods.spider.baby
-                ? this.getDataTracker().get(SPIDER_BABY)
+                && ((ComponentProvider) this).getComponentContainer() != null
+                ? MyComponents.BABY_COMPONENT.get(this).isBaby()
                 : original;
     }
 

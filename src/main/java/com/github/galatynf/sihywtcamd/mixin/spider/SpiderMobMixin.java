@@ -1,6 +1,7 @@
 package com.github.galatynf.sihywtcamd.mixin.spider;
 
 import com.github.galatynf.sihywtcamd.Sihywtcamd;
+import com.github.galatynf.sihywtcamd.cardinal.MyComponents;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import com.github.galatynf.sihywtcamd.entity.CobwebAttackGoal;
 import com.github.galatynf.sihywtcamd.entity.CobwebProjectileEntity;
@@ -18,7 +19,6 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.SpiderEntity;
 import net.minecraft.entity.passive.MerchantEntity;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -30,7 +30,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.Objects;
 
 import static com.github.galatynf.sihywtcamd.Sihywtcamd.MESSY_COBWEB;
-import static com.github.galatynf.sihywtcamd.Sihywtcamd.SPIDER_BABY;
 
 @Mixin(SpiderEntity.class)
 public abstract class SpiderMobMixin extends MobEntityMixin implements RangedAttackMob {
@@ -54,7 +53,7 @@ public abstract class SpiderMobMixin extends MobEntityMixin implements RangedAtt
 
     @Override
     protected void onSetBaby(boolean baby, CallbackInfo ci) {
-        this.getDataTracker().set(SPIDER_BABY, baby);
+        MyComponents.BABY_COMPONENT.get(this).setBaby(baby);
         if (baby) {
             EntityAttributeInstance attackDamage = this.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE);
             EntityAttributeInstance maxHealth = this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
@@ -68,16 +67,6 @@ public abstract class SpiderMobMixin extends MobEntityMixin implements RangedAtt
                 this.goalSelector.remove(this.sihywtcamd_cobwebAttackGoal);
             }
         }
-    }
-
-    @Override
-    protected void readModDataFromNbt(NbtCompound tag, CallbackInfo ci) {
-        this.setBaby(tag.getBoolean("IsBaby"));
-    }
-
-    @Override
-    protected void writeModDataToNbt(NbtCompound tag, CallbackInfo ci) {
-        tag.putBoolean("IsBaby", this.isBaby());
     }
 
     @ModifyReturnValue(method = "getActiveEyeHeight", at = @At("RETURN"))

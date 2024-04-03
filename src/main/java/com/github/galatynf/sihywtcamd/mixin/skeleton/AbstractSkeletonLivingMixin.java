@@ -1,13 +1,13 @@
 package com.github.galatynf.sihywtcamd.mixin.skeleton;
 
+import com.github.galatynf.sihywtcamd.cardinal.MyComponents;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import com.github.galatynf.sihywtcamd.mixin.LivingEntityMixin;
+import dev.onyxstudios.cca.api.v3.component.ComponentProvider;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.AbstractSkeletonEntity;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
-
-import static com.github.galatynf.sihywtcamd.Sihywtcamd.SKELETON_BABY;
 
 @Mixin(AbstractSkeletonEntity.class)
 public abstract class AbstractSkeletonLivingMixin extends LivingEntityMixin {
@@ -17,8 +17,9 @@ public abstract class AbstractSkeletonLivingMixin extends LivingEntityMixin {
 
     @Override
     protected boolean updateBaby(boolean original) {
-        return ModConfig.get().skeletons.general.baby || ModConfig.get().skeletons.witherSkeleton.baby
-                ? this.getDataTracker().get(SKELETON_BABY)
+        return (ModConfig.get().skeletons.general.baby || ModConfig.get().skeletons.witherSkeleton.baby)
+                && ((ComponentProvider) this).getComponentContainer() != null
+                ? MyComponents.BABY_COMPONENT.get(this).isBaby()
                 : original;
     }
 }

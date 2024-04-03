@@ -1,5 +1,6 @@
 package com.github.galatynf.sihywtcamd.mixin.skeleton;
 
+import com.github.galatynf.sihywtcamd.cardinal.MyComponents;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import com.github.galatynf.sihywtcamd.entity.BowQuickAttackGoal;
 import com.github.galatynf.sihywtcamd.entity.SkeletonSwimGoal;
@@ -36,8 +37,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import static com.github.galatynf.sihywtcamd.Sihywtcamd.SKELETON_BABY;
 
 @Mixin(AbstractSkeletonEntity.class)
 public abstract class AbstractSkeletonMobMixin extends MobEntityMixin implements RangedAttackMob {
@@ -99,24 +98,11 @@ public abstract class AbstractSkeletonMobMixin extends MobEntityMixin implements
 
     @Override
     protected void onSetBaby(boolean baby, CallbackInfo ci) {
-        this.getDataTracker().set(SKELETON_BABY, baby);
+        MyComponents.BABY_COMPONENT.get(this).setBaby(baby);
         this.updateAttackType();
     }
 
-    @Override
-    protected void onInitDataTracker(CallbackInfo ci) {
-        this.getDataTracker().startTracking(SKELETON_BABY, false);
-    }
 
-    @Override
-    protected void readModDataFromNbt(NbtCompound nbt, CallbackInfo ci) {
-        this.setBaby(nbt.getBoolean("IsBaby"));
-    }
-
-    @Override
-    protected void writeModDataToNbt(NbtCompound nbt, CallbackInfo ci) {
-        nbt.putBoolean("IsBaby", this.isBaby());
-    }
 
     @ModifyReturnValue(method = "getActiveEyeHeight", at = @At("RETURN"))
     private float updateSkeletonEyeHeight(float original) {
