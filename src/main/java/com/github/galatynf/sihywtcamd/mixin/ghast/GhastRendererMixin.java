@@ -10,14 +10,14 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import static com.github.galatynf.sihywtcamd.Sihywtcamd.MOD_ID;
+import static com.github.galatynf.sihywtcamd.Sihywtcamd.id;
 
 @Mixin(GhastEntityRenderer.class)
 public abstract class GhastRendererMixin {
     @Unique
-    private static final Identifier GHAST_TEXTURE = new Identifier(MOD_ID, "textures/entity/ghast.png");
+    private static final Identifier GHAST_TEXTURE = id("textures/entity/ghast.png");
     @Unique
-    private static final Identifier GHAST_SHOOTING_TEXTURE = new Identifier(MOD_ID, "textures/entity/ghast_shooting.png");
+    private static final Identifier GHAST_SHOOTING_TEXTURE = id("textures/entity/ghast_shooting.png");
 
     @Inject(method = "getTexture*", at = @At("HEAD"), cancellable = true)
     private void getTexture(GhastEntity ghastEntity, CallbackInfoReturnable<Identifier> cir) {

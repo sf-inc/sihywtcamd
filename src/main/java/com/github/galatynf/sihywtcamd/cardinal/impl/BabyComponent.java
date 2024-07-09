@@ -4,7 +4,8 @@ import com.github.galatynf.sihywtcamd.cardinal.MyComponents;
 import com.github.galatynf.sihywtcamd.cardinal.api.BabyComponentAPI;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.PacketByteBuf;
+import net.minecraft.network.RegistryByteBuf;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.server.network.ServerPlayerEntity;
 
 public class BabyComponent implements BabyComponentAPI {
@@ -30,22 +31,22 @@ public class BabyComponent implements BabyComponentAPI {
     }
 
     @Override
-    public void readFromNbt(NbtCompound tag) {
+    public void readFromNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
         this.setBaby(tag.getBoolean("IsBaby"));
     }
 
     @Override
-    public void writeToNbt(NbtCompound tag) {
+    public void writeToNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
         tag.putBoolean("IsBaby", this.isBaby);
     }
 
     @Override
-    public void applySyncPacket(PacketByteBuf buf) {
+    public void applySyncPacket(RegistryByteBuf buf) {
         this.setBaby(buf.readBoolean());
     }
 
     @Override
-    public void writeSyncPacket(PacketByteBuf buf, ServerPlayerEntity player) {
+    public void writeSyncPacket(RegistryByteBuf buf, ServerPlayerEntity player) {
         buf.writeBoolean(this.isBaby);
     }
 }

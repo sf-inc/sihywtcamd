@@ -3,10 +3,10 @@ package com.github.galatynf.sihywtcamd.mixin.spider;
 import com.github.galatynf.sihywtcamd.cardinal.MyComponents;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import com.github.galatynf.sihywtcamd.mixin.LivingEntityMixin;
-import dev.onyxstudios.cca.api.v3.component.ComponentProvider;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.SpiderEntity;
 import net.minecraft.world.World;
+import org.ladysnake.cca.api.v3.component.ComponentProvider;
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(SpiderEntity.class)

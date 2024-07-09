@@ -13,7 +13,6 @@ import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Text;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
@@ -29,15 +28,15 @@ public abstract class SkeletonMixin extends AbstractSkeletonMobMixin implements 
 
     @Override
     protected PersistentProjectileEntity updateArrowProjectile(LivingEntity entity, ItemStack stack, float damageModifier,
-                                                               Operation<PersistentProjectileEntity> original) {
+                                                               ItemStack bow, Operation<PersistentProjectileEntity> original) {
         return MyComponents.SKELETON_COMPONENT.get(this).isSpectral()
-                ? original.call(entity, new ItemStack(Items.SPECTRAL_ARROW), damageModifier)
-                : original.call(entity, stack, damageModifier);
+                ? original.call(entity, new ItemStack(Items.SPECTRAL_ARROW), damageModifier, bow)
+                : original.call(entity, stack, damageModifier, bow);
     }
 
     @Override
     protected void onInitialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason,
-                                EntityData entityData, NbtCompound entityNbt, CallbackInfoReturnable<EntityData> cir) {
+                                EntityData entityData, CallbackInfoReturnable<EntityData> cir) {
         if (ModConfig.get().skeletons.skeleton.spectralArrow
                 && world.getRandom().nextFloat() < 0.05f) {
             this.sihywtcamd$setSpectral();

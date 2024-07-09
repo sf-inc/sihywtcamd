@@ -2,6 +2,7 @@ package com.github.galatynf.sihywtcamd.cardinal.impl;
 
 import com.github.galatynf.sihywtcamd.cardinal.api.SkeletonEntityComponentAPI;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryWrapper;
 
 public class SkeletonEntityComponent implements SkeletonEntityComponentAPI {
     private boolean isSpectral = false;
@@ -17,12 +18,12 @@ public class SkeletonEntityComponent implements SkeletonEntityComponentAPI {
     }
 
     @Override
-    public void readFromNbt(NbtCompound tag) {
+    public void readFromNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
         this.isSpectral = tag.getBoolean("IsSpectral");
     }
 
     @Override
-    public void writeToNbt(NbtCompound tag) {
+    public void writeToNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
         tag.putBoolean("IsSpectral", this.isSpectral);
     }
 }

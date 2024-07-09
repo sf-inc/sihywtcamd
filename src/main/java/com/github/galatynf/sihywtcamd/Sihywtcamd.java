@@ -1,45 +1,19 @@
 package com.github.galatynf.sihywtcamd;
 
-import com.github.galatynf.sihywtcamd.block.MessyCobweb;
+import com.github.galatynf.sihywtcamd.block.BlockRegistry;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
-import com.github.galatynf.sihywtcamd.entity.CobwebProjectileEntity;
-import com.github.galatynf.sihywtcamd.init.BiomeFeatures;
-import com.github.galatynf.sihywtcamd.init.BiomeSpawn;
+import com.github.galatynf.sihywtcamd.entity.EntityRegistry;
+import com.github.galatynf.sihywtcamd.init.*;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import me.shedaniel.autoconfig.serializer.PartitioningSerializer;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
-import net.minecraft.block.Block;
-import net.minecraft.block.MapColor;
-import net.minecraft.block.piston.PistonBehavior;
-import net.minecraft.entity.EntityDimensions;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnGroup;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 
 public class Sihywtcamd implements ModInitializer {
     public static final boolean DEBUG = false;
     public static boolean areConfigsInit = false;
     public static final String MOD_ID = "sihywtcamd";
-
-    public static final EntityType<CobwebProjectileEntity> COBWEB  = Registry.register(Registries.ENTITY_TYPE,
-            new Identifier(MOD_ID, "cobweb"),
-            FabricEntityTypeBuilder
-                    .create(SpawnGroup.MISC, CobwebProjectileEntity::new)
-                    .dimensions(EntityDimensions.fixed(0.5F, 0.5F))
-                    .build());
-
-    public static final Block MESSY_COBWEB = new MessyCobweb(FabricBlockSettings
-            .create().mapColor(MapColor.WHITE_GRAY).solid().noCollision().requiresTool().strength(3.0F)
-            .pistonBehavior(PistonBehavior.DESTROY));
-
-    public static final Identifier SPIDER_SPIT_ID = new Identifier(MOD_ID, "spider_spit");
-    public static SoundEvent SPIDER_SPIT_EVENT = SoundEvent.of(SPIDER_SPIT_ID);
 
     @Override
     public void onInitialize() {
@@ -50,8 +24,12 @@ public class Sihywtcamd implements ModInitializer {
 
         BiomeFeatures.init();
         BiomeSpawn.init();
+        BlockRegistry.init();
+        EntityRegistry.init();
+        SoundRegistry.init();
+    }
 
-        Registry.register(Registries.BLOCK, new Identifier(MOD_ID, "messy_cobweb"), MESSY_COBWEB);
-        Registry.register(Registries.SOUND_EVENT, SPIDER_SPIT_ID, SPIDER_SPIT_EVENT);
+    public static Identifier id(String path) {
+        return Identifier.of(MOD_ID, path);
     }
 }

@@ -2,7 +2,10 @@ package com.github.galatynf.sihywtcamd.mixin.skeleton;
 
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import com.github.galatynf.sihywtcamd.imixin.SpectralSkeletonIMixin;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.ItemEnchantmentsComponent;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.provider.EnchantmentProviders;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.SpawnReason;
@@ -30,16 +33,13 @@ public abstract class SkeletonHorseTrapMixin {
     @Shadow @Final private SkeletonHorseEntity skeletonHorse;
 
     @Shadow @Nullable protected abstract AbstractHorseEntity getHorse(LocalDifficulty localDifficulty);
-
     @Shadow @Nullable protected abstract SkeletonEntity getSkeleton(LocalDifficulty localDifficulty, AbstractHorseEntity vehicle);
-
-    @Shadow protected abstract ItemStack removeEnchantments(ItemStack stack);
 
     @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/world/ServerWorld;spawnEntityAndPassengers(Lnet/minecraft/entity/Entity;)V", shift = At.Shift.AFTER), cancellable = true)
     private void summonOtherSkeletons(CallbackInfo ci) {
         if (!ModConfig.get().skeletons.skeletonHorse.skeletonsVariationOnTrap) return;
 
-        ServerWorld serverWorld = (ServerWorld)this.skeletonHorse.getWorld();
+        ServerWorld serverWorld = (ServerWorld) this.skeletonHorse.getWorld();
         LocalDifficulty localDifficulty = serverWorld.getLocalDifficulty(this.skeletonHorse.getBlockPos());
 
         AbstractSkeletonEntity skeletonEntity;
@@ -78,16 +78,24 @@ public abstract class SkeletonHorseTrapMixin {
     private StrayEntity getStray(LocalDifficulty localDifficulty, AbstractHorseEntity vehicle) {
         StrayEntity strayEntity = EntityType.STRAY.create(vehicle.getWorld());
         if (strayEntity != null) {
-            strayEntity.initialize((ServerWorld)vehicle.getWorld(), localDifficulty, SpawnReason.TRIGGERED, null, null);
+            strayEntity.initialize((ServerWorld)vehicle.getWorld(), localDifficulty, SpawnReason.TRIGGERED, null);
             strayEntity.setPosition(vehicle.getX(), vehicle.getY(), vehicle.getZ());
             strayEntity.timeUntilRegen = 60;
             strayEntity.setPersistent();
             if (strayEntity.getEquippedStack(EquipmentSlot.HEAD).isEmpty()) {
                 strayEntity.equipStack(EquipmentSlot.HEAD, new ItemStack(Items.IRON_HELMET));
             }
-            strayEntity.equipStack(EquipmentSlot.MAINHAND, EnchantmentHelper.enchant(strayEntity.getRandom(), this.removeEnchantments(strayEntity.getMainHandStack()), (int)(5.0f + localDifficulty.getClampedLocalDifficulty() * (float)strayEntity.getRandom().nextInt(18)), false));
-            strayEntity.equipStack(EquipmentSlot.HEAD, EnchantmentHelper.enchant(strayEntity.getRandom(), this.removeEnchantments(strayEntity.getEquippedStack(EquipmentSlot.HEAD)), (int)(5.0f + localDifficulty.getClampedLocalDifficulty() * (float)strayEntity.getRandom().nextInt(18)), false));
+            this.enchantEquipment(strayEntity, EquipmentSlot.MAINHAND, localDifficulty);
+            this.enchantEquipment(strayEntity, EquipmentSlot.HEAD, localDifficulty);
         }
         return strayEntity;
+    }
+
+    @Unique
+    private void enchantEquipment(StrayEntity rider, EquipmentSlot slot, LocalDifficulty localDifficulty) {
+        ItemStack itemStack = rider.getEquippedStack(slot);
+        itemStack.set(DataComponentTypes.ENCHANTMENTS, ItemEnchantmentsComponent.DEFAULT);
+        EnchantmentHelper.applyEnchantmentProvider(itemStack, rider.getWorld().getRegistryManager(), EnchantmentProviders.MOB_SPAWN_EQUIPMENT, localDifficulty, rider.getRandom());
+        rider.equipStack(slot, itemStack);
     }
 }

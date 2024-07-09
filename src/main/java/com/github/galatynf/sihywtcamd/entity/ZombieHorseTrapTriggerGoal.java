@@ -1,7 +1,10 @@
 package com.github.galatynf.sihywtcamd.entity;
 
 import com.github.galatynf.sihywtcamd.imixin.ZombieHorseIMixin;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.ItemEnchantmentsComponent;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.provider.EnchantmentProviders;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LightningEntity;
@@ -76,7 +79,7 @@ public class ZombieHorseTrapTriggerGoal extends Goal {
     private AbstractHorseEntity getHorse(LocalDifficulty localDifficulty) {
         ZombieHorseEntity zombieHorseEntity = EntityType.ZOMBIE_HORSE.create(this.zombieHorse.getWorld());
         if (zombieHorseEntity != null) {
-            zombieHorseEntity.initialize((ServerWorld)this.zombieHorse.getWorld(), localDifficulty, SpawnReason.TRIGGERED, null, null);
+            zombieHorseEntity.initialize((ServerWorld) this.zombieHorse.getWorld(), localDifficulty, SpawnReason.TRIGGERED, null);
             zombieHorseEntity.setPosition(this.zombieHorse.getX(), this.zombieHorse.getY(), this.zombieHorse.getZ());
             zombieHorseEntity.addVelocity(this.zombieHorse.getRandom().nextTriangular(0.0, 1.1485), 0.0, this.zombieHorse.getRandom().nextTriangular(0.0, 1.1485));
             zombieHorseEntity.timeUntilRegen = 60;
@@ -90,7 +93,7 @@ public class ZombieHorseTrapTriggerGoal extends Goal {
     private void initZombie(ZombieEntity zombieEntity, LocalDifficulty localDifficulty, Item item, AbstractHorseEntity vehicle) {
         if (zombieEntity == null) return;
 
-        zombieEntity.initialize((ServerWorld)vehicle.getWorld(), localDifficulty, SpawnReason.TRIGGERED, null, null);
+        zombieEntity.initialize((ServerWorld) vehicle.getWorld(), localDifficulty, SpawnReason.TRIGGERED, null);
         zombieEntity.setPosition(vehicle.getX(), vehicle.getY(), vehicle.getZ());
         zombieEntity.timeUntilRegen = 60;
         zombieEntity.setPersistent();
@@ -99,14 +102,16 @@ public class ZombieHorseTrapTriggerGoal extends Goal {
         if (zombieEntity.getEquippedStack(EquipmentSlot.HEAD).isEmpty()) {
             zombieEntity.equipStack(EquipmentSlot.HEAD, new ItemStack(Items.IRON_HELMET));
         }
-        zombieEntity.equipStack(EquipmentSlot.MAINHAND, EnchantmentHelper.enchant(zombieEntity.getRandom(), this.removeEnchantments(zombieEntity.getMainHandStack()), (int)(5.0f + localDifficulty.getClampedLocalDifficulty() * (float)zombieEntity.getRandom().nextInt(18)), false));
-        zombieEntity.equipStack(EquipmentSlot.HEAD, EnchantmentHelper.enchant(zombieEntity.getRandom(), this.removeEnchantments(zombieEntity.getEquippedStack(EquipmentSlot.HEAD)), (int)(5.0f + localDifficulty.getClampedLocalDifficulty() * (float)zombieEntity.getRandom().nextInt(18)), false));
+        this.enchantEquipment(zombieEntity, EquipmentSlot.MAINHAND, localDifficulty);
+        this.enchantEquipment(zombieEntity, EquipmentSlot.HEAD, localDifficulty);
 
         zombieEntity.startRiding(vehicle);
     }
 
-    private ItemStack removeEnchantments(ItemStack stack) {
-        stack.removeSubNbt("Enchantments");
-        return stack;
+    private void enchantEquipment(ZombieEntity rider, EquipmentSlot slot, LocalDifficulty localDifficulty) {
+        ItemStack itemStack = rider.getEquippedStack(slot);
+        itemStack.set(DataComponentTypes.ENCHANTMENTS, ItemEnchantmentsComponent.DEFAULT);
+        EnchantmentHelper.applyEnchantmentProvider(itemStack, rider.getWorld().getRegistryManager(), EnchantmentProviders.MOB_SPAWN_EQUIPMENT, localDifficulty, rider.getRandom());
+        rider.equipStack(slot, itemStack);
     }
 }

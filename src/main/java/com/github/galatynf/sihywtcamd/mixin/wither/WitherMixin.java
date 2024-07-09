@@ -11,7 +11,6 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.boss.WitherEntity;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
@@ -42,7 +41,7 @@ public abstract class WitherMixin extends MobEntityMixin {
 
     @Override
     protected void onInitialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason,
-                                EntityData entityData, NbtCompound entityTag, CallbackInfoReturnable<EntityData> cir) {
+                                EntityData entityData, CallbackInfoReturnable<EntityData> cir) {
         if (!ModConfig.get().bosses.wither.increasedHealth) return;
 
         EntityAttributeInstance maxHealth = this.getAttributes().getCustomInstance(EntityAttributes.GENERIC_MAX_HEALTH);

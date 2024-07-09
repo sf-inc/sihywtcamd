@@ -1,6 +1,7 @@
 package com.github.galatynf.sihywtcamd.data;
 
 import com.github.galatynf.sihywtcamd.Sihywtcamd;
+import com.github.galatynf.sihywtcamd.block.BlockRegistry;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -14,12 +15,15 @@ import net.minecraft.predicate.entity.EntityPredicate;
 import net.minecraft.predicate.entity.LocationPredicate;
 import net.minecraft.predicate.entity.PlayerPredicate;
 import net.minecraft.predicate.item.ItemPredicate;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.EntityTypeTags;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.BiomeKeys;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
 public class DataGenerator implements DataGeneratorEntrypoint {
@@ -32,18 +36,18 @@ public class DataGenerator implements DataGeneratorEntrypoint {
     }
 
     static class AdvancementsProvider extends FabricAdvancementProvider {
-        protected AdvancementsProvider(FabricDataOutput dataGenerator) {
-            super(dataGenerator);
+        protected AdvancementsProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+            super(output, registryLookup);
         }
 
         @Override
-        public void generateAdvancement(Consumer<AdvancementEntry> consumer) {
+        public void generateAdvancement(RegistryWrapper.WrapperLookup registryLookup, Consumer<AdvancementEntry> consumer) {
             AdvancementEntry root = Advancement.Builder.create()
                     .display(
                             Items.STONE_SWORD,
                             Text.translatable("advancements.root.title"),
                             Text.translatable("advancements.root.description"),
-                            new Identifier("textures/block/deepslate_top.png"),
+                            Identifier.ofVanilla("textures/block/deepslate_top.png"),
                             AdvancementFrame.TASK,
                             true,
                             false,
@@ -66,7 +70,7 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                             true,
                             false
                     )
-                    .criterion("enter_messy_cobweb", EnterBlockCriterion.Conditions.block(Sihywtcamd.MESSY_COBWEB))
+                    .criterion("enter_messy_cobweb", EnterBlockCriterion.Conditions.block(BlockRegistry.MESSY_COBWEB))
                     .build(consumer, Sihywtcamd.MOD_ID + "/enter_messy_cobweb");
 
             AdvancementEntry babySpiderSpawn = Advancement.Builder.create()
@@ -154,7 +158,8 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                     .criterion("kill_phantom_end", OnKilledCriterion.Conditions.createPlayerKilledEntity(
                             EntityPredicate.Builder.create()
                                     .type(EntityType.PHANTOM)
-                                    .location(LocationPredicate.Builder.createBiome(BiomeKeys.THE_END))))
+                                    .location(LocationPredicate.Builder.createBiome(registryLookup
+                                            .getWrapperOrThrow(RegistryKeys.BIOME).getOrThrow(BiomeKeys.MEADOW)))))
                     .build(consumer, Sihywtcamd.MOD_ID + "/kill_phantom_end");
 
             AdvancementEntry babyZombiesTower1 = Advancement.Builder.create()

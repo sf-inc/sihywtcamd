@@ -5,7 +5,6 @@ import com.github.galatynf.sihywtcamd.config.ModConfig;
 import com.github.galatynf.sihywtcamd.entity.BowQuickAttackGoal;
 import com.github.galatynf.sihywtcamd.entity.SkeletonSwimGoal;
 import com.github.galatynf.sihywtcamd.mixin.MobEntityMixin;
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.entity.EntityData;
@@ -25,7 +24,6 @@ import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
@@ -68,8 +66,8 @@ public abstract class AbstractSkeletonMobMixin extends MobEntityMixin implements
     }
 
     @Inject(method = "initialize", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/AbstractSkeletonEntity;updateAttackType()V"))
-    private void canSpawnBaby(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, EntityData entityData,
-                              NbtCompound entityNbt, CallbackInfoReturnable<EntityData> cir) {
+    private void canSpawnBaby(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason,
+                              EntityData entityData, CallbackInfoReturnable<EntityData> cir) {
         this.setBaby(ModConfig.get().skeletons.general.baby && this.random.nextFloat() < 0.1f);
     }
 
@@ -102,22 +100,9 @@ public abstract class AbstractSkeletonMobMixin extends MobEntityMixin implements
         this.updateAttackType();
     }
 
-
-
-    @ModifyReturnValue(method = "getActiveEyeHeight", at = @At("RETURN"))
-    private float updateSkeletonEyeHeight(float original) {
-        if (ModConfig.get().skeletons.general.baby) {
-            return original * this.getScaleFactor();
-        } else {
-            return original;
-        }
-    }
-
-
-
-    @WrapOperation(method = "createArrowProjectile", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/projectile/ProjectileUtil;createArrowProjectile(Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/item/ItemStack;F)Lnet/minecraft/entity/projectile/PersistentProjectileEntity;"))
+    @WrapOperation(method = "createArrowProjectile", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/projectile/ProjectileUtil;createArrowProjectile(Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/item/ItemStack;FLnet/minecraft/item/ItemStack;)Lnet/minecraft/entity/projectile/PersistentProjectileEntity;"))
     protected PersistentProjectileEntity updateArrowProjectile(LivingEntity entity, ItemStack stack, float damageModifier,
-                                                               Operation<PersistentProjectileEntity> original) {
-        return original.call(entity, stack, damageModifier);
+                                                               ItemStack bow, Operation<PersistentProjectileEntity> original) {
+        return original.call(entity, stack, damageModifier, bow);
     }
 }

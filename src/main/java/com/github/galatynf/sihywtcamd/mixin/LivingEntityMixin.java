@@ -3,7 +3,6 @@ package com.github.galatynf.sihywtcamd.mixin;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
@@ -11,9 +10,10 @@ import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.DamageTypeTags;
+import net.minecraft.registry.tag.EntityTypeTags;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
@@ -30,20 +30,15 @@ public abstract class LivingEntityMixin extends Entity {
         super(type, world);
     }
 
-    @Shadow public abstract EntityGroup getGroup();
-    @Shadow public abstract @Nullable EntityAttributeInstance getAttributeInstance(EntityAttribute attribute);
-
     @Shadow protected float lastDamageTaken;
     @Shadow public float bodyYaw;
 
     @Shadow public abstract boolean isBaby();
-    @Shadow public abstract Random getRandom();
-
-    @Shadow public abstract float getScaleFactor();
+    @Shadow @Nullable public abstract EntityAttributeInstance getAttributeInstance(RegistryEntry<EntityAttribute> attribute);
 
     @Inject(method = "computeFallDamage", at = @At("HEAD"), cancellable = true)
     private void cancelArthropodFallDamage(float fallDistance, float damageMultiplier, CallbackInfoReturnable<Integer> cir) {
-        if (ModConfig.get().arthropods.general.noFallDamage && this.getGroup().equals(EntityGroup.ARTHROPOD)) {
+        if (ModConfig.get().arthropods.general.noFallDamage && this.getType().isIn(EntityTypeTags.ARTHROPOD)) {
             cir.setReturnValue(0);
         }
     }
@@ -65,7 +60,7 @@ public abstract class LivingEntityMixin extends Entity {
 
             if (realAmount > 0.f
                     && livingEntity != null
-                    && livingEntity.isUndead()
+                    && livingEntity.getType().isIn(EntityTypeTags.UNDEAD)
                     && !(livingEntity instanceof WitherEntity)) {
                 livingEntity.heal(realAmount);
             }

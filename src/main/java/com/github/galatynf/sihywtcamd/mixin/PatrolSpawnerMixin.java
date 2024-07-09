@@ -27,7 +27,7 @@ public class PatrolSpawnerMixin {
                 }
 
                 patrolEntity.setPosition(pos.getX(), pos.getY(), pos.getZ());
-                patrolEntity.initialize(world, world.getLocalDifficulty(pos), SpawnReason.PATROL, null, null);
+                patrolEntity.initialize(world, world.getLocalDifficulty(pos), SpawnReason.PATROL, null);
                 world.spawnEntityAndPassengers(patrolEntity);
                 cir.setReturnValue(true);
             } else {
@@ -51,7 +51,7 @@ public class PatrolSpawnerMixin {
                 }
 
                 patrolEntity1.setPosition(pos.getX(), pos.getY(), pos.getZ());
-                patrolEntity1.initialize(world, world.getLocalDifficulty(pos), SpawnReason.PATROL, null, null);
+                patrolEntity1.initialize(world, world.getLocalDifficulty(pos), SpawnReason.PATROL, null);
                 world.spawnEntityAndPassengers(patrolEntity1);
                 cir.setReturnValue(true);
             } else {

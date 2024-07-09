@@ -18,7 +18,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(MobEntity.class)
 public abstract class MobEntityMixin extends LivingEntity {
     @Shadow @Final protected GoalSelector targetSelector;
-
     @Shadow @Final protected GoalSelector goalSelector;
 
     @Shadow public abstract void setBaby(boolean baby);
@@ -39,7 +38,7 @@ public abstract class MobEntityMixin extends LivingEntity {
 
     @Inject(method = "initialize", at = @At("TAIL"))
     protected void onInitialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason,
-                              EntityData entityData, NbtCompound entityNbt, CallbackInfoReturnable<EntityData> cir) {
+                                EntityData entityData, CallbackInfoReturnable<EntityData> cir) {
 
     }
 

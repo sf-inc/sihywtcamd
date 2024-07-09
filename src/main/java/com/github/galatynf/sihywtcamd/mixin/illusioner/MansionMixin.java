@@ -25,7 +25,7 @@ public class MansionMixin {
             if (illusioner != null) {
                 illusioner.setPersistent();
                 illusioner.refreshPositionAndAngles(pos, 0.0f, 0.0f);
-                illusioner.initialize(world, world.getLocalDifficulty(illusioner.getBlockPos()), SpawnReason.STRUCTURE, null, null);
+                illusioner.initialize(world, world.getLocalDifficulty(illusioner.getBlockPos()), SpawnReason.STRUCTURE, null);
 
                 world.spawnEntityAndPassengers(illusioner);
                 if (random.nextFloat() < 0.8f) {

@@ -23,14 +23,13 @@ public class PathNodeMakerMixin {
         if (!ModConfig.get().general.pathPassengerAware || !entity.hasPassengers()) return;
 
         Entity rider = entity;
-        float height = entity.getHeight();
+        float height = (float) -entity.getPos().y;
         float maxWidth = entity.getWidth();
         while (rider.hasPassengers()) {
-            height += rider.getFirstPassenger().getRidingOffset(rider);
             rider = rider.getFirstPassenger();
-            height += rider.getHeight();
             maxWidth = Math.max(maxWidth, rider.getWidth());
         }
+        height += (float) (rider.getHeight() + rider.getPos().y);
 
         this.entityBlockXSize = MathHelper.ceil(maxWidth);
         this.entityBlockYSize = MathHelper.ceil(height);

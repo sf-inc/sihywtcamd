@@ -9,7 +9,6 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.GhastEntity;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
@@ -24,7 +23,7 @@ public abstract class GhastMixin extends MobEntityMixin {
 
     @Override
     protected void onInitialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason,
-                                EntityData entityData, NbtCompound entityTag, CallbackInfoReturnable<EntityData> cir) {
+                                EntityData entityData, CallbackInfoReturnable<EntityData> cir) {
         if (!ModConfig.get().nether.ghast.increasedHealth) return;
 
         EntityAttributeInstance maxHealth = this.getAttributes().getCustomInstance(EntityAttributes.GENERIC_MAX_HEALTH);

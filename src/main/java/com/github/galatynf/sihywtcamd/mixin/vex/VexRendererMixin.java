@@ -10,14 +10,14 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import static com.github.galatynf.sihywtcamd.Sihywtcamd.MOD_ID;
+import static com.github.galatynf.sihywtcamd.Sihywtcamd.id;
 
 @Mixin(VexEntityRenderer.class)
 public abstract class VexRendererMixin {
     @Unique
-    private static final Identifier VEX_TEXTURE = new Identifier(MOD_ID, "textures/entity/vex.png");
+    private static final Identifier VEX_TEXTURE = id("textures/entity/vex.png");
     @Unique
-    private static final Identifier VEX_CHARGING_TEXTURE = new Identifier(MOD_ID, "textures/entity/vex_charging.png");
+    private static final Identifier VEX_CHARGING_TEXTURE = id("textures/entity/vex_charging.png");
 
     @Inject(method = "getTexture*", at = @At("HEAD"), cancellable = true)
     private void getTexture(VexEntity vexEntity, CallbackInfoReturnable<Identifier> cir) {

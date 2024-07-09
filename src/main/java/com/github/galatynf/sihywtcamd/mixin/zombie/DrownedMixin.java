@@ -10,7 +10,6 @@ import net.minecraft.entity.mob.GuardianEntity;
 import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.LocalDifficulty;
@@ -45,18 +44,19 @@ public abstract class DrownedMixin extends ZombieEntity {
     }
 
     @Inject(method = "initialize", at = @At("TAIL"))
-    private void trySpawnAsGuardianJockey(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, EntityData entityData, NbtCompound entityNbt, CallbackInfoReturnable<EntityData> cir) {
+    private void trySpawnAsGuardianJockey(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason,
+                                          EntityData entityData, CallbackInfoReturnable<EntityData> cir) {
         if (ModConfig.get().zombies.drowned.guardianJockeySpawn && this.isBaby() && !this.hasVehicle()
                 && world.getRandom().nextFloat() < 0.1F + 0.1F * difficulty.getClampedLocalDifficulty()) {
             List<GuardianEntity> list = world.getEntitiesByClass(GuardianEntity.class, this.getBoundingBox().expand(5.0D, 3.0D, 5.0D), EntityPredicates.NOT_MOUNTED);
             if (!list.isEmpty()) {
-                GuardianEntity guardianEntity = list.get(0);
+                GuardianEntity guardianEntity = list.getFirst();
                 this.startRiding(guardianEntity);
             } else {
                 GuardianEntity guardianEntity = EntityType.GUARDIAN.create(this.getWorld());
                 if (guardianEntity != null) {
                     guardianEntity.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), this.getYaw(), 0.0F);
-                    guardianEntity.initialize(world, difficulty, SpawnReason.JOCKEY, null, null);
+                    guardianEntity.initialize(world, difficulty, SpawnReason.JOCKEY, null);
                     this.startRiding(guardianEntity);
                     world.spawnEntity(guardianEntity);
                 }

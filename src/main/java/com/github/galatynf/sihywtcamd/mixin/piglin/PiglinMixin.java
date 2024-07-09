@@ -7,7 +7,6 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.mob.AbstractPiglinEntity;
 import net.minecraft.entity.mob.HoglinEntity;
 import net.minecraft.entity.mob.PiglinEntity;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
@@ -29,20 +28,20 @@ public abstract class PiglinMixin extends AbstractPiglinEntity {
     }
 
     @Inject(method = "initialize", at = @At("TAIL"))
-    private void spawnOnHoglin(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, EntityData entityData,
-                               NbtCompound entityTag, CallbackInfoReturnable<EntityData> cir) {
+    private void spawnOnHoglin(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason,
+                               EntityData entityData, CallbackInfoReturnable<EntityData> cir) {
         if (ModConfig.get().nether.piglin.rideHoglin && !this.hasVehicle()
                 && world.getRandom().nextFloat() < 0.05F + 0.05F * difficulty.getClampedLocalDifficulty()) {
             this.setCannotHunt(true);
             List<HoglinEntity> list = world.getEntitiesByClass(HoglinEntity.class, this.getBoundingBox().expand(5.0D, 3.0D, 5.0D), EntityPredicates.NOT_MOUNTED);
             if (!list.isEmpty()) {
-                HoglinEntity hoglinEntity = list.get(0);
+                HoglinEntity hoglinEntity = list.getFirst();
                 this.startRiding(hoglinEntity);
             } else {
                 HoglinEntity hoglinEntity2 = EntityType.HOGLIN.create(this.getWorld());
                 if (hoglinEntity2 != null) {
                     hoglinEntity2.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), this.getYaw(), 0.0F);
-                    hoglinEntity2.initialize(world, difficulty, SpawnReason.JOCKEY, null, null);
+                    hoglinEntity2.initialize(world, difficulty, SpawnReason.JOCKEY, null);
                     this.startRiding(hoglinEntity2);
                     world.spawnEntity(hoglinEntity2);
                 }

@@ -1,9 +1,10 @@
 package com.github.galatynf.sihywtcamd.entity;
 
-import com.github.galatynf.sihywtcamd.Sihywtcamd;
+import com.github.galatynf.sihywtcamd.block.BlockRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.util.hit.EntityHitResult;
@@ -26,7 +27,7 @@ public class CobwebProjectileEntity extends ProjectileEntity {
     }
 
     public static CobwebProjectileEntity create(World world, LivingEntity owner) {
-        CobwebProjectileEntity cobwebProjectileEntity = new CobwebProjectileEntity(Sihywtcamd.COBWEB, world);
+        CobwebProjectileEntity cobwebProjectileEntity = new CobwebProjectileEntity(EntityRegistry.COBWEB, world);
         cobwebProjectileEntity.setPosition(owner.getPos());
         cobwebProjectileEntity.setOwner(owner);
         return cobwebProjectileEntity;
@@ -131,7 +132,7 @@ public class CobwebProjectileEntity extends ProjectileEntity {
         if (!entityHitResult.getEntity().isTouchingWater()) {
             BlockPos blockPos = entityHitResult.getEntity().getBlockPos().withY(this.getBlockY());
             if (getWorld().getBlockState(blockPos).isAir()) {
-                this.getWorld().setBlockState(blockPos, Sihywtcamd.MESSY_COBWEB.getDefaultState());
+                this.getWorld().setBlockState(blockPos, BlockRegistry.MESSY_COBWEB.getDefaultState());
             }
         }
 
@@ -139,7 +140,7 @@ public class CobwebProjectileEntity extends ProjectileEntity {
     }
 
     @Override
-    protected void initDataTracker() {
-
+    protected void initDataTracker(DataTracker.Builder builder) {
+        builder.build();
     }
 }

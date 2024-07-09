@@ -11,7 +11,6 @@ import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.mob.MagmaCubeEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.SlimeEntity;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
@@ -40,9 +39,9 @@ public abstract class SlimeMixin extends MobEntity {
         super(entityType, world);
     }
 
-    @Inject(method = "initialize", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/MobEntity;initialize(Lnet/minecraft/world/ServerWorldAccess;Lnet/minecraft/world/LocalDifficulty;Lnet/minecraft/entity/SpawnReason;Lnet/minecraft/entity/EntityData;Lnet/minecraft/nbt/NbtCompound;)Lnet/minecraft/entity/EntityData;"))
-    private void spawnBigger(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, EntityData entityData,
-                             NbtCompound entityNbt, CallbackInfoReturnable<EntityData> cir) {
+    @Inject(method = "initialize", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/MobEntity;initialize(Lnet/minecraft/world/ServerWorldAccess;Lnet/minecraft/world/LocalDifficulty;Lnet/minecraft/entity/SpawnReason;Lnet/minecraft/entity/EntityData;)Lnet/minecraft/entity/EntityData;"))
+    private void spawnBigger(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason,
+                             EntityData entityData, CallbackInfoReturnable<EntityData> cir) {
         SlimeEntity slime = (SlimeEntity) (Object) this;
         if (ModConfig.get().overworld.slime.biggerSize
                 && !(slime instanceof MagmaCubeEntity)

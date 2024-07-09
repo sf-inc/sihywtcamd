@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 public class WitherSkullMixin {
     @ModifyVariable(method = "onPlaced(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/entity/SkullBlockEntity;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;spawnEntity(Lnet/minecraft/entity/Entity;)Z"))
     private static WitherEntity initWitherOnSummoned(WitherEntity witherEntity, World world, BlockPos pos, SkullBlockEntity blockEntity) {
-        witherEntity.initialize((ServerWorldAccess) world, world.getLocalDifficulty(pos), SpawnReason.MOB_SUMMONED, null, null);
+        witherEntity.initialize((ServerWorldAccess) world, world.getLocalDifficulty(pos), SpawnReason.MOB_SUMMONED, null);
         return witherEntity;
     }
 }
