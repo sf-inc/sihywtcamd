@@ -49,6 +49,11 @@
       "sihywtcamd:skeleton_component",
       "sihywtcamd:slime_component",
       "sihywtcamd:wither_component"
-    ]
+    ],
+    "modmenu": {
+      "links": {
+        "modmenu.discord": "https://discord.gg/eNwkve8k7c"
+      }
+    }
   }
 }
