@@ -38,8 +38,8 @@
   ],
   "accessWidener": "sihywtcamd.accesswidener",
   "depends": {
-    "fabricloader": ">=0.12.6",
-    "fabric": "*"
+    "fabricloader": ">=0.15.11",
+    "fabric-api": ">=0.100.4"
   },
   "custom": {
     "cardinal-components": [
