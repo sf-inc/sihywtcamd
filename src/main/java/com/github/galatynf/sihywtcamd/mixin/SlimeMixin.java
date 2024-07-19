@@ -3,11 +3,7 @@ package com.github.galatynf.sihywtcamd.mixin;
 import com.github.galatynf.sihywtcamd.Sihywtcamd;
 import com.github.galatynf.sihywtcamd.cardinal.MyComponents;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
-import net.minecraft.entity.EntityData;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.ai.TargetPredicate;
+import net.minecraft.entity.*;
 import net.minecraft.entity.mob.MagmaCubeEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.SlimeEntity;
@@ -50,32 +46,30 @@ public abstract class SlimeMixin extends MobEntity {
         }
     }
 
-    @Inject(method = "tick", at = @At("TAIL"))
-    private void tryToMerge(CallbackInfo ci) {
-        SlimeEntity slime = (SlimeEntity) (Object) this;
+    @Inject(method = "pushAwayFrom", at = @At("TAIL"))
+    private void tryToMerge(Entity entity, CallbackInfo ci) {
+        if (!this.getType().equals(entity.getType())) return;
+
+        SlimeEntity thisSlime = (SlimeEntity) (Object) this;
+        SlimeEntity otherSlime = (SlimeEntity) entity;
         if (!this.getWorld().isClient()
-                && !(slime instanceof MagmaCubeEntity)
+                && !(thisSlime instanceof MagmaCubeEntity)
                 && ModConfig.get().overworld.slime.canMerge
                 && !MyComponents.SLIME_COMPONENT.get(this).hasMerged()
                 && this.isAlive()
                 && this.getSize() < 4
-                && (this.getWorld().getTime() % 5) == 0) {
-            SlimeEntity slimeEntity = this.getWorld().getClosestEntity(SlimeEntity.class, TargetPredicate.DEFAULT, this,
-                    this.getX(), this.getY(), this.getZ(), this.getBoundingBox());
-            if (slimeEntity != null
-                    && this.getSize() == slimeEntity.getSize()) {
-                MyComponents.SLIME_COMPONENT.get(this).setMerged(true);
-                slimeEntity.remove(RemovalReason.DISCARDED);
-                this.setSize(this.getSize() * 2, true);
-                this.getWorld().addParticle(this.getParticles(), this.getX(), this.getY(), this.getZ(),
-                        0.0, 0.0, 0.0);
-                this.playSound(SoundEvents.ENTITY_SLIME_ATTACK, 1.0f,
-                        (this.random.nextFloat() - this.random.nextFloat()) * 0.2f + 1.0f);
+                && this.getSize() == otherSlime.getSize()) {
+            MyComponents.SLIME_COMPONENT.get(this).setMerged(true);
+            otherSlime.remove(RemovalReason.DISCARDED);
+            this.setSize(this.getSize() * 2, true);
+            this.getWorld().addParticle(this.getParticles(), this.getX(), this.getY(), this.getZ(),
+                    0.0, 0.0, 0.0);
+            this.playSound(SoundEvents.ENTITY_SLIME_ATTACK, 1.0f,
+                    (this.random.nextFloat() - this.random.nextFloat()) * 0.2f + 1.0f);
 
-                if (Sihywtcamd.DEBUG) {
-                    this.setCustomName(Text.of("Merged"));
-                    this.setCustomNameVisible(true);
-                }
+            if (Sihywtcamd.DEBUG) {
+                this.setCustomName(Text.of("Merged"));
+                this.setCustomNameVisible(true);
             }
         }
     }
