@@ -4,6 +4,9 @@
 * **x.X versions** are either updates that add content or major bug fixes
 * **x.x.X versions** are either small content updates (language translation, new textures, ...) or bug fixes
 
+## v1.10.2
+* Fix crash on load when not having CC-API on 1.21
+
 ## v1.10.1
 * Fix server freeze with multiple rider (#52)
 * Fix compatibility issue with Mob Variant (#51)
