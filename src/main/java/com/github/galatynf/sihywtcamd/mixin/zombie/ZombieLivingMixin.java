@@ -55,7 +55,7 @@ public abstract class ZombieLivingMixin extends LivingEntityMixin {
                                  EntityData entityData, CallbackInfoReturnable<EntityData> cir) {
         this.setBaby(world.getRandom().nextBoolean());
         if (ModConfig.get().zombies.general.babyTowerHeight > 0
-                //&& this.isBaby()
+                && this.isBaby()
                 && !this.hasVehicle()
                 && world.getRandom().nextFloat() < 0.2f) {
             final float random = world.getRandom().nextFloat();
