@@ -4,6 +4,10 @@
 * **x.X versions** are either updates that add content or major bug fixes
 * **x.x.X versions** are either small content updates (language translation, new textures, ...) or bug fixes
 
+## v1.10.3
+* Fix cave spider natural spawn ignoring light level
+* Fix zombie tower not always zombie (introduced in 1.21 port when testing the port)
+
 ## v1.10.2
 * Fix crash on load when not having CC-API on 1.21
 
