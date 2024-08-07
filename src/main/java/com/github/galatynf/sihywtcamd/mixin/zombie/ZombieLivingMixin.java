@@ -53,7 +53,6 @@ public abstract class ZombieLivingMixin extends LivingEntityMixin {
     @Inject(method = "initialize", at = @At("TAIL"))
     private void spawnBabyTowers(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason,
                                  EntityData entityData, CallbackInfoReturnable<EntityData> cir) {
-        this.setBaby(world.getRandom().nextBoolean());
         if (ModConfig.get().zombies.general.babyTowerHeight > 0
                 && this.isBaby()
                 && !this.hasVehicle()
@@ -67,10 +66,10 @@ public abstract class ZombieLivingMixin extends LivingEntityMixin {
                     if (newBaby == null) {
                         break;
                     }
-                    newBaby.setBaby(true);
                     newBaby.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), this.getYaw(), 0.0f);
                     newBaby.startRiding(lastBaby, true);
                     newBaby.initialize(world, difficulty, SpawnReason.JOCKEY, null);
+                    newBaby.setBaby(true);
 
                     lastBaby = newBaby;
                 } else {
