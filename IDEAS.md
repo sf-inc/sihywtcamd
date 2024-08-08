@@ -6,6 +6,14 @@ May be added one day, as it may not.
 
 ## Features
 
+### Piglins
+- Eat pork they get from hunting to heal (maybe run away to eat)
+- Can send ender pearls to cross gasps
+
+### Ghasts
+- Pop out with particles and sound effect
+- Creates explosion on death
+
 ### Skeletons
 - Skeletons: don't shoot if shielding
 - Spider jockeys: use tipped arrow to heal mobs
@@ -19,6 +27,7 @@ May be added one day, as it may not.
 - Cave spiders: different effects depending on depth ?
 
 ### Slimy
+- Merge after delay on spawn
 - Slime/magma: speed depending on size
 - Slime: Depending on their size, they will fling the player away on hit
 - Slime: Their chunky bodies will negate and reflect projectiles
@@ -28,11 +37,14 @@ May be added one day, as it may not.
 - Witches cast thunder strikes ? and changes weather to storm ?
 
 ### Other
-- Undead can heal from damage they make
-- Undead don't do revenge on other undead mobs
 - Silverfishes: pop out if you take damage near infested blocks
 - Mob breaking blocks? like torches
 - Smart mobs (illagers?) could open doors/press buttons?
+- Undead healing should add particle effects
+- Shulkers stack levitation effect with less duration
+- Path passenger aware for spiders don't work
+- Blazes reduce atk range
+- Increase follow range but not aggro range
 
 ## Gimmicks
 Rare stuff that triggers an advancement
