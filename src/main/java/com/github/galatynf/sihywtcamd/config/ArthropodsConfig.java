@@ -25,6 +25,7 @@ public class ArthropodsConfig implements ConfigData {
     public GeneralSpiders generalSpiders = new GeneralSpiders();
 
     public static class GeneralSpiders {
+        @ConfigEntry.Gui.RequiresRestart
         public boolean webProjectileGoal = true;
     }
 

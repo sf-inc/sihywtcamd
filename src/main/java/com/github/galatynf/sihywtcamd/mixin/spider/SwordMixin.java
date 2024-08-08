@@ -17,6 +17,10 @@ import java.util.List;
 public class SwordMixin {
     @WrapOperation(method = "createToolComponent", at = @At(value = "INVOKE", target = "Lnet/minecraft/component/type/ToolComponent$Rule;ofAlwaysDropping(Ljava/util/List;F)Lnet/minecraft/component/type/ToolComponent$Rule;"))
     private static ToolComponent.Rule addMessyCobwebComponent(List<Block> blocks, float speed, Operation<ToolComponent.Rule> original) {
+        if (!ModConfig.get().arthropods.generalSpiders.webProjectileGoal) {
+            return original.call(blocks, speed);
+        }
+
         ArrayList<Block> list = new ArrayList<>(blocks);
         list.add(BlockRegistry.MESSY_COBWEB);
         return original.call(list, speed);

@@ -1,5 +1,6 @@
 package com.github.galatynf.sihywtcamd.init;
 
+import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvent;
@@ -12,6 +13,8 @@ public class SoundRegistry {
     public static SoundEvent SPIDER_SPIT_EVENT = SoundEvent.of(SPIDER_SPIT_ID);
 
     public static void init() {
-        Registry.register(Registries.SOUND_EVENT, SPIDER_SPIT_ID, SPIDER_SPIT_EVENT);
+        if (ModConfig.get().arthropods.generalSpiders.webProjectileGoal) {
+            Registry.register(Registries.SOUND_EVENT, SPIDER_SPIT_ID, SPIDER_SPIT_EVENT);
+        }
     }
 }
