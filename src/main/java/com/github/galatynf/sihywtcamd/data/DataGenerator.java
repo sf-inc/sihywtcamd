@@ -1,7 +1,7 @@
 package com.github.galatynf.sihywtcamd.data;
 
 import com.github.galatynf.sihywtcamd.Sihywtcamd;
-import com.github.galatynf.sihywtcamd.block.BlockRegistry;
+import com.github.galatynf.sihywtcamd.init.BlockRegistry;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;

@@ -1,6 +1,7 @@
 package com.github.galatynf.sihywtcamd.mixin.spider;
 
-import com.github.galatynf.sihywtcamd.block.BlockRegistry;
+import com.github.galatynf.sihywtcamd.config.ModConfig;
+import com.github.galatynf.sihywtcamd.init.BlockRegistry;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.block.Block;

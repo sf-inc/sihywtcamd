@@ -1,7 +1,7 @@
-package com.github.galatynf.sihywtcamd.client;
+package com.github.galatynf.sihywtcamd;
 
-import com.github.galatynf.sihywtcamd.block.BlockRegistry;
-import com.github.galatynf.sihywtcamd.entity.EntityRegistry;
+import com.github.galatynf.sihywtcamd.init.BlockRenderRegistry;
+import com.github.galatynf.sihywtcamd.init.EntityRenderRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -10,7 +10,7 @@ import net.fabricmc.api.Environment;
 public class SihywtcamdClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        BlockRegistry.initClient();
-        EntityRegistry.initClient();
+        BlockRenderRegistry.init();
+        EntityRenderRegistry.init();
     }
 }

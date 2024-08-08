@@ -1,6 +1,5 @@
 {
   "required": true,
-  "minVersion": "0.8",
   "package": "com.github.galatynf.sihywtcamd.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
@@ -13,7 +12,6 @@
     "EntityMixin",
     "FleeGoalMixin",
     "LivingEntityMixin",
-    "LivingEntityRendererMixin",
     "MagmaCubeMixin",
     "MobEntityMixin",
     "PathNodeMakerMixin",
@@ -63,13 +61,6 @@
     "zombie.HuskMixin",
     "zombie.ZombieHorseMobMixin",
     "zombie.ZombieLivingMixin"
-  ],
-  "client": [
-    "AllayRendererMixin",
-    "EntityRenderDispatcherMixin",
-    "ghast.GhastRendererMixin",
-    "phantom.PhantomRendererMixin",
-    "vex.VexRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -47,6 +47,15 @@ processResources {
 loom {
     accessWidenerPath = file("src/main/resources/sihywtcamd.accesswidener")
 
+    splitEnvironmentSourceSets()
+
+    mods {
+        modid {
+            sourceSet sourceSets.main
+            sourceSet sourceSets.client
+        }
+    }
+
     runs {
         // This adds a new gradle task that runs the datagen API: "gradlew runDatagen"
         datagen {

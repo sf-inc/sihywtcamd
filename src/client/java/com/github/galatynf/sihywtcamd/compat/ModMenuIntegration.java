@@ -1,5 +1,6 @@
-package com.github.galatynf.sihywtcamd.config;
+package com.github.galatynf.sihywtcamd.compat;
 
+import com.github.galatynf.sihywtcamd.config.ModConfig;
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
 import me.shedaniel.autoconfig.AutoConfig;

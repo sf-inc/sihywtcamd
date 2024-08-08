@@ -1,6 +1,6 @@
 package com.github.galatynf.sihywtcamd.entity;
 
-import com.github.galatynf.sihywtcamd.block.BlockRegistry;
+import com.github.galatynf.sihywtcamd.init.BlockRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;

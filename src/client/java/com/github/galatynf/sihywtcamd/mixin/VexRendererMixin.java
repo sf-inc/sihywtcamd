@@ -1,4 +1,4 @@
-package com.github.galatynf.sihywtcamd.mixin.vex;
+package com.github.galatynf.sihywtcamd.mixin;
 
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.client.render.entity.VexEntityRenderer;

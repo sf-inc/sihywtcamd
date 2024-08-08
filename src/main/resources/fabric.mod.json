@@ -21,7 +21,7 @@
       "com.github.galatynf.sihywtcamd.data.DataGenerator"
     ],
     "client": [
-      "com.github.galatynf.sihywtcamd.client.SihywtcamdClient"
+      "com.github.galatynf.sihywtcamd.SihywtcamdClient"
     ],
     "main": [
       "com.github.galatynf.sihywtcamd.Sihywtcamd"
@@ -30,11 +30,15 @@
       "com.github.galatynf.sihywtcamd.cardinal.MyComponents"
     ],
     "modmenu": [
-      "com.github.galatynf.sihywtcamd.config.ModMenuIntegration"
+      "com.github.galatynf.sihywtcamd.compat.ModMenuIntegration"
     ]
   },
   "mixins": [
-    "sihywtcamd.mixins.json"
+    "sihywtcamd.mixins.json",
+    {
+      "config": "sihywtcamd.client.mixins.json",
+      "environment": "client"
+    }
   ],
   "accessWidener": "sihywtcamd.accesswidener",
   "depends": {

@@ -27,7 +27,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import static com.github.galatynf.sihywtcamd.Sihywtcamd.id;
-import static com.github.galatynf.sihywtcamd.block.BlockRegistry.MESSY_COBWEB;
+import static com.github.galatynf.sihywtcamd.init.BlockRegistry.MESSY_COBWEB;
 import static com.github.galatynf.sihywtcamd.init.SoundRegistry.SPIDER_SPIT_EVENT;
 
 @Mixin(SpiderEntity.class)

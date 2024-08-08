@@ -1,6 +1,6 @@
 package com.github.galatynf.sihywtcamd;
 
-import com.github.galatynf.sihywtcamd.block.BlockRegistry;
+import com.github.galatynf.sihywtcamd.init.BlockRegistry;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import com.github.galatynf.sihywtcamd.entity.EntityRegistry;
 import com.github.galatynf.sihywtcamd.init.*;
