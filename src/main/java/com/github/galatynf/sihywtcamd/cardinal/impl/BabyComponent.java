@@ -2,6 +2,7 @@ package com.github.galatynf.sihywtcamd.cardinal.impl;
 
 import com.github.galatynf.sihywtcamd.cardinal.MyComponents;
 import com.github.galatynf.sihywtcamd.cardinal.api.BabyComponentAPI;
+import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.RegistryByteBuf;
@@ -48,5 +49,13 @@ public class BabyComponent implements BabyComponentAPI {
     @Override
     public void writeSyncPacket(RegistryByteBuf buf, ServerPlayerEntity player) {
         buf.writeBoolean(this.isBaby);
+    }
+
+    @Override
+    public boolean isRequiredOnClient() {
+        return ModConfig.get().arthropods.spider.baby
+                || ModConfig.get().arthropods.caveSpider.baby
+                || ModConfig.get().skeletons.general.baby
+                || ModConfig.get().skeletons.witherSkeleton.baby;
     }
 }
