@@ -39,10 +39,11 @@ public abstract class SkeletonHorseTrapMixin {
         LocalDifficulty localDifficulty = serverWorld.getLocalDifficulty(this.skeletonHorse.getBlockPos());
 
 
-        // Spawn skeleton
+        // Spawn spectral skeleton
         AbstractSkeletonEntity skeletonEntity = EntityType.SKELETON.create(this.skeletonHorse.getWorld());
         if (skeletonEntity == null) return;
         this.initSkeleton(skeletonEntity, localDifficulty, this.skeletonHorse);
+        ((SpectralSkeletonIMixin) skeletonEntity).sihywtcamd$setSpectral();
         serverWorld.spawnEntityAndPassengers(skeletonEntity);
 
         AbstractHorseEntity abstractHorseEntity;
@@ -58,11 +59,10 @@ public abstract class SkeletonHorseTrapMixin {
             this.initSkeleton(skeletonEntity, localDifficulty, abstractHorseEntity);
             serverWorld.spawnEntityAndPassengers(abstractHorseEntity);
         }
-        // Spawn spectral skeleton
+        // Spawn wither skeleton
         if ((abstractHorseEntity = this.getHorse(localDifficulty)) != null
-                && (skeletonEntity = EntityType.SKELETON.create(this.skeletonHorse.getWorld())) != null) {
+                && (skeletonEntity = EntityType.WITHER_SKELETON.create(this.skeletonHorse.getWorld())) != null) {
             this.initSkeleton(skeletonEntity, localDifficulty, abstractHorseEntity);
-            ((SpectralSkeletonIMixin) skeletonEntity).sihywtcamd$setSpectral();
             serverWorld.spawnEntityAndPassengers(abstractHorseEntity);
         }
 
