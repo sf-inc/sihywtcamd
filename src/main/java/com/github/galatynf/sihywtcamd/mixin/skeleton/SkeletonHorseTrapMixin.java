@@ -10,10 +10,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.SkeletonHorseTrapTriggerGoal;
-import net.minecraft.entity.mob.AbstractSkeletonEntity;
-import net.minecraft.entity.mob.SkeletonEntity;
-import net.minecraft.entity.mob.SkeletonHorseEntity;
-import net.minecraft.entity.mob.StrayEntity;
+import net.minecraft.entity.mob.*;
 import net.minecraft.entity.passive.AbstractHorseEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -61,10 +58,10 @@ public abstract class SkeletonHorseTrapMixin {
             abstractHorseEntity.addVelocity(this.skeletonHorse.getRandom().nextTriangular(0.0, 1.1485), 0.0, this.skeletonHorse.getRandom().nextTriangular(0.0, 1.1485));
             serverWorld.spawnEntityAndPassengers(abstractHorseEntity);
         }
-        // Add a baby
+        // Add a bogged
         if ((abstractHorseEntity = this.getHorse(localDifficulty)) != null
-                && (skeletonEntity = this.getSkeleton(localDifficulty, abstractHorseEntity)) != null) {
-            skeletonEntity.setBaby(true);
+                && (skeletonEntity = this.getBogged(localDifficulty, abstractHorseEntity)) != null) {
+            skeletonEntity.setBaby(false);
             skeletonEntity.startRiding(abstractHorseEntity);
             abstractHorseEntity.addVelocity(this.skeletonHorse.getRandom().nextTriangular(0.0, 1.1485), 0.0, this.skeletonHorse.getRandom().nextTriangular(0.0, 1.1485));
             serverWorld.spawnEntityAndPassengers(abstractHorseEntity);
@@ -92,10 +89,29 @@ public abstract class SkeletonHorseTrapMixin {
     }
 
     @Unique
-    private void enchantEquipment(StrayEntity rider, EquipmentSlot slot, LocalDifficulty localDifficulty) {
+    @Nullable
+    private BoggedEntity getBogged(LocalDifficulty localDifficulty, AbstractHorseEntity vehicle) {
+        BoggedEntity boggedEntity = EntityType.BOGGED.create(vehicle.getWorld());
+        if (boggedEntity != null) {
+            boggedEntity.initialize((ServerWorld)vehicle.getWorld(), localDifficulty, SpawnReason.TRIGGERED, null);
+            boggedEntity.setPosition(vehicle.getX(), vehicle.getY(), vehicle.getZ());
+            boggedEntity.timeUntilRegen = 60;
+            boggedEntity.setPersistent();
+            if (boggedEntity.getEquippedStack(EquipmentSlot.HEAD).isEmpty()) {
+                boggedEntity.equipStack(EquipmentSlot.HEAD, new ItemStack(Items.IRON_HELMET));
+            }
+            this.enchantEquipment(boggedEntity, EquipmentSlot.MAINHAND, localDifficulty);
+            this.enchantEquipment(boggedEntity, EquipmentSlot.HEAD, localDifficulty);
+        }
+        return boggedEntity;
+    }
+
+    @Unique
+    private void enchantEquipment(AbstractSkeletonEntity rider, EquipmentSlot slot, LocalDifficulty localDifficulty) {
         ItemStack itemStack = rider.getEquippedStack(slot);
         itemStack.set(DataComponentTypes.ENCHANTMENTS, ItemEnchantmentsComponent.DEFAULT);
-        EnchantmentHelper.applyEnchantmentProvider(itemStack, rider.getWorld().getRegistryManager(), EnchantmentProviders.MOB_SPAWN_EQUIPMENT, localDifficulty, rider.getRandom());
+        EnchantmentHelper.applyEnchantmentProvider(itemStack, rider.getWorld().getRegistryManager(),
+                EnchantmentProviders.MOB_SPAWN_EQUIPMENT, localDifficulty, rider.getRandom());
         rider.equipStack(slot, itemStack);
     }
 }
