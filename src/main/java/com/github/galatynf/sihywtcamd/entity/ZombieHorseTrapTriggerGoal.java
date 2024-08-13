@@ -62,11 +62,13 @@ public class ZombieHorseTrapTriggerGoal extends Goal {
             this.initZombie(zombieEntity, localDifficulty, Items.TRIDENT, abstractHorseEntity);
             serverWorld.spawnEntityAndPassengers(abstractHorseEntity);
         }
-        // Spawn zombified piglin
+        // Spawn zombie villager
         if ((abstractHorseEntity = this.getHorse(localDifficulty)) != null
-                && (zombieEntity = EntityType.ZOMBIFIED_PIGLIN.create(this.zombieHorse.getWorld())) != null) {
-            this.initZombie(zombieEntity, localDifficulty, Items.GOLDEN_SWORD, abstractHorseEntity);
-            zombieEntity.setTarget(serverWorld.getClosestPlayer(this.zombieHorse, 10.0));
+                && (zombieEntity = EntityType.ZOMBIE_VILLAGER.create(this.zombieHorse.getWorld())) != null) {
+            this.initZombie(zombieEntity, localDifficulty, Items.IRON_AXE, abstractHorseEntity);
+            zombieEntity.equipStack(EquipmentSlot.CHEST, new ItemStack(Items.DIAMOND_CHESTPLATE));
+            zombieEntity.setEquipmentDropChance(EquipmentSlot.CHEST, 0.f);
+            EntityUtils.enchantEquipment(zombieEntity, EquipmentSlot.CHEST, localDifficulty);
             serverWorld.spawnEntityAndPassengers(abstractHorseEntity);
         }
     }
