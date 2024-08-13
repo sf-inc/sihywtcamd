@@ -27,7 +27,6 @@ public class SkeletonsConfig implements ConfigData {
     public Stray stray = new Stray();
 
     public static class Stray {
-        public boolean betterSlowness = true;
         public boolean frozenArrows = true;
         public boolean coldBiomeSpawn = true;
     }
