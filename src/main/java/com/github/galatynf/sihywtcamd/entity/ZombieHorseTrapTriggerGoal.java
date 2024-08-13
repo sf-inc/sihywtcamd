@@ -12,6 +12,8 @@ import net.minecraft.entity.passive.AbstractHorseEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.item.trim.ArmorTrimMaterials;
+import net.minecraft.item.trim.ArmorTrimPatterns;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.LocalDifficulty;
 import org.jetbrains.annotations.Nullable;
@@ -47,6 +49,8 @@ public class ZombieHorseTrapTriggerGoal extends Goal {
         ZombieEntity zombieEntity = EntityType.ZOMBIE.create(this.zombieHorse.getWorld());
         if (zombieEntity == null) return;
         this.initZombie(zombieEntity, localDifficulty, Items.IRON_SWORD, this.zombieHorse);
+        EntityUtils.trimEntityArmor(serverWorld, zombieEntity, EquipmentSlot.HEAD,
+                ArmorTrimMaterials.LAPIS, ArmorTrimPatterns.SHAPER);
         serverWorld.spawnEntityAndPassengers(zombieEntity);
 
         AbstractHorseEntity abstractHorseEntity;
@@ -54,12 +58,16 @@ public class ZombieHorseTrapTriggerGoal extends Goal {
         if ((abstractHorseEntity = this.getHorse(localDifficulty)) != null
                 && (zombieEntity = EntityType.HUSK.create(this.zombieHorse.getWorld())) != null) {
             this.initZombie(zombieEntity, localDifficulty, Items.IRON_SHOVEL, abstractHorseEntity);
+            EntityUtils.trimEntityArmor(serverWorld, zombieEntity, EquipmentSlot.HEAD,
+                    ArmorTrimMaterials.COPPER, ArmorTrimPatterns.DUNE);
             serverWorld.spawnEntityAndPassengers(abstractHorseEntity);
         }
         // Spawn drowned
         if ((abstractHorseEntity = this.getHorse(localDifficulty)) != null
                 && (zombieEntity = EntityType.DROWNED.create(this.zombieHorse.getWorld())) != null) {
             this.initZombie(zombieEntity, localDifficulty, Items.TRIDENT, abstractHorseEntity);
+            EntityUtils.trimEntityArmor(serverWorld, zombieEntity, EquipmentSlot.HEAD,
+                    ArmorTrimMaterials.DIAMOND, ArmorTrimPatterns.COAST);
             serverWorld.spawnEntityAndPassengers(abstractHorseEntity);
         }
         // Spawn zombie villager
@@ -69,6 +77,10 @@ public class ZombieHorseTrapTriggerGoal extends Goal {
             zombieEntity.equipStack(EquipmentSlot.CHEST, new ItemStack(Items.DIAMOND_CHESTPLATE));
             zombieEntity.setEquipmentDropChance(EquipmentSlot.CHEST, 0.f);
             EntityUtils.enchantEquipment(zombieEntity, EquipmentSlot.CHEST, localDifficulty);
+            EntityUtils.trimEntityArmor(serverWorld, zombieEntity, EquipmentSlot.CHEST,
+                    ArmorTrimMaterials.EMERALD, ArmorTrimPatterns.HOST);
+            EntityUtils.trimEntityArmor(serverWorld, zombieEntity, EquipmentSlot.HEAD,
+                    ArmorTrimMaterials.EMERALD, ArmorTrimPatterns.HOST);
             serverWorld.spawnEntityAndPassengers(abstractHorseEntity);
         }
     }
