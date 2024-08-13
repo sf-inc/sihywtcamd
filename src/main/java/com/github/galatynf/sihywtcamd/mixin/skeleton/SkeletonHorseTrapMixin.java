@@ -3,10 +3,6 @@ package com.github.galatynf.sihywtcamd.mixin.skeleton;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import com.github.galatynf.sihywtcamd.entity.EntityUtils;
 import com.github.galatynf.sihywtcamd.imixin.SpectralSkeletonIMixin;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.ItemEnchantmentsComponent;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.provider.EnchantmentProviders;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.SpawnReason;
@@ -92,19 +88,10 @@ public abstract class SkeletonHorseTrapMixin {
         if (skeletonEntity.getEquippedStack(EquipmentSlot.HEAD).isEmpty()) {
             skeletonEntity.equipStack(EquipmentSlot.HEAD, new ItemStack(Items.IRON_HELMET));
         }
-        this.enchantEquipment(skeletonEntity, EquipmentSlot.MAINHAND, localDifficulty);
-        this.enchantEquipment(skeletonEntity, EquipmentSlot.HEAD, localDifficulty);
+        EntityUtils.enchantEquipment(skeletonEntity, EquipmentSlot.MAINHAND, localDifficulty);
+        EntityUtils.enchantEquipment(skeletonEntity, EquipmentSlot.HEAD, localDifficulty);
 
         vehicle.addVelocity(this.skeletonHorse.getRandom().nextTriangular(0.0, 1.1485), 0.0, this.skeletonHorse.getRandom().nextTriangular(0.0, 1.1485));
         skeletonEntity.startRiding(vehicle);
-    }
-
-    @Unique
-    private void enchantEquipment(AbstractSkeletonEntity rider, EquipmentSlot slot, LocalDifficulty localDifficulty) {
-        ItemStack itemStack = rider.getEquippedStack(slot);
-        itemStack.set(DataComponentTypes.ENCHANTMENTS, ItemEnchantmentsComponent.DEFAULT);
-        EnchantmentHelper.applyEnchantmentProvider(itemStack, rider.getWorld().getRegistryManager(),
-                EnchantmentProviders.MOB_SPAWN_EQUIPMENT, localDifficulty, rider.getRandom());
-        rider.equipStack(slot, itemStack);
     }
 }

@@ -1,10 +1,6 @@
 package com.github.galatynf.sihywtcamd.entity;
 
 import com.github.galatynf.sihywtcamd.imixin.ZombieHorseIMixin;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.ItemEnchantmentsComponent;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.provider.EnchantmentProviders;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LightningEntity;
@@ -102,16 +98,9 @@ public class ZombieHorseTrapTriggerGoal extends Goal {
         if (zombieEntity.getEquippedStack(EquipmentSlot.HEAD).isEmpty()) {
             zombieEntity.equipStack(EquipmentSlot.HEAD, new ItemStack(Items.IRON_HELMET));
         }
-        this.enchantEquipment(zombieEntity, EquipmentSlot.MAINHAND, localDifficulty);
-        this.enchantEquipment(zombieEntity, EquipmentSlot.HEAD, localDifficulty);
+        EntityUtils.enchantEquipment(zombieEntity, EquipmentSlot.MAINHAND, localDifficulty);
+        EntityUtils.enchantEquipment(zombieEntity, EquipmentSlot.HEAD, localDifficulty);
 
         zombieEntity.startRiding(vehicle);
-    }
-
-    private void enchantEquipment(ZombieEntity rider, EquipmentSlot slot, LocalDifficulty localDifficulty) {
-        ItemStack itemStack = rider.getEquippedStack(slot);
-        itemStack.set(DataComponentTypes.ENCHANTMENTS, ItemEnchantmentsComponent.DEFAULT);
-        EnchantmentHelper.applyEnchantmentProvider(itemStack, rider.getWorld().getRegistryManager(), EnchantmentProviders.MOB_SPAWN_EQUIPMENT, localDifficulty, rider.getRandom());
-        rider.equipStack(slot, itemStack);
     }
 }
