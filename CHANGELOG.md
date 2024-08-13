@@ -4,6 +4,23 @@
 * **x.X versions** are either updates that add content or major bug fixes
 * **x.x.X versions** are either small content updates (language translation, new textures, ...) or bug fixes
 
+## v1.10.4
+### Tweaks
+* Fix zombie being set to baby too often (introduced in 1.21 port when testing the port)
+* Make the mod joinable by vanilla client if some configs are disabled.
+  These are the web projectiles and every baby configs.
+* Remove the slowness 2 for strays, as there are already frozen arrows to increase difficulty
+* Replace the netherite sword with an iron sword for wither skeletons
+
+### Skeleton horsemen
+* Replace the baby zombie with the bogged
+* Replace the regular skeleton with a wither skeleton holding a bow
+* Give them style with armor trims on their armor
+
+### Zombie horsemen
+* Replace zombified piglin with a zombie villager with a diamond chestplate
+* Give them style with armor trims on their armor
+
 ## v1.10.3
 * Fix cave spider natural spawn ignoring light level
 * Fix zombie tower not always zombie (introduced in 1.21 port when testing the port)
