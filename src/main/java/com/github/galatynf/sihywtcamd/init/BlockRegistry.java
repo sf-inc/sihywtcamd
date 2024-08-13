@@ -15,7 +15,12 @@ import static com.github.galatynf.sihywtcamd.Sihywtcamd.id;
 public class BlockRegistry {
     public static Block MESSY_COBWEB;
 
+    private static boolean isInit = false;
+
     public static void init() {
+        if (isInit) return;
+        isInit = true;
+
         if (ModConfig.get().arthropods.generalSpiders.webProjectileGoal) {
             MESSY_COBWEB = new MessyCobweb(AbstractBlock.Settings.create()
                     .mapColor(MapColor.WHITE_GRAY).sounds(BlockSoundGroup.COBWEB).solid().noCollision().requiresTool()

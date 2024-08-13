@@ -21,6 +21,8 @@ public class SwordMixin {
             return original.call(blocks, speed);
         }
 
+        BlockRegistry.init();
+
         ArrayList<Block> list = new ArrayList<>(blocks);
         list.add(BlockRegistry.MESSY_COBWEB);
         return original.call(list, speed);
