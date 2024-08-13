@@ -61,7 +61,7 @@
   "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton": "Le wither squelette",
   "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton.baby": "Les wither squelettes peuvent apparaître bébé",
   "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton.bow": "Les wither squelettes peuvent apparaître avec un arc (si adulte)",
-  "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton.netheriteSword": "Les wither squelettes ont une épée en netherite",
+  "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton.ironSword": "Les wither squelettes ont une épée en fer",
   "text.autoconfig.sihywtcamd.option.skeletons.skeletonHorse": "Le cheval squelette",
   "text.autoconfig.sihywtcamd.option.skeletons.skeletonHorse.skeletonsVariationOnTrap": "Le piège de cheval squelette fait apparaître différent squelettes",
   "text.autoconfig.sihywtcamd.option.skeletons.skeletonHorse.increasedSpeed": "Les mobs les chevauchent plus vite",

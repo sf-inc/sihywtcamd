@@ -36,9 +36,9 @@ public abstract class WitherSkeletonMixin extends AbstractSkeletonEntity {
                 && random.nextFloat() < 0.25F) {
             this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.BOW));
             ci.cancel();
-        } else if (ModConfig.get().skeletons.witherSkeleton.netheriteSword) {
-            this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.NETHERITE_SWORD));
-            this.setEquipmentDropChance(EquipmentSlot.MAINHAND, 0.025f);
+        } else if (ModConfig.get().skeletons.witherSkeleton.ironSword) {
+            this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_SWORD));
+            this.setEquipmentDropChance(EquipmentSlot.MAINHAND, 0.05f);
             ci.cancel();
         }
     }

@@ -61,7 +61,7 @@
   "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton": "Wither skeleton",
   "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton.baby": "Wither skeletons can spawn baby",
   "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton.bow": "Wither skeletons can spawn carrying a bow (if adult)",
-  "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton.netheriteSword": "Wither skeletons have a netherite sword",
+  "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton.ironSword": "Wither skeletons have an iron sword",
   "text.autoconfig.sihywtcamd.option.skeletons.skeletonHorse": "Skeleton horse",
   "text.autoconfig.sihywtcamd.option.skeletons.skeletonHorse.skeletonsVariationOnTrap": "Skeletons horse trap spawn different type of skeletons",
   "text.autoconfig.sihywtcamd.option.skeletons.skeletonHorse.increasedSpeed": "Mobs ride them at higher speed",
