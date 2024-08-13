@@ -36,7 +36,7 @@ public class SkeletonsConfig implements ConfigData {
     public static class WitherSkeleton {
         public boolean baby = true;
         public boolean bow = true;
-        public boolean netheriteSword = true;
+        public boolean ironSword = true;
     }
 
     @ConfigEntry.Gui.CollapsibleObject
