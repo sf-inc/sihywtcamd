@@ -1,6 +1,7 @@
 package com.github.galatynf.sihywtcamd.mixin.skeleton;
 
 import com.github.galatynf.sihywtcamd.config.ModConfig;
+import com.github.galatynf.sihywtcamd.entity.EntityUtils;
 import com.github.galatynf.sihywtcamd.imixin.SpectralSkeletonIMixin;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.ItemEnchantmentsComponent;
@@ -14,6 +15,8 @@ import net.minecraft.entity.mob.*;
 import net.minecraft.entity.passive.AbstractHorseEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.item.trim.ArmorTrimMaterials;
+import net.minecraft.item.trim.ArmorTrimPatterns;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.LocalDifficulty;
 import org.jetbrains.annotations.Nullable;
@@ -44,6 +47,8 @@ public abstract class SkeletonHorseTrapMixin {
         if (skeletonEntity == null) return;
         this.initSkeleton(skeletonEntity, localDifficulty, this.skeletonHorse);
         ((SpectralSkeletonIMixin) skeletonEntity).sihywtcamd$setSpectral();
+        EntityUtils.trimEntityArmor(serverWorld, skeletonEntity, EquipmentSlot.HEAD,
+                ArmorTrimMaterials.GOLD, ArmorTrimPatterns.RAISER);
         serverWorld.spawnEntityAndPassengers(skeletonEntity);
 
         AbstractHorseEntity abstractHorseEntity;
@@ -51,18 +56,24 @@ public abstract class SkeletonHorseTrapMixin {
         if ((abstractHorseEntity = this.getHorse(localDifficulty)) != null
                 && (skeletonEntity = EntityType.STRAY.create(this.skeletonHorse.getWorld())) != null) {
             this.initSkeleton(skeletonEntity, localDifficulty, abstractHorseEntity);
+            EntityUtils.trimEntityArmor(serverWorld, skeletonEntity, EquipmentSlot.HEAD,
+                    ArmorTrimMaterials.DIAMOND, ArmorTrimPatterns.SHAPER);
             serverWorld.spawnEntityAndPassengers(abstractHorseEntity);
         }
         // Spawn bogged
         if ((abstractHorseEntity = this.getHorse(localDifficulty)) != null
                 && (skeletonEntity = EntityType.BOGGED.create(this.skeletonHorse.getWorld())) != null) {
             this.initSkeleton(skeletonEntity, localDifficulty, abstractHorseEntity);
+            EntityUtils.trimEntityArmor(serverWorld, skeletonEntity, EquipmentSlot.HEAD,
+                    ArmorTrimMaterials.EMERALD, ArmorTrimPatterns.HOST);
             serverWorld.spawnEntityAndPassengers(abstractHorseEntity);
         }
         // Spawn wither skeleton
         if ((abstractHorseEntity = this.getHorse(localDifficulty)) != null
                 && (skeletonEntity = EntityType.WITHER_SKELETON.create(this.skeletonHorse.getWorld())) != null) {
             this.initSkeleton(skeletonEntity, localDifficulty, abstractHorseEntity);
+            EntityUtils.trimEntityArmor(serverWorld, skeletonEntity, EquipmentSlot.HEAD,
+                    ArmorTrimMaterials.NETHERITE, ArmorTrimPatterns.RIB);
             serverWorld.spawnEntityAndPassengers(abstractHorseEntity);
         }
 
