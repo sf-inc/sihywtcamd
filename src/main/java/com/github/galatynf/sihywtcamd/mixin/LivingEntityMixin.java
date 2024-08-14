@@ -49,20 +49,15 @@ public abstract class LivingEntityMixin extends Entity {
             float realAmount = (float) this.timeUntilRegen > 10.0f && !source.isIn(DamageTypeTags.BYPASSES_COOLDOWN)
                     ? amount - this.lastDamageTaken : amount;
 
-            LivingEntity livingEntity = source.getAttacker() instanceof LivingEntity
+            LivingEntity attacker = source.getAttacker() instanceof LivingEntity
                     ? (LivingEntity) source.getAttacker()
                     : null;
-            if (livingEntity == null) {
-                livingEntity = source.getSource() instanceof LivingEntity
-                        ? (LivingEntity) source.getSource()
-                        : null;
-            }
 
             if (realAmount > 0.f
-                    && livingEntity != null
-                    && livingEntity.getType().isIn(EntityTypeTags.UNDEAD)
-                    && !(livingEntity instanceof WitherEntity)) {
-                livingEntity.heal(realAmount);
+                    && attacker != null
+                    && attacker.getType().isIn(EntityTypeTags.UNDEAD)
+                    && !(attacker instanceof WitherEntity)) {
+                attacker.heal(realAmount);
             }
         }
     }
