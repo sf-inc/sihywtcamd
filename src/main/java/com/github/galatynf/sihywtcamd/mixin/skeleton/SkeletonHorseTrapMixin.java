@@ -68,6 +68,8 @@ public abstract class SkeletonHorseTrapMixin {
         if ((abstractHorseEntity = this.getHorse(localDifficulty)) != null
                 && (skeletonEntity = EntityType.WITHER_SKELETON.create(this.skeletonHorse.getWorld())) != null) {
             this.initSkeleton(skeletonEntity, localDifficulty, abstractHorseEntity);
+            skeletonEntity.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.BOW));
+            EntityUtils.enchantEquipment(skeletonEntity, EquipmentSlot.MAINHAND, localDifficulty);
             EntityUtils.trimEntityArmor(serverWorld, skeletonEntity, EquipmentSlot.HEAD,
                     ArmorTrimMaterials.NETHERITE, ArmorTrimPatterns.RIB);
             serverWorld.spawnEntityAndPassengers(abstractHorseEntity);
