@@ -43,8 +43,7 @@ public abstract class SkeletonHorseTrapMixin {
         if (skeletonEntity == null) return;
         this.initSkeleton(skeletonEntity, localDifficulty, this.skeletonHorse);
         ((SpectralSkeletonIMixin) skeletonEntity).sihywtcamd$setSpectral();
-        EntityUtils.trimEntityArmor(serverWorld, skeletonEntity, EquipmentSlot.HEAD,
-                ArmorTrimMaterials.GOLD, ArmorTrimPatterns.RAISER);
+        EntityUtils.trimEntityArmor(serverWorld, skeletonEntity, ArmorTrimMaterials.GOLD, ArmorTrimPatterns.RAISER);
         serverWorld.spawnEntityAndPassengers(skeletonEntity);
 
         AbstractHorseEntity abstractHorseEntity;
@@ -52,16 +51,14 @@ public abstract class SkeletonHorseTrapMixin {
         if ((abstractHorseEntity = this.getHorse(localDifficulty)) != null
                 && (skeletonEntity = EntityType.STRAY.create(this.skeletonHorse.getWorld())) != null) {
             this.initSkeleton(skeletonEntity, localDifficulty, abstractHorseEntity);
-            EntityUtils.trimEntityArmor(serverWorld, skeletonEntity, EquipmentSlot.HEAD,
-                    ArmorTrimMaterials.DIAMOND, ArmorTrimPatterns.SHAPER);
+            EntityUtils.trimEntityArmor(serverWorld, skeletonEntity, ArmorTrimMaterials.DIAMOND, ArmorTrimPatterns.SHAPER);
             serverWorld.spawnEntityAndPassengers(abstractHorseEntity);
         }
         // Spawn bogged
         if ((abstractHorseEntity = this.getHorse(localDifficulty)) != null
                 && (skeletonEntity = EntityType.BOGGED.create(this.skeletonHorse.getWorld())) != null) {
             this.initSkeleton(skeletonEntity, localDifficulty, abstractHorseEntity);
-            EntityUtils.trimEntityArmor(serverWorld, skeletonEntity, EquipmentSlot.HEAD,
-                    ArmorTrimMaterials.EMERALD, ArmorTrimPatterns.HOST);
+            EntityUtils.trimEntityArmor(serverWorld, skeletonEntity, ArmorTrimMaterials.EMERALD, ArmorTrimPatterns.HOST);
             serverWorld.spawnEntityAndPassengers(abstractHorseEntity);
         }
         // Spawn wither skeleton
@@ -70,8 +67,7 @@ public abstract class SkeletonHorseTrapMixin {
             this.initSkeleton(skeletonEntity, localDifficulty, abstractHorseEntity);
             skeletonEntity.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.BOW));
             EntityUtils.enchantEquipment(skeletonEntity, EquipmentSlot.MAINHAND, localDifficulty);
-            EntityUtils.trimEntityArmor(serverWorld, skeletonEntity, EquipmentSlot.HEAD,
-                    ArmorTrimMaterials.NETHERITE, ArmorTrimPatterns.RIB);
+            EntityUtils.trimEntityArmor(serverWorld, skeletonEntity, ArmorTrimMaterials.NETHERITE, ArmorTrimPatterns.RIB);
             serverWorld.spawnEntityAndPassengers(abstractHorseEntity);
         }
 

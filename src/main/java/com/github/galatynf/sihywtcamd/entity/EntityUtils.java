@@ -31,6 +31,14 @@ public class EntityUtils {
                 trimMaterialRegistry.entryOf(material), trimPatternRegistry.entryOf(pattern)));
     }
 
+    public static void trimEntityArmor(ServerWorld world, MobEntity mob, RegistryKey<ArmorTrimMaterial> material,
+                                       RegistryKey<ArmorTrimPattern> pattern) {
+        trimEntityArmor(world, mob, EquipmentSlot.HEAD, material, pattern);
+        trimEntityArmor(world, mob, EquipmentSlot.CHEST, material, pattern);
+        trimEntityArmor(world, mob, EquipmentSlot.LEGS, material, pattern);
+        trimEntityArmor(world, mob, EquipmentSlot.FEET, material, pattern);
+    }
+
     public static void enchantEquipment(MobEntity entity, EquipmentSlot slot, LocalDifficulty localDifficulty) {
         ItemStack itemStack = entity.getEquippedStack(slot);
         itemStack.set(DataComponentTypes.ENCHANTMENTS, ItemEnchantmentsComponent.DEFAULT);
