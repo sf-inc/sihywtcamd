@@ -1,6 +1,7 @@
 package com.github.galatynf.sihywtcamd.mixin;
 
 import com.github.galatynf.sihywtcamd.config.ModConfig;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
@@ -10,8 +11,6 @@ import net.minecraft.entity.LivingEntity;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntityRenderer.class)
 public abstract class LivingEntityRendererMixin<T extends LivingEntity>
@@ -20,12 +19,13 @@ public abstract class LivingEntityRendererMixin<T extends LivingEntity>
         super(ctx);
     }
 
-    @Inject(method = "getRenderLayer", at = @At("HEAD"), cancellable = true)
-    private void setTranslucentPhantoms(T entity, boolean showBody, boolean translucent, boolean showOutline,
-                                        CallbackInfoReturnable<@Nullable RenderLayer> cir) {
+    @ModifyReturnValue(method = "getRenderLayer", at = @At("RETURN"))
+    private @Nullable RenderLayer setTranslucentPhantoms(@Nullable RenderLayer original, T entity, boolean showBody,
+                                                         boolean translucent, boolean showOutline) {
         if ((entity.getType().equals(EntityType.GHAST) && ModConfig.get().cosmetics.translucentGhast)
                 || (entity.getType().equals(EntityType.PHANTOM) && ModConfig.get().cosmetics.translucentPhantom)) {
-            cir.setReturnValue(RenderLayer.getEntityTranslucent(getTexture(entity)));
+            return RenderLayer.getEntityTranslucent(getTexture(entity));
         }
+        return original;
     }
 }
