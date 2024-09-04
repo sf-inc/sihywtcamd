@@ -8,8 +8,8 @@
 
   "text.autoconfig.sihywtcamd.category.overworld": "Overworld",
   "text.autoconfig.sihywtcamd.option.overworld.creeper": "Le creeper",
-  "text.autoconfig.sihywtcamd.option.overworld.creeper.explosionFatigue": "Les explosions de creepers donnent fatigue de minage",
-  "text.autoconfig.sihywtcamd.option.overworld.creeper.explosionWeakness": "Les explosions de creepers donnent faiblesse",
+  "text.autoconfig.sihywtcamd.option.overworld.creeper.explosionFatigueMaxDuration": "Les explosions de creepers donnent fatigue de minage pour max (s)",
+  "text.autoconfig.sihywtcamd.option.overworld.creeper.explosionWeaknessMaxDuration": "Les explosions de creepers donnent faiblesse pour max (s)",
   "text.autoconfig.sihywtcamd.option.overworld.creeper.chainExplosions": "Les creepers s'allument avec les dégâts d'explosions",
   "text.autoconfig.sihywtcamd.option.overworld.slime": "Le slime",
   "text.autoconfig.sihywtcamd.option.overworld.slime.biggerSize": "Les slimes peuvent apparaître avec une taille en plus",
