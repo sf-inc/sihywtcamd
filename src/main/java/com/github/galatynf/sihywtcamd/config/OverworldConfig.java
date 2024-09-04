@@ -10,8 +10,10 @@ public class OverworldConfig implements ConfigData {
     public Creeper creeper = new Creeper();
 
     public static class Creeper {
-        public boolean explosionFatigue = true;
-        public boolean explosionWeakness = true;
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 300)
+        public int explosionFatigueMaxDuration = 60;
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 300)
+        public int explosionWeaknessMaxDuration = 60;
         public boolean chainExplosions = true;
     }
 

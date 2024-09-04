@@ -3,14 +3,12 @@ package com.github.galatynf.sihywtcamd.mixin;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.CreeperEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.tag.DamageTypeTags;
-import net.minecraft.util.math.Box;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -34,27 +32,27 @@ public abstract class CreeperMixin extends LivingEntityMixin {
 
     @Inject(method = "explode", at = @At("HEAD"))
     private void effectToEntities(CallbackInfo ci) {
-        if (this.getWorld().isClient()) {
-            return;
-        }
+        if (this.getWorld().isClient()) return;
+
+        final int fatigueDuration = ModConfig.get().overworld.creeper.explosionFatigueMaxDuration * 20;
+        final int weaknessDuration = ModConfig.get().overworld.creeper.explosionWeaknessMaxDuration * 20;
+        if (fatigueDuration <= 0 && weaknessDuration <= 0) return;
 
         final int explosionRadius = this.explosionRadius * (this.shouldRenderOverlay() ? 3 : 2);
-        final int duration = 150;
-        Vec3d explosionRadiuses = new Vec3d(explosionRadius, explosionRadius, explosionRadius);
         List<Entity> entityList = this.getWorld().getOtherEntities(this,
-                new Box(this.getPos().subtract(explosionRadiuses), this.getPos().add(explosionRadiuses)),
-                entity -> entity instanceof PlayerEntity && this.distanceTo(entity) < explosionRadius);
+                this.getBoundingBox().expand(explosionRadius),
+                entity -> entity instanceof LivingEntity && this.distanceTo(entity) < explosionRadius);
 
         for (Entity entity : entityList) {
             final double multiplier = Math.sqrt(1.0 - (this.distanceTo(entity) / explosionRadius));
-            PlayerEntity playerEntity = (PlayerEntity) entity;
-            if (ModConfig.get().overworld.creeper.explosionFatigue) {
-                playerEntity.addStatusEffect(new StatusEffectInstance(
-                        StatusEffects.MINING_FATIGUE, (int) (duration * multiplier)), this);
+            LivingEntity livingEntity = (LivingEntity) entity;
+            if (fatigueDuration > 0) {
+                livingEntity.addStatusEffect(new StatusEffectInstance(
+                        StatusEffects.MINING_FATIGUE, (int) (fatigueDuration * multiplier)), this);
             }
-            if (ModConfig.get().overworld.creeper.explosionWeakness) {
-                playerEntity.addStatusEffect(new StatusEffectInstance(
-                        StatusEffects.WEAKNESS, (int) (duration * multiplier)), this);
+            if (weaknessDuration > 0) {
+                livingEntity.addStatusEffect(new StatusEffectInstance(
+                        StatusEffects.WEAKNESS, (int) (weaknessDuration * multiplier)), this);
             }
         }
     }
