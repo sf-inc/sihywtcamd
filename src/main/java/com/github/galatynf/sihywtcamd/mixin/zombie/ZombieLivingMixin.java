@@ -59,6 +59,7 @@ public abstract class ZombieLivingMixin extends LivingEntityMixin {
                 && world.getRandom().nextFloat() < 0.2f) {
             final float random = world.getRandom().nextFloat();
             ZombieEntity lastBaby = (ZombieEntity) (Object) this;
+            ZombieEntity.ZombieData babyData = new ZombieEntity.ZombieData(true, false);
 
             for (int i = 0; i < ModConfig.get().zombies.general.babyTowerHeight; ++i) {
                 if (random < 1.f / Math.pow(2.f, i)) {
@@ -68,7 +69,7 @@ public abstract class ZombieLivingMixin extends LivingEntityMixin {
                     }
                     newBaby.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), this.getYaw(), 0.0f);
                     newBaby.startRiding(lastBaby, true);
-                    newBaby.initialize(world, difficulty, SpawnReason.JOCKEY, null);
+                    newBaby.initialize(world, difficulty, SpawnReason.JOCKEY, babyData);
                     newBaby.setBaby(true);
 
                     lastBaby = newBaby;
