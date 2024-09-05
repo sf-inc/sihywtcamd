@@ -28,6 +28,7 @@ public class CaveSpiderMixin extends SpiderEntity {
         if (ModConfig.get().arthropods.caveSpider.babySpawnGroup
                 && !this.isBaby()
                 && !this.hasPassengers()
+                && !SpawnReason.isAnySpawner(spawnReason)
                 && this.random.nextFloat() < 0.15F) {
             this.setBaby(true);
 

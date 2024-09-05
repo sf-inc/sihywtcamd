@@ -69,6 +69,7 @@ public abstract class SpiderMobMixin extends MobEntityMixin implements RangedAtt
         if (ModConfig.get().arthropods.spider.babySpawnGroup
                 && !this.isBaby()
                 && !this.hasPassengers()
+                && !SpawnReason.isAnySpawner(spawnReason)
                 && this.random.nextFloat() < 0.1F) {
             this.setBaby(true);
 

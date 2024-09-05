@@ -29,7 +29,7 @@ public abstract class CaveSpiderLivingMixin extends LivingEntityMixin {
                                   EntityData entityData, CallbackInfoReturnable<EntityData> cir) {
         if (ModConfig.get().arthropods.caveSpider.jockey
                 && !this.hasVehicle()
-                && !spawnReason.equals(SpawnReason.SPAWNER)
+                && !SpawnReason.isAnySpawner(spawnReason)
                 && world.getRandom().nextInt(50) == 0) {
             SkeletonEntity skeletonEntity = EntityType.SKELETON.create(this.getWorld());
             if (skeletonEntity != null) {
