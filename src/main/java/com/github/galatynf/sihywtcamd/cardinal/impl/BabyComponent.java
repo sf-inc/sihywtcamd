@@ -3,6 +3,7 @@ package com.github.galatynf.sihywtcamd.cardinal.impl;
 import com.github.galatynf.sihywtcamd.cardinal.MyComponents;
 import com.github.galatynf.sihywtcamd.cardinal.api.BabyComponentAPI;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
+import com.github.galatynf.sihywtcamd.config.UtilsConfig;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.RegistryByteBuf;
@@ -53,10 +54,8 @@ public class BabyComponent implements BabyComponentAPI {
 
     @Override
     public boolean isRequiredOnClient() {
-        return ModConfig.get().arthropods.spider.babyOnDeath
-                || ModConfig.get().arthropods.spider.babySpawnGroup
-                || ModConfig.get().arthropods.caveSpider.babyOnDeath
-                || ModConfig.get().arthropods.caveSpider.babySpawnGroup
+        return UtilsConfig.babySpidersEnabled()
+                || UtilsConfig.babyCaveSpidersEnabled()
                 || ModConfig.get().skeletons.general.baby
                 || ModConfig.get().skeletons.witherSkeleton.baby;
     }

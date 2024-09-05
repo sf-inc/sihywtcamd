@@ -1,7 +1,7 @@
 package com.github.galatynf.sihywtcamd.mixin.spider;
 
 import com.github.galatynf.sihywtcamd.cardinal.MyComponents;
-import com.github.galatynf.sihywtcamd.config.ModConfig;
+import com.github.galatynf.sihywtcamd.config.UtilsConfig;
 import com.github.galatynf.sihywtcamd.mixin.LivingEntityMixin;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.SpiderEntity;
@@ -17,7 +17,7 @@ public abstract class SpiderLivingMixin extends LivingEntityMixin {
 
     @Override
     public boolean updateBaby(boolean original) {
-        return ModConfig.get().arthropods.spider.babyOnDeath
+        return (UtilsConfig.babySpidersEnabled() || UtilsConfig.babyCaveSpidersEnabled())
                 && ((ComponentProvider) this).getComponentContainer() != null
                 ? MyComponents.BABY_COMPONENT.get(this).isBaby()
                 : original;
@@ -25,7 +25,7 @@ public abstract class SpiderLivingMixin extends LivingEntityMixin {
 
     @Override
     protected float updateScaleFactor(float original) {
-        if (ModConfig.get().arthropods.spider.babyOnDeath && this.isBaby()) {
+        if (UtilsConfig.babySpidersEnabled() && this.isBaby()) {
             return 0.33F;
         } else {
             return original;

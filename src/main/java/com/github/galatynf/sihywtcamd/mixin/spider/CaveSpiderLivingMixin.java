@@ -1,6 +1,7 @@
 package com.github.galatynf.sihywtcamd.mixin.spider;
 
 import com.github.galatynf.sihywtcamd.config.ModConfig;
+import com.github.galatynf.sihywtcamd.config.UtilsConfig;
 import com.github.galatynf.sihywtcamd.mixin.LivingEntityMixin;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import net.minecraft.entity.EntityData;
@@ -41,7 +42,7 @@ public abstract class CaveSpiderLivingMixin extends LivingEntityMixin {
 
     @Override
     protected float updateScaleFactor(float original) {
-        if (ModConfig.get().arthropods.caveSpider.babyOnDeath && this.isBaby()) {
+        if (UtilsConfig.babyCaveSpidersEnabled() && this.isBaby()) {
             return 0.5F;
         } else {
             return original;
@@ -50,7 +51,7 @@ public abstract class CaveSpiderLivingMixin extends LivingEntityMixin {
 
     @ModifyExpressionValue(method = "tryAttack", at = @At(value = "NEW", target = "(Lnet/minecraft/registry/entry/RegistryEntry;II)Lnet/minecraft/entity/effect/StatusEffectInstance;"))
     private StatusEffectInstance adaptivePoison(StatusEffectInstance original) {
-        if (ModConfig.get().arthropods.caveSpider.babyOnDeath && this.isBaby()) {
+        if (UtilsConfig.babyCaveSpidersEnabled() && this.isBaby()) {
             int duration = original.getDuration() / 5;
             return new StatusEffectInstance(original.getEffectType(), duration, original.getAmplifier());
         } else {

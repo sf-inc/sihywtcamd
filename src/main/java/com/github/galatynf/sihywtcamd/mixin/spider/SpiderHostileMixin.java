@@ -1,6 +1,6 @@
 package com.github.galatynf.sihywtcamd.mixin.spider;
 
-import com.github.galatynf.sihywtcamd.config.ModConfig;
+import com.github.galatynf.sihywtcamd.config.UtilsConfig;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.mob.SpiderEntity;
@@ -15,7 +15,7 @@ public class SpiderHostileMixin extends HostileMixin {
 
     @Override
     protected boolean updateDropLoot(boolean original) {
-        if (ModConfig.get().arthropods.spider.babyOnDeath || ModConfig.get().arthropods.caveSpider.babyOnDeath) {
+        if (UtilsConfig.babySpidersEnabled() || UtilsConfig.babyCaveSpidersEnabled()) {
             return !this.isBaby();
         } else  {
             return original;
