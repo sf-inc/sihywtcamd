@@ -75,9 +75,11 @@
   "text.autoconfig.sihywtcamd.option.arthropods.generalSpiders": "General spiders",
   "text.autoconfig.sihywtcamd.option.arthropods.generalSpiders.webProjectileGoal": "Spiders can launch webs",
   "text.autoconfig.sihywtcamd.option.arthropods.spider": "Spider",
-  "text.autoconfig.sihywtcamd.option.arthropods.spider.baby": "Spiders can spawn baby spiders on death",
+  "text.autoconfig.sihywtcamd.option.arthropods.spider.babyOnDeath": "Spiders can spawn baby spiders on death",
+  "text.autoconfig.sihywtcamd.option.arthropods.spider.babySpawnGroup": "Spiders can spawn in group of babies",
   "text.autoconfig.sihywtcamd.option.arthropods.caveSpider": "Cave spider",
-  "text.autoconfig.sihywtcamd.option.arthropods.caveSpider.baby": "Cave spiders can spawn baby cave spiders on death",
+  "text.autoconfig.sihywtcamd.option.arthropods.caveSpider.babyOnDeath": "Cave spiders can spawn baby cave spiders on death",
+  "text.autoconfig.sihywtcamd.option.arthropods.caveSpider.babySpawnGroup": "Cave spiders can spawn in group of babies",
   "text.autoconfig.sihywtcamd.option.arthropods.caveSpider.jockey": "Cave spider jockeys can spawn",
   "text.autoconfig.sihywtcamd.option.arthropods.caveSpider.naturalSpawn": "Cave spiders can spawn naturally in caves",
 

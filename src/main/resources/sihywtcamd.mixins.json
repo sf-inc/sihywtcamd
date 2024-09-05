@@ -48,6 +48,7 @@
     "skeleton.StrayMixin",
     "skeleton.WitherSkeletonMixin",
     "spider.CaveSpiderLivingMixin",
+    "spider.CaveSpiderMixin",
     "spider.HostileMixin",
     "spider.LivingEntityMixin",
     "spider.SpiderHostileMixin",

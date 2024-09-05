@@ -53,8 +53,10 @@ public class BabyComponent implements BabyComponentAPI {
 
     @Override
     public boolean isRequiredOnClient() {
-        return ModConfig.get().arthropods.spider.baby
-                || ModConfig.get().arthropods.caveSpider.baby
+        return ModConfig.get().arthropods.spider.babyOnDeath
+                || ModConfig.get().arthropods.spider.babySpawnGroup
+                || ModConfig.get().arthropods.caveSpider.babyOnDeath
+                || ModConfig.get().arthropods.caveSpider.babySpawnGroup
                 || ModConfig.get().skeletons.general.baby
                 || ModConfig.get().skeletons.witherSkeleton.baby;
     }

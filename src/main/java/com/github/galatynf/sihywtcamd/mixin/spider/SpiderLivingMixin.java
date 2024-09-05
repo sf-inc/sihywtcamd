@@ -17,7 +17,7 @@ public abstract class SpiderLivingMixin extends LivingEntityMixin {
 
     @Override
     public boolean updateBaby(boolean original) {
-        return ModConfig.get().arthropods.spider.baby
+        return ModConfig.get().arthropods.spider.babyOnDeath
                 && ((ComponentProvider) this).getComponentContainer() != null
                 ? MyComponents.BABY_COMPONENT.get(this).isBaby()
                 : original;
@@ -25,7 +25,7 @@ public abstract class SpiderLivingMixin extends LivingEntityMixin {
 
     @Override
     protected float updateScaleFactor(float original) {
-        if (ModConfig.get().arthropods.spider.baby && this.isBaby()) {
+        if (ModConfig.get().arthropods.spider.babyOnDeath && this.isBaby()) {
             return 0.33F;
         } else {
             return original;

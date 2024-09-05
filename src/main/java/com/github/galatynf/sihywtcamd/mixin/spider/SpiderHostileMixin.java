@@ -15,7 +15,7 @@ public class SpiderHostileMixin extends HostileMixin {
 
     @Override
     protected boolean updateDropLoot(boolean original) {
-        if (ModConfig.get().arthropods.spider.baby || ModConfig.get().arthropods.caveSpider.baby) {
+        if (ModConfig.get().arthropods.spider.babyOnDeath || ModConfig.get().arthropods.caveSpider.babyOnDeath) {
             return !this.isBaby();
         } else  {
             return original;

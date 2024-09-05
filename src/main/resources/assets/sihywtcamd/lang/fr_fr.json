@@ -75,9 +75,11 @@
   "text.autoconfig.sihywtcamd.option.arthropods.generalSpiders": "Les araignées en général",
   "text.autoconfig.sihywtcamd.option.arthropods.generalSpiders.webProjectileGoal": "Les araignées peuvent lancer des toiles",
   "text.autoconfig.sihywtcamd.option.arthropods.spider": "L'araignée",
-  "text.autoconfig.sihywtcamd.option.arthropods.spider.baby": "Les araignées peuvent faire apparaître des bébés à leur mort",
+  "text.autoconfig.sihywtcamd.option.arthropods.spider.babyOnDeath": "Les araignées peuvent faire apparaître des bébés à leur mort",
+  "text.autoconfig.sihywtcamd.option.arthropods.spider.babySpawnGroup": "Les araignées peuvent apparaître en groupe de bébés",
   "text.autoconfig.sihywtcamd.option.arthropods.caveSpider": "L'araignée venimeuse",
-  "text.autoconfig.sihywtcamd.option.arthropods.caveSpider.baby": "Les araignées venimeuses peuvent faire apparaître des bébés à leur mort",
+  "text.autoconfig.sihywtcamd.option.arthropods.caveSpider.babyOnDeath": "Les araignées venimeuses peuvent faire apparaître des bébés à leur mort",
+  "text.autoconfig.sihywtcamd.option.arthropods.caveSpider.babySpawnGroup": "Les araignées venimeuses peuvent apparaître en groupe de bébés",
   "text.autoconfig.sihywtcamd.option.arthropods.caveSpider.jockey": "Les araignées venimeuses chevauchées peuvent apparaître",
   "text.autoconfig.sihywtcamd.option.arthropods.caveSpider.naturalSpawn": "Les araignées venimeuses peuvent apparaître naturellement en caverne",
 

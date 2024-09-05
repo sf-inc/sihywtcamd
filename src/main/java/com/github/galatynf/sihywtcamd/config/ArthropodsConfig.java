@@ -33,14 +33,16 @@ public class ArthropodsConfig implements ConfigData {
     public Spider spider = new Spider();
 
     public static class Spider {
-        public boolean baby = true;
+        public boolean babyOnDeath = true;
+        public boolean babySpawnGroup = true;
     }
 
     @ConfigEntry.Gui.CollapsibleObject
     public CaveSpider caveSpider = new CaveSpider();
 
     public static class CaveSpider {
-        public boolean baby = true;
+        public boolean babyOnDeath = true;
+        public boolean babySpawnGroup = true;
 
         public boolean jockey = true;
         @ConfigEntry.Gui.RequiresRestart
