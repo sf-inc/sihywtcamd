@@ -1,9 +1,14 @@
 package com.github.galatynf.sihywtcamd.entity;
 
+import com.github.galatynf.sihywtcamd.init.BlockRegistry;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.RangedAttackMob;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.mob.HostileEntity;
+import net.minecraft.registry.entry.RegistryEntryList;
+import net.minecraft.util.math.BlockPos;
 
 import java.util.EnumSet;
 
@@ -31,7 +36,19 @@ public class CobwebAttackGoal<T extends HostileEntity & RangedAttackMob> extends
 
     @Override
     public boolean canStart() {
-        return this.actor.getTarget() != null && this.actor.distanceTo(this.actor.getTarget()) > 2.0F;
+        LivingEntity target = this.actor.getTarget();
+        return target != null
+                && this.actor.distanceTo(target) > 2.f
+                && isNotCobweb(target.getBlockPos())
+                && isNotCobweb(target.getBlockPos().up());
+    }
+
+    private boolean isNotCobweb(BlockPos blockPos) {
+        return !this.actor.getWorld().getBlockState(blockPos).isIn(
+                RegistryEntryList.of(
+                        Block::getRegistryEntry,
+                        Blocks.COBWEB,
+                        BlockRegistry.MESSY_COBWEB));
     }
 
     @Override
