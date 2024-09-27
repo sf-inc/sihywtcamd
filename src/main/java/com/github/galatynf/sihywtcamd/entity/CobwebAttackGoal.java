@@ -29,25 +29,25 @@ public class CobwebAttackGoal<T extends HostileEntity & RangedAttackMob> extends
         this.setControls(EnumSet.of(Goal.Control.MOVE, Goal.Control.LOOK));
     }
 
+    @Override
     public boolean canStart() {
         return this.actor.getTarget() != null && this.actor.distanceTo(this.actor.getTarget()) > 2.0F;
     }
 
-    public boolean shouldContinue() {
-        return this.canStart();
-    }
-
+    @Override
     public void start() {
         super.start();
         this.actor.setAttacking(true);
     }
 
+    @Override
     public void stop() {
         super.stop();
         this.actor.setAttacking(false);
         this.targetSeeingTicker = 0;
     }
 
+    @Override
     public void tick() {
         LivingEntity livingEntity = this.actor.getTarget();
         if (livingEntity != null) {
