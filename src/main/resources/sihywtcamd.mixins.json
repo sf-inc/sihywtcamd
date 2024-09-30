@@ -10,6 +10,7 @@
     "EndermanMixin",
     "EndermiteMixin",
     "EntityMixin",
+    "FireworkRocketEntityMixin",
     "FleeGoalMixin",
     "LivingEntityMixin",
     "MagmaCubeMixin",

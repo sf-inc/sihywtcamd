@@ -4,10 +4,7 @@ import com.github.galatynf.sihywtcamd.cardinal.api.*;
 import com.github.galatynf.sihywtcamd.cardinal.impl.*;
 import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
-import net.minecraft.entity.mob.AbstractSkeletonEntity;
-import net.minecraft.entity.mob.SkeletonEntity;
-import net.minecraft.entity.mob.SlimeEntity;
-import net.minecraft.entity.mob.SpiderEntity;
+import net.minecraft.entity.mob.*;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import org.ladysnake.cca.api.v3.component.ComponentKey;
 import org.ladysnake.cca.api.v3.component.ComponentRegistry;
@@ -23,6 +20,8 @@ public final class MyComponents implements EntityComponentInitializer {
             ComponentRegistry.getOrCreate(id("baby_component"), BabyComponentAPI.class);
     public static final ComponentKey<EnderDragonEntityComponentAPI> ENDER_DRAGON_COMPONENT =
             ComponentRegistry.getOrCreate(id("ender_dragon_component"), EnderDragonEntityComponentAPI.class);
+    public static final ComponentKey<PillagerEntityComponentAPI> PILLAGER_COMPONENT =
+            ComponentRegistry.getOrCreate(id("pillager_component"), PillagerEntityComponentAPI.class);
     public static final ComponentKey<SkeletonEntityComponentAPI> SKELETON_COMPONENT =
             ComponentRegistry.getOrCreate(id("skeleton_component"), SkeletonEntityComponentAPI.class);
     public static final ComponentKey<SlimeEntityComponentAPI> SLIME_COMPONENT =
@@ -35,6 +34,7 @@ public final class MyComponents implements EntityComponentInitializer {
         registry.registerFor(PersistentProjectileEntity.class, ARROW_COMPONENT, entity -> new ArrowEntityComponent());
         registry.registerFor(AbstractSkeletonEntity.class, BABY_COMPONENT, BabyComponent::new);
         registry.registerFor(SpiderEntity.class, BABY_COMPONENT, BabyComponent::new);
+        registry.registerFor(PillagerEntity.class, PILLAGER_COMPONENT, PillagerEntityComponent::new);
         registry.registerFor(SkeletonEntity.class, SKELETON_COMPONENT, entity -> new SkeletonEntityComponent());
         registry.registerFor(SlimeEntity.class, SLIME_COMPONENT, entity -> new SlimeEntityComponent());
         registry.registerFor(EnderDragonEntity.class, ENDER_DRAGON_COMPONENT, entity -> new EnderDragonEntityComponent());

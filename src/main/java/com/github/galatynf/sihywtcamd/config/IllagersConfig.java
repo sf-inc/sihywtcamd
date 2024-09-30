@@ -11,7 +11,7 @@ public class IllagersConfig implements ConfigData {
 
     public static class Pillager {
         public boolean moreEnchants = true;
-        public boolean speedBonus = true;
+        public boolean pillatrooper = true;
     }
 
     @ConfigEntry.Gui.CollapsibleObject
