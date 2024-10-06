@@ -37,9 +37,4 @@ public class HostileMixin extends PathAwareEntity {
         return ModConfig.get().arthropods.caveSpider.naturalSpawn
                 && random.nextDouble() < (1.F - 3.F * relativeHeight);
     }
-
-    @ModifyReturnValue(method = "shouldDropLoot", at = @At("RETURN"))
-    protected boolean updateDropLoot(boolean original) {
-        return original;
-    }
 }

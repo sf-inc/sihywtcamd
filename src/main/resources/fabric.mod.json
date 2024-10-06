@@ -20,9 +20,6 @@
     "fabric-datagen": [
       "com.github.galatynf.sihywtcamd.data.DataGenerator"
     ],
-    "client": [
-      "com.github.galatynf.sihywtcamd.SihywtcamdClient"
-    ],
     "main": [
       "com.github.galatynf.sihywtcamd.Sihywtcamd"
     ],
@@ -34,11 +31,7 @@
     ]
   },
   "mixins": [
-    "sihywtcamd.mixins.json",
-    {
-      "config": "sihywtcamd.client.mixins.json",
-      "environment": "client"
-    }
+    "sihywtcamd.mixins.json"
   ],
   "accessWidener": "sihywtcamd.accesswidener",
   "depends": {
@@ -48,7 +41,6 @@
   "custom": {
     "cardinal-components": [
       "sihywtcamd:arrow_component",
-      "sihywtcamd:baby_component",
       "sihywtcamd:ender_dragon_component",
       "sihywtcamd:pillager_component",
       "sihywtcamd:skeleton_component",

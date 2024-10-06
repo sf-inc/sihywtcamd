@@ -1,8 +1,6 @@
 package com.github.galatynf.sihywtcamd;
 
-import com.github.galatynf.sihywtcamd.init.BlockRegistry;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
-import com.github.galatynf.sihywtcamd.entity.EntityRegistry;
 import com.github.galatynf.sihywtcamd.init.*;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
@@ -24,9 +22,6 @@ public class Sihywtcamd implements ModInitializer {
 
         BiomeFeatures.init();
         BiomeSpawn.init();
-        BlockRegistry.init();
-        EntityRegistry.init();
-        SoundRegistry.init();
     }
 
     public static Identifier id(String path) {

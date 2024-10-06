@@ -49,8 +49,6 @@
 
   "text.autoconfig.sihywtcamd.category.skeletons": "Skeletons",
   "text.autoconfig.sihywtcamd.option.skeletons.general": "General skeletons",
-  "text.autoconfig.sihywtcamd.option.skeletons.general.baby": "Skeletons can spawn baby",
-  "text.autoconfig.sihywtcamd.option.skeletons.general.babyQuickAttackGoal": "Baby skeletons shoot quick volleys of arrows",
   "text.autoconfig.sihywtcamd.option.skeletons.general.fleeGoal": "Skeletons flee player if too close",
   "text.autoconfig.sihywtcamd.option.skeletons.general.swimGoal": "Skeletons can swim",
   "text.autoconfig.sihywtcamd.option.skeletons.skeleton": "Skeleton",
@@ -59,7 +57,6 @@
   "text.autoconfig.sihywtcamd.option.skeletons.stray.frozenArrows": "Strays shoot frozen arrows",
   "text.autoconfig.sihywtcamd.option.skeletons.stray.coldBiomeSpawn": "Strays can spawn in any cold biome",
   "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton": "Wither skeleton",
-  "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton.baby": "Wither skeletons can spawn baby",
   "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton.bow": "Wither skeletons can spawn carrying a bow (if adult)",
   "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton.ironSword": "Wither skeletons have an iron sword",
   "text.autoconfig.sihywtcamd.option.skeletons.skeletonHorse": "Skeleton horse",
@@ -72,14 +69,7 @@
   "text.autoconfig.sihywtcamd.option.arthropods.general.larvaeSpeedBonus": "Larvae have a random speed bonus",
   "text.autoconfig.sihywtcamd.option.arthropods.silverfish": "Silverfish",
   "text.autoconfig.sihywtcamd.option.arthropods.silverfish.infestedEverywhere": "Stone is infested everywhere",
-  "text.autoconfig.sihywtcamd.option.arthropods.generalSpiders": "General spiders",
-  "text.autoconfig.sihywtcamd.option.arthropods.generalSpiders.webProjectileGoal": "Spiders can launch webs",
-  "text.autoconfig.sihywtcamd.option.arthropods.spider": "Spider",
-  "text.autoconfig.sihywtcamd.option.arthropods.spider.babyOnDeath": "Spiders can spawn baby spiders on death",
-  "text.autoconfig.sihywtcamd.option.arthropods.spider.babySpawnGroup": "Spiders can spawn in group of babies",
   "text.autoconfig.sihywtcamd.option.arthropods.caveSpider": "Cave spider",
-  "text.autoconfig.sihywtcamd.option.arthropods.caveSpider.babyOnDeath": "Cave spiders can spawn baby cave spiders on death",
-  "text.autoconfig.sihywtcamd.option.arthropods.caveSpider.babySpawnGroup": "Cave spiders can spawn in group of babies",
   "text.autoconfig.sihywtcamd.option.arthropods.caveSpider.jockey": "Cave spider jockeys can spawn",
   "text.autoconfig.sihywtcamd.option.arthropods.caveSpider.naturalSpawn": "Cave spiders can spawn naturally in caves",
 
@@ -132,23 +122,8 @@
   "text.autoconfig.sihywtcamd.option.bosses.wither.explosion": "Withers creates an explosion when half health",
   "text.autoconfig.sihywtcamd.option.bosses.wither.skeletonsSpawn": "Withers can spawn wither skeletons when half health",
 
-  "text.autoconfig.sihywtcamd.category.cosmetics": "Cosmetics",
-  "text.autoconfig.sihywtcamd.option.cosmetics.translucentAllay": "Allays texture is translucent",
-  "text.autoconfig.sihywtcamd.option.cosmetics.translucentGhast": "Ghasts texture is translucent",
-  "text.autoconfig.sihywtcamd.option.cosmetics.translucentPhantom": "Phantoms texture is translucent",
-  "text.autoconfig.sihywtcamd.option.cosmetics.translucentVex": "Vexes texture is translucent",
-
   "advancements.root.title": "SIHYWTCAMD",
   "advancements.root.description": "So I Heard You Were Talking Crap About Minecraft's Difficulty?",
-
-  "advancements.baby_spider_spawn.title": "Baby Revenge",
-  "advancements.baby_spider_spawn.description": "Release the babies of a Spider when killing it",
-
-  "advancements.baby_cave_spider_spawn.title": "Poisonous Revenge",
-  "advancements.baby_cave_spider_spawn.description": "Release the babies of a Spider when killing it",
-
-  "advancements.enter_messy_cobweb.title": "Messy Situation",
-  "advancements.enter_messy_cobweb.description": "Get stuck in a Messy Cobweb while fighting with a Spider",
 
   "advancements.full_golden_armor.title": "Cover Me in Gold",
   "advancements.full_golden_armor.description": "Get a full suit of Golden armor to make Piglins neutral",
@@ -166,7 +141,5 @@
   "advancements.spyglass_at_baby_4.description": "Look at a Baby Zombie holding four other ones through a Spyglass",
 
   "advancements.ride_zombie_horse.title": "A Deadly Ride",
-  "advancements.ride_zombie_horse.description": "Ride a Zombie Horse after defeating its previous rider",
-
-  "subtitles.sihywtcamd.spider_spit": "Spider spits"
+  "advancements.ride_zombie_horse.description": "Ride a Zombie Horse after defeating its previous rider"
 }

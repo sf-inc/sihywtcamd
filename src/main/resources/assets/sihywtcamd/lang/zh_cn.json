@@ -1,17 +1,15 @@
 {
   "text.autoconfig.sihywtcamd.title": "SIHYWTCAMD 配置",
 
+  "text.autoconfig.sihywtcamd.category.general": "敌对生物",
+  "text.autoconfig.sihywtcamd.option.general.mobsLessFear": "目标血量低于一半时不再逃跑",
+  "text.autoconfig.sihywtcamd.option.general.merchantHostility": "绝大多数敌对生物会攻击村民",
+
   "text.autoconfig.sihywtcamd.category.overworld": "主世界",
-  "text.autoconfig.sihywtcamd.option.overworld.general": "敌对生物",
-  "text.autoconfig.sihywtcamd.option.overworld.general.mobsLessFear": "目标血量低于一半时不再逃跑",
-  "text.autoconfig.sihywtcamd.option.overworld.general.merchantHostility": "绝大多数敌对生物会攻击村民",
   "text.autoconfig.sihywtcamd.option.overworld.creeper": "苦力怕",
   "text.autoconfig.sihywtcamd.option.overworld.creeper.explosionFatigueMaxDuration": "爆炸附加挖掘疲劳",
   "text.autoconfig.sihywtcamd.option.overworld.creeper.explosionWeaknessMaxDuration": "爆炸附加虚弱",
   "text.autoconfig.sihywtcamd.option.overworld.creeper.chainExplosions": "可被爆炸伤害引爆",
-  "text.autoconfig.sihywtcamd.option.overworld.phantom": "幻翼",
-  "text.autoconfig.sihywtcamd.option.overworld.phantom.throughBlocks": "可透视并穿过方块",
-  "text.autoconfig.sihywtcamd.option.overworld.phantom.lightFear": "惧怕光源",
   "text.autoconfig.sihywtcamd.option.overworld.slime": "史莱姆",
   "text.autoconfig.sihywtcamd.option.overworld.slime.biggerSize": "可生成更大一级尺寸的",
   "text.autoconfig.sihywtcamd.option.overworld.slime.canMerge": "小型与普通史莱姆可融合",
@@ -22,9 +20,12 @@
   "text.autoconfig.sihywtcamd.option.overworld.guardian.naturalSpawn": "自然生成",
   "text.autoconfig.sihywtcamd.option.overworld.guardian.silentKill": "只在伤害玩家时播放音效",
 
+  "text.autoconfig.sihywtcamd.option.undead.phantom": "幻翼",
+  "text.autoconfig.sihywtcamd.option.undead.phantom.throughBlocks": "可透视并穿过方块",
+  "text.autoconfig.sihywtcamd.option.undead.phantom.lightFear": "惧怕光源",
+
   "text.autoconfig.sihywtcamd.category.zombies": "僵尸",
   "text.autoconfig.sihywtcamd.option.zombies.general": "僵尸类怪物",
-  "text.autoconfig.sihywtcamd.option.zombies.general.attackHeal": "击中吸血",
   "text.autoconfig.sihywtcamd.option.zombies.general.moreKnockbackResistance": "更高的击退抗性",
   "text.autoconfig.sihywtcamd.option.zombies.general.spawnMoreReinforcement": "更高的增援概率",
   "text.autoconfig.sihywtcamd.option.zombies.general.attributeVariations": "属性变种",
@@ -44,9 +45,7 @@
   "text.autoconfig.sihywtcamd.option.skeletons.stray": "流浪者",
   "text.autoconfig.sihywtcamd.option.skeletons.stray.frozenArrows": "使用冰冻药箭",
   "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton": "凋零骷髅",
-  "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton.baby": "生成幼年形态",
   "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton.bow": "可生成用弓的（成年）凋零骷髅变种",
-  "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton.netheriteSword": "凋零骷髅使用下界合金剑",
 
   "text.autoconfig.sihywtcamd.category.arthropods": "节肢怪物",
   "text.autoconfig.sihywtcamd.option.arthropods.general": "节肢类怪物",
@@ -54,10 +53,6 @@
   "text.autoconfig.sihywtcamd.option.arthropods.general.larvaeSpeedBonus": "虫类怪物获得随机速度增益",
   "text.autoconfig.sihywtcamd.option.arthropods.silverfish": "蠹虫",
   "text.autoconfig.sihywtcamd.option.arthropods.silverfish.infestedEverywhere": "感染所有石头",
-  "text.autoconfig.sihywtcamd.option.arthropods.generalSpiders.webProjectileGoal": "喷丝能力",
-  "text.autoconfig.sihywtcamd.option.arthropods.spider": "蜘蛛",
-  "text.autoconfig.sihywtcamd.option.arthropods.spider.babyOnDeath": "蜘蛛死亡时生成小蜘蛛",
-  "text.autoconfig.sihywtcamd.option.arthropods.caveSpider.babyOnDeath": "洞穴蜘蛛死亡时生成小洞穴蜘蛛",
   "text.autoconfig.sihywtcamd.option.arthropods.caveSpider.jockey": "洞穴蜘蛛骑士",
   "text.autoconfig.sihywtcamd.option.arthropods.caveSpider.naturalSpawn": "洞穴蜘蛛可在洞穴内自然生成",
 
@@ -103,13 +98,5 @@
   "text.autoconfig.sihywtcamd.option.bosses.wither.increasedHealth": "略微更高的生命值",
   "text.autoconfig.sihywtcamd.option.bosses.wither.stormyWeather": "将天气变成雷暴",
   "text.autoconfig.sihywtcamd.option.bosses.wither.explosion": "半血爆炸",
-  "text.autoconfig.sihywtcamd.option.bosses.wither.skeletonsSpawn": "半血时生成凋零骷髅",
-
-  "text.autoconfig.sihywtcamd.category.cosmetics": "装饰性",
-  "text.autoconfig.sihywtcamd.option.cosmetics.translucentAllay": "半透明悦灵",
-  "text.autoconfig.sihywtcamd.option.cosmetics.translucentGhast": "半透明恶魂",
-  "text.autoconfig.sihywtcamd.option.cosmetics.translucentPhantom": "半透明幻翼",
-  "text.autoconfig.sihywtcamd.option.cosmetics.translucentVex": "半透明恼鬼",
-
-  "subtitles.sihywtcamd.spider_spit": "蜘蛛：喷丝"
+  "text.autoconfig.sihywtcamd.option.bosses.wither.skeletonsSpawn": "半血时生成凋零骷髅"
 }

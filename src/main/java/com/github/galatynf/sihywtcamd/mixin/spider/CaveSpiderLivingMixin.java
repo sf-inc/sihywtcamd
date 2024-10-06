@@ -1,13 +1,10 @@
 package com.github.galatynf.sihywtcamd.mixin.spider;
 
 import com.github.galatynf.sihywtcamd.config.ModConfig;
-import com.github.galatynf.sihywtcamd.config.UtilsConfig;
 import com.github.galatynf.sihywtcamd.mixin.LivingEntityMixin;
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.mob.CaveSpiderEntity;
 import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.world.LocalDifficulty;
@@ -37,25 +34,6 @@ public abstract class CaveSpiderLivingMixin extends LivingEntityMixin {
                 skeletonEntity.initialize(world, difficulty, spawnReason, null);
                 skeletonEntity.startRiding(this);
             }
-        }
-    }
-
-    @Override
-    protected float updateScaleFactor(float original) {
-        if (UtilsConfig.babyCaveSpidersEnabled() && this.isBaby()) {
-            return 0.5F;
-        } else {
-            return original;
-        }
-    }
-
-    @ModifyExpressionValue(method = "tryAttack", at = @At(value = "NEW", target = "(Lnet/minecraft/registry/entry/RegistryEntry;II)Lnet/minecraft/entity/effect/StatusEffectInstance;"))
-    private StatusEffectInstance adaptivePoison(StatusEffectInstance original) {
-        if (UtilsConfig.babyCaveSpidersEnabled() && this.isBaby()) {
-            int duration = original.getDuration() / 5;
-            return new StatusEffectInstance(original.getEffectType(), duration, original.getAmplifier());
-        } else {
-            return original;
         }
     }
 }

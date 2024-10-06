@@ -10,8 +10,6 @@ public class SkeletonsConfig implements ConfigData {
     public General general = new General();
 
     public static class General {
-        public boolean baby = true;
-        public boolean babyQuickAttackGoal = true;
         public boolean fleeGoal = true;
         public boolean swimGoal = true;
     }
@@ -34,7 +32,6 @@ public class SkeletonsConfig implements ConfigData {
     public WitherSkeleton witherSkeleton = new WitherSkeleton();
 
     public static class WitherSkeleton {
-        public boolean baby = true;
         public boolean bow = true;
         public boolean ironSword = true;
     }

@@ -49,8 +49,6 @@
 
   "text.autoconfig.sihywtcamd.category.skeletons": "Les squelettes",
   "text.autoconfig.sihywtcamd.option.skeletons.general": "Les squelettes en général",
-  "text.autoconfig.sihywtcamd.option.skeletons.general.baby": "Les squelettes peuvent apparaître bébé",
-  "text.autoconfig.sihywtcamd.option.skeletons.general.babyQuickAttackGoal": "Les bébés squelettes tirent des vollées rapides de flèches",
   "text.autoconfig.sihywtcamd.option.skeletons.general.fleeGoal": "Les squelettes fuient les joueurs trop proches",
   "text.autoconfig.sihywtcamd.option.skeletons.general.swimGoal": "Les squelettes peuvent nager",
   "text.autoconfig.sihywtcamd.option.skeletons.skeleton": "Le squelette",
@@ -59,7 +57,6 @@
   "text.autoconfig.sihywtcamd.option.skeletons.stray.frozenArrows": "Les vagabonds tirent des flèches glacées",
   "text.autoconfig.sihywtcamd.option.skeletons.stray.coldBiomeSpawn": "Les vagabonds peuvent apparaître dans n'importe quel biôme froid",
   "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton": "Le wither squelette",
-  "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton.baby": "Les wither squelettes peuvent apparaître bébé",
   "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton.bow": "Les wither squelettes peuvent apparaître avec un arc (si adulte)",
   "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton.ironSword": "Les wither squelettes ont une épée en fer",
   "text.autoconfig.sihywtcamd.option.skeletons.skeletonHorse": "Le cheval squelette",
@@ -72,14 +69,7 @@
   "text.autoconfig.sihywtcamd.option.arthropods.general.larvaeSpeedBonus": "Les larves ont un bonus de vitesse aléatoire",
   "text.autoconfig.sihywtcamd.option.arthropods.silverfish": "Le poisson d'argent",
   "text.autoconfig.sihywtcamd.option.arthropods.silverfish.infestedEverywhere": "La pierre est infestée de partout",
-  "text.autoconfig.sihywtcamd.option.arthropods.generalSpiders": "Les araignées en général",
-  "text.autoconfig.sihywtcamd.option.arthropods.generalSpiders.webProjectileGoal": "Les araignées peuvent lancer des toiles",
-  "text.autoconfig.sihywtcamd.option.arthropods.spider": "L'araignée",
-  "text.autoconfig.sihywtcamd.option.arthropods.spider.babyOnDeath": "Les araignées peuvent faire apparaître des bébés à leur mort",
-  "text.autoconfig.sihywtcamd.option.arthropods.spider.babySpawnGroup": "Les araignées peuvent apparaître en groupe de bébés",
   "text.autoconfig.sihywtcamd.option.arthropods.caveSpider": "L'araignée venimeuse",
-  "text.autoconfig.sihywtcamd.option.arthropods.caveSpider.babyOnDeath": "Les araignées venimeuses peuvent faire apparaître des bébés à leur mort",
-  "text.autoconfig.sihywtcamd.option.arthropods.caveSpider.babySpawnGroup": "Les araignées venimeuses peuvent apparaître en groupe de bébés",
   "text.autoconfig.sihywtcamd.option.arthropods.caveSpider.jockey": "Les araignées venimeuses chevauchées peuvent apparaître",
   "text.autoconfig.sihywtcamd.option.arthropods.caveSpider.naturalSpawn": "Les araignées venimeuses peuvent apparaître naturellement en caverne",
 
@@ -132,23 +122,8 @@
   "text.autoconfig.sihywtcamd.option.bosses.wither.explosion": "Les withers créent une explosion quand mid-life",
   "text.autoconfig.sihywtcamd.option.bosses.wither.skeletonsSpawn": "Les withers font apparaître des withers squelettes quand mid-life",
 
-  "text.autoconfig.sihywtcamd.category.cosmetics": "Les cosmétiques",
-  "text.autoconfig.sihywtcamd.option.cosmetics.translucentAllay": "La texture des allays est transparente",
-  "text.autoconfig.sihywtcamd.option.cosmetics.translucentGhast": "La texture des ghasts est transparente",
-  "text.autoconfig.sihywtcamd.option.cosmetics.translucentPhantom": "La texture des fantômes est transparente",
-  "text.autoconfig.sihywtcamd.option.cosmetics.translucentVex": "La texture des vexes est transparente",
-
   "advancements.root.title": "SIHYWTCAMD",
   "advancements.root.description": "So I Heard You Were Talking Crap About Minecraft's Difficulty?",
-
-  "advancements.baby_spider_spawn.title": "Une bébé vengeance",
-  "advancements.baby_spider_spawn.description": "Relachez les bébés d'une araignée à sa mort",
-
-  "advancements.baby_cave_spider_spawn.title": "Une vengeance venimeuse",
-  "advancements.baby_cave_spider_spawn.description": "Relachez les bébés d'une araignée venimeuse à sa mort",
-
-  "advancements.enter_messy_cobweb.title": "Atterrissage en douleur",
-  "advancements.enter_messy_cobweb.description": "Tombez dans une toile d'araignée désordonnée pendant un combat avec une araignée",
 
   "advancements.full_golden_armor.title": "Couvrez-moi d'or",
   "advancements.full_golden_armor.description": "Obtenez une armure complète en Or pour rendre neutre les piglins.",
@@ -166,7 +141,5 @@
   "advancements.spyglass_at_baby_4.description": "Regardez un bébé zombie en porter quatre autres à travers une longue-vue.",
 
   "advancements.ride_zombie_horse.title": "Une chevauchée mortelle",
-  "advancements.ride_zombie_horse.description": " Montez un cheval zombie après avoir battu son précédent cavalier",
-
-  "subtitles.sihywtcamd.spider_spit": "Araignée qui crache"
+  "advancements.ride_zombie_horse.description": " Montez un cheval zombie après avoir battu son précédent cavalier"
 }

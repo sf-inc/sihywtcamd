@@ -16,8 +16,6 @@ import static com.github.galatynf.sihywtcamd.Sihywtcamd.id;
 public final class MyComponents implements EntityComponentInitializer {
     public static final ComponentKey<ArrowEntityComponentAPI> ARROW_COMPONENT =
             ComponentRegistry.getOrCreate(id("arrow_component"), ArrowEntityComponentAPI.class);
-    public static final ComponentKey<BabyComponentAPI> BABY_COMPONENT =
-            ComponentRegistry.getOrCreate(id("baby_component"), BabyComponentAPI.class);
     public static final ComponentKey<EnderDragonEntityComponentAPI> ENDER_DRAGON_COMPONENT =
             ComponentRegistry.getOrCreate(id("ender_dragon_component"), EnderDragonEntityComponentAPI.class);
     public static final ComponentKey<PillagerEntityComponentAPI> PILLAGER_COMPONENT =
@@ -32,8 +30,6 @@ public final class MyComponents implements EntityComponentInitializer {
     @Override
     public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {
         registry.registerFor(PersistentProjectileEntity.class, ARROW_COMPONENT, entity -> new ArrowEntityComponent());
-        registry.registerFor(AbstractSkeletonEntity.class, BABY_COMPONENT, BabyComponent::new);
-        registry.registerFor(SpiderEntity.class, BABY_COMPONENT, BabyComponent::new);
         registry.registerFor(PillagerEntity.class, PILLAGER_COMPONENT, PillagerEntityComponent::new);
         registry.registerFor(SkeletonEntity.class, SKELETON_COMPONENT, entity -> new SkeletonEntityComponent());
         registry.registerFor(SlimeEntity.class, SLIME_COMPONENT, entity -> new SlimeEntityComponent());
