@@ -4,6 +4,29 @@
 * **x.X versions** are either updates that add content or major bug fixes
 * **x.x.X versions** are either small content updates (language translation, new textures, ...) or bug fixes
 
+## v1.11
+* Move features requiring the mod on client to an extension mod
+  * Baby variants of mobs (spiders and skeletons)
+  * Baby skeletons shooting valve of arrows (as there won't be babies anymore)
+  * Spiders shooting messy cobwebs
+  * Cosmetics changes
+  * Associated advancements
+* Fix baby zombie towers causing worldgen locks
+* Fix spiders condition not checking trial spawner
+* Spiders stop shooting if their target is in cobweb
+* Increase and make duration configurable for effects of creepers explosions
+* Pillagers can spawn as "Pillatrooper"
+  * They can fly up in the air with a firework
+  * When flying down, they shoot quicker valve of arrows
+  * The first arrow shot is guaranteed to be a firework, then it has 50% chance to be an arrow again
+  * They have 20% chance to spawn with this ability
+
+## v1.10.5 (backport version)
+* Intermediary version for the last backport of new features for 1.20.1
+* Include v1.11 changes of the mod (except pillatroopers), without the split of the mod
+* Does not include the changes making the mod joinable by vanilla client from v1.10.4,
+  skeleton and zombie horsemen changes
+
 ## v1.10.4
 ### Tweaks
 * Fix zombie being set to baby too often (introduced in 1.21 port when testing the port)
