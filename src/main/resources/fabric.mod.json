@@ -2,11 +2,11 @@
   "schemaVersion": 1,
   "id": "sihywtcamd",
   "version": "${version}",
-  "name": "sihywtcamd",
+  "name": "SIHYWTCAMD",
   "description": "So I heard you were talking crap about Minecraft's difficulty?",
   "authors": [
-    "GalatynF",
-    "Pardys"
+    "Pardys",
+    "GalatynF"
   ],
   "contact": {
     "homepage": "https://modrinth.com/mod/difficulty",
