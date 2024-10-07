@@ -1,8 +1,8 @@
 package com.github.galatynf.sihywtcamd.mixin.skeleton;
 
+import com.github.galatynf.sihywtcamd.cardinal.MyComponents;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import com.github.galatynf.sihywtcamd.entity.EntityUtils;
-import com.github.galatynf.sihywtcamd.imixin.SpectralSkeletonIMixin;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.SpawnReason;
@@ -42,7 +42,7 @@ public abstract class SkeletonHorseTrapMixin {
         AbstractSkeletonEntity skeletonEntity = EntityType.SKELETON.create(this.skeletonHorse.getWorld());
         if (skeletonEntity == null) return;
         this.initSkeleton(skeletonEntity, localDifficulty, this.skeletonHorse);
-        ((SpectralSkeletonIMixin) skeletonEntity).sihywtcamd$setSpectral();
+        MyComponents.SKELETON_COMPONENT.get(skeletonEntity).setSpectral();
         EntityUtils.trimEntityArmor(serverWorld, skeletonEntity, ArmorTrimMaterials.GOLD, ArmorTrimPatterns.RAISER);
         serverWorld.spawnEntityAndPassengers(skeletonEntity);
 

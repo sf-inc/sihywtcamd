@@ -31,7 +31,7 @@ public final class MyComponents implements EntityComponentInitializer {
     public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {
         registry.registerFor(PersistentProjectileEntity.class, ARROW_COMPONENT, entity -> new ArrowEntityComponent());
         registry.registerFor(PillagerEntity.class, PILLAGER_COMPONENT, PillagerEntityComponent::new);
-        registry.registerFor(SkeletonEntity.class, SKELETON_COMPONENT, entity -> new SkeletonEntityComponent());
+        registry.registerFor(SkeletonEntity.class, SKELETON_COMPONENT, SkeletonEntityComponent::new);
         registry.registerFor(SlimeEntity.class, SLIME_COMPONENT, entity -> new SlimeEntityComponent());
         registry.registerFor(EnderDragonEntity.class, ENDER_DRAGON_COMPONENT, entity -> new EnderDragonEntityComponent());
         registry.registerFor(WitherEntity.class, WITHER_COMPONENT, entity -> new WitherEntityComponent());
