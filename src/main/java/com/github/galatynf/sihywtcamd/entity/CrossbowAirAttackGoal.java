@@ -1,5 +1,7 @@
 package com.github.galatynf.sihywtcamd.entity;
 
+import com.github.galatynf.sihywtcamd.cardinal.MyComponents;
+import com.github.galatynf.sihywtcamd.cardinal.api.PillagerEntityComponentAPI;
 import com.github.galatynf.sihywtcamd.imixin.PillatrooperIMixin;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.ChargedProjectilesComponent;
@@ -24,6 +26,7 @@ import net.minecraft.util.Identifier;
 
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Optional;
 
 import static com.github.galatynf.sihywtcamd.Sihywtcamd.id;
 
@@ -157,6 +160,9 @@ public class CrossbowAirAttackGoal<T extends HostileEntity & CrossbowUser & Pill
             } else if (this.stage == Stage.AIR_FLY) {
                 if (!this.actor.hasVehicle()) {
                     this.stage = Stage.UNCHARGED;
+
+                    Optional<PillagerEntityComponentAPI> pillagerComponent = MyComponents.PILLAGER_COMPONENT.maybeGet(this.actor);
+                    pillagerComponent.ifPresent(pillagerComponent2 -> pillagerComponent2.setFireworkRocket(true));
                 }
             } else if (this.stage == Stage.UNCHARGED) {
                 this.actor.setCurrentHand(ProjectileUtil.getHandPossiblyHolding(this.actor, Items.CROSSBOW));
@@ -184,8 +190,11 @@ public class CrossbowAirAttackGoal<T extends HostileEntity & CrossbowUser & Pill
                 if (isInAir) {
                     this.stage = Stage.UNCHARGED;
                 } else {
-                    this.actor.sihywtcamd$resetDelay();
                     this.stage = Stage.MOVE;
+                    this.actor.sihywtcamd$resetDelay();
+
+                    Optional<PillagerEntityComponentAPI> pillagerComponent = MyComponents.PILLAGER_COMPONENT.maybeGet(this.actor);
+                    pillagerComponent.ifPresent(pillagerComponent2 -> pillagerComponent2.setFireworkRocket(false));
                 }
             }
         }

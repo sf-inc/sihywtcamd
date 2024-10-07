@@ -1,4 +1,4 @@
-package com.github.galatynf.sihywtcamd.mixin;
+package com.github.galatynf.sihywtcamd.mixin.pillager;
 
 import com.github.galatynf.sihywtcamd.Sihywtcamd;
 import com.github.galatynf.sihywtcamd.cardinal.MyComponents;
