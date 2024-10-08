@@ -1,6 +1,6 @@
 package com.github.galatynf.sihywtcamd.entity;
 
-import com.github.galatynf.sihywtcamd.init.BlockRegistry;
+import com.github.galatynf.sihywtcamd.Sihywtcamd;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
@@ -48,7 +48,7 @@ public class CobwebAttackGoal<T extends HostileEntity & RangedAttackMob> extends
                 RegistryEntryList.of(
                         Block::getRegistryEntry,
                         Blocks.COBWEB,
-                        BlockRegistry.MESSY_COBWEB));
+                        Sihywtcamd.MESSY_COBWEB));
     }
 
     @Override
