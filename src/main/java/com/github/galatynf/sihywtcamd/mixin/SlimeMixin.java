@@ -24,12 +24,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(SlimeEntity.class)
 public abstract class SlimeMixin extends MobEntity {
     @Shadow public abstract int getSize();
+    @Shadow public abstract EntityType<? extends SlimeEntity> getType();
+    @Shadow protected abstract ParticleEffect getParticles();
 
     @Shadow public abstract void setSize(int size, boolean heal);
-
-    @Shadow public abstract EntityType<? extends SlimeEntity> getType();
-
-    @Shadow protected abstract ParticleEffect getParticles();
 
     protected SlimeMixin(EntityType<? extends MobEntity> entityType, World world) {
         super(entityType, world);
@@ -46,6 +44,11 @@ public abstract class SlimeMixin extends MobEntity {
         }
     }
 
+    @Inject(method = "tick", at = @At("HEAD"))
+    private void updateMergeDelay(CallbackInfo ci) {
+        MyComponents.SLIME_COMPONENT.get(this).updateMerged();
+    }
+
     @Inject(method = "pushAwayFrom", at = @At("TAIL"))
     private void tryToMerge(Entity entity, CallbackInfo ci) {
         if (!this.getType().equals(entity.getType())) return;
@@ -55,12 +58,13 @@ public abstract class SlimeMixin extends MobEntity {
         if (!this.getWorld().isClient()
                 && !(thisSlime instanceof MagmaCubeEntity)
                 && ModConfig.get().overworld.slime.canMerge
-                && !MyComponents.SLIME_COMPONENT.get(this).hasMerged()
+                && MyComponents.SLIME_COMPONENT.get(this).canMerge()
+                && MyComponents.SLIME_COMPONENT.get(otherSlime).canMerge()
                 && this.isAlive()
                 && this.getSize() < 4
                 && this.getSize() == otherSlime.getSize()) {
-            MyComponents.SLIME_COMPONENT.get(this).setMerged(true);
-            otherSlime.remove(RemovalReason.DISCARDED);
+            MyComponents.SLIME_COMPONENT.get(this).setMerged();
+            otherSlime.discard();
             this.setSize(this.getSize() * 2, true);
             this.getWorld().addParticle(this.getParticles(), this.getX(), this.getY(), this.getZ(),
                     0.0, 0.0, 0.0);
@@ -77,7 +81,9 @@ public abstract class SlimeMixin extends MobEntity {
     @ModifyVariable(method = "remove", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/SlimeEntity;setInvulnerable(Z)V"))
     private SlimeEntity transferMergedGene(SlimeEntity slime, RemovalReason value) {
         boolean hasMerged = MyComponents.SLIME_COMPONENT.get(this).hasMerged();
-        MyComponents.SLIME_COMPONENT.get(slime).setMerged(hasMerged);
+        if (hasMerged) {
+            MyComponents.SLIME_COMPONENT.get(slime).setMerged();
+        }
 
         if (Sihywtcamd.DEBUG && hasMerged) {
             this.setCustomName(Text.of("Merged Child"));

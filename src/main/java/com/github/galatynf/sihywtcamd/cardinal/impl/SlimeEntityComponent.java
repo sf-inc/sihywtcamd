@@ -5,24 +5,37 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryWrapper;
 
 public class SlimeEntityComponent implements SlimeEntityComponentAPI {
-    private boolean hasMerged = false;
+    private int mergeDelay = 50;
 
-    public boolean hasMerged() {
-        return this.hasMerged;
+    @Override
+    public boolean canMerge() {
+        return this.mergeDelay == 0;
     }
 
     @Override
-    public void setMerged(boolean hasMerged) {
-        this.hasMerged = hasMerged;
+    public boolean hasMerged() {
+        return this.mergeDelay < 0;
+    }
+
+    @Override
+    public void setMerged() {
+        this.mergeDelay = -1;
+    }
+
+    @Override
+    public void updateMerged() {
+        if (this.mergeDelay > 0) {
+            this.mergeDelay--;
+        }
     }
 
     @Override
     public void readFromNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
-        this.setMerged(tag.getBoolean("HasMerged"));
+        this.mergeDelay = tag.getInt("MergeDelay");
     }
 
     @Override
     public void writeToNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
-        tag.putBoolean("HasMerged", this.hasMerged);
+        tag.putInt("MergeDelay", this.mergeDelay);
     }
 }
