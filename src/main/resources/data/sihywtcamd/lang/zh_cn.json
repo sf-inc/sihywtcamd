@@ -4,6 +4,7 @@
   "text.autoconfig.sihywtcamd.category.general": "敌对生物",
   "text.autoconfig.sihywtcamd.option.general.mobsLessFear": "目标血量低于一半时不再逃跑",
   "text.autoconfig.sihywtcamd.option.general.merchantHostility": "绝大多数敌对生物会攻击村民",
+  "text.autoconfig.sihywtcamd.option.general.pathPassengerAware": "Mobs don't pathfind through blocks when riding",
 
   "text.autoconfig.sihywtcamd.category.overworld": "主世界",
   "text.autoconfig.sihywtcamd.option.overworld.creeper": "苦力怕",
@@ -13,6 +14,7 @@
   "text.autoconfig.sihywtcamd.option.overworld.slime": "史莱姆",
   "text.autoconfig.sihywtcamd.option.overworld.slime.biggerSize": "可生成更大一级尺寸的",
   "text.autoconfig.sihywtcamd.option.overworld.slime.canMerge": "小型与普通史莱姆可融合",
+  "text.autoconfig.sihywtcamd.option.overworld.slime.magmaConversion": "Slimes turn into magma cubes in lava in the nether",
   "text.autoconfig.sihywtcamd.option.overworld.vex": "恼鬼",
   "text.autoconfig.sihywtcamd.option.overworld.vex.dieWithEvoker": "召唤者同步死亡",
   "text.autoconfig.sihywtcamd.option.overworld.vex.naturalSpawnDarkForest": "在黑森林群系中自然生成",
@@ -20,21 +22,31 @@
   "text.autoconfig.sihywtcamd.option.overworld.guardian.naturalSpawn": "自然生成",
   "text.autoconfig.sihywtcamd.option.overworld.guardian.silentKill": "只在伤害玩家时播放音效",
 
+  "text.autoconfig.sihywtcamd.category.undead": "Undead",
+  "text.autoconfig.sihywtcamd.option.undead.general": "General undead",
+  "text.autoconfig.sihywtcamd.option.undead.general.attackHeal": "Undead are healed with damages they deal",
+  "text.autoconfig.sihywtcamd.option.undead.general.ignoreUndeadAttacks": "Undead don't take revenge on other undead",
   "text.autoconfig.sihywtcamd.option.undead.phantom": "幻翼",
   "text.autoconfig.sihywtcamd.option.undead.phantom.throughBlocks": "可透视并穿过方块",
   "text.autoconfig.sihywtcamd.option.undead.phantom.lightFear": "惧怕光源",
+  "text.autoconfig.sihywtcamd.option.undead.phantom.spawnInEndCities": "Phantoms can spawn in end cities",
 
   "text.autoconfig.sihywtcamd.category.zombies": "僵尸",
   "text.autoconfig.sihywtcamd.option.zombies.general": "僵尸类怪物",
   "text.autoconfig.sihywtcamd.option.zombies.general.moreKnockbackResistance": "更高的击退抗性",
   "text.autoconfig.sihywtcamd.option.zombies.general.spawnMoreReinforcement": "更高的增援概率",
+  "text.autoconfig.sihywtcamd.option.zombies.general.sameTypeReinforcement": "Zombies can spawn reinforcement of same zombie type",
   "text.autoconfig.sihywtcamd.option.zombies.general.attributeVariations": "属性变种",
+  "text.autoconfig.sihywtcamd.option.zombies.general.babyTowerHeight": "Baby zombies can spawn with X babies on top",
   "text.autoconfig.sihywtcamd.option.zombies.husk": "尸壳",
   "text.autoconfig.sihywtcamd.option.zombies.husk.fireResistant": "尸壳免疫火焰伤害",
   "text.autoconfig.sihywtcamd.option.zombies.drowned": "溺尸",
   "text.autoconfig.sihywtcamd.option.zombies.drowned.tridentSpawn": "更高的三叉戟携带率",
   "text.autoconfig.sihywtcamd.option.zombies.drowned.highVelocity": "更快的游泳速度",
   "text.autoconfig.sihywtcamd.option.zombies.drowned.guardianJockeySpawn": "可生成骑乘守卫者的幼年溺尸",
+  "text.autoconfig.sihywtcamd.option.zombies.zombieHorse": "Zombie horse",
+  "text.autoconfig.sihywtcamd.option.zombies.zombieHorse.zombieHorseTrap": "Zombie horse trap can spawn during thunder",
+  "text.autoconfig.sihywtcamd.option.zombies.zombieHorse.increasedSpeed": "Mobs ride them at higher speed",
 
   "text.autoconfig.sihywtcamd.category.skeletons": "骷髅",
   "text.autoconfig.sihywtcamd.option.skeletons.general": "骷髅类怪物",
@@ -44,8 +56,13 @@
   "text.autoconfig.sihywtcamd.option.skeletons.skeleton.spectralArrow": "可能使用光灵箭",
   "text.autoconfig.sihywtcamd.option.skeletons.stray": "流浪者",
   "text.autoconfig.sihywtcamd.option.skeletons.stray.frozenArrows": "使用冰冻药箭",
+  "text.autoconfig.sihywtcamd.option.skeletons.stray.coldBiomeSpawn": "Strays can spawn in any cold biome",
   "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton": "凋零骷髅",
   "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton.bow": "可生成用弓的（成年）凋零骷髅变种",
+  "text.autoconfig.sihywtcamd.option.skeletons.witherSkeleton.ironSword": "Wither skeletons have an iron sword",
+  "text.autoconfig.sihywtcamd.option.skeletons.skeletonHorse": "Skeleton horse",
+  "text.autoconfig.sihywtcamd.option.skeletons.skeletonHorse.skeletonsVariationOnTrap": "Skeletons horse trap spawn different type of skeletons",
+  "text.autoconfig.sihywtcamd.option.skeletons.skeletonHorse.increasedSpeed": "Mobs ride them at higher speed",
 
   "text.autoconfig.sihywtcamd.category.arthropods": "节肢怪物",
   "text.autoconfig.sihywtcamd.option.arthropods.general": "节肢类怪物",
@@ -53,12 +70,14 @@
   "text.autoconfig.sihywtcamd.option.arthropods.general.larvaeSpeedBonus": "虫类怪物获得随机速度增益",
   "text.autoconfig.sihywtcamd.option.arthropods.silverfish": "蠹虫",
   "text.autoconfig.sihywtcamd.option.arthropods.silverfish.infestedEverywhere": "感染所有石头",
+  "text.autoconfig.sihywtcamd.option.arthropods.caveSpider": "Cave spider",
   "text.autoconfig.sihywtcamd.option.arthropods.caveSpider.jockey": "洞穴蜘蛛骑士",
   "text.autoconfig.sihywtcamd.option.arthropods.caveSpider.naturalSpawn": "洞穴蜘蛛可在洞穴内自然生成",
 
   "text.autoconfig.sihywtcamd.category.illagers": "灾厄村民",
   "text.autoconfig.sihywtcamd.option.illagers.pillager": "掠夺者",
   "text.autoconfig.sihywtcamd.option.illagers.pillager.moreEnchants": "弩上附加穿刺附魔的概率更高",
+  "text.autoconfig.sihywtcamd.option.illagers.pillager.pillatrooper": "Pillagers can spawn as pillatroopers",
   "text.autoconfig.sihywtcamd.option.illagers.vindicator": "卫道士",
   "text.autoconfig.sihywtcamd.option.illagers.vindicator.spawnInPatrols": "出现在灾厄巡逻队中",
   "text.autoconfig.sihywtcamd.option.illagers.vindicator.speedBonus": "生成时可能附带速度增益",
@@ -80,6 +99,7 @@
   "text.autoconfig.sihywtcamd.option.nether.ghast.increasedHealth": "更高的生命值",
   "text.autoconfig.sihywtcamd.option.nether.magmaCube": "岩浆怪",
   "text.autoconfig.sihywtcamd.option.nether.magmaCube.fireCollision": "碰撞点燃",
+  "text.autoconfig.sihywtcamd.option.nether.magmaCube.slimeConversion": "Magma cubes turn into slimes in water in the overworld",
   "text.autoconfig.sihywtcamd.option.nether.piglin": "猪灵",
   "text.autoconfig.sihywtcamd.option.nether.piglin.goldenArmor": "攻击装备金制护甲低于此值的玩家",
   "text.autoconfig.sihywtcamd.option.nether.piglin.rideHoglin": "可生成骑乘疣猪兽的猪灵变种",
@@ -94,9 +114,34 @@
   "text.autoconfig.sihywtcamd.option.end.endermite.teleportAttack": "击中传送目标",
 
   "text.autoconfig.sihywtcamd.category.bosses": "头目",
+  "text.autoconfig.sihywtcamd.option.bosses.enderDragon": "Ender Dragon",
+  "text.autoconfig.sihywtcamd.option.bosses.enderDragon.crystalDestructionSpawnsPhantom": "A phantom can spawn when an end crystal is destroyed",
+  "text.autoconfig.sihywtcamd.option.bosses.enderDragon.controlEndermanWhenLanding": "Enderman can target its closest player when dragon is landed",
+  "text.autoconfig.sihywtcamd.option.bosses.enderDragon.crystalsToSummon": "The ender dragon summons 1 crystal for X health thresholds",
   "text.autoconfig.sihywtcamd.option.bosses.wither": "凋零",
   "text.autoconfig.sihywtcamd.option.bosses.wither.increasedHealth": "略微更高的生命值",
   "text.autoconfig.sihywtcamd.option.bosses.wither.stormyWeather": "将天气变成雷暴",
   "text.autoconfig.sihywtcamd.option.bosses.wither.explosion": "半血爆炸",
-  "text.autoconfig.sihywtcamd.option.bosses.wither.skeletonsSpawn": "半血时生成凋零骷髅"
+  "text.autoconfig.sihywtcamd.option.bosses.wither.skeletonsSpawn": "半血时生成凋零骷髅",
+
+  "advancements.root.title": "SIHYWTCAMD",
+  "advancements.root.description": "So I Heard You Were Talking Crap About Minecraft's Difficulty?",
+
+  "advancements.full_golden_armor.title": "Cover Me in Gold",
+  "advancements.full_golden_armor.description": "Get a full suit of Golden armor to make Piglins neutral",
+
+  "advancements.kill_illusioner.title": "Illusion or Reality?",
+  "advancements.kill_illusioner.description": "Bring the Illusioner back to reality by killing it",
+
+  "advancements.kill_phantom_end.title": "Got the Wrong Bird",
+  "advancements.kill_phantom_end.description": "Kill a Phantom spawned from an Ender Crystal",
+
+  "advancements.spyglass_at_baby_1.title": "Is It a Tree?",
+  "advancements.spyglass_at_baby_1.description": "Look at a Baby Zombie holding another one through a Spyglass",
+
+  "advancements.spyglass_at_baby_4.title": "Is It a Tower?",
+  "advancements.spyglass_at_baby_4.description": "Look at a Baby Zombie holding four other ones through a Spyglass",
+
+  "advancements.ride_zombie_horse.title": "A Deadly Ride",
+  "advancements.ride_zombie_horse.description": "Ride a Zombie Horse after defeating its previous rider"
 }

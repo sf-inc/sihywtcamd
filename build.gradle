@@ -14,6 +14,7 @@ repositories {
     maven { url "https://maven.terraformersmc.com/releases/" }
     maven { url "https://maven.shedaniel.me/" }
     maven { url "https://maven.ladysnake.org/releases" }
+    maven { url 'https://maven.nucleoid.xyz' }
 }
 
 dependencies {
@@ -34,6 +35,8 @@ dependencies {
     include "org.ladysnake.cardinal-components-api:cardinal-components-item:${project.cardinal_version}"
     modImplementation "org.ladysnake.cardinal-components-api:cardinal-components-entity:${project.cardinal_version}"
     include "org.ladysnake.cardinal-components-api:cardinal-components-entity:${project.cardinal_version}"
+
+    modImplementation include("xyz.nucleoid:server-translations-api:${project.server_translation_version}")
 }
 
 processResources {
@@ -91,6 +94,10 @@ java {
 jar {
     from("LICENSE") {
         rename { "${it}_${project.archivesBaseName}"}
+    }
+
+    from("src/main/resources/data/sihywtcamd/lang") {
+        into("assets/sihywtcamd/lang")
     }
 }
 
