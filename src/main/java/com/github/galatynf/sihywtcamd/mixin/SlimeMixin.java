@@ -45,8 +45,22 @@ public abstract class SlimeMixin extends MobEntity {
     }
 
     @Inject(method = "tick", at = @At("HEAD"))
-    private void updateMergeDelay(CallbackInfo ci) {
+    protected void onTick(CallbackInfo ci) {
         MyComponents.SLIME_COMPONENT.get(this).updateMerged();
+
+        SlimeEntity thisSlime = (SlimeEntity) (Object) this;
+        if (!this.getWorld().isClient()
+                && ModConfig.get().overworld.slime.magmaConversion
+                && !(thisSlime instanceof MagmaCubeEntity)
+                && this.getWorld().getRegistryKey().equals(World.NETHER)
+                && this.isInLava()) {
+            int size = this.getSize();
+            MagmaCubeEntity magmaCube = this.convertTo(EntityType.MAGMA_CUBE, false);
+            if (magmaCube != null) {
+                magmaCube.setSize(size, true);
+                this.playSound(SoundEvents.ENTITY_GENERIC_EXTINGUISH_FIRE, 0.7F, 1.6F + (this.random.nextFloat() - this.random.nextFloat()) * 0.4F);
+            }
+        }
     }
 
     @Inject(method = "pushAwayFrom", at = @At("TAIL"))

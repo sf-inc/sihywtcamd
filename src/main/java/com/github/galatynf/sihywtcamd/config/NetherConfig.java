@@ -25,6 +25,7 @@ public class NetherConfig implements ConfigData {
 
     public static class MagmaCube {
         public boolean fireCollision = true;
+        public boolean slimeConversion = true;
     }
 
     @ConfigEntry.Gui.CollapsibleObject

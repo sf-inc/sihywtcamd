@@ -23,6 +23,7 @@ public class OverworldConfig implements ConfigData {
     public static class Slime {
         public boolean biggerSize = true;
         public boolean canMerge = true;
+        public boolean magmaConversion = true;
     }
 
     @ConfigEntry.Gui.CollapsibleObject
