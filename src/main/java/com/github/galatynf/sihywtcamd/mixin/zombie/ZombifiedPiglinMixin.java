@@ -1,5 +1,6 @@
 package com.github.galatynf.sihywtcamd.mixin.zombie;
 
+import com.github.galatynf.sihywtcamd.advancement.AdvancementRegistry;
 import com.github.galatynf.sihywtcamd.cardinal.MyComponents;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import com.github.galatynf.sihywtcamd.mixin.LivingEntityMixin;
@@ -10,10 +11,11 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.ZombifiedPiglinEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
@@ -49,9 +51,12 @@ public abstract class ZombifiedPiglinMixin extends LivingEntityMixin {
 
     @Override
     protected void onPushAwayFrom(Entity entity, CallbackInfo ci) {
+        MobEntity thisMob = (MobEntity) (Object) this;
         if (MyComponents.ZOMBIFIED_PIGLIN_COMPONENT.get(this).isBrute()
-                && entity instanceof PlayerEntity player) {
+                && entity instanceof ServerPlayerEntity player
+                && thisMob.getTarget() == null) {
             this.setTarget(player);
+            AdvancementRegistry.ZOMBIFIED_PIGLIN_BRUTE_COLLISION.trigger(player);
         }
     }
 }

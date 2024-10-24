@@ -10,10 +10,12 @@ import java.util.Optional;
 public class AdvancementRegistry {
     public static TickCriterion MAGMA_TO_SLIME_CONVERSION = new TickCriterion();
     public static TickCriterion SLIME_TO_MAGMA_CONVERSION = new TickCriterion();
+    public static TickCriterion ZOMBIFIED_PIGLIN_BRUTE_COLLISION = new TickCriterion();
 
     public static void init() {
         Criteria.register(Sihywtcamd.MOD_ID + "/magma_to_slime_conversion", MAGMA_TO_SLIME_CONVERSION);
         Criteria.register(Sihywtcamd.MOD_ID + "/slime_to_magma_conversion", SLIME_TO_MAGMA_CONVERSION);
+        Criteria.register(Sihywtcamd.MOD_ID + "/zombified_piglin_brute_collision", ZOMBIFIED_PIGLIN_BRUTE_COLLISION);
     }
 
     public static AdvancementCriterion<TickCriterion.Conditions> createMagmaToSlime() {
@@ -22,5 +24,9 @@ public class AdvancementRegistry {
 
     public static AdvancementCriterion<TickCriterion.Conditions> createSlimeToMagma() {
         return SLIME_TO_MAGMA_CONVERSION.create(new TickCriterion.Conditions(Optional.empty()));
+    }
+
+    public static AdvancementCriterion<TickCriterion.Conditions> createBruteCollision() {
+        return ZOMBIFIED_PIGLIN_BRUTE_COLLISION.create(new TickCriterion.Conditions(Optional.empty()));
     }
 }

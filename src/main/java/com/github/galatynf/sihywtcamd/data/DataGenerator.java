@@ -74,6 +74,21 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                             Items.GOLDEN_HELMET, Items.GOLDEN_CHESTPLATE, Items.GOLDEN_LEGGINGS, Items.GOLDEN_BOOTS))
                     .build(consumer, Sihywtcamd.MOD_ID + "/full_golden_armor");
 
+            AdvancementEntry bruteCollision = Advancement.Builder.create()
+                    .parent(fullGoldenArmor)
+                    .display(
+                            Items.GOLDEN_AXE,
+                            Text.translatable("advancements.zombified_piglin_brute_collision.title"),
+                            Text.translatable("advancements.zombified_piglin_brute_collision.description"),
+                            null,
+                            AdvancementFrame.TASK,
+                            true,
+                            true,
+                            false
+                    )
+                    .criterion("zombified_piglin_brute_collision", AdvancementRegistry.createBruteCollision())
+                    .build(consumer, Sihywtcamd.MOD_ID + "/zombified_piglin_brute_collision");
+
             AdvancementEntry killIllusioner = Advancement.Builder.create()
                     .parent(root)
                     .display(
