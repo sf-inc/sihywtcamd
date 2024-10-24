@@ -2,6 +2,7 @@
   "text.autoconfig.sihywtcamd.title": "SIHYWTCAMD Configuration",
 
   "text.autoconfig.sihywtcamd.category.general": "General",
+  "text.autoconfig.sihywtcamd.option.general.increasedFollowRange": "Mobs have doubled follow range",
   "text.autoconfig.sihywtcamd.option.general.mobsLessFear": "Mobs don't flee if target is half health",
   "text.autoconfig.sihywtcamd.option.general.merchantHostility": "Most hostile mobs are hostile to villagers",
   "text.autoconfig.sihywtcamd.option.general.pathPassengerAware": "Mobs don't pathfind through blocks when riding",

@@ -2,6 +2,7 @@
   "text.autoconfig.sihywtcamd.title": "SIHYWTCAMD 設定",
 
   "text.autoconfig.sihywtcamd.category.general": "敵對生物",
+  "text.autoconfig.sihywtcamd.option.general.increasedFollowRange": "Mobs have doubled follow range",
   "text.autoconfig.sihywtcamd.option.general.mobsLessFear": "目標血量低於一半時不再逃跑",
   "text.autoconfig.sihywtcamd.option.general.merchantHostility": "絕大多數敵對生物會攻擊村民",
   "text.autoconfig.sihywtcamd.option.general.pathPassengerAware": "騎乘時的怪物不會繞過方塊尋路",

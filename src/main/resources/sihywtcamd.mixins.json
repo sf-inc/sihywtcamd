@@ -24,6 +24,7 @@
     "SilverfishMixin",
     "SlimeMixin",
     "SpawnHelperMixin",
+    "TrackTargetGoalMixin",
     "VindicatorMixin",
     "WitchMixin",
     "enderdragon.EnderDragonMixin",

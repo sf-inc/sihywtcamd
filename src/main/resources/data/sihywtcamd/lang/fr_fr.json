@@ -2,6 +2,7 @@
   "text.autoconfig.sihywtcamd.title": "SIHYWTCAMD Configuration",
 
   "text.autoconfig.sihywtcamd.category.general": "Général",
+  "text.autoconfig.sihywtcamd.option.general.increasedFollowRange": "Les mobs suivent de deux fois plus loin",
   "text.autoconfig.sihywtcamd.option.general.mobsLessFear": "Les mobs ne fuient plus les entités mid-life",
   "text.autoconfig.sihywtcamd.option.general.merchantHostility": "La plupart des mobs hostiles le sont avec les villageois",
   "text.autoconfig.sihywtcamd.option.general.pathPassengerAware": "Les mobs avec monture ne path find pas à travers les blocs",
