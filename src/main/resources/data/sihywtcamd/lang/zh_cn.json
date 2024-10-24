@@ -143,5 +143,11 @@
   "advancements.spyglass_at_baby_4.description": "Look at a Baby Zombie holding four other ones through a Spyglass",
 
   "advancements.ride_zombie_horse.title": "A Deadly Ride",
-  "advancements.ride_zombie_horse.description": "Ride a Zombie Horse after defeating its previous rider"
+  "advancements.ride_zombie_horse.description": "Ride a Zombie Horse after defeating its previous rider",
+
+  "advancements.convert_magma.title": "Cool It Down",
+  "advancements.convert_magma.description": "Rescue a Magma Cube from the Nether, bring it safely home to the Overworld... and put it in water",
+
+  "advancements.convert_slime.title": "Warm It Up",
+  "advancements.convert_slime.description": "Rescue a Slime from the Overworld, bring it safely home to the Nether... and put it in lava"
 }

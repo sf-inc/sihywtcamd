@@ -143,5 +143,11 @@
   "advancements.spyglass_at_baby_4.description": "透過望遠鏡查看五隻幼年殭屍表演疊羅漢",
 
   "advancements.ride_zombie_horse.title": "不死騎士",
-  "advancements.ride_zombie_horse.description": "打敗殭屍馬的主人並騎上牠"
+  "advancements.ride_zombie_horse.description": "打敗殭屍馬的主人並騎上牠",
+
+  "advancements.convert_magma.title": "Cool It Down",
+  "advancements.convert_magma.description": "Rescue a Magma Cube from the Nether, bring it safely home to the Overworld... and put it in water",
+
+  "advancements.convert_slime.title": "Warm It Up",
+  "advancements.convert_slime.description": "Rescue a Slime from the Overworld, bring it safely home to the Nether... and put it in lava"
 }

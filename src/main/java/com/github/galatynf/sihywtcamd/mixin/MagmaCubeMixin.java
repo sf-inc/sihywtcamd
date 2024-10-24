@@ -1,5 +1,6 @@
 package com.github.galatynf.sihywtcamd.mixin;
 
+import com.github.galatynf.sihywtcamd.advancement.AdvancementRegistry;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -7,6 +8,7 @@ import net.minecraft.entity.mob.MagmaCubeEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.SlimeEntity;
 import net.minecraft.registry.tag.FluidTags;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -38,6 +40,9 @@ public abstract class MagmaCubeMixin extends SlimeMixin {
             if (slime != null) {
                 slime.setSize(size, true);
                 this.playSound(SoundEvents.ENTITY_GENERIC_EXTINGUISH_FIRE, 0.7F, 1.6F + (this.random.nextFloat() - this.random.nextFloat()) * 0.4F);
+                if (this.getTarget() instanceof ServerPlayerEntity target) {
+                    AdvancementRegistry.MAGMA_TO_SLIME_CONVERSION.trigger(target);
+                }
             }
         }
     }

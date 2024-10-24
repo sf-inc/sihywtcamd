@@ -1,6 +1,7 @@
 package com.github.galatynf.sihywtcamd.data;
 
 import com.github.galatynf.sihywtcamd.Sihywtcamd;
+import com.github.galatynf.sihywtcamd.advancement.AdvancementRegistry;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -187,6 +188,36 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                                     .vehicle(EntityPredicate.Builder.create()
                                             .type(EntityType.ZOMBIE_HORSE))))
                     .build(consumer, Sihywtcamd.MOD_ID + "/ride_zombie_horse");
+
+            AdvancementEntry convertMagma = Advancement.Builder.create()
+                    .parent(root)
+                    .display(
+                            Items.SLIME_BALL,
+                            Text.translatable("advancements.convert_magma.title"),
+                            Text.translatable("advancements.convert_magma.description"),
+                            null,
+                            AdvancementFrame.TASK,
+                            true,
+                            true,
+                            false
+                    )
+                    .criterion("convert_magma", AdvancementRegistry.createMagmaToSlime())
+                    .build(consumer, Sihywtcamd.MOD_ID + "/convert_magma");
+
+            AdvancementEntry convertSlime = Advancement.Builder.create()
+                    .parent(convertMagma)
+                    .display(
+                            Items.MAGMA_CREAM,
+                            Text.translatable("advancements.convert_slime.title"),
+                            Text.translatable("advancements.convert_slime.description"),
+                            null,
+                            AdvancementFrame.TASK,
+                            true,
+                            true,
+                            false
+                    )
+                    .criterion("convert_slime", AdvancementRegistry.createSlimeToMagma())
+                    .build(consumer, Sihywtcamd.MOD_ID + "/convert_slime");
         }
     }
 }

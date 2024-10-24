@@ -143,5 +143,11 @@
   "advancements.spyglass_at_baby_4.description": "Regardez un bébé zombie en porter quatre autres à travers une longue-vue.",
 
   "advancements.ride_zombie_horse.title": "Une chevauchée mortelle",
-  "advancements.ride_zombie_horse.description": " Montez un cheval zombie après avoir battu son précédent cavalier"
+  "advancements.ride_zombie_horse.description": " Montez un cheval zombie après avoir battu son précédent cavalier",
+
+  "advancements.convert_magma.title": "Refroidissez-le",
+  "advancements.convert_magma.description": "Sauvez un Cube de Magma du Nether, amenez-le en toute sécurité à la Surface... puis mettez-le dans l'eau.",
+
+  "advancements.convert_slime.title": "Réchauffez-le",
+  "advancements.convert_slime.description": "Sauvez un Slime de la Surface, amenez-le en toute sécurité dans le Nether... puis mettez-le dans la lave."
 }

@@ -1,5 +1,6 @@
 package com.github.galatynf.sihywtcamd;
 
+import com.github.galatynf.sihywtcamd.advancement.AdvancementRegistry;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import com.github.galatynf.sihywtcamd.init.*;
 import me.shedaniel.autoconfig.AutoConfig;
@@ -20,6 +21,7 @@ public class Sihywtcamd implements ModInitializer {
             Sihywtcamd.areConfigsInit = true;
         }
 
+        AdvancementRegistry.init();
         BiomeFeatures.init();
         BiomeSpawn.init();
     }
