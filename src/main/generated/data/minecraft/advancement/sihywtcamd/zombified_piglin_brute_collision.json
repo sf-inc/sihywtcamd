@@ -1,0 +1,26 @@
+{
+  "parent": "minecraft:sihywtcamd/full_golden_armor",
+  "criteria": {
+    "zombified_piglin_brute_collision": {
+      "trigger": "minecraft:sihywtcamd/zombified_piglin_brute_collision"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.zombified_piglin_brute_collision.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:golden_axe"
+    },
+    "title": {
+      "translate": "advancements.zombified_piglin_brute_collision.title"
+    }
+  },
+  "requirements": [
+    [
+      "zombified_piglin_brute_collision"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

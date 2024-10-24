@@ -1,0 +1,26 @@
+{
+  "parent": "minecraft:sihywtcamd/root",
+  "criteria": {
+    "convert_magma": {
+      "trigger": "minecraft:sihywtcamd/magma_to_slime_conversion"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.convert_magma.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:slime_ball"
+    },
+    "title": {
+      "translate": "advancements.convert_magma.title"
+    }
+  },
+  "requirements": [
+    [
+      "convert_magma"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

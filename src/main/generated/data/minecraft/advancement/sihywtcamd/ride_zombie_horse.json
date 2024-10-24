@@ -1,0 +1,39 @@
+{
+  "parent": "minecraft:sihywtcamd/root",
+  "criteria": {
+    "ride_zombie_horse": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "vehicle": {
+                "type": "minecraft:zombie_horse"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:started_riding"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.ride_zombie_horse.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:saddle"
+    },
+    "title": {
+      "translate": "advancements.ride_zombie_horse.title"
+    }
+  },
+  "requirements": [
+    [
+      "ride_zombie_horse"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,40 @@
+{
+  "parent": "minecraft:sihywtcamd/root",
+  "criteria": {
+    "kill_phantom_end": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:phantom",
+              "location": {
+                "biomes": "minecraft:meadow"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.kill_phantom_end.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:phantom_membrane"
+    },
+    "title": {
+      "translate": "advancements.kill_phantom_end.title"
+    }
+  },
+  "requirements": [
+    [
+      "kill_phantom_end"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

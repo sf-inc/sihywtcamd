@@ -1,0 +1,42 @@
+{
+  "parent": "minecraft:sihywtcamd/root",
+  "criteria": {
+    "full_golden_armor": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:golden_helmet"
+          },
+          {
+            "items": "minecraft:golden_chestplate"
+          },
+          {
+            "items": "minecraft:golden_leggings"
+          },
+          {
+            "items": "minecraft:golden_boots"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.full_golden_armor.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:golden_chestplate"
+    },
+    "title": {
+      "translate": "advancements.full_golden_armor.title"
+    }
+  },
+  "requirements": [
+    [
+      "full_golden_armor"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,76 @@
+{
+  "parent": "minecraft:sihywtcamd/spyglass_at_baby_1",
+  "criteria": {
+    "spyglass_at_baby_4": {
+      "conditions": {
+        "item": {
+          "items": "minecraft:spyglass"
+        },
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type_specific": {
+                "type": "minecraft:player",
+                "looking_at": {
+                  "type": "#minecraft:zombies",
+                  "flags": {
+                    "is_baby": true
+                  },
+                  "passenger": {
+                    "type": "#minecraft:zombies",
+                    "flags": {
+                      "is_baby": true
+                    },
+                    "passenger": {
+                      "type": "#minecraft:zombies",
+                      "flags": {
+                        "is_baby": true
+                      },
+                      "passenger": {
+                        "type": "#minecraft:zombies",
+                        "flags": {
+                          "is_baby": true
+                        },
+                        "passenger": {
+                          "type": "#minecraft:zombies",
+                          "flags": {
+                            "is_baby": true
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:using_item"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.spyglass_at_baby_4.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "minecraft:spyglass"
+    },
+    "title": {
+      "translate": "advancements.spyglass_at_baby_4.title"
+    }
+  },
+  "requirements": [
+    [
+      "spyglass_at_baby_4"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  },
+  "sends_telemetry_event": true
+}

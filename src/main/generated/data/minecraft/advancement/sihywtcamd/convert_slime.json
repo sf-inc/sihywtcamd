@@ -1,0 +1,26 @@
+{
+  "parent": "minecraft:sihywtcamd/convert_magma",
+  "criteria": {
+    "convert_slime": {
+      "trigger": "minecraft:sihywtcamd/slime_to_magma_conversion"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.convert_slime.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:magma_cream"
+    },
+    "title": {
+      "translate": "advancements.convert_slime.title"
+    }
+  },
+  "requirements": [
+    [
+      "convert_slime"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

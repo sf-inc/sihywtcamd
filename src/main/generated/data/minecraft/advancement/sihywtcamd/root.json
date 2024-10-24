@@ -1,0 +1,31 @@
+{
+  "criteria": {
+    "kill_something": {
+      "trigger": "minecraft:player_killed_entity"
+    },
+    "killed_by_something": {
+      "trigger": "minecraft:entity_killed_player"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "minecraft:textures/block/deepslate_top.png",
+    "description": {
+      "translate": "advancements.root.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:stone_sword"
+    },
+    "title": {
+      "translate": "advancements.root.title"
+    }
+  },
+  "requirements": [
+    [
+      "kill_something",
+      "killed_by_something"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

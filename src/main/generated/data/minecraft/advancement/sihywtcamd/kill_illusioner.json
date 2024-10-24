@@ -1,0 +1,37 @@
+{
+  "parent": "minecraft:sihywtcamd/root",
+  "criteria": {
+    "kill_illusioner": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:illusioner"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.kill_illusioner.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:bow"
+    },
+    "title": {
+      "translate": "advancements.kill_illusioner.title"
+    }
+  },
+  "requirements": [
+    [
+      "kill_illusioner"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
