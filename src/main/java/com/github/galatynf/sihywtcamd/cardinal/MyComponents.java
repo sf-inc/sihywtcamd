@@ -26,6 +26,8 @@ public final class MyComponents implements EntityComponentInitializer {
             ComponentRegistry.getOrCreate(id("slime_component"), SlimeEntityComponentAPI.class);
     public static final ComponentKey<WitherEntityComponentAPI> WITHER_COMPONENT =
             ComponentRegistry.getOrCreate(id("wither_component"), WitherEntityComponentAPI.class);
+    public static final ComponentKey<ZombifiedPiglinComponentAPI> ZOMBIFIED_PIGLIN_COMPONENT =
+            ComponentRegistry.getOrCreate(id("zombified_piglin_component"), ZombifiedPiglinComponentAPI.class);
 
     @Override
     public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {
@@ -35,5 +37,6 @@ public final class MyComponents implements EntityComponentInitializer {
         registry.registerFor(SlimeEntity.class, SLIME_COMPONENT, entity -> new SlimeEntityComponent());
         registry.registerFor(EnderDragonEntity.class, ENDER_DRAGON_COMPONENT, entity -> new EnderDragonEntityComponent());
         registry.registerFor(WitherEntity.class, WITHER_COMPONENT, entity -> new WitherEntityComponent());
+        registry.registerFor(ZombifiedPiglinEntity.class, ZOMBIFIED_PIGLIN_COMPONENT, entity -> new ZombifiedPiglinComponent());
     }
 }

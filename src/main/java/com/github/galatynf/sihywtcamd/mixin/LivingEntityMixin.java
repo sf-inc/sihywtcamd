@@ -34,6 +34,7 @@ public abstract class LivingEntityMixin extends Entity {
     @Shadow public float bodyYaw;
 
     @Shadow public abstract boolean isBaby();
+    @Shadow @Nullable public abstract LivingEntity getAttacker();
     @Shadow @Nullable public abstract EntityAttributeInstance getAttributeInstance(RegistryEntry<EntityAttribute> attribute);
 
     @Inject(method = "computeFallDamage", at = @At("HEAD"), cancellable = true)
@@ -78,6 +79,11 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(method = "tickRiding", at = @At("TAIL"))
     protected void onTickRiding(CallbackInfo ci) {
+
+    }
+
+    @Inject(method = "pushAwayFrom", at = @At("TAIL"))
+    protected void onPushAwayFrom(Entity entity, CallbackInfo ci) {
 
     }
 

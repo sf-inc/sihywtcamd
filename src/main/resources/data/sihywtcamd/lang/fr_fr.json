@@ -44,6 +44,8 @@
   "text.autoconfig.sihywtcamd.option.zombies.drowned.tridentSpawn": "Les noyés apparaissent plus souvent avec un trident",
   "text.autoconfig.sihywtcamd.option.zombies.drowned.highVelocity": "Les noyés nagent plus vite",
   "text.autoconfig.sihywtcamd.option.zombies.drowned.guardianJockeySpawn": "Les bébés noyés peuvent apparaître sur un gardien",
+  "text.autoconfig.sihywtcamd.option.zombies.zombifiedPiglin": "Le piglin zombifié",
+  "text.autoconfig.sihywtcamd.option.zombies.zombifiedPiglin.bruteVariant": "Les piglins zombifiés peuvent apparaître en tant que brutes",
   "text.autoconfig.sihywtcamd.option.zombies.zombieHorse": "Le cheval zombie",
   "text.autoconfig.sihywtcamd.option.zombies.zombieHorse.zombieHorseTrap": "Un piège de cheval zombie peut apparaître lors d'orages",
   "text.autoconfig.sihywtcamd.option.zombies.zombieHorse.increasedSpeed": "Les mobs les chevauchent plus vite",

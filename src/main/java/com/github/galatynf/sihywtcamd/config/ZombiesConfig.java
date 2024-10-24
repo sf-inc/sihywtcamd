@@ -35,6 +35,13 @@ public class ZombiesConfig implements ConfigData {
     }
 
     @ConfigEntry.Gui.CollapsibleObject
+    public ZombifiedPiglin zombifiedPiglin = new ZombifiedPiglin();
+
+    public static class ZombifiedPiglin {
+        public boolean bruteVariant = true;
+    }
+
+    @ConfigEntry.Gui.CollapsibleObject
     public ZombieHorse zombieHorse = new ZombieHorse();
 
     public static class ZombieHorse {

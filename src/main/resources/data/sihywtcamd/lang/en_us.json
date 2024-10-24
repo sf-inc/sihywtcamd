@@ -44,6 +44,8 @@
   "text.autoconfig.sihywtcamd.option.zombies.drowned.tridentSpawn": "Drowned spawn more often with a trident",
   "text.autoconfig.sihywtcamd.option.zombies.drowned.highVelocity": "Drowned have an increased velocity in water",
   "text.autoconfig.sihywtcamd.option.zombies.drowned.guardianJockeySpawn": "Baby drowned can spawn riding a guardian",
+  "text.autoconfig.sihywtcamd.option.zombies.zombifiedPiglin": "Zombified Piglin",
+  "text.autoconfig.sihywtcamd.option.zombies.zombifiedPiglin.bruteVariant": "Zombified Piglins can spawn as brutes",
   "text.autoconfig.sihywtcamd.option.zombies.zombieHorse": "Zombie horse",
   "text.autoconfig.sihywtcamd.option.zombies.zombieHorse.zombieHorseTrap": "Zombie horse trap can spawn during thunder",
   "text.autoconfig.sihywtcamd.option.zombies.zombieHorse.increasedSpeed": "Mobs ride them at higher speed",

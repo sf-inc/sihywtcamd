@@ -44,6 +44,8 @@
   "text.autoconfig.sihywtcamd.option.zombies.drowned.tridentSpawn": "更高的三叉戟携带率",
   "text.autoconfig.sihywtcamd.option.zombies.drowned.highVelocity": "更快的游泳速度",
   "text.autoconfig.sihywtcamd.option.zombies.drowned.guardianJockeySpawn": "可生成骑乘守卫者的幼年溺尸",
+  "text.autoconfig.sihywtcamd.option.zombies.zombifiedPiglin": "Zombified Piglin",
+  "text.autoconfig.sihywtcamd.option.zombies.zombifiedPiglin.bruteVariant": "Zombified Piglins can spawn as brutes",
   "text.autoconfig.sihywtcamd.option.zombies.zombieHorse": "Zombie horse",
   "text.autoconfig.sihywtcamd.option.zombies.zombieHorse.zombieHorseTrap": "Zombie horse trap can spawn during thunder",
   "text.autoconfig.sihywtcamd.option.zombies.zombieHorse.increasedSpeed": "Mobs ride them at higher speed",

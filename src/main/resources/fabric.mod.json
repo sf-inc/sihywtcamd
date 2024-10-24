@@ -45,7 +45,8 @@
       "sihywtcamd:pillager_component",
       "sihywtcamd:skeleton_component",
       "sihywtcamd:slime_component",
-      "sihywtcamd:wither_component"
+      "sihywtcamd:wither_component",
+      "sihywtcamd:zombified_piglin_component"
     ],
     "modmenu": {
       "links": {

@@ -57,7 +57,8 @@
     "zombie.DrownedMixin",
     "zombie.HuskMixin",
     "zombie.ZombieHorseMobMixin",
-    "zombie.ZombieLivingMixin"
+    "zombie.ZombieLivingMixin",
+    "zombie.ZombifiedPiglinMixin"
   ],
   "injectors": {
     "defaultRequire": 1
