@@ -3,21 +3,18 @@ package com.github.galatynf.sihywtcamd.mixin.wither;
 import com.github.galatynf.sihywtcamd.Sihywtcamd;
 import com.github.galatynf.sihywtcamd.cardinal.MyComponents;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
-import com.github.galatynf.sihywtcamd.mixin.MobEntityMixin;
-import net.minecraft.entity.EntityData;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.attribute.EntityAttributeInstance;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.boss.WitherEntity;
+import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Difficulty;
-import net.minecraft.world.LocalDifficulty;
-import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -25,30 +22,26 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Optional;
 
 @Mixin(WitherEntity.class)
-public abstract class WitherMixin extends MobEntityMixin {
+public abstract class WitherMixin extends HostileEntity {
     @Shadow public abstract int getInvulnerableTimer();
+
     @Unique
     static private final int sihywtcamd_SKELETONS_SPAWN_DISTANCE = 5;
 
-    protected WitherMixin(EntityType<? extends LivingEntity> entityType, World world) {
+    protected WitherMixin(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
     }
 
-    @Override
-    protected void onInitialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason,
-                                EntityData entityData, CallbackInfoReturnable<EntityData> cir) {
-        if (!ModConfig.get().bosses.wither.increasedHealth) return;
-
-        EntityAttributeInstance maxHealth = this.getAttributes().getCustomInstance(EntityAttributes.GENERIC_MAX_HEALTH);
-        if (maxHealth != null) {
-            maxHealth.setBaseValue(400.0D);
-            this.setHealth(this.getMaxHealth());
+    @ModifyReturnValue(method = "createWitherAttributes", at = @At("RETURN"))
+    private static DefaultAttributeContainer.Builder increaseHealth(DefaultAttributeContainer.Builder original) {
+        if (ModConfig.get().bosses.wither.increasedHealth) {
+            original.add(EntityAttributes.GENERIC_MAX_HEALTH, 400.0);
         }
+        return original;
     }
 
     @Inject(method = "mobTick", at = @At("HEAD"))

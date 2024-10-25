@@ -30,7 +30,6 @@
     "enderdragon.EnderDragonMixin",
     "enderdragon.SittingFlamingPhaseMixin",
     "evoker.EvokerEntityMixin",
-    "evoker.EvokerMobMixin",
     "ghast.GhastMixin",
     "guardian.GuardianAttackGoalMixin",
     "guardian.GuardianMixin",
