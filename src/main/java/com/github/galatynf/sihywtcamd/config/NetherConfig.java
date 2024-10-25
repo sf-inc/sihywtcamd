@@ -11,6 +11,7 @@ public class NetherConfig implements ConfigData {
 
     public static class Blaze {
         public boolean fireAttack = true;
+        public boolean reducedFollowRange = true;
     }
 
     @ConfigEntry.Gui.CollapsibleObject

@@ -98,6 +98,7 @@
   "text.autoconfig.sihywtcamd.category.nether": "Nether",
   "text.autoconfig.sihywtcamd.option.nether.blaze": "Le blaze",
   "text.autoconfig.sihywtcamd.option.nether.blaze.fireAttack": "Les blazes mettent en feu lors d'attaque (cac)",
+  "text.autoconfig.sihywtcamd.option.nether.blaze.reducedFollowRange": "Les blazes ont une portée de suivi réduite",
   "text.autoconfig.sihywtcamd.option.nether.ghast": "Le ghast",
   "text.autoconfig.sihywtcamd.option.nether.ghast.increasedHealth": "Les ghasts ont bien plus de vie",
   "text.autoconfig.sihywtcamd.option.nether.magmaCube": "Le cube de magma",

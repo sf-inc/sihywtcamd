@@ -98,6 +98,7 @@
   "text.autoconfig.sihywtcamd.category.nether": "地獄",
   "text.autoconfig.sihywtcamd.option.nether.blaze": "烈焰使者",
   "text.autoconfig.sihywtcamd.option.nether.blaze.fireAttack": "擊中時點燃目標",
+  "text.autoconfig.sihywtcamd.option.nether.blaze.reducedFollowRange": "Blazes have a reduced follow range",
   "text.autoconfig.sihywtcamd.option.nether.ghast": "地獄幽靈",
   "text.autoconfig.sihywtcamd.option.nether.ghast.increasedHealth": "更高的生命值",
   "text.autoconfig.sihywtcamd.option.nether.magmaCube": "岩漿立方怪",

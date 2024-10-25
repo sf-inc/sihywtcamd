@@ -98,6 +98,7 @@
   "text.autoconfig.sihywtcamd.category.nether": "Nether",
   "text.autoconfig.sihywtcamd.option.nether.blaze": "Blaze",
   "text.autoconfig.sihywtcamd.option.nether.blaze.fireAttack": "Blazes set entities on fire on attack",
+  "text.autoconfig.sihywtcamd.option.nether.blaze.reducedFollowRange": "Blazes have a reduced follow range",
   "text.autoconfig.sihywtcamd.option.nether.ghast": "Ghast",
   "text.autoconfig.sihywtcamd.option.nether.ghast.increasedHealth": "Ghasts health is increased a lot",
   "text.autoconfig.sihywtcamd.option.nether.magmaCube": "Magma Cube",
