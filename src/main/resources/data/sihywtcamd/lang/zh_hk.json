@@ -2,7 +2,7 @@
   "text.autoconfig.sihywtcamd.title": "SIHYWTCAMD 設定",
 
   "text.autoconfig.sihywtcamd.category.general": "敵對生物",
-  "text.autoconfig.sihywtcamd.option.general.increasedFollowRange": "Mobs have doubled follow range",
+  "text.autoconfig.sihywtcamd.option.general.increasedFollowRange": "雙倍尋敵距離",
   "text.autoconfig.sihywtcamd.option.general.mobsLessFear": "目標血量低於一半時不再逃跑",
   "text.autoconfig.sihywtcamd.option.general.merchantHostility": "絕大多數敵對生物會攻擊村民",
   "text.autoconfig.sihywtcamd.option.general.pathPassengerAware": "騎乘時的怪物不會繞過方塊尋路",
@@ -15,7 +15,7 @@
   "text.autoconfig.sihywtcamd.option.overworld.slime": "史萊姆",
   "text.autoconfig.sihywtcamd.option.overworld.slime.biggerSize": "生成更大一級尺寸的",
   "text.autoconfig.sihywtcamd.option.overworld.slime.canMerge": "小型與中型史萊姆可以融合",
-  "text.autoconfig.sihywtcamd.option.overworld.slime.magmaConversion": "Slimes turn into magma cubes in lava in the nether",
+  "text.autoconfig.sihywtcamd.option.overworld.slime.magmaConversion": "在地獄碰到岩漿時轉變為岩漿立方怪",
   "text.autoconfig.sihywtcamd.option.overworld.vex": "惱鬼",
   "text.autoconfig.sihywtcamd.option.overworld.vex.dieWithEvoker": "與召喚者同時死亡",
   "text.autoconfig.sihywtcamd.option.overworld.vex.naturalSpawnDarkForest": "在黑森林生態系中生成",
@@ -45,8 +45,8 @@
   "text.autoconfig.sihywtcamd.option.zombies.drowned.tridentSpawn": "更高的三叉戟攜帶率",
   "text.autoconfig.sihywtcamd.option.zombies.drowned.highVelocity": "更快的游泳速度",
   "text.autoconfig.sihywtcamd.option.zombies.drowned.guardianJockeySpawn": "機率生成騎乘深海守衛的幼年沉屍",
-  "text.autoconfig.sihywtcamd.option.zombies.zombifiedPiglin": "Zombified Piglin",
-  "text.autoconfig.sihywtcamd.option.zombies.zombifiedPiglin.bruteVariant": "Zombified Piglins can spawn as brutes",
+  "text.autoconfig.sihywtcamd.option.zombies.zombifiedPiglin": "殭屍化豬布林",
+  "text.autoconfig.sihywtcamd.option.zombies.zombifiedPiglin.bruteVariant": "生成手持金斧頭的變種",
   "text.autoconfig.sihywtcamd.option.zombies.zombieHorse": "殭屍馬",
   "text.autoconfig.sihywtcamd.option.zombies.zombieHorse.zombieHorseTrap": "雷雨時生成殭屍馬陷阱",
   "text.autoconfig.sihywtcamd.option.zombies.zombieHorse.increasedSpeed": "提高被騎乘時的移動速度",
@@ -98,12 +98,12 @@
   "text.autoconfig.sihywtcamd.category.nether": "地獄",
   "text.autoconfig.sihywtcamd.option.nether.blaze": "烈焰使者",
   "text.autoconfig.sihywtcamd.option.nether.blaze.fireAttack": "擊中時點燃目標",
-  "text.autoconfig.sihywtcamd.option.nether.blaze.reducedFollowRange": "Blazes have a reduced follow range",
+  "text.autoconfig.sihywtcamd.option.nether.blaze.reducedFollowRange": "縮短尋敵距離",
   "text.autoconfig.sihywtcamd.option.nether.ghast": "地獄幽靈",
   "text.autoconfig.sihywtcamd.option.nether.ghast.increasedHealth": "更高的生命值",
   "text.autoconfig.sihywtcamd.option.nether.magmaCube": "岩漿立方怪",
   "text.autoconfig.sihywtcamd.option.nether.magmaCube.fireCollision": "碰撞時點燃目標",
-  "text.autoconfig.sihywtcamd.option.nether.magmaCube.slimeConversion": "Magma cubes turn into slimes in water in the overworld",
+  "text.autoconfig.sihywtcamd.option.nether.magmaCube.slimeConversion": "在主世界碰到水時轉變為史萊姆",
   "text.autoconfig.sihywtcamd.option.nether.piglin": "豬布林",
   "text.autoconfig.sihywtcamd.option.nether.piglin.goldenArmor": "攻擊裝備低於X件黃金盔甲的玩家",
   "text.autoconfig.sihywtcamd.option.nether.piglin.rideHoglin": "生成騎乘豬布獸的變種",
@@ -134,8 +134,8 @@
   "advancements.full_golden_armor.title": "金碧輝煌",
   "advancements.full_golden_armor.description": "全身穿著黃金盔甲並成為豬布林的好朋友",
 
-  "advancements.zombified_piglin_brute_collision.title": "Brutal Axe-ident",
-  "advancements.zombified_piglin_brute_collision.description": "Collide with a Brute variant of the Zombified Piglin and face the consequences",
+  "advancements.zombified_piglin_brute_collision.title": "不是故意撞到的...",
+  "advancements.zombified_piglin_brute_collision.description": "和變種殭屍化豬布林發生相撞意外",
 
   "advancements.kill_illusioner.title": "幻影還是現實？",
   "advancements.kill_illusioner.description": "擊敗幻術師",
@@ -152,9 +152,9 @@
   "advancements.ride_zombie_horse.title": "不死騎士",
   "advancements.ride_zombie_horse.description": "打敗殭屍馬的主人並騎上牠",
 
-  "advancements.convert_magma.title": "Cool It Down",
-  "advancements.convert_magma.description": "Rescue a Magma Cube from the Nether, bring it safely home to the Overworld... and put it in water",
+  "advancements.convert_magma.title": "冷卻方塊",
+  "advancements.convert_magma.description": "從地獄取得一隻岩漿立方怪，帶回主世界後將它放入水中...",
 
-  "advancements.convert_slime.title": "Warm It Up",
-  "advancements.convert_slime.description": "Rescue a Slime from the Overworld, bring it safely home to the Nether... and put it in lava"
+  "advancements.convert_slime.title": "火烤方塊",
+  "advancements.convert_slime.description": "從主世界取得一隻史萊姆，帶進地獄後將它放入岩漿中..."
 }
