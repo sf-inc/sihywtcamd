@@ -4,6 +4,32 @@
 * **x.X versions** are either updates that add content or major bug fixes
 * **x.x.X versions** are either small content updates (language translation, new textures, ...) or bug fixes
 
+## v1.11.1
+* Translation files are now sent to client, which avoid missing translation
+  when the mod is server-side only for advancements
+* Add and update multiple Chinese translation files (thanls to @salmoooon)
+* Blazes have a reduced follow range from 48 to 32
+* Mobs have a doubled "follow range"
+  * The follow range attribute stays the same, but is kinda split
+  into a follow range and aggro range
+  * The aggro range stays the same, using the follow range value
+  * The new "follow range" (when a mob is already aggro) is doubled to avoid fleeing
+  too easily
+  * This new value is capped to 48
+* Zombified Piglins have a 9% chance to spawn as "brute"
+  * When they do, they hold a golden axe instead of a golden sword
+  * They also aggro players on collision (but don't call others, unless you attack them)
+  * Add an advancement for colliding a brute variant
+* Magma Cubes turn into Slimes when in water in the Overworld
+  * Add an advancement for it
+* Slimes turn into Magma Cubes when in lava in the Nether
+  * Add an advancement for it
+* Slimes can merge only after a short delay to avoid instant fusion
+* Add an advancement for deflecting a firework rocket from a pillatrooper
+* The advancement for killing an illusioner was updated to require the player to be invisible
+* Advancements have now vanilla parents, instead of being in a new tab
+* Some advancements have a new frame, some are hidden and some have rewards
+
 ## v1.11
 * Move features requiring the mod on client to an [extension mod](https://github.com/sf-inc/sihywtcamd_extensions)
   * Baby variants of mobs (spiders and skeletons)
