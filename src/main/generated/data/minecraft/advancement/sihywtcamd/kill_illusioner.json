@@ -23,8 +23,13 @@
     "frame": "challenge",
     "hidden": true,
     "icon": {
+      "components": {
+        "minecraft:potion_contents": {
+          "potion": "minecraft:invisibility"
+        }
+      },
       "count": 1,
-      "id": "minecraft:bow"
+      "id": "minecraft:potion"
     },
     "title": {
       "translate": "advancements.kill_illusioner.title"

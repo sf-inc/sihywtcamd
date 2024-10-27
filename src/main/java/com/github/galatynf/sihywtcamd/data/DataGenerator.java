@@ -8,8 +8,10 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
 import net.minecraft.advancement.*;
 import net.minecraft.advancement.criterion.*;
+import net.minecraft.component.type.PotionContentsComponent;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Items;
+import net.minecraft.potion.Potions;
 import net.minecraft.predicate.entity.EntityFlagsPredicate;
 import net.minecraft.predicate.entity.EntityPredicate;
 import net.minecraft.predicate.entity.LocationPredicate;
@@ -75,7 +77,7 @@ public class DataGenerator implements DataGeneratorEntrypoint {
             AdvancementEntry killIllusioner = Advancement.Builder.create()
                     .parent(Identifier.ofVanilla("adventure/kill_a_mob"))
                     .display(
-                            Items.BOW,
+                            PotionContentsComponent.createStack(Items.POTION, Potions.INVISIBILITY),
                             Text.translatable("advancements.kill_illusioner.title"),
                             Text.translatable("advancements.kill_illusioner.description"),
                             null,
