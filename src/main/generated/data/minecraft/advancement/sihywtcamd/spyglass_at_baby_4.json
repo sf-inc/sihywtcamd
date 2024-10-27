@@ -55,7 +55,7 @@
     "description": {
       "translate": "advancements.spyglass_at_baby_4.description"
     },
-    "frame": "goal",
+    "frame": "challenge",
     "icon": {
       "count": 1,
       "id": "minecraft:spyglass"

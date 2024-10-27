@@ -25,6 +25,7 @@
     "description": {
       "translate": "advancements.full_golden_armor.description"
     },
+    "frame": "goal",
     "icon": {
       "count": 1,
       "id": "minecraft:golden_chestplate"

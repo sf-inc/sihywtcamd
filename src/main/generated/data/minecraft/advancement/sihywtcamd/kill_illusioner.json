@@ -20,6 +20,8 @@
     "description": {
       "translate": "advancements.kill_illusioner.description"
     },
+    "frame": "challenge",
+    "hidden": true,
     "icon": {
       "count": 1,
       "id": "minecraft:bow"

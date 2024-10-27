@@ -48,7 +48,7 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                             Text.translatable("advancements.full_golden_armor.title"),
                             Text.translatable("advancements.full_golden_armor.description"),
                             null,
-                            AdvancementFrame.TASK,
+                            AdvancementFrame.GOAL,
                             true,
                             true,
                             false
@@ -64,10 +64,10 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                             Text.translatable("advancements.zombified_piglin_brute_collision.title"),
                             Text.translatable("advancements.zombified_piglin_brute_collision.description"),
                             null,
-                            AdvancementFrame.TASK,
+                            AdvancementFrame.CHALLENGE,
                             true,
                             true,
-                            false
+                            true
                     )
                     .criterion("zombified_piglin_brute_collision", AdvancementRegistry.createBruteCollision())
                     .build(consumer, Sihywtcamd.MOD_ID + "/zombified_piglin_brute_collision");
@@ -79,10 +79,10 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                             Text.translatable("advancements.kill_illusioner.title"),
                             Text.translatable("advancements.kill_illusioner.description"),
                             null,
-                            AdvancementFrame.TASK,
+                            AdvancementFrame.CHALLENGE,
                             true,
                             true,
-                            false
+                            true
                     )
                     .criterion("kill_illusioner", OnKilledCriterion.Conditions.createPlayerKilledEntity(
                             EntityPredicate.Builder.create().type(EntityType.ILLUSIONER)))
@@ -140,7 +140,7 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                             Text.translatable("advancements.spyglass_at_baby_4.title"),
                             Text.translatable("advancements.spyglass_at_baby_4.description"),
                             null,
-                            AdvancementFrame.GOAL,
+                            AdvancementFrame.CHALLENGE,
                             true,
                             true,
                             false
@@ -176,10 +176,10 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                             Text.translatable("advancements.ride_zombie_horse.title"),
                             Text.translatable("advancements.ride_zombie_horse.description"),
                             null,
-                            AdvancementFrame.TASK,
+                            AdvancementFrame.CHALLENGE,
                             true,
                             true,
-                            false
+                            true
                     )
                     .criterion("ride_zombie_horse", StartedRidingCriterion.Conditions.create(
                             EntityPredicate.Builder.create()

@@ -9,6 +9,8 @@
     "description": {
       "translate": "advancements.zombified_piglin_brute_collision.description"
     },
+    "frame": "challenge",
+    "hidden": true,
     "icon": {
       "count": 1,
       "id": "minecraft:golden_axe"
