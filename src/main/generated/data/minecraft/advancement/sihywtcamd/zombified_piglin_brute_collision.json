@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:sihywtcamd/full_golden_armor",
+  "parent": "minecraft:nether/root",
   "criteria": {
     "zombified_piglin_brute_collision": {
       "trigger": "minecraft:sihywtcamd/zombified_piglin_brute_collision"

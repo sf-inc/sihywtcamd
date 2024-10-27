@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:sihywtcamd/root",
+  "parent": "minecraft:adventure/kill_a_mob",
   "criteria": {
     "kill_illusioner": {
       "conditions": {

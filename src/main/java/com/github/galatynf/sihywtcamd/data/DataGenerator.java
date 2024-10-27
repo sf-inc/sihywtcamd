@@ -22,7 +22,6 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.BiomeKeys;
 
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
@@ -42,24 +41,8 @@ public class DataGenerator implements DataGeneratorEntrypoint {
 
         @Override
         public void generateAdvancement(RegistryWrapper.WrapperLookup registryLookup, Consumer<AdvancementEntry> consumer) {
-            AdvancementEntry root = Advancement.Builder.create()
-                    .display(
-                            Items.STONE_SWORD,
-                            Text.translatable("advancements.root.title"),
-                            Text.translatable("advancements.root.description"),
-                            Identifier.ofVanilla("textures/block/deepslate_top.png"),
-                            AdvancementFrame.TASK,
-                            true,
-                            false,
-                            false
-                    )
-                    .criterion("kill_something", OnKilledCriterion.Conditions.createPlayerKilledEntity())
-                    .criterion("killed_by_something", OnKilledCriterion.Conditions.createEntityKilledPlayer())
-                    .requirements(AdvancementRequirements.anyOf(List.of("kill_something", "killed_by_something")))
-                    .build(consumer, Sihywtcamd.MOD_ID + "/root");
-
             AdvancementEntry fullGoldenArmor = Advancement.Builder.create()
-                    .parent(root)
+                    .parent(Identifier.ofVanilla("nether/distract_piglin"))
                     .display(
                             Items.GOLDEN_CHESTPLATE,
                             Text.translatable("advancements.full_golden_armor.title"),
@@ -75,7 +58,7 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                     .build(consumer, Sihywtcamd.MOD_ID + "/full_golden_armor");
 
             AdvancementEntry bruteCollision = Advancement.Builder.create()
-                    .parent(fullGoldenArmor)
+                    .parent(Identifier.ofVanilla("nether/root"))
                     .display(
                             Items.GOLDEN_AXE,
                             Text.translatable("advancements.zombified_piglin_brute_collision.title"),
@@ -90,7 +73,7 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                     .build(consumer, Sihywtcamd.MOD_ID + "/zombified_piglin_brute_collision");
 
             AdvancementEntry killIllusioner = Advancement.Builder.create()
-                    .parent(root)
+                    .parent(Identifier.ofVanilla("adventure/kill_a_mob"))
                     .display(
                             Items.BOW,
                             Text.translatable("advancements.kill_illusioner.title"),
@@ -106,7 +89,7 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                     .build(consumer, Sihywtcamd.MOD_ID + "/kill_illusioner");
 
             AdvancementEntry killPhantomEnd = Advancement.Builder.create()
-                    .parent(root)
+                    .parent(Identifier.ofVanilla("end/root"))
                     .display(
                             Items.PHANTOM_MEMBRANE,
                             Text.translatable("advancements.kill_phantom_end.title"),
@@ -125,7 +108,7 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                     .build(consumer, Sihywtcamd.MOD_ID + "/kill_phantom_end");
 
             AdvancementEntry babyZombiesTower1 = Advancement.Builder.create()
-                    .parent(root)
+                    .parent(Identifier.ofVanilla("adventure/spyglass_at_parrot"))
                     .display(
                             Items.SPYGLASS,
                             Text.translatable("advancements.spyglass_at_baby_1.title"),
@@ -187,7 +170,7 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                     .build(consumer, Sihywtcamd.MOD_ID + "/spyglass_at_baby_4");
 
             AdvancementEntry rideZombieHorse = Advancement.Builder.create()
-                    .parent(root)
+                    .parent(Identifier.ofVanilla("adventure/root"))
                     .display(
                             Items.SADDLE,
                             Text.translatable("advancements.ride_zombie_horse.title"),
@@ -205,7 +188,7 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                     .build(consumer, Sihywtcamd.MOD_ID + "/ride_zombie_horse");
 
             AdvancementEntry convertMagma = Advancement.Builder.create()
-                    .parent(root)
+                    .parent(Identifier.ofVanilla("nether/root"))
                     .display(
                             Items.SLIME_BALL,
                             Text.translatable("advancements.convert_magma.title"),

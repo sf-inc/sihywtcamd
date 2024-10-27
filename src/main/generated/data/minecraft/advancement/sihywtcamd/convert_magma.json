@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:sihywtcamd/root",
+  "parent": "minecraft:nether/root",
   "criteria": {
     "convert_magma": {
       "trigger": "minecraft:sihywtcamd/magma_to_slime_conversion"
