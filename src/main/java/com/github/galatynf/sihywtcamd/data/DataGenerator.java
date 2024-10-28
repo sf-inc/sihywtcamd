@@ -13,6 +13,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Items;
 import net.minecraft.potion.Potions;
+import net.minecraft.predicate.DamagePredicate;
 import net.minecraft.predicate.entity.*;
 import net.minecraft.predicate.item.ItemPredicate;
 import net.minecraft.registry.RegistryKeys;
@@ -71,6 +72,28 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                     )
                     .criterion("zombified_piglin_brute_collision", AdvancementRegistry.createBruteCollision())
                     .build(consumer, Sihywtcamd.MOD_ID + "/zombified_piglin_brute_collision");
+
+            AdvancementEntry deflectFireworkRocket = Advancement.Builder.create()
+                    .parent(Identifier.ofVanilla("story/deflect_arrow"))
+                    .display(
+                            Items.FIREWORK_ROCKET,
+                            Text.translatable("advancements.deflect_firework_rocket.title"),
+                            Text.translatable("advancements.deflect_firework_rocket.description"),
+                            null,
+                            AdvancementFrame.TASK,
+                            true,
+                            true,
+                            false
+                    )
+                    .criterion("deflected_firework_rocket", EntityHurtPlayerCriterion.Conditions.create(
+                                    DamagePredicate.Builder.create().type(DamageSourcePredicate.Builder.create()
+                                                    .directEntity(EntityPredicate.Builder.create()
+                                                            .type(EntityType.FIREWORK_ROCKET))
+                                                    .sourceEntity(EntityPredicate.Builder.create()
+                                                            .type(EntityType.PILLAGER)))
+                                            .blocked(true)
+                            ))
+                    .build(consumer, Sihywtcamd.MOD_ID + "/deflect_firework_rocket");
 
             AdvancementEntry killIllusioner = Advancement.Builder.create()
                     .parent(Identifier.ofVanilla("adventure/kill_a_mob"))

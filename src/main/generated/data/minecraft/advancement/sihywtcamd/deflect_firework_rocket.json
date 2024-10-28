@@ -1,0 +1,39 @@
+{
+  "parent": "minecraft:story/deflect_arrow",
+  "criteria": {
+    "deflected_firework_rocket": {
+      "conditions": {
+        "damage": {
+          "type": {
+            "direct_entity": {
+              "type": "minecraft:firework_rocket"
+            },
+            "source_entity": {
+              "type": "minecraft:pillager"
+            }
+          },
+          "blocked": true
+        }
+      },
+      "trigger": "minecraft:entity_hurt_player"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.deflect_firework_rocket.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:firework_rocket"
+    },
+    "title": {
+      "translate": "advancements.deflect_firework_rocket.title"
+    }
+  },
+  "requirements": [
+    [
+      "deflected_firework_rocket"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
