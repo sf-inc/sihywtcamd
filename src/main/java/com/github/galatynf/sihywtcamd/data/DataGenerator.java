@@ -10,12 +10,10 @@ import net.minecraft.advancement.*;
 import net.minecraft.advancement.criterion.*;
 import net.minecraft.component.type.PotionContentsComponent;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Items;
 import net.minecraft.potion.Potions;
-import net.minecraft.predicate.entity.EntityFlagsPredicate;
-import net.minecraft.predicate.entity.EntityPredicate;
-import net.minecraft.predicate.entity.LocationPredicate;
-import net.minecraft.predicate.entity.PlayerPredicate;
+import net.minecraft.predicate.entity.*;
 import net.minecraft.predicate.item.ItemPredicate;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
@@ -84,9 +82,11 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                             AdvancementFrame.CHALLENGE,
                             true,
                             true,
-                            true
+                            false
                     )
-                    .criterion("kill_illusioner", OnKilledCriterion.Conditions.createPlayerKilledEntity(
+                    .criterion("kill_illusioner", AdvancementRegistry.createPlayerKilledEntity(
+                            EntityPredicate.Builder.create().effects(
+                                    EntityEffectPredicate.Builder.create().addEffect(StatusEffects.INVISIBILITY)),
                             EntityPredicate.Builder.create().type(EntityType.ILLUSIONER)))
                     .build(consumer, Sihywtcamd.MOD_ID + "/kill_illusioner");
 

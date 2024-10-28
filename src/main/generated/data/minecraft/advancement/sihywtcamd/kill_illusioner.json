@@ -11,6 +11,17 @@
               "type": "minecraft:illusioner"
             }
           }
+        ],
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "effects": {
+                "minecraft:invisibility": {}
+              }
+            }
+          }
         ]
       },
       "trigger": "minecraft:player_killed_entity"
@@ -21,7 +32,6 @@
       "translate": "advancements.kill_illusioner.description"
     },
     "frame": "challenge",
-    "hidden": true,
     "icon": {
       "components": {
         "minecraft:potion_contents": {
