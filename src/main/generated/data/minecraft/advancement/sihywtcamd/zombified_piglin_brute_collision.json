@@ -24,5 +24,8 @@
       "zombified_piglin_brute_collision"
     ]
   ],
+  "rewards": {
+    "experience": 100
+  },
   "sends_telemetry_event": true
 }

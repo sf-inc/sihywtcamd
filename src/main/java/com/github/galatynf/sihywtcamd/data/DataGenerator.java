@@ -71,6 +71,7 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                             true
                     )
                     .criterion("zombified_piglin_brute_collision", AdvancementRegistry.createBruteCollision())
+                    .rewards(AdvancementRewards.Builder.experience(100))
                     .build(consumer, Sihywtcamd.MOD_ID + "/zombified_piglin_brute_collision");
 
             AdvancementEntry deflectFireworkRocket = Advancement.Builder.create()
@@ -111,6 +112,7 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                             EntityPredicate.Builder.create().effects(
                                     EntityEffectPredicate.Builder.create().addEffect(StatusEffects.INVISIBILITY)),
                             EntityPredicate.Builder.create().type(EntityType.ILLUSIONER)))
+                    .rewards(AdvancementRewards.Builder.experience(50))
                     .build(consumer, Sihywtcamd.MOD_ID + "/kill_illusioner");
 
             AdvancementEntry killPhantomEnd = Advancement.Builder.create()
@@ -191,7 +193,7 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                                             .build()),
                             ItemPredicate.Builder.create().items(Items.SPYGLASS))
                     )
-                    .rewards(AdvancementRewards.Builder.experience(50))
+                    .rewards(AdvancementRewards.Builder.experience(25))
                     .build(consumer, Sihywtcamd.MOD_ID + "/spyglass_at_baby_4");
 
             AdvancementEntry rideZombieHorse = Advancement.Builder.create()
@@ -210,6 +212,7 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                             EntityPredicate.Builder.create()
                                     .vehicle(EntityPredicate.Builder.create()
                                             .type(EntityType.ZOMBIE_HORSE))))
+                    .rewards(AdvancementRewards.Builder.experience(10))
                     .build(consumer, Sihywtcamd.MOD_ID + "/ride_zombie_horse");
 
             AdvancementEntry convertMagma = Advancement.Builder.create()
@@ -219,12 +222,13 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                             Text.translatable("advancements.convert_magma.title"),
                             Text.translatable("advancements.convert_magma.description"),
                             null,
-                            AdvancementFrame.TASK,
+                            AdvancementFrame.CHALLENGE,
                             true,
                             true,
                             false
                     )
                     .criterion("convert_magma", AdvancementRegistry.createMagmaToSlime())
+                    .rewards(AdvancementRewards.Builder.experience(20))
                     .build(consumer, Sihywtcamd.MOD_ID + "/convert_magma");
 
             AdvancementEntry convertSlime = Advancement.Builder.create()
@@ -234,12 +238,13 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                             Text.translatable("advancements.convert_slime.title"),
                             Text.translatable("advancements.convert_slime.description"),
                             null,
-                            AdvancementFrame.TASK,
+                            AdvancementFrame.CHALLENGE,
                             true,
                             true,
                             false
                     )
                     .criterion("convert_slime", AdvancementRegistry.createSlimeToMagma())
+                    .rewards(AdvancementRewards.Builder.experience(30))
                     .build(consumer, Sihywtcamd.MOD_ID + "/convert_slime");
         }
     }

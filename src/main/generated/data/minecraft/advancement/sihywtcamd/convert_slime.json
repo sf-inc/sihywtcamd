@@ -9,6 +9,7 @@
     "description": {
       "translate": "advancements.convert_slime.description"
     },
+    "frame": "challenge",
     "icon": {
       "count": 1,
       "id": "minecraft:magma_cream"
@@ -22,5 +23,8 @@
       "convert_slime"
     ]
   ],
+  "rewards": {
+    "experience": 30
+  },
   "sends_telemetry_event": true
 }

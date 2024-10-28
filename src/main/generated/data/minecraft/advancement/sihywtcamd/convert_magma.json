@@ -9,6 +9,7 @@
     "description": {
       "translate": "advancements.convert_magma.description"
     },
+    "frame": "challenge",
     "icon": {
       "count": 1,
       "id": "minecraft:slime_ball"
@@ -22,5 +23,8 @@
       "convert_magma"
     ]
   ],
+  "rewards": {
+    "experience": 20
+  },
   "sends_telemetry_event": true
 }

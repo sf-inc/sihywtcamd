@@ -37,5 +37,8 @@
       "ride_zombie_horse"
     ]
   ],
+  "rewards": {
+    "experience": 10
+  },
   "sends_telemetry_event": true
 }
