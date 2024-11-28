@@ -3,8 +3,6 @@ package com.github.galatynf.sihywtcamd.mixin.zombie;
 import com.github.galatynf.sihywtcamd.Sihywtcamd;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import com.github.galatynf.sihywtcamd.mixin.LivingEntityMixin;
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
@@ -38,13 +36,10 @@ public abstract class ZombieLivingMixin extends LivingEntityMixin {
     @Unique
     private static final Identifier UNSTOPPABLE_BONUS_ID = id("unstoppable_zombie_bonus");
 
-    @Shadow public abstract void setCanBreakDoors(boolean canBreakDoors);
-
-    @Shadow protected abstract boolean shouldBreakDoors();
-
+    @Shadow public abstract boolean canBreakDoors();
     @Shadow public abstract boolean isBaby();
 
-    @Shadow public abstract void setBaby(boolean baby);
+    @Shadow public abstract void setCanBreakDoors(boolean canBreakDoors);
 
     public ZombieLivingMixin(EntityType<?> type, World world) {
         super(type, world);
@@ -63,7 +58,7 @@ public abstract class ZombieLivingMixin extends LivingEntityMixin {
 
             for (int i = 0; i < ModConfig.get().zombies.general.babyTowerHeight; ++i) {
                 if (random < 1.f / Math.pow(2.f, i)) {
-                    ZombieEntity newBaby = (ZombieEntity) this.getType().create(world.toServerWorld());
+                    ZombieEntity newBaby = (ZombieEntity) this.getType().create(world.toServerWorld(), SpawnReason.JOCKEY);
                     if (newBaby == null) {
                         break;
                     }
@@ -88,23 +83,23 @@ public abstract class ZombieLivingMixin extends LivingEntityMixin {
             if (random < 0.1f) {
                 name = "Caller";
                 double value = 0.2 + 0.15 * chanceMultiplier + 0.15 * this.random.nextDouble();
-                this.getAttributeInstance(EntityAttributes.ZOMBIE_SPAWN_REINFORCEMENTS).addPersistentModifier(
+                this.getAttributeInstance(EntityAttributes.SPAWN_REINFORCEMENTS).addPersistentModifier(
                         new EntityAttributeModifier(CALLER_BONUS_ID, value, EntityAttributeModifier.Operation.ADD_VALUE));
             } else if (random < 0.3f) {
                 name = "Tank";
-                this.setCanBreakDoors(this.shouldBreakDoors());
+                this.setCanBreakDoors(this.canBreakDoors());
                 double value = 0.5 + 1.0 * chanceMultiplier + this.random.nextDouble();
-                this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).addPersistentModifier(
+                this.getAttributeInstance(EntityAttributes.MAX_HEALTH).addPersistentModifier(
                         new EntityAttributeModifier(TANK_BONUS_ID, value, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE));
             } else if (random < 0.5f) {
                 name = "Runner";
                 double value = 0.2 + 0.15 * chanceMultiplier + 0.15 * this.random.nextDouble();
-                this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).addPersistentModifier(
+                this.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED).addPersistentModifier(
                         new EntityAttributeModifier(RUNNER_BONUS_ID, value, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE));
             } else if (random < 0.7f) {
                 name = "Unstoppable";
                 double value = 0.2 + 0.15 * chanceMultiplier + 0.15 * this.random.nextDouble();
-                this.getAttributeInstance(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE).addPersistentModifier(
+                this.getAttributeInstance(EntityAttributes.KNOCKBACK_RESISTANCE).addPersistentModifier(
                         new EntityAttributeModifier(UNSTOPPABLE_BONUS_ID, value, EntityAttributeModifier.Operation.ADD_VALUE));
             }
 
@@ -119,22 +114,11 @@ public abstract class ZombieLivingMixin extends LivingEntityMixin {
     @Inject(method = "initAttributes", at = @At("HEAD"), cancellable = true)
     private void initWithIncreasedAttributes(CallbackInfo ci) {
         if (ModConfig.get().zombies.general.moreKnockbackResistance) {
-            this.getAttributeInstance(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(0.2 + 0.2 * this.random.nextDouble());
+            this.getAttributeInstance(EntityAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.2 + 0.2 * this.random.nextDouble());
         }
         if (ModConfig.get().zombies.general.spawnMoreReinforcement) {
-            this.getAttributeInstance(EntityAttributes.ZOMBIE_SPAWN_REINFORCEMENTS).setBaseValue(0.2 + 0.2 * this.random.nextDouble());
+            this.getAttributeInstance(EntityAttributes.SPAWN_REINFORCEMENTS).setBaseValue(0.2 + 0.2 * this.random.nextDouble());
             ci.cancel();
-        }
-    }
-
-    @WrapOperation(method = "damage", at = @At(value = "NEW", target = "(Lnet/minecraft/world/World;)Lnet/minecraft/entity/mob/ZombieEntity;"))
-    private ZombieEntity updateZombieType(World world, Operation<ZombieEntity> original) {
-        if (ModConfig.get().zombies.general.sameTypeReinforcement
-                && this.getType() != EntityType.ZOMBIE
-                && this.random.nextBoolean()) {
-            return (ZombieEntity) this.getType().create(world);
-        } else {
-            return original.call(world);
         }
     }
 

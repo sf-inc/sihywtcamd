@@ -16,7 +16,7 @@ public abstract class EvokerEntityMixin extends EntityMixin {
     @ModifyReturnValue(method = "createEvokerAttributes", at = @At("RETURN"))
     private static DefaultAttributeContainer.Builder increaseHealth(DefaultAttributeContainer.Builder original) {
         if (ModConfig.get().illagers.evoker.increasedHealth) {
-            original.add(EntityAttributes.GENERIC_FOLLOW_RANGE, 36.0);
+            original.add(EntityAttributes.MAX_HEALTH, 36.0);
         }
         return original;
     }

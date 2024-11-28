@@ -13,7 +13,7 @@ public class GhastMixin {
     @ModifyReturnValue(method = "createGhastAttributes", at = @At("RETURN"))
     private static DefaultAttributeContainer.Builder increaseHealth(DefaultAttributeContainer.Builder original) {
         if (ModConfig.get().nether.ghast.increasedHealth) {
-            original.add(EntityAttributes.GENERIC_MAX_HEALTH, 30.0);
+            original.add(EntityAttributes.MAX_HEALTH, 30.0);
         }
         return original;
     }

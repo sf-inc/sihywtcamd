@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(Entity.class)
 public abstract class EntityMixin {
-    @ModifyReturnValue(method = "isInvulnerableTo", at = @At("RETURN"))
+    @ModifyReturnValue(method = "isAlwaysInvulnerableTo", at = @At("RETURN"))
     protected boolean updateInvulnerableTo(boolean original, DamageSource damageSource) {
         return original;
     }

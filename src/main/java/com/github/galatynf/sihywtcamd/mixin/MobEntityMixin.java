@@ -4,6 +4,7 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.GoalSelector;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
@@ -20,14 +21,12 @@ public abstract class MobEntityMixin extends LivingEntity {
     @Shadow @Final protected GoalSelector targetSelector;
     @Shadow @Final protected GoalSelector goalSelector;
 
-    @Shadow public abstract void setBaby(boolean baby);
-
     protected MobEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
     }
 
     @Inject(method = "tryAttack", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/MobEntity;onAttacking(Lnet/minecraft/entity/Entity;)V"))
-    protected void onTryAttackSuccess(Entity target, CallbackInfoReturnable<Boolean> cir) {
+    protected void onTryAttackSuccess(ServerWorld world, Entity target, CallbackInfoReturnable<Boolean> cir) {
 
     }
 

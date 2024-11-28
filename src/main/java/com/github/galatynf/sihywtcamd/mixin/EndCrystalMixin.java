@@ -21,8 +21,9 @@ public abstract class EndCrystalMixin extends Entity {
         super(type, world);
     }
 
-    @Inject(method = "damage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/decoration/EndCrystalEntity;crystalDestroyed(Lnet/minecraft/entity/damage/DamageSource;)V"))
-    private void summonPhantoms(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+    @Inject(method = "damage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/decoration/EndCrystalEntity;crystalDestroyed(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/entity/damage/DamageSource;)V"))
+    private void summonPhantoms(ServerWorld world, DamageSource source, float amount,
+                                CallbackInfoReturnable<Boolean> cir) {
         if (ModConfig.get().bosses.enderDragon.crystalDestructionSpawnsPhantom
                 && this.getWorld() instanceof ServerWorld serverWorld
                 && serverWorld.getEnderDragonFight() != null

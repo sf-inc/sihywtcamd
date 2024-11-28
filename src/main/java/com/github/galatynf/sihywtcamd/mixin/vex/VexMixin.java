@@ -5,6 +5,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.VexEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
@@ -24,8 +25,10 @@ public abstract class VexMixin extends HostileEntity {
     @Inject(method = "tick", at = @At("HEAD"))
     private void killWithMaster(CallbackInfo ci) {
         if (ModConfig.get().overworld.vex.dieWithEvoker
-                && this.getOwner() != null && this.getOwner().isDead()) {
-            this.kill();
+                && this.getWorld() instanceof ServerWorld world
+                && this.getOwner() != null
+                && this.getOwner().isDead()) {
+            this.kill(world);
         }
     }
 }

@@ -7,9 +7,9 @@ import net.minecraft.enchantment.provider.EnchantmentProviders;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.trim.ArmorTrim;
-import net.minecraft.item.trim.ArmorTrimMaterial;
-import net.minecraft.item.trim.ArmorTrimPattern;
+import net.minecraft.item.equipment.trim.ArmorTrim;
+import net.minecraft.item.equipment.trim.ArmorTrimMaterial;
+import net.minecraft.item.equipment.trim.ArmorTrimPattern;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
@@ -24,11 +24,12 @@ public class EntityUtils {
         if (armorStack.isEmpty()) return;
 
         DynamicRegistryManager drm = world.getRegistryManager();
-        Registry<ArmorTrimMaterial> trimMaterialRegistry = drm.get(RegistryKeys.TRIM_MATERIAL);
-        Registry<ArmorTrimPattern> trimPatternRegistry = drm.get(RegistryKeys.TRIM_PATTERN);
+        Registry<ArmorTrimMaterial> trimMaterialRegistry = drm.getOrThrow(RegistryKeys.TRIM_MATERIAL);
+        Registry<ArmorTrimPattern> trimPatternRegistry = drm.getOrThrow(RegistryKeys.TRIM_PATTERN);
 
         armorStack.set(DataComponentTypes.TRIM, new ArmorTrim(
-                trimMaterialRegistry.entryOf(material), trimPatternRegistry.entryOf(pattern)));
+                trimMaterialRegistry.getEntry(trimMaterialRegistry.get(material)),
+                trimPatternRegistry.getEntry(trimPatternRegistry.get(pattern))));
     }
 
     public static void trimEntityArmor(ServerWorld world, MobEntity mob, RegistryKey<ArmorTrimMaterial> material,

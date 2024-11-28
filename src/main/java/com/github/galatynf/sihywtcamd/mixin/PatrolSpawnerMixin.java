@@ -15,11 +15,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PatrolSpawner.class)
 public class PatrolSpawnerMixin {
-    @Inject(method = "spawnPillager", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/EntityType;create(Lnet/minecraft/world/World;)Lnet/minecraft/entity/Entity;"), cancellable = true)
+    @Inject(method = "spawnPillager", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/EntityType;create(Lnet/minecraft/world/World;Lnet/minecraft/entity/SpawnReason;)Lnet/minecraft/entity/Entity;"), cancellable = true)
     private void spawnVindicatorOrRavager(ServerWorld world, BlockPos pos, Random random, boolean captain, CallbackInfoReturnable<Boolean> cir) {
         if (ModConfig.get().illagers.vindicator.spawnInPatrols
                 && random.nextFloat() < 0.1F + 0.1F * world.getLocalDifficulty(pos).getClampedLocalDifficulty()) {
-            PatrolEntity patrolEntity = EntityType.VINDICATOR.create(world);
+            PatrolEntity patrolEntity = EntityType.VINDICATOR.create(world, SpawnReason.PATROL);
             if (patrolEntity != null) {
                 if (captain) {
                     patrolEntity.setPatrolLeader(true);
@@ -38,8 +38,9 @@ public class PatrolSpawnerMixin {
 
         if (ModConfig.get().illagers.ravager.spawnInPatrols
                 && random.nextFloat() < 0.05F + 0.05F * world.getLocalDifficulty(pos).getClampedLocalDifficulty()) {
-            PatrolEntity patrolEntity1 = EntityType.RAVAGER.create(world);
-            PatrolEntity patrolEntity2 = captain || random.nextBoolean() ? EntityType.PILLAGER.create(world) : null;
+            PatrolEntity patrolEntity1 = EntityType.RAVAGER.create(world, SpawnReason.PATROL);
+            PatrolEntity patrolEntity2 = captain || random.nextBoolean()
+                    ? EntityType.PILLAGER.create(world, SpawnReason.PATROL) : null;
 
             if (patrolEntity1 != null) {
                 if (patrolEntity2 != null) {

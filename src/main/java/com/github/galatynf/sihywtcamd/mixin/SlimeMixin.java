@@ -4,7 +4,10 @@ import com.github.galatynf.sihywtcamd.Sihywtcamd;
 import com.github.galatynf.sihywtcamd.advancement.AdvancementRegistry;
 import com.github.galatynf.sihywtcamd.cardinal.MyComponents;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.entity.*;
+import net.minecraft.entity.conversion.EntityConversionContext;
 import net.minecraft.entity.mob.MagmaCubeEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.SlimeEntity;
@@ -19,7 +22,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -57,7 +59,10 @@ public abstract class SlimeMixin extends MobEntity {
                 && this.getWorld().getRegistryKey().equals(World.NETHER)
                 && this.isInLava()) {
             int size = this.getSize();
-            MagmaCubeEntity magmaCube = this.convertTo(EntityType.MAGMA_CUBE, false);
+            MagmaCubeEntity magmaCube = this.convertTo(
+                    EntityType.MAGMA_CUBE,
+                    EntityConversionContext.create(this, false, true),
+                    slime -> {});
             if (magmaCube != null) {
                 magmaCube.setSize(size, true);
                 this.playSound(SoundEvents.ENTITY_GENERIC_EXTINGUISH_FIRE, 0.7F, 1.6F + (this.random.nextFloat() - this.random.nextFloat()) * 0.4F);
@@ -97,19 +102,23 @@ public abstract class SlimeMixin extends MobEntity {
         }
     }
 
-    @ModifyVariable(method = "remove", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/SlimeEntity;setInvulnerable(Z)V"))
-    private SlimeEntity transferMergedGene(SlimeEntity slime, RemovalReason value) {
-        boolean hasMerged = MyComponents.SLIME_COMPONENT.get(this).hasMerged();
-        if (hasMerged) {
-            MyComponents.SLIME_COMPONENT.get(slime).setMerged();
-        }
+    @WrapOperation(method = "remove", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/SlimeEntity;convertTo(Lnet/minecraft/entity/EntityType;Lnet/minecraft/entity/conversion/EntityConversionContext;Lnet/minecraft/entity/SpawnReason;Lnet/minecraft/entity/conversion/EntityConversionContext$Finalizer;)Lnet/minecraft/entity/mob/MobEntity;"))
+    private MobEntity transferMergedGene(SlimeEntity instance, EntityType<?> entityType,
+                                         EntityConversionContext entityConversionContext, SpawnReason spawnReason,
+                                         EntityConversionContext.Finalizer<SlimeEntity> finalizer, Operation<MobEntity> original) {
+        return original.call(instance, entityType, entityConversionContext, spawnReason,
+                (EntityConversionContext.Finalizer<SlimeEntity>) slime -> {
+            finalizer.finalizeConversion(slime);
+            boolean hasMerged = MyComponents.SLIME_COMPONENT.get(instance).hasMerged();
+            if (hasMerged) {
+                MyComponents.SLIME_COMPONENT.get(slime).setMerged();
+            }
 
-        if (Sihywtcamd.DEBUG && hasMerged) {
-            this.setCustomName(Text.of("Merged Child"));
-            this.setCustomNameVisible(true);
-        }
-
-        return slime;
+            if (Sihywtcamd.DEBUG && hasMerged) {
+                slime.setCustomName(Text.of("Merged Child"));
+                slime.setCustomNameVisible(true);
+            }
+        });
     }
 
     @Inject(method = "damage", at = @At("HEAD"))

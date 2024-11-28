@@ -48,7 +48,8 @@ public abstract class SpawnHelperMixin {
             return false;
         }
 
-        Structure structure = structureAccessor.getRegistryManager().get(RegistryKeys.STRUCTURE).get(StructureKeys.END_CITY);
+        Structure structure = structureAccessor.getRegistryManager().getOrThrow(RegistryKeys.STRUCTURE)
+                .get(StructureKeys.END_CITY);
         if (structure == null) {
             return false;
         }

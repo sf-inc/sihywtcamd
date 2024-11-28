@@ -82,7 +82,7 @@ public class CrossbowAirAttackGoal<T extends HostileEntity & CrossbowUser & Pill
             this.actor.getActiveItem().set(DataComponentTypes.CHARGED_PROJECTILES, ChargedProjectilesComponent.DEFAULT);
         }
         this.actor.removeStatusEffect(StatusEffects.SLOW_FALLING);
-        EntityAttributeInstance gravity = this.actor.getAttributeInstance(EntityAttributes.GENERIC_GRAVITY);
+        EntityAttributeInstance gravity = this.actor.getAttributeInstance(EntityAttributes.GRAVITY);
         if (gravity != null) {
             gravity.removeModifier(REDUCED_GRAVITY_ID);
         }
@@ -125,7 +125,7 @@ public class CrossbowAirAttackGoal<T extends HostileEntity & CrossbowUser & Pill
                 }
                 if (!isInAir) {
                     this.actor.removeStatusEffect(StatusEffects.SLOW_FALLING);
-                    EntityAttributeInstance gravity = this.actor.getAttributeInstance(EntityAttributes.GENERIC_GRAVITY);
+                    EntityAttributeInstance gravity = this.actor.getAttributeInstance(EntityAttributes.GRAVITY);
                     if (gravity != null) {
                         gravity.removeModifier(REDUCED_GRAVITY_ID);
                     }
@@ -145,7 +145,7 @@ public class CrossbowAirAttackGoal<T extends HostileEntity & CrossbowUser & Pill
             } else if (this.stage == Stage.AIR_LAUNCH) {
                 this.actor.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, -1, 0, false, false));
                 double multiplier = -0.90;
-                EntityAttributeInstance gravity = this.actor.getAttributeInstance(EntityAttributes.GENERIC_GRAVITY);
+                EntityAttributeInstance gravity = this.actor.getAttributeInstance(EntityAttributes.GRAVITY);
                 if (gravity != null && !gravity.hasModifier(REDUCED_GRAVITY_ID)) {
                     gravity.addPersistentModifier(new EntityAttributeModifier(
                             REDUCED_GRAVITY_ID, multiplier, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE));

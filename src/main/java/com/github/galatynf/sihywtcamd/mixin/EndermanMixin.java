@@ -8,6 +8,7 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.EndermanEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -19,7 +20,7 @@ public abstract class EndermanMixin extends MobEntityMixin {
     }
 
     @Override
-    protected void onTryAttackSuccess(Entity target, CallbackInfoReturnable<Boolean> cir) {
+    protected void onTryAttackSuccess(ServerWorld world, Entity target, CallbackInfoReturnable<Boolean> cir) {
         if (ModConfig.get().end.enderman.blindnessAttack
                 && target instanceof PlayerEntity playerEntity
                 && this.random.nextBoolean()) {

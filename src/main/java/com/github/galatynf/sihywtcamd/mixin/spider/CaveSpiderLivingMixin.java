@@ -28,7 +28,7 @@ public abstract class CaveSpiderLivingMixin extends LivingEntityMixin {
                 && !this.hasVehicle()
                 && !SpawnReason.isAnySpawner(spawnReason)
                 && world.getRandom().nextInt(50) == 0) {
-            SkeletonEntity skeletonEntity = EntityType.SKELETON.create(this.getWorld());
+            SkeletonEntity skeletonEntity = EntityType.SKELETON.create(this.getWorld(), SpawnReason.JOCKEY);
             if (skeletonEntity != null) {
                 skeletonEntity.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), this.getYaw(), 0.0F);
                 skeletonEntity.initialize(world, difficulty, spawnReason, null);

@@ -53,7 +53,7 @@ public abstract class DrownedMixin extends ZombieEntity {
                 GuardianEntity guardianEntity = list.getFirst();
                 this.startRiding(guardianEntity);
             } else {
-                GuardianEntity guardianEntity = EntityType.GUARDIAN.create(this.getWorld());
+                GuardianEntity guardianEntity = EntityType.GUARDIAN.create(this.getWorld(), SpawnReason.JOCKEY);
                 if (guardianEntity != null) {
                     guardianEntity.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), this.getYaw(), 0.0F);
                     guardianEntity.initialize(world, difficulty, SpawnReason.JOCKEY, null);

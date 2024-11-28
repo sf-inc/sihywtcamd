@@ -33,7 +33,7 @@ public abstract class SilverfishMixin extends MobEntityMixin {
                               EntityData entityData, CallbackInfoReturnable<EntityData> cir) {
         if (!ModConfig.get().arthropods.general.larvaeSpeedBonus) return;
 
-        EntityAttributeInstance speed = this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED);
+        EntityAttributeInstance speed = this.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED);
         if (speed != null) {
             double random = 0.25 * world.getRandom().nextDouble();
             double localDifficulty = 0.25 * difficulty.getClampedLocalDifficulty();

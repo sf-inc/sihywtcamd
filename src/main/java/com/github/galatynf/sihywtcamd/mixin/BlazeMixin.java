@@ -8,6 +8,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.BlazeEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -25,13 +26,13 @@ public abstract class BlazeMixin extends MobEntityMixin {
     @ModifyReturnValue(method = "createBlazeAttributes", at = @At("RETURN"))
     private static DefaultAttributeContainer.Builder reduceFollowRange(DefaultAttributeContainer.Builder original) {
         if (ModConfig.get().nether.blaze.reducedFollowRange) {
-            original.add(EntityAttributes.GENERIC_FOLLOW_RANGE, 32.0);
+            original.add(EntityAttributes.FOLLOW_RANGE, 32.0);
         }
         return original;
     }
 
     @Override
-    protected void onTryAttackSuccess(Entity target, CallbackInfoReturnable<Boolean> cir) {
+    protected void onTryAttackSuccess(ServerWorld world, Entity target, CallbackInfoReturnable<Boolean> cir) {
         if (ModConfig.get().nether.blaze.fireAttack && this.isFireActive()) {
             target.setOnFireFor(5);
         }

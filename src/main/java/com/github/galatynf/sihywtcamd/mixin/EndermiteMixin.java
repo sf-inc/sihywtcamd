@@ -6,6 +6,7 @@ import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.EndermiteEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -31,7 +32,7 @@ public abstract class EndermiteMixin extends MobEntityMixin {
     }
 
     @Override
-    protected void onTryAttackSuccess(Entity entity, CallbackInfoReturnable<Boolean> cir) {
+    protected void onTryAttackSuccess(ServerWorld world, Entity entity, CallbackInfoReturnable<Boolean> cir) {
         if (ModConfig.get().end.endermite.teleportAttack
                 && entity instanceof LivingEntity target) {
             BlockPos oldPos = target.getBlockPos();
@@ -57,7 +58,7 @@ public abstract class EndermiteMixin extends MobEntityMixin {
                                 EntityData entityData, CallbackInfoReturnable<EntityData> cir) {
         if (!ModConfig.get().arthropods.general.larvaeSpeedBonus) return;
 
-        EntityAttributeInstance speed = this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED);
+        EntityAttributeInstance speed = this.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED);
         if (speed != null) {
             double random = 0.25 * world.getRandom().nextDouble();
             double localDifficulty = 0.25 * difficulty.getClampedLocalDifficulty();

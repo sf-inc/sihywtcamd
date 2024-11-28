@@ -9,6 +9,7 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.registry.tag.DamageTypeTags;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -22,7 +23,7 @@ import java.util.List;
 public abstract class CreeperMixin extends LivingEntityMixin {
     @Shadow private int explosionRadius;
 
-    @Shadow public abstract boolean shouldRenderOverlay();
+    @Shadow public abstract boolean isCharged();
 
     @Shadow public abstract void ignite();
 
@@ -38,7 +39,7 @@ public abstract class CreeperMixin extends LivingEntityMixin {
         final int weaknessDuration = ModConfig.get().overworld.creeper.explosionWeaknessMaxDuration * 20;
         if (fatigueDuration <= 0 && weaknessDuration <= 0) return;
 
-        final int explosionRadius = this.explosionRadius * (this.shouldRenderOverlay() ? 3 : 2);
+        final int explosionRadius = this.explosionRadius * (this.isCharged() ? 3 : 2);
         List<Entity> entityList = this.getWorld().getOtherEntities(this,
                 this.getBoundingBox().expand(explosionRadius),
                 entity -> entity instanceof LivingEntity && this.distanceTo(entity) < explosionRadius);
@@ -58,13 +59,13 @@ public abstract class CreeperMixin extends LivingEntityMixin {
     }
 
     @Override
-    public boolean updateDamage(boolean original, DamageSource source, float amount) {
+    public boolean updateDamage(boolean original, ServerWorld world, DamageSource source, float amount) {
         if (!original) return false;
 
         if (ModConfig.get().overworld.creeper.chainExplosions
                 && source.isIn(DamageTypeTags.IS_EXPLOSION)
                 && (!(source.getAttacker() instanceof CreeperEntity creeper)
-                || !creeper.shouldRenderOverlay())) {
+                || !creeper.isCharged())) {
             this.ignite();
             return false;
         } else {

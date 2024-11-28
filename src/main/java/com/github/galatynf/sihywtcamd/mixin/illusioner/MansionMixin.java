@@ -21,7 +21,7 @@ public class MansionMixin {
         if (ModConfig.get().illagers.illusioner.spawnInMansions
                 && metadata.equals("Mage")
                 && random.nextFloat() < 0.4f) {
-            MobEntity illusioner = EntityType.ILLUSIONER.create(world.toServerWorld());
+            MobEntity illusioner = EntityType.ILLUSIONER.create(world.toServerWorld(), SpawnReason.STRUCTURE);
             if (illusioner != null) {
                 illusioner.setPersistent();
                 illusioner.refreshPositionAndAngles(pos, 0.0f, 0.0f);

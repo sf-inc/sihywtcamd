@@ -13,6 +13,7 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.registry.tag.EntityTypeTags;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -45,7 +46,8 @@ public abstract class LivingEntityMixin extends Entity {
     }
 
     @Inject(method = "damage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LimbAnimator;setSpeed(F)V"))
-    private void healUndeadAttacker(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+    private void healUndeadAttacker(ServerWorld world, DamageSource source, float amount,
+                                    CallbackInfoReturnable<Boolean> cir) {
         if (ModConfig.get().undead.general.attackHeal && amount > 0) {
             float realAmount = (float) this.timeUntilRegen > 10.0f && !source.isIn(DamageTypeTags.BYPASSES_COOLDOWN)
                     ? amount - this.lastDamageTaken : amount;
@@ -88,7 +90,8 @@ public abstract class LivingEntityMixin extends Entity {
     }
 
     @ModifyReturnValue(method = "damage", at = @At("RETURN"))
-    protected boolean updateDamage(boolean original, DamageSource source, float amount) {
+    protected boolean updateDamage(boolean original, ServerWorld world, DamageSource source, float amount) {
+        // TODO: Not working anymore (maybe for a while)
         return original;
     }
 

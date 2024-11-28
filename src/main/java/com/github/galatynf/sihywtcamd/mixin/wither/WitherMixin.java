@@ -39,7 +39,7 @@ public abstract class WitherMixin extends HostileEntity {
     @ModifyReturnValue(method = "createWitherAttributes", at = @At("RETURN"))
     private static DefaultAttributeContainer.Builder increaseHealth(DefaultAttributeContainer.Builder original) {
         if (ModConfig.get().bosses.wither.increasedHealth) {
-            original.add(EntityAttributes.GENERIC_MAX_HEALTH, 400.0);
+            original.add(EntityAttributes.MAX_HEALTH, 400.0);
         }
         return original;
     }
