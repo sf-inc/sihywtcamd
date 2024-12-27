@@ -89,12 +89,6 @@ public abstract class LivingEntityMixin extends Entity {
 
     }
 
-    @ModifyReturnValue(method = "damage", at = @At("RETURN"))
-    protected boolean updateDamage(boolean original, ServerWorld world, DamageSource source, float amount) {
-        // TODO: Not working anymore (maybe for a while)
-        return original;
-    }
-
     @ModifyReturnValue(method = "isBaby", at = @At("RETURN"))
     protected boolean updateBaby(boolean original) {
         return original;

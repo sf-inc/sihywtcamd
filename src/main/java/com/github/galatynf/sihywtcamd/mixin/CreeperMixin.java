@@ -2,15 +2,11 @@ package com.github.galatynf.sihywtcamd.mixin;
 
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.CreeperEntity;
-import net.minecraft.registry.tag.DamageTypeTags;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.world.World;
+import net.minecraft.world.explosion.Explosion;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -20,16 +16,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.List;
 
 @Mixin(CreeperEntity.class)
-public abstract class CreeperMixin extends LivingEntityMixin {
+public abstract class CreeperMixin extends EntityMixin {
     @Shadow private int explosionRadius;
 
     @Shadow public abstract boolean isCharged();
 
     @Shadow public abstract void ignite();
-
-    public CreeperMixin(EntityType<?> type, World world) {
-        super(type, world);
-    }
 
     @Inject(method = "explode", at = @At("HEAD"))
     private void effectToEntities(CallbackInfo ci) {
@@ -39,8 +31,9 @@ public abstract class CreeperMixin extends LivingEntityMixin {
         final int weaknessDuration = ModConfig.get().overworld.creeper.explosionWeaknessMaxDuration * 20;
         if (fatigueDuration <= 0 && weaknessDuration <= 0) return;
 
+        Entity thisEntity = (Entity)(Object) this;
         final int explosionRadius = this.explosionRadius * (this.isCharged() ? 3 : 2);
-        List<Entity> entityList = this.getWorld().getOtherEntities(this,
+        List<Entity> entityList = this.getWorld().getOtherEntities(thisEntity,
                 this.getBoundingBox().expand(explosionRadius),
                 entity -> entity instanceof LivingEntity && this.distanceTo(entity) < explosionRadius);
 
@@ -49,27 +42,24 @@ public abstract class CreeperMixin extends LivingEntityMixin {
             LivingEntity livingEntity = (LivingEntity) entity;
             if (fatigueDuration > 0) {
                 livingEntity.addStatusEffect(new StatusEffectInstance(
-                        StatusEffects.MINING_FATIGUE, (int) (fatigueDuration * multiplier)), this);
+                        StatusEffects.MINING_FATIGUE, (int) (fatigueDuration * multiplier)), thisEntity);
             }
             if (weaknessDuration > 0) {
                 livingEntity.addStatusEffect(new StatusEffectInstance(
-                        StatusEffects.WEAKNESS, (int) (weaknessDuration * multiplier)), this);
+                        StatusEffects.WEAKNESS, (int) (weaknessDuration * multiplier)), thisEntity);
             }
         }
     }
 
     @Override
-    public boolean updateDamage(boolean original, ServerWorld world, DamageSource source, float amount) {
-        if (!original) return false;
-
+    public boolean updateImmunityToExplosion(boolean original, Explosion explosion) {
         if (ModConfig.get().overworld.creeper.chainExplosions
-                && source.isIn(DamageTypeTags.IS_EXPLOSION)
-                && (!(source.getAttacker() instanceof CreeperEntity creeper)
+                && (!(explosion.getCausingEntity() instanceof CreeperEntity creeper)
                 || !creeper.isCharged())) {
             this.ignite();
-            return false;
-        } else {
             return true;
+        } else {
+            return original;
         }
     }
 }

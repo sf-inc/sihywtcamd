@@ -8,7 +8,7 @@ import net.minecraft.util.math.Vec3d;
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(FireworkRocketEntity.class)
-public class FireworkRocketEntityMixin extends EntityMixin {
+public abstract class FireworkRocketEntityMixin extends EntityMixin {
     @Override
     protected Vec3d updatePassengerAttachmentPos(Vec3d original, Entity passenger, EntityDimensions dimensions, float scaleFactor) {
         double widthOffset = (dimensions.width() + passenger.getWidth()) / 2;
