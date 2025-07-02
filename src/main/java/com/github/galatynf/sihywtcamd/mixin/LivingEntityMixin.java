@@ -39,15 +39,14 @@ public abstract class LivingEntityMixin extends Entity {
     @Shadow @Nullable public abstract EntityAttributeInstance getAttributeInstance(RegistryEntry<EntityAttribute> attribute);
 
     @Inject(method = "computeFallDamage", at = @At("HEAD"), cancellable = true)
-    private void cancelArthropodFallDamage(float fallDistance, float damageMultiplier, CallbackInfoReturnable<Integer> cir) {
+    private void cancelArthropodFallDamage(double fallDistance, float damageMultiplier, CallbackInfoReturnable<Integer> cir) {
         if (ModConfig.get().arthropods.general.noFallDamage && this.getType().isIn(EntityTypeTags.ARTHROPOD)) {
             cir.setReturnValue(0);
         }
     }
 
-    @Inject(method = "damage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LimbAnimator;setSpeed(F)V"))
-    private void healUndeadAttacker(ServerWorld world, DamageSource source, float amount,
-                                    CallbackInfoReturnable<Boolean> cir) {
+    @Inject(method = "damage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;becomeAngry(Lnet/minecraft/entity/damage/DamageSource;)V"))
+    private void healUndeadAttacker(ServerWorld world, DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         if (ModConfig.get().undead.general.attackHeal && amount > 0) {
             float realAmount = (float) this.timeUntilRegen > 10.0f && !source.isIn(DamageTypeTags.BYPASSES_COOLDOWN)
                     ? amount - this.lastDamageTaken : amount;

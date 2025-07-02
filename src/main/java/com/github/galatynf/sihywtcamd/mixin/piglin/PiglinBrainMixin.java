@@ -3,6 +3,7 @@ package com.github.galatynf.sihywtcamd.mixin.piglin;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.PiglinBrain;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.tag.ItemTags;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,14 +17,24 @@ public class PiglinBrainMixin {
     private static void needFullGoldenArmor(LivingEntity entity, CallbackInfoReturnable<Boolean> cir) {
         if (ModConfig.get().nether.piglin.goldenArmor > 1) {
             int goldenArmorPiece = 0;
-
-            for (ItemStack itemStack: entity.getAllArmorItems()) {
-                if (itemStack.isIn(ItemTags.PIGLIN_SAFE_ARMOR)) {
-                    goldenArmorPiece++;
-                }
+            ItemStack helmet = entity.getEquippedStack(EquipmentSlot.HEAD);
+            ItemStack chestplate = entity.getEquippedStack(EquipmentSlot.CHEST);
+            ItemStack leggings = entity.getEquippedStack(EquipmentSlot.LEGS);
+            ItemStack boots = entity.getEquippedStack(EquipmentSlot.FEET);
+            if (helmet.isIn(ItemTags.PIGLIN_SAFE_ARMOR)) {
+                goldenArmorPiece++;
             }
-
+            if (chestplate.isIn(ItemTags.PIGLIN_SAFE_ARMOR)) {
+                goldenArmorPiece++;
+            }
+            if (leggings.isIn(ItemTags.PIGLIN_SAFE_ARMOR)) {
+                goldenArmorPiece++;
+            }
+            if (boots.isIn(ItemTags.PIGLIN_SAFE_ARMOR)) {
+                goldenArmorPiece++;
+            }
             cir.setReturnValue(goldenArmorPiece >= ModConfig.get().nether.piglin.goldenArmor);
         }
     }
 }
+

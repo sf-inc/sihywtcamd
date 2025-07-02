@@ -19,7 +19,7 @@ public class EnderDragonEntityComponent implements EnderDragonEntityComponentAPI
 
     @Override
     public void readFromNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
-        this.summonedCrystals = tag.getInt("SummonedCrystals");
+        this.summonedCrystals = tag.getInt("SummonedCrystals", 0);
     }
 
     @Override

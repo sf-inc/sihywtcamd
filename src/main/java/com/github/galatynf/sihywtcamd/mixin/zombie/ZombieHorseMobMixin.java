@@ -34,8 +34,8 @@ public abstract class ZombieHorseMobMixin extends MobEntityMixin implements Zomb
 
     @Override
     protected void readModDataFromNbt(NbtCompound nbt, CallbackInfo ci) {
-        this.sihywtcamd$setTrapped(nbt.getBoolean("ZombieTrap"));
-        this.trapTime = nbt.getInt("ZombieTrapTime");
+        this.sihywtcamd$setTrapped(nbt.getBoolean("ZombieTrap", false));
+        this.trapTime = nbt.getInt("ZombieTrapTime", -1);
     }
 
     @Override

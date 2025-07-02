@@ -31,7 +31,7 @@ public class SlimeEntityComponent implements SlimeEntityComponentAPI {
 
     @Override
     public void readFromNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
-        this.mergeDelay = tag.getInt("MergeDelay");
+        this.mergeDelay = tag.getInt("MergeDelay", 50);
     }
 
     @Override

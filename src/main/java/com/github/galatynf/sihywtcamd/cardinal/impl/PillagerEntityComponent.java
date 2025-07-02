@@ -34,8 +34,8 @@ public class PillagerEntityComponent implements PillagerEntityComponentAPI {
 
     @Override
     public void readFromNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
-        this.setPillatrooper(tag.getBoolean("IsPillatrooper"));
-        this.setFireworkRocket(tag.getBoolean("HasFireworkRocket"));
+        this.setPillatrooper(tag.getBoolean("IsPillatrooper", false));
+        this.setFireworkRocket(tag.getBoolean("HasFireworkRocket", false));
     }
 
     @Override

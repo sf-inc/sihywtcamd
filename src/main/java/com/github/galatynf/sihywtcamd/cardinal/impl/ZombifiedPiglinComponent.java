@@ -19,7 +19,7 @@ public class ZombifiedPiglinComponent implements ZombifiedPiglinComponentAPI {
 
     @Override
     public void readFromNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
-        this.setBrute(tag.getBoolean("IsBrute"));
+        this.setBrute(tag.getBoolean("IsBrute", false));
     }
 
     @Override

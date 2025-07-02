@@ -31,7 +31,7 @@ public class SkeletonEntityComponent implements SkeletonEntityComponentAPI {
 
     @Override
     public void readFromNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
-        this.isSpectral = tag.getBoolean("IsSpectral");
+        this.isSpectral = tag.getBoolean("IsSpectral", true);
     }
 
     @Override
