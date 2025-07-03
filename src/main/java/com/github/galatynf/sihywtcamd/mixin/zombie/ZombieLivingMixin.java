@@ -91,6 +91,7 @@ public abstract class ZombieLivingMixin extends LivingEntityMixin {
                 double value = 0.5 + 1.0 * chanceMultiplier + this.random.nextDouble();
                 this.getAttributeInstance(EntityAttributes.MAX_HEALTH).addPersistentModifier(
                         new EntityAttributeModifier(TANK_BONUS_ID, value, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+                this.setHealth((float) (20 + 20 * value));
             } else if (random < 0.5f) {
                 name = "Runner";
                 double value = 0.2 + 0.15 * chanceMultiplier + 0.15 * this.random.nextDouble();

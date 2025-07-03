@@ -38,6 +38,8 @@ public abstract class LivingEntityMixin extends Entity {
     @Shadow @Nullable public abstract LivingEntity getAttacker();
     @Shadow @Nullable public abstract EntityAttributeInstance getAttributeInstance(RegistryEntry<EntityAttribute> attribute);
 
+    @Shadow public abstract void setHealth(float health);
+
     @Inject(method = "computeFallDamage", at = @At("HEAD"), cancellable = true)
     private void cancelArthropodFallDamage(double fallDistance, float damageMultiplier, CallbackInfoReturnable<Integer> cir) {
         if (ModConfig.get().arthropods.general.noFallDamage && this.getType().isIn(EntityTypeTags.ARTHROPOD)) {
