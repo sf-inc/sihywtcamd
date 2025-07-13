@@ -2,8 +2,8 @@ package com.github.galatynf.sihywtcamd.cardinal.impl;
 
 import com.github.galatynf.sihywtcamd.cardinal.api.PillagerEntityComponentAPI;
 import com.github.galatynf.sihywtcamd.imixin.PillatrooperIMixin;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 
 public class PillagerEntityComponent implements PillagerEntityComponentAPI {
     private final Object provider;
@@ -33,13 +33,13 @@ public class PillagerEntityComponent implements PillagerEntityComponentAPI {
     }
 
     @Override
-    public void readFromNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
+    public void readData(ReadView tag) {
         this.setPillatrooper(tag.getBoolean("IsPillatrooper", false));
         this.setFireworkRocket(tag.getBoolean("HasFireworkRocket", false));
     }
 
     @Override
-    public void writeToNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
+    public void writeData(WriteView tag) {
         tag.putBoolean("IsPillatrooper", this.isPillatrooper);
         tag.putBoolean("HasFireworkRocket", this.hasFireworkRocket);
     }

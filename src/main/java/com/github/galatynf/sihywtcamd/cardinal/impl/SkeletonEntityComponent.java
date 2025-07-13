@@ -3,8 +3,8 @@ package com.github.galatynf.sihywtcamd.cardinal.impl;
 import com.github.galatynf.sihywtcamd.Sihywtcamd;
 import com.github.galatynf.sihywtcamd.cardinal.api.SkeletonEntityComponentAPI;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 import net.minecraft.text.Text;
 
 public class SkeletonEntityComponent implements SkeletonEntityComponentAPI {
@@ -30,12 +30,12 @@ public class SkeletonEntityComponent implements SkeletonEntityComponentAPI {
     }
 
     @Override
-    public void readFromNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
+    public void readData(ReadView tag) {
         this.isSpectral = tag.getBoolean("IsSpectral", true);
     }
 
     @Override
-    public void writeToNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
+    public void writeData(WriteView tag) {
         tag.putBoolean("IsSpectral", this.isSpectral);
     }
 }

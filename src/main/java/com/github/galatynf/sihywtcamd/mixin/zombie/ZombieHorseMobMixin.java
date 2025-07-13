@@ -6,7 +6,8 @@ import com.github.galatynf.sihywtcamd.mixin.MobEntityMixin;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.ZombieHorseEntity;
-import net.minecraft.nbt.NbtCompound;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -33,13 +34,13 @@ public abstract class ZombieHorseMobMixin extends MobEntityMixin implements Zomb
     }
 
     @Override
-    protected void readModDataFromNbt(NbtCompound nbt, CallbackInfo ci) {
+    protected void readModDataFromNbt(ReadView nbt, CallbackInfo ci) {
         this.sihywtcamd$setTrapped(nbt.getBoolean("ZombieTrap", false));
         this.trapTime = nbt.getInt("ZombieTrapTime", -1);
     }
 
     @Override
-    protected void writeModDataToNbt(NbtCompound nbt, CallbackInfo ci) {
+    protected void writeModDataToNbt(WriteView nbt, CallbackInfo ci) {
         nbt.putBoolean("ZombieTrap", this.trapped);
         nbt.putInt("ZombieTrapTime", this.trapTime);
     }
