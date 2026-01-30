@@ -1,8 +1,8 @@
 package com.github.galatynf.sihywtcamd.cardinal.impl;
 
 import com.github.galatynf.sihywtcamd.cardinal.api.EnderDragonEntityComponentAPI;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 
 public class EnderDragonEntityComponent implements EnderDragonEntityComponentAPI {
     private int summonedCrystals = 0;
@@ -18,12 +18,12 @@ public class EnderDragonEntityComponent implements EnderDragonEntityComponentAPI
     }
 
     @Override
-    public void readFromNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
-        this.summonedCrystals = tag.getInt("SummonedCrystals", 0);
+    public void readData(ReadView readView) {
+        this.summonedCrystals = readView.getInt("SummonedCrystals", 0);
     }
 
     @Override
-    public void writeToNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
-        tag.putInt("SummonedCrystals", this.summonedCrystals);
+    public void writeData(WriteView writeView) {
+        writeView.putInt("SummonedCrystals", this.summonedCrystals);
     }
 }

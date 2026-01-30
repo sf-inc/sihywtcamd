@@ -1,8 +1,8 @@
 package com.github.galatynf.sihywtcamd.cardinal.impl;
 
 import com.github.galatynf.sihywtcamd.cardinal.api.ArrowEntityComponentAPI;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 
 public class ArrowEntityComponent implements ArrowEntityComponentAPI {
     private boolean isFrozen = false;
@@ -18,12 +18,12 @@ public class ArrowEntityComponent implements ArrowEntityComponentAPI {
     }
 
     @Override
-    public void readFromNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
-        this.isFrozen = tag.getBoolean ("IsFrozen", false);
+    public void readData(ReadView readView) {
+        this.isFrozen = readView.getBoolean ("IsFrozen", false);
     }
 
     @Override
-    public void writeToNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
-        tag.putBoolean("IsFrozen", this.isFrozen);
+    public void writeData(WriteView writeView) {
+        writeView.putBoolean("IsFrozen", this.isFrozen);
     }
 }

@@ -3,8 +3,9 @@ package com.github.galatynf.sihywtcamd.mixin;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.GoalSelector;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
@@ -46,13 +47,13 @@ public abstract class MobEntityMixin extends LivingEntity {
 
     }
 
-    @Inject(method = "readCustomDataFromNbt", at = @At("TAIL"))
-    protected void readModDataFromNbt(NbtCompound nbt, CallbackInfo ci) {
+    @Inject(method = "readCustomData", at = @At("TAIL"))
+    protected void readModData(ReadView view, CallbackInfo ci) {
 
     }
 
-    @Inject(method = "writeCustomDataToNbt", at = @At("TAIL"))
-    protected void writeModDataToNbt(NbtCompound nbt, CallbackInfo ci) {
+    @Inject(method = "writeCustomData", at = @At("TAIL"))
+    protected void writeModData(WriteView view, CallbackInfo ci) {
 
     }
 }

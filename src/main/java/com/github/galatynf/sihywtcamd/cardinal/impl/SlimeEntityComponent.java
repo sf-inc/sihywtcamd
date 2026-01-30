@@ -1,8 +1,8 @@
 package com.github.galatynf.sihywtcamd.cardinal.impl;
 
 import com.github.galatynf.sihywtcamd.cardinal.api.SlimeEntityComponentAPI;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 
 public class SlimeEntityComponent implements SlimeEntityComponentAPI {
     private int mergeDelay = 50;
@@ -30,12 +30,12 @@ public class SlimeEntityComponent implements SlimeEntityComponentAPI {
     }
 
     @Override
-    public void readFromNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
-        this.mergeDelay = tag.getInt("MergeDelay", 50);
+    public void readData(ReadView readView) {
+        this.mergeDelay = readView.getInt("MergeDelay", 50);
     }
 
     @Override
-    public void writeToNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
-        tag.putInt("MergeDelay", this.mergeDelay);
+    public void writeData(WriteView writeView) {
+        writeView.putInt("MergeDelay", this.mergeDelay);
     }
 }

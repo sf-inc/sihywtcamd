@@ -1,8 +1,8 @@
 package com.github.galatynf.sihywtcamd.cardinal.impl;
 
 import com.github.galatynf.sihywtcamd.cardinal.api.WitherEntityComponentAPI;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 
 public class WitherEntityComponent implements WitherEntityComponentAPI {
     private boolean halfHealthReached = false;
@@ -18,12 +18,12 @@ public class WitherEntityComponent implements WitherEntityComponentAPI {
     }
 
     @Override
-    public void readFromNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
-        this.halfHealthReached = tag.getBoolean("HalfHealthReached", false);
+    public void readData(ReadView readView) {
+        this.halfHealthReached = readView.getBoolean("HalfHealthReached", false);
     }
 
     @Override
-    public void writeToNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
-        tag.putBoolean("HalfHealthReached", this.halfHealthReached);
+    public void writeData(WriteView writeView) {
+        writeView.putBoolean("HalfHealthReached", this.halfHealthReached);
     }
 }
