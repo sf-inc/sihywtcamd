@@ -33,7 +33,7 @@ public abstract class ServerWorldMixin extends World {
         super(properties, registryRef, registryManager, dimensionEntry, isClient, debugWorld, seed, maxChainedNeighborUpdates);
     }
 
-    @ModifyVariable(method = "tickChunk", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LightningEntity;setCosmetic(Z)V", shift = At.Shift.AFTER))
+    @ModifyVariable(method = "tickThunder", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LightningEntity;setCosmetic(Z)V", shift = At.Shift.AFTER))
     private LightningEntity spawnZombieHorse(LightningEntity lightningEntity) {
         if (!ModConfig.get().zombies.zombieHorse.zombieHorseTrap) return lightningEntity;
 

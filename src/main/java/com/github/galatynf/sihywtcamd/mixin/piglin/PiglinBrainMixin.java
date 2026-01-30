@@ -1,9 +1,10 @@
 package com.github.galatynf.sihywtcamd.mixin.piglin;
 
 import com.github.galatynf.sihywtcamd.config.ModConfig;
+import net.minecraft.component.type.AttributeModifierSlot;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.PiglinBrain;
-import net.minecraft.item.ItemStack;
 import net.minecraft.registry.tag.ItemTags;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -17,8 +18,8 @@ public class PiglinBrainMixin {
         if (ModConfig.get().nether.piglin.goldenArmor > 1) {
             int goldenArmorPiece = 0;
 
-            for (ItemStack itemStack: entity.getAllArmorItems()) {
-                if (itemStack.isIn(ItemTags.PIGLIN_SAFE_ARMOR)) {
+            for (EquipmentSlot equipmentSlot : AttributeModifierSlot.ARMOR) {
+                if (entity.getEquippedStack(equipmentSlot).isIn(ItemTags.PIGLIN_SAFE_ARMOR)) {
                     goldenArmorPiece++;
                 }
             }

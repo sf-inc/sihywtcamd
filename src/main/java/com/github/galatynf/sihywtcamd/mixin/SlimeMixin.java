@@ -90,7 +90,7 @@ public abstract class SlimeMixin extends MobEntity {
             MyComponents.SLIME_COMPONENT.get(this).setMerged();
             otherSlime.discard();
             this.setSize(this.getSize() * 2, true);
-            this.getWorld().addParticle(this.getParticles(), this.getX(), this.getY(), this.getZ(),
+            this.getWorld().addParticleClient(this.getParticles(), this.getX(), this.getY(), this.getZ(),
                     0.0, 0.0, 0.0);
             this.playSound(SoundEvents.ENTITY_SLIME_ATTACK, 1.0f,
                     (this.random.nextFloat() - this.random.nextFloat()) * 0.2f + 1.0f);

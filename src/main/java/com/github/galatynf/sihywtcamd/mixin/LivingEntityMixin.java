@@ -11,7 +11,6 @@ import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.registry.tag.EntityTypeTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Vec3d;
@@ -31,36 +30,33 @@ public abstract class LivingEntityMixin extends Entity {
         super(type, world);
     }
 
-    @Shadow protected float lastDamageTaken;
     @Shadow public float bodyYaw;
 
     @Shadow public abstract boolean isBaby();
+    @Shadow public abstract boolean isInvulnerableTo(ServerWorld world, DamageSource source);
     @Shadow @Nullable public abstract LivingEntity getAttacker();
     @Shadow @Nullable public abstract EntityAttributeInstance getAttributeInstance(RegistryEntry<EntityAttribute> attribute);
 
     @Inject(method = "computeFallDamage", at = @At("HEAD"), cancellable = true)
-    private void cancelArthropodFallDamage(float fallDistance, float damageMultiplier, CallbackInfoReturnable<Integer> cir) {
+    private void cancelArthropodFallDamage(double fallDistance, float damagePerDistance, CallbackInfoReturnable<Integer> cir) {
         if (ModConfig.get().arthropods.general.noFallDamage && this.getType().isIn(EntityTypeTags.ARTHROPOD)) {
             cir.setReturnValue(0);
         }
     }
 
-    @Inject(method = "damage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LimbAnimator;setSpeed(F)V"))
-    private void healUndeadAttacker(ServerWorld world, DamageSource source, float amount,
-                                    CallbackInfoReturnable<Boolean> cir) {
-        if (ModConfig.get().undead.general.attackHeal && amount > 0) {
-            float realAmount = (float) this.timeUntilRegen > 10.0f && !source.isIn(DamageTypeTags.BYPASSES_COOLDOWN)
-                    ? amount - this.lastDamageTaken : amount;
+    @Inject(method = "applyDamage", at = @At("HEAD"))
+    private void healUndeadAttacker(ServerWorld world, DamageSource source, float amount, CallbackInfo ci) {
+        if (this.isInvulnerableTo(world, source)) return;
 
+        if (ModConfig.get().undead.general.attackHeal && amount > 0) {
             LivingEntity attacker = source.getAttacker() instanceof LivingEntity
                     ? (LivingEntity) source.getAttacker()
                     : null;
 
-            if (realAmount > 0.f
-                    && attacker != null
+            if (attacker != null
                     && attacker.getType().isIn(EntityTypeTags.UNDEAD)
                     && !(attacker instanceof WitherEntity)) {
-                attacker.heal(realAmount);
+                attacker.heal(amount);
             }
         }
     }

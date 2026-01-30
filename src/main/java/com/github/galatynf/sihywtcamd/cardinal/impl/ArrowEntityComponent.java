@@ -19,7 +19,7 @@ public class ArrowEntityComponent implements ArrowEntityComponentAPI {
 
     @Override
     public void readFromNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
-        this.isFrozen = tag.getBoolean("IsFrozen");
+        this.isFrozen = tag.getBoolean ("IsFrozen", false);
     }
 
     @Override

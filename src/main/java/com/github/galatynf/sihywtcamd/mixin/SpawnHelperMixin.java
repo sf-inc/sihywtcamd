@@ -26,7 +26,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class SpawnHelperMixin {
 
     @Unique
-    private static final Pool<SpawnSettings.SpawnEntry> END_PHANTOMS_SPAWNS = Pool.of(new SpawnSettings.SpawnEntry(EntityType.PHANTOM, 10, 2, 3));
+    private static final Pool<SpawnSettings.SpawnEntry> END_PHANTOMS_SPAWNS = Pool.of(new SpawnSettings.SpawnEntry(EntityType.PHANTOM, 2, 3));
 
     @Inject(method = "getSpawnEntries", at = @At("HEAD"), cancellable = true)
     private static void addPhantomSpawnInEnd(ServerWorld world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator,

@@ -19,7 +19,7 @@ public class WitherEntityComponent implements WitherEntityComponentAPI {
 
     @Override
     public void readFromNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
-        this.halfHealthReached = tag.getBoolean("HalfHealthReached");
+        this.halfHealthReached = tag.getBoolean("HalfHealthReached", false);
     }
 
     @Override
