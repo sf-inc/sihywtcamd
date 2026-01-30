@@ -25,7 +25,7 @@ public abstract class CreeperMixin extends EntityMixin {
 
     @Inject(method = "explode", at = @At("HEAD"))
     private void effectToEntities(CallbackInfo ci) {
-        if (this.getWorld().isClient()) return;
+        if (this.getEntityWorld().isClient()) return;
 
         final int fatigueDuration = ModConfig.get().overworld.creeper.explosionFatigueMaxDuration * 20;
         final int weaknessDuration = ModConfig.get().overworld.creeper.explosionWeaknessMaxDuration * 20;
@@ -33,7 +33,7 @@ public abstract class CreeperMixin extends EntityMixin {
 
         Entity thisEntity = (Entity)(Object) this;
         final int explosionRadius = this.explosionRadius * (this.isCharged() ? 3 : 2);
-        List<Entity> entityList = this.getWorld().getOtherEntities(thisEntity,
+        List<Entity> entityList = this.getEntityWorld().getOtherEntities(thisEntity,
                 this.getBoundingBox().expand(explosionRadius),
                 entity -> entity instanceof LivingEntity && this.distanceTo(entity) < explosionRadius);
 

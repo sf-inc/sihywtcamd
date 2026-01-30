@@ -63,7 +63,7 @@ public abstract class ZombieLivingMixin extends LivingEntityMixin {
                         break;
                     }
                     newBaby.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), this.getYaw(), 0.0f);
-                    newBaby.startRiding(lastBaby, true);
+                    newBaby.startRiding(lastBaby, false, false);
                     newBaby.initialize(world, difficulty, SpawnReason.JOCKEY, babyData);
                     newBaby.setBaby(true);
 

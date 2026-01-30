@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class EntityMixin {
     @Shadow public abstract float distanceTo(Entity entity);
     @Shadow public abstract Box getBoundingBox();
-    @Shadow public abstract World getWorld();
+    @Shadow public abstract World getEntityWorld();
 
     @ModifyReturnValue(method = "isAlwaysInvulnerableTo", at = @At("RETURN"))
     protected boolean updateInvulnerableTo(boolean original, DamageSource damageSource) {

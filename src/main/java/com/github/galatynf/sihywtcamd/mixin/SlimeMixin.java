@@ -53,10 +53,10 @@ public abstract class SlimeMixin extends MobEntity {
         MyComponents.SLIME_COMPONENT.get(this).updateMerged();
 
         SlimeEntity thisSlime = (SlimeEntity) (Object) this;
-        if (!this.getWorld().isClient()
+        if (!this.getEntityWorld().isClient()
                 && ModConfig.get().overworld.slime.magmaConversion
                 && !(thisSlime instanceof MagmaCubeEntity)
-                && this.getWorld().getRegistryKey().equals(World.NETHER)
+                && this.getEntityWorld().getRegistryKey().equals(World.NETHER)
                 && this.isInLava()) {
             int size = this.getSize();
             MagmaCubeEntity magmaCube = this.convertTo(
@@ -79,7 +79,7 @@ public abstract class SlimeMixin extends MobEntity {
 
         SlimeEntity thisSlime = (SlimeEntity) (Object) this;
         SlimeEntity otherSlime = (SlimeEntity) entity;
-        if (!this.getWorld().isClient()
+        if (!this.getEntityWorld().isClient()
                 && !(thisSlime instanceof MagmaCubeEntity)
                 && ModConfig.get().overworld.slime.canMerge
                 && MyComponents.SLIME_COMPONENT.get(this).canMerge()
@@ -90,7 +90,7 @@ public abstract class SlimeMixin extends MobEntity {
             MyComponents.SLIME_COMPONENT.get(this).setMerged();
             otherSlime.discard();
             this.setSize(this.getSize() * 2, true);
-            this.getWorld().addParticleClient(this.getParticles(), this.getX(), this.getY(), this.getZ(),
+            this.getEntityWorld().addParticleClient(this.getParticles(), this.getX(), this.getY(), this.getZ(),
                     0.0, 0.0, 0.0);
             this.playSound(SoundEvents.ENTITY_SLIME_ATTACK, 1.0f,
                     (this.random.nextFloat() - this.random.nextFloat()) * 0.2f + 1.0f);

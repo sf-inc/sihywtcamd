@@ -30,11 +30,11 @@ public abstract class SittingFlamingPhaseMixin extends AbstractPhase {
         if (ModConfig.get().bosses.enderDragon.controlEndermanWhenLanding
                 && this.ticks % 20 == 0) {
             Box box = this.dragon.getBoundingBox().expand(5.0,0.0,5.0).offset(0.0, -3.0, 0.0);
-            List<EndermanEntity> endermen = this.dragon.getWorld().getEntitiesByType(
+            List<EndermanEntity> endermen = this.dragon.getEntityWorld().getEntitiesByType(
                     TypeFilter.instanceOf(EndermanEntity.class), box, EntityPredicates.VALID_ENTITY);
             for (EndermanEntity enderman : endermen) {
                 if (enderman.getTarget() == null || !enderman.getTarget().isPlayer()) {
-                    PlayerEntity player = this.dragon.getWorld().getClosestPlayer(enderman, 16.0);
+                    PlayerEntity player = this.dragon.getEntityWorld().getClosestPlayer(enderman, 16.0);
                     enderman.setTarget(player);
                     break;
                 }

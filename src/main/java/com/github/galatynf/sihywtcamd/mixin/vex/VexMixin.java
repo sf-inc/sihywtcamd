@@ -25,7 +25,7 @@ public abstract class VexMixin extends HostileEntity {
     @Inject(method = "tick", at = @At("HEAD"))
     private void killWithMaster(CallbackInfo ci) {
         if (ModConfig.get().overworld.vex.dieWithEvoker
-                && this.getWorld() instanceof ServerWorld world
+                && this.getEntityWorld() instanceof ServerWorld world
                 && this.getOwner() != null
                 && this.getOwner().isDead()) {
             this.kill(world);

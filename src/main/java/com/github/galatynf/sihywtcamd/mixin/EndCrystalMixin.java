@@ -25,7 +25,7 @@ public abstract class EndCrystalMixin extends Entity {
     private void summonPhantoms(ServerWorld world, DamageSource source, float amount,
                                 CallbackInfoReturnable<Boolean> cir) {
         if (ModConfig.get().bosses.enderDragon.crystalDestructionSpawnsPhantom
-                && this.getWorld() instanceof ServerWorld serverWorld
+                && this.getEntityWorld() instanceof ServerWorld serverWorld
                 && serverWorld.getEnderDragonFight() != null
                 && this.random.nextFloat() < 0.66F) {
             PhantomEntity phantom = EntityType.PHANTOM.spawn(serverWorld, this.getBlockPos(), SpawnReason.TRIGGERED);

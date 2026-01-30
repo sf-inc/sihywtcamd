@@ -43,7 +43,7 @@ public class EntityUtils {
     public static void enchantEquipment(MobEntity entity, EquipmentSlot slot, LocalDifficulty localDifficulty) {
         ItemStack itemStack = entity.getEquippedStack(slot);
         itemStack.set(DataComponentTypes.ENCHANTMENTS, ItemEnchantmentsComponent.DEFAULT);
-        EnchantmentHelper.applyEnchantmentProvider(itemStack, entity.getWorld().getRegistryManager(), EnchantmentProviders.MOB_SPAWN_EQUIPMENT, localDifficulty, entity.getRandom());
+        EnchantmentHelper.applyEnchantmentProvider(itemStack, entity.getEntityWorld().getRegistryManager(), EnchantmentProviders.MOB_SPAWN_EQUIPMENT, localDifficulty, entity.getRandom());
         entity.equipStack(slot, itemStack);
     }
 }

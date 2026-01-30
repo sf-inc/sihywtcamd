@@ -25,7 +25,7 @@ public abstract class EndermanMixin extends MobEntityMixin {
                 && target instanceof PlayerEntity playerEntity
                 && this.random.nextBoolean()) {
             int duration = 30;
-            duration += (int) (30 * this.getWorld().getLocalDifficulty(this.getBlockPos()).getClampedLocalDifficulty());
+            duration += (int) (30 * this.getEntityWorld().getLocalDifficulty(this.getBlockPos()).getClampedLocalDifficulty());
             duration += (int) (40 * this.random.nextFloat());
             playerEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS, duration));
         }

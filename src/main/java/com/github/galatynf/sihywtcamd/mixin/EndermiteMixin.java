@@ -44,9 +44,9 @@ public abstract class EndermiteMixin extends MobEntityMixin {
                     continue;
                 }
 
-                this.getWorld().emitGameEvent(GameEvent.TELEPORT, oldPos, GameEvent.Emitter.of(target));
+                this.getEntityWorld().emitGameEvent(GameEvent.TELEPORT, oldPos, GameEvent.Emitter.of(target));
                 SoundEvent soundEvent = SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT;
-                this.getWorld().playSound(null, oldPos.getX(), oldPos.getY(), oldPos.getZ(), soundEvent, SoundCategory.PLAYERS, 1.0f, 1.0f);
+                this.getEntityWorld().playSound(null, oldPos.getX(), oldPos.getY(), oldPos.getZ(), soundEvent, SoundCategory.PLAYERS, 1.0f, 1.0f);
                 target.playSound(soundEvent, 1.0f, 1.0f);
                 break;
             }

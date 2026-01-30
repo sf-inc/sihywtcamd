@@ -110,8 +110,8 @@ public class CrossbowAirAttackGoal<T extends HostileEntity & CrossbowUser & Pill
 
             boolean isInAir = this.actor.getSteppingBlockState().isAir();
             if (this.stage.ordinal() > Stage.AIR_FLY.ordinal()) {
-                if (this.actor.getWorld().getTime() % 2 == 0) {
-                    ((ServerWorld) this.actor.getWorld()).spawnParticles(
+                if (this.actor.getEntityWorld().getTime() % 2 == 0) {
+                    ((ServerWorld) this.actor.getEntityWorld()).spawnParticles(
                             ParticleTypes.FIREWORK,
                             this.actor.getX(),
                             this.actor.getY(),
@@ -151,9 +151,9 @@ public class CrossbowAirAttackGoal<T extends HostileEntity & CrossbowUser & Pill
                             REDUCED_GRAVITY_ID, multiplier, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE));
                 }
 
-                FireworkRocketEntity fireworkRocketEntity = new FireworkRocketEntity(this.actor.getWorld(), this.actor,
+                FireworkRocketEntity fireworkRocketEntity = new FireworkRocketEntity(this.actor.getEntityWorld(), this.actor,
                         this.actor.getX(), this.actor.getY(), this.actor.getZ(), getFirework());
-                this.actor.getWorld().spawnEntity(fireworkRocketEntity);
+                this.actor.getEntityWorld().spawnEntity(fireworkRocketEntity);
                 this.actor.startRiding(fireworkRocketEntity);
 
                 this.stage = Stage.AIR_FLY;

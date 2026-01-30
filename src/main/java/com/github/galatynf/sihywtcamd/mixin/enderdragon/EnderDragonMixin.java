@@ -33,10 +33,10 @@ public class EnderDragonMixin extends MobEntity {
         int crystalsToSummon = ModConfig.get().bosses.enderDragon.crystalsToSummon;
         int summonedCrystals = MyComponents.ENDER_DRAGON_COMPONENT.get(this).getNumberOfSummonedCrystals();
 
-        if (!this.getWorld().isClient()
+        if (!this.getEntityWorld().isClient()
                 && crystalsToSummon > 0
                 && summonedCrystals < crystalsToSummon) {
-            ServerWorld world = (ServerWorld) this.getWorld();
+            ServerWorld world = (ServerWorld) this.getEntityWorld();
             float healthRatio = (float) (crystalsToSummon - summonedCrystals) / (crystalsToSummon + 1);
 
             if (this.getHealth() < healthRatio * this.getMaxHealth()) {

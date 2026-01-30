@@ -13,7 +13,7 @@ public class SkeletonSwimGoal extends SwimGoal {
 
     @Override
     public void tick() {
-        if (this.mob2.getTarget() == null || this.mob2.getPos().y < this.mob2.getTarget().getPos().y) {
+        if (this.mob2.getTarget() == null || this.mob2.getEntityPos().y < this.mob2.getTarget().getEntityPos().y) {
             if (this.mob2.getRandom().nextFloat() < 0.3f) {
                 this.mob2.getJumpControl().setActive();
             }
