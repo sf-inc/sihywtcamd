@@ -17,8 +17,8 @@ public abstract class GuardianMixin extends HostileEntity {
         super(entityType, world);
     }
 
-    @Inject(method = "travel", at = @At("HEAD"))
-    private void usePassengerSpeed(Vec3d movementInput, CallbackInfo ci) {
+    @Inject(method = "travelInWater", at = @At("HEAD"))
+    private void usePassengerDirection(Vec3d movementInput, double gravity, boolean falling, double y, CallbackInfo ci) {
         if (this.hasPassengers() && this.getFirstPassenger() instanceof LivingEntity livingEntity) {
             this.setPitch(livingEntity.getPitch() * 0.5f);
         }

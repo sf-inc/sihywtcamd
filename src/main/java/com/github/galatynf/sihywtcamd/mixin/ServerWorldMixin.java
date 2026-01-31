@@ -12,11 +12,11 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.GameRules;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.MutableWorldProperties;
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionType;
+import net.minecraft.world.rule.GameRules;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -24,8 +24,8 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(ServerWorld.class)
 public abstract class ServerWorldMixin extends World {
-
     @Shadow public abstract GameRules getGameRules();
+    @Shadow public abstract LocalDifficulty getLocalDifficulty(BlockPos pos);
 
     protected ServerWorldMixin(MutableWorldProperties properties, RegistryKey<World> registryRef,
                                DynamicRegistryManager registryManager, RegistryEntry<DimensionType> dimensionEntry,
@@ -41,7 +41,7 @@ public abstract class ServerWorldMixin extends World {
         ZombieHorseEntity zombieHorseEntity;
         LocalDifficulty localDifficulty = this.getLocalDifficulty(blockPos);
         boolean canSpawn = !lightningEntity.cosmetic
-                && this.getGameRules().getBoolean(GameRules.DO_MOB_SPAWNING)
+                && this.getGameRules().getValue(GameRules.DO_MOB_SPAWNING)
                 && this.random.nextDouble() < localDifficulty.getLocalDifficulty() * 0.01
                 && !this.getBlockState(blockPos.down()).isOf(Blocks.LIGHTNING_ROD);
         if (canSpawn && (zombieHorseEntity = EntityType.ZOMBIE_HORSE.create(this, SpawnReason.TRIGGERED)) != null) {

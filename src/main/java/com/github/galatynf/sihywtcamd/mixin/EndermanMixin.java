@@ -22,10 +22,11 @@ public abstract class EndermanMixin extends MobEntityMixin {
     @Override
     protected void onTryAttackSuccess(ServerWorld world, Entity target, CallbackInfoReturnable<Boolean> cir) {
         if (ModConfig.get().end.enderman.blindnessAttack
+                && this.getEntityWorld() instanceof ServerWorld serverWorld
                 && target instanceof PlayerEntity playerEntity
                 && this.random.nextBoolean()) {
             int duration = 30;
-            duration += (int) (30 * this.getEntityWorld().getLocalDifficulty(this.getBlockPos()).getClampedLocalDifficulty());
+            duration += (int) (30 * serverWorld.getLocalDifficulty(this.getBlockPos()).getClampedLocalDifficulty());
             duration += (int) (40 * this.random.nextFloat());
             playerEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS, duration));
         }

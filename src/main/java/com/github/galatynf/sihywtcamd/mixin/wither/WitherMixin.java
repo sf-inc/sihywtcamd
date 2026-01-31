@@ -46,7 +46,7 @@ public abstract class WitherMixin extends HostileEntity {
 
     @Inject(method = "mobTick", at = @At("HEAD"))
     private void spawnWitherSkeletons(CallbackInfo ci) {
-        if (this.getEntityWorld().isClient()) {
+        if (!(this.getEntityWorld() instanceof ServerWorld serverWorld)) {
             return;
         }
         if ((this.getEntityWorld().getDifficulty().equals(Difficulty.NORMAL)
@@ -58,7 +58,7 @@ public abstract class WitherMixin extends HostileEntity {
                 this.getEntityWorld().createExplosion(this, this.getX(), this.getEyeY(), this.getZ(), 7.0f, false, World.ExplosionSourceType.MOB);
             }
             if (ModConfig.get().bosses.wither.skeletonsSpawn) {
-                int nbWitherSkeletons = 3 + Math.round(2 * this.getEntityWorld().getLocalDifficulty(this.getBlockPos()).getClampedLocalDifficulty());
+                int nbWitherSkeletons = 3 + Math.round(2 * serverWorld.getLocalDifficulty(this.getBlockPos()).getClampedLocalDifficulty());
                 float deltaAngle = (2 * MathHelper.PI) / nbWitherSkeletons;
                 for (int i=0; i < nbWitherSkeletons; ++i) {
                     int x = MathHelper.floor(sihywtcamd_SKELETONS_SPAWN_DISTANCE * MathHelper.cos(i * deltaAngle));
