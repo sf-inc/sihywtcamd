@@ -62,7 +62,7 @@ public abstract class PillagerMixin extends IllagerEntity implements Pillatroope
 
     @ModifyArg(method = "enchantMainHandItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/random/Random;nextInt(I)I"))
     private int changeProbabilityMoreEnchant(int range) {
-        return ModConfig.get().illagers.pillager.moreEnchants ? range / 3 : range;
+        return ModConfig.get().illagers.pillager.moreEnchants ? range / 6 : range;
     }
 
     @Override
