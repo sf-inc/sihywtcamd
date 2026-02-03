@@ -2,6 +2,7 @@ package com.github.galatynf.sihywtcamd.mixin;
 
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.GoalSelector;
+import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.storage.ReadView;
@@ -21,6 +22,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class MobEntityMixin extends LivingEntity {
     @Shadow @Final protected GoalSelector targetSelector;
     @Shadow @Final protected GoalSelector goalSelector;
+
+    @Shadow public abstract void setPathfindingPenalty(PathNodeType nodeType, float penalty);
 
     protected MobEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);

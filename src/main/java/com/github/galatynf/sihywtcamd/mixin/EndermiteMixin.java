@@ -52,18 +52,4 @@ public abstract class EndermiteMixin extends MobEntityMixin {
             }
         }
     }
-
-    @Override
-    protected void onInitialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason,
-                                EntityData entityData, CallbackInfoReturnable<EntityData> cir) {
-        if (!ModConfig.get().arthropods.general.larvaeSpeedBonus) return;
-
-        EntityAttributeInstance speed = this.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED);
-        if (speed != null) {
-            double random = 0.25 * world.getRandom().nextDouble();
-            double localDifficulty = 0.25 * difficulty.getClampedLocalDifficulty();
-            speed.addPersistentModifier(new EntityAttributeModifier(
-                    BONUS_ID,  random + localDifficulty, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE));
-        }
-    }
 }

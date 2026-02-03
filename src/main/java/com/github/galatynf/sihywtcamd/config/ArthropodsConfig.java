@@ -11,7 +11,6 @@ public class ArthropodsConfig implements ConfigData {
 
     public static class General {
         public boolean noFallDamage = true;
-        public boolean larvaeSpeedBonus = true;
     }
 
     @ConfigEntry.Gui.CollapsibleObject

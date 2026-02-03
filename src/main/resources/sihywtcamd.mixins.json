@@ -21,7 +21,6 @@
     "RevengeGoalMixin",
     "ServerWorldMixin",
     "ShulkerBulletMixin",
-    "SilverfishMixin",
     "SlimeMixin",
     "SpawnHelperMixin",
     "TrackTargetGoalMixin",
