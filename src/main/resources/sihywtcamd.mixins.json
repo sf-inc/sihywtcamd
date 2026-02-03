@@ -24,7 +24,6 @@
     "SlimeMixin",
     "SpawnHelperMixin",
     "TrackTargetGoalMixin",
-    "VindicatorMixin",
     "WitchMixin",
     "enderdragon.EnderDragonMixin",
     "enderdragon.SittingFlamingPhaseMixin",

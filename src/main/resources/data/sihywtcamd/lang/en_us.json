@@ -82,7 +82,6 @@
   "text.autoconfig.sihywtcamd.option.illagers.pillager.pillatrooper": "Pillagers can spawn as pillatroopers",
   "text.autoconfig.sihywtcamd.option.illagers.vindicator": "Vindicator",
   "text.autoconfig.sihywtcamd.option.illagers.vindicator.spawnInPatrols": "Vindicators can spawn in patrols",
-  "text.autoconfig.sihywtcamd.option.illagers.vindicator.speedBonus": "Vindicators can spawn with a speed bonus",
   "text.autoconfig.sihywtcamd.option.illagers.evoker": "Evoker",
   "text.autoconfig.sihywtcamd.option.illagers.evoker.stopArrows": "Evokers stop arrows",
   "text.autoconfig.sihywtcamd.option.illagers.evoker.increasedHealth": "Evokers health is slightly increased",

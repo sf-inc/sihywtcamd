@@ -37,7 +37,7 @@ public abstract class PillagerMixin extends IllagerEntity implements Pillatroope
     }
 
     @Inject(method = "initialize", at = @At("HEAD"))
-    private void addSpeedBonusP(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason,
+    private void makePillatrooper(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason,
                                 EntityData entityData, CallbackInfoReturnable<EntityData> cir) {
         if (ModConfig.get().illagers.pillager.pillatrooper
                 && !this.hasVehicle()

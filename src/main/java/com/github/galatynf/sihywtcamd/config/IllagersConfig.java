@@ -19,7 +19,6 @@ public class IllagersConfig implements ConfigData {
 
     public static class Vindicator {
         public boolean spawnInPatrols = true;
-        public boolean speedBonus = true;
     }
 
     @ConfigEntry.Gui.CollapsibleObject
