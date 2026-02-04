@@ -10,7 +10,6 @@ import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.Identifier;
 
 public class Sihywtcamd implements ModInitializer {
-    public static final boolean DEBUG = false;
     public static boolean areConfigsInit = false;
     public static final String MOD_ID = "sihywtcamd";
 

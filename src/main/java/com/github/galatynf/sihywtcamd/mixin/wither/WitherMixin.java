@@ -70,7 +70,7 @@ public abstract class WitherMixin extends HostileEntity {
             }
 
             MyComponents.WITHER_COMPONENT.get(this).setHalfHealthReached();
-            if (Sihywtcamd.DEBUG) {
+            if (ModConfig.get().general.enableDebugInfo) {
                 this.setCustomName(Text.of("Half Health Reached"));
                 this.setCustomNameVisible(true);
             }

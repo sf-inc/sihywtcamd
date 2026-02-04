@@ -103,7 +103,7 @@ public abstract class ZombieLivingMixin extends LivingEntityMixin {
                         new EntityAttributeModifier(UNSTOPPABLE_BONUS_ID, value, EntityAttributeModifier.Operation.ADD_VALUE));
             }
 
-            if (Sihywtcamd.DEBUG && name != null) {
+            if (ModConfig.get().general.enableDebugInfo && name != null) {
                 this.setCustomName(Text.of(name));
                 this.setCustomNameVisible(true);
             }

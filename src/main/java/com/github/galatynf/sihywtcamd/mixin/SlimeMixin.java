@@ -95,7 +95,7 @@ public abstract class SlimeMixin extends MobEntity {
             this.playSound(SoundEvents.ENTITY_SLIME_ATTACK, 1.0f,
                     (this.random.nextFloat() - this.random.nextFloat()) * 0.2f + 1.0f);
 
-            if (Sihywtcamd.DEBUG) {
+            if (ModConfig.get().general.enableDebugInfo) {
                 this.setCustomName(Text.of("Merged"));
                 this.setCustomNameVisible(true);
             }
@@ -114,7 +114,7 @@ public abstract class SlimeMixin extends MobEntity {
                 MyComponents.SLIME_COMPONENT.get(slime).setMerged();
             }
 
-            if (Sihywtcamd.DEBUG && hasMerged) {
+            if (ModConfig.get().general.enableDebugInfo && hasMerged) {
                 slime.setCustomName(Text.of("Merged Child"));
                 slime.setCustomNameVisible(true);
             }

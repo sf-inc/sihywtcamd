@@ -45,7 +45,7 @@ public abstract class PillagerMixin extends IllagerEntity implements Pillatroope
             this.sihywtcamd$resetDelay();
             MyComponents.PILLAGER_COMPONENT.get(this).setPillatrooper(true);
 
-            if (Sihywtcamd.DEBUG) {
+            if (ModConfig.get().general.enableDebugInfo) {
                 this.setCustomName(Text.of("Pillatrooper"));
                 this.setCustomNameVisible(true);
             }

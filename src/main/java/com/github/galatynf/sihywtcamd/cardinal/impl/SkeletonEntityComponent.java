@@ -1,7 +1,7 @@
 package com.github.galatynf.sihywtcamd.cardinal.impl;
 
-import com.github.galatynf.sihywtcamd.Sihywtcamd;
 import com.github.galatynf.sihywtcamd.cardinal.api.SkeletonEntityComponentAPI;
+import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.storage.ReadView;
 import net.minecraft.storage.WriteView;
@@ -23,7 +23,7 @@ public class SkeletonEntityComponent implements SkeletonEntityComponentAPI {
     @Override
     public void setSpectral() {
         this.isSpectral = true;
-        if (Sihywtcamd.DEBUG && provider instanceof LivingEntity livingEntity) {
+        if (ModConfig.get().general.enableDebugInfo && provider instanceof LivingEntity livingEntity) {
             livingEntity.setCustomName(Text.of("Spectral"));
             livingEntity.setCustomNameVisible(true);
         }
