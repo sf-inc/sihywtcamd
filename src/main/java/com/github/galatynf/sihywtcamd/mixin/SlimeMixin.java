@@ -13,6 +13,7 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.SlimeEntity;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.world.LocalDifficulty;
@@ -94,8 +95,8 @@ public abstract class SlimeMixin extends MobEntity {
             MyComponents.SLIME_COMPONENT.get(this).setMerged();
             otherSlime.discard();
             this.setSize(this.getSize() * 2, true);
-            this.getEntityWorld().addParticleClient(this.getParticles(), this.getX(), this.getY(), this.getZ(),
-                    0.0, 0.0, 0.0);
+            ((ServerWorld) this.getEntityWorld()).spawnParticles(this.getParticles(), this.getX(), this.getY(), this.getZ(),
+                    this.getSize() * 8, this.getWidth() * 0.25, 0.0, this.getWidth() * 0.25, 0.0);
             this.playSound(SoundEvents.ENTITY_SLIME_ATTACK, 1.0f,
                     (this.random.nextFloat() - this.random.nextFloat()) * 0.2f + 1.0f);
 

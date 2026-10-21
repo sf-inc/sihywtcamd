@@ -23,6 +23,7 @@
 * Fix slimes being duplicated when merging
 * Fix dead slimes and magma cubes coming back to life when converted in lava or water
 * Fix named slimes disappearing when merging with another slime
+* Fix missing particles when slimes merge
 
 ## v1.11.1
 * Translation files are now sent to client, which avoid missing translation
