@@ -15,7 +15,10 @@ public class ProjectileMixin {
     private void freezeEntity(EntityHitResult entityHitResult, CallbackInfo ci) {
         if (MyComponents.ARROW_COMPONENT.get(this).isFrozen()) {
             Entity entity = entityHitResult.getEntity();
-            entity.setFrozenTicks(entity.getFrozenTicks() + entity.getMinFreezeDamageTicks());
+            int maxFrozenTicks = 2 * entity.getMinFreezeDamageTicks();
+            if (entity.canFreeze() && entity.getFrozenTicks() < maxFrozenTicks) {
+                entity.setFrozenTicks(Math.min(entity.getFrozenTicks() + entity.getMinFreezeDamageTicks(), maxFrozenTicks));
+            }
         }
     }
 }

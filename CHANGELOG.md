@@ -38,6 +38,7 @@
 * Startup-only options (stray cold biome spawns, infested stone everywhere, blaze follow range, ghast/evoker/wither health) now ask for a restart when changed
 * Fix strays and skeletons being added to cold modded biomes that had no skeletons, or outside the Overworld
 * Fix creeper Mining Fatigue and Weakness going through walls and reaching creative and spectator players
+* Fix frozen stray arrows freezing freeze-immune targets (like players wearing leather armor) and stacking freeze time without limit
 
 ## v1.11.1
 * Translation files are now sent to client, which avoid missing translation
