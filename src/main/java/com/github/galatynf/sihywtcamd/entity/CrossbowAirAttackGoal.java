@@ -55,7 +55,7 @@ public class CrossbowAirAttackGoal<T extends HostileEntity & CrossbowUser & Pill
     @Override
     public boolean canStart() {
         return this.hasAliveTarget() && this.isEntityHoldingCrossbow() && this.actor.sihywtcamd$canUseAirAttack()
-                && !this.actor.hasVehicle() && !this.actor.getSteppingBlockState().isAir();
+                && !this.actor.hasVehicle() && isLanded(this.actor);
     }
 
     private boolean isEntityHoldingCrossbow() {
@@ -116,7 +116,7 @@ public class CrossbowAirAttackGoal<T extends HostileEntity & CrossbowUser & Pill
                 this.seeingTargetTicker--;
             }
 
-            boolean isInAir = this.actor.getSteppingBlockState().isAir();
+            boolean isInAir = !isLanded(this.actor);
             if (this.stage.ordinal() > Stage.AIR_FLY.ordinal()) {
                 if (this.actor.getEntityWorld().getTime() % 2 == 0) {
                     ((ServerWorld) this.actor.getEntityWorld()).spawnParticles(
@@ -233,10 +233,14 @@ public class CrossbowAirAttackGoal<T extends HostileEntity & CrossbowUser & Pill
     public static void removeAirEffectsOnGround(LivingEntity entity) {
         EntityAttributeInstance gravity = entity.getAttributeInstance(EntityAttributes.GRAVITY);
         if (gravity != null && gravity.hasModifier(REDUCED_GRAVITY_ID)
-                && !entity.hasVehicle() && !entity.getSteppingBlockState().isAir()) {
+                && !entity.hasVehicle() && isLanded(entity)) {
             gravity.removeModifier(REDUCED_GRAVITY_ID);
             entity.removeStatusEffect(StatusEffects.SLOW_FALLING);
         }
+    }
+
+    private static boolean isLanded(LivingEntity entity) {
+        return entity.isOnGround() || entity.isInFluid();
     }
 
     enum Stage {
