@@ -19,6 +19,7 @@
 * Fix zombie horse traps despawning before they can be triggered
 * Fix zombie horse traps spawning on oxidized or waxed lightning rods
 * Fix Tank zombies spawning without their bonus health and door breaking ability
+* Fix infected baby villagers getting invisible baby zombie riders
 
 ## v1.11.1
 * Translation files are now sent to client, which avoid missing translation

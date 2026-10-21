@@ -48,6 +48,7 @@ public abstract class ZombieLivingMixin extends LivingEntityMixin {
     private void spawnBabyTowers(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason,
                                  EntityData entityData, CallbackInfoReturnable<EntityData> cir) {
         if (ModConfig.get().zombies.general.babyTowerHeight > 0
+                && spawnReason != SpawnReason.CONVERSION
                 && this.isBaby()
                 && !this.hasVehicle()
                 && world.getRandom().nextFloat() < 0.2f) {
