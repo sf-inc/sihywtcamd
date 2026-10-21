@@ -98,7 +98,8 @@ public class ZombieHorseTrapTriggerGoal extends Goal {
     private void initZombie(ZombieEntity zombieEntity, LocalDifficulty localDifficulty, Item item, AbstractHorseEntity vehicle) {
         if (zombieEntity == null) return;
 
-        zombieEntity.initialize((ServerWorld) vehicle.getEntityWorld(), localDifficulty, SpawnReason.TRIGGERED, null);
+        zombieEntity.initialize((ServerWorld) vehicle.getEntityWorld(), localDifficulty, SpawnReason.TRIGGERED,
+                new ZombieEntity.ZombieData(ZombieEntity.shouldBeBaby(zombieEntity.getRandom()), false));
         zombieEntity.setPosition(vehicle.getX(), vehicle.getY(), vehicle.getZ());
         zombieEntity.timeUntilRegen = 60;
         zombieEntity.setPersistent();

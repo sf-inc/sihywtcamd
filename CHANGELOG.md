@@ -42,6 +42,7 @@
 * Fix endermen no longer spawning in the upper part of end cities, phantoms now spawn alongside them
 * Fix patrol ravagers being able to spawn inside blocks next to cliffs or tree trunks
 * Toggling the "Mobs don't flee if target is half health" option now applies to already loaded mobs
+* Fix zombie horse trap riders sometimes spawning a chicken jockey and leaving the chicken behind
 
 ## v1.11.1
 * Translation files are now sent to client, which avoid missing translation
