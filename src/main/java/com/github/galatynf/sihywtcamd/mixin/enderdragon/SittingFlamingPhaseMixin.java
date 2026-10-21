@@ -34,9 +34,11 @@ public abstract class SittingFlamingPhaseMixin extends AbstractPhase {
                     TypeFilter.instanceOf(EndermanEntity.class), box, EntityPredicates.VALID_ENTITY);
             for (EndermanEntity enderman : endermen) {
                 if (enderman.getTarget() == null || !enderman.getTarget().isPlayer()) {
-                    PlayerEntity player = this.dragon.getEntityWorld().getClosestPlayer(enderman, 16.0);
-                    enderman.setTarget(player);
-                    break;
+                    PlayerEntity player = this.dragon.getEntityWorld().getClosestPlayer(enderman.getX(), enderman.getY(), enderman.getZ(), 16.0, true);
+                    if (player != null) {
+                        enderman.setTarget(player);
+                        break;
+                    }
                 }
             }
         }
