@@ -10,17 +10,21 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Box;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 
 import java.util.List;
 
 @Mixin(targets = "net.minecraft.entity.mob.PhantomEntity$FindTargetGoal")
 public class PhantomTargetGoalMixin {
+    @Unique
+    private static final TargetPredicate NO_VISIBILITY_PREDICATE = TargetPredicate.createAttackable().ignoreVisibility();
+
     @WrapOperation(method = "canStart()Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/world/ServerWorld;getPlayers(Lnet/minecraft/entity/ai/TargetPredicate;Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/util/math/Box;)Ljava/util/List;"))
     private List<PlayerEntity> changePlayerPredicateStart(ServerWorld instance, TargetPredicate targetPredicate, LivingEntity livingEntity,
                                                           Box box, Operation<List<PlayerEntity>> original) {
         return ModConfig.get().undead.phantom.throughBlocks
-                ? original.call(instance, targetPredicate.ignoreVisibility(), livingEntity, box)
+                ? original.call(instance, targetPredicate.copy().ignoreVisibility(), livingEntity, box)
                 : original.call(instance, targetPredicate, livingEntity, box);
     }
 
@@ -28,7 +32,7 @@ public class PhantomTargetGoalMixin {
     private boolean changePredicateStart(PhantomEntity instance, ServerWorld world, LivingEntity target,
                                           TargetPredicate predicate, Operation<Boolean> original) {
         return ModConfig.get().undead.phantom.throughBlocks
-                ? original.call(instance, world, target, predicate.ignoreVisibility())
+                ? original.call(instance, world, target, NO_VISIBILITY_PREDICATE)
                 : original.call(instance, world, target, predicate);
     }
 
@@ -36,7 +40,7 @@ public class PhantomTargetGoalMixin {
     private boolean changePredicateContinue(PhantomEntity instance, ServerWorld world, LivingEntity target,
                                           TargetPredicate predicate, Operation<Boolean> original) {
         return ModConfig.get().undead.phantom.throughBlocks
-                ? original.call(instance, world, target, predicate.ignoreVisibility())
+                ? original.call(instance, world, target, NO_VISIBILITY_PREDICATE)
                 : original.call(instance, world, target, predicate);
     }
 }

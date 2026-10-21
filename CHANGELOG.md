@@ -12,6 +12,7 @@
 * Fix the Mod Menu config screen integration
 * Skeleton horse traps now spawn a parched instead of a wither skeleton
 * Fix undead not healing when hitting players, and make them heal by the damage actually dealt
+* Fix phantoms making tamed wolves and trader llamas target mobs through blocks
 
 ## v1.11.1
 * Translation files are now sent to client, which avoid missing translation
