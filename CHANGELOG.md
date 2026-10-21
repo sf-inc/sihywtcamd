@@ -46,6 +46,7 @@
 * Fix zombified piglin brutes targeting creative players who bump into them, and granting them the collision advancement
 * Fix baby drowned being able to ride elder guardians
 * Fix skeleton horse traps knocking the original horse aside when triggered
+* Fix phantoms flying through the world border
 
 ## v1.11.1
 * Translation files are now sent to client, which avoid missing translation
