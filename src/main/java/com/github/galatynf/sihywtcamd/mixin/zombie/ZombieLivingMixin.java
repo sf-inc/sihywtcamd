@@ -83,24 +83,24 @@ public abstract class ZombieLivingMixin extends LivingEntityMixin {
             if (random < 0.1f) {
                 name = "Caller";
                 double value = 0.2 + 0.15 * chanceMultiplier + 0.15 * this.random.nextDouble();
-                this.getAttributeInstance(EntityAttributes.SPAWN_REINFORCEMENTS).addPersistentModifier(
+                this.getAttributeInstance(EntityAttributes.SPAWN_REINFORCEMENTS).overwritePersistentModifier(
                         new EntityAttributeModifier(CALLER_BONUS_ID, value, EntityAttributeModifier.Operation.ADD_VALUE));
             } else if (random < 0.3f) {
                 name = "Tank";
                 this.setCanBreakDoors(true);
                 double value = 0.5 + 1.0 * chanceMultiplier + this.random.nextDouble();
-                this.getAttributeInstance(EntityAttributes.MAX_HEALTH).addPersistentModifier(
+                this.getAttributeInstance(EntityAttributes.MAX_HEALTH).overwritePersistentModifier(
                         new EntityAttributeModifier(TANK_BONUS_ID, value, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE));
                 this.setHealth(this.getMaxHealth());
             } else if (random < 0.5f) {
                 name = "Runner";
                 double value = 0.2 + 0.15 * chanceMultiplier + 0.15 * this.random.nextDouble();
-                this.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED).addPersistentModifier(
+                this.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED).overwritePersistentModifier(
                         new EntityAttributeModifier(RUNNER_BONUS_ID, value, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE));
             } else if (random < 0.7f) {
                 name = "Unstoppable";
                 double value = 0.2 + 0.15 * chanceMultiplier + 0.15 * this.random.nextDouble();
-                this.getAttributeInstance(EntityAttributes.KNOCKBACK_RESISTANCE).addPersistentModifier(
+                this.getAttributeInstance(EntityAttributes.KNOCKBACK_RESISTANCE).overwritePersistentModifier(
                         new EntityAttributeModifier(UNSTOPPABLE_BONUS_ID, value, EntityAttributeModifier.Operation.ADD_VALUE));
             }
 
