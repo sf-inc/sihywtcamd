@@ -4,6 +4,14 @@
 * **x.X versions** are either updates that add content or major bug fixes
 * **x.x.X versions** are either small content updates (language translation, new textures, ...) or bug fixes
 
+## v1.11.2
+* Remove the speed bonus of silverfish and endermites
+* Remove the speed bonus of vindicators
+* Pillagers are more likely to get a Piercing crossbow (1/50 instead of 1/100)
+* Debug info is now a hidden config option (`enableDebugInfo`), disabled by default
+* Fix the Mod Menu config screen integration
+* Skeleton horse traps now spawn a parched instead of a wither skeleton
+
 ## v1.11.1
 * Translation files are now sent to client, which avoid missing translation
   when the mod is server-side only for advancements
