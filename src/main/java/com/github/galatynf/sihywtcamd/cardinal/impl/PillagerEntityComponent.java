@@ -35,12 +35,10 @@ public class PillagerEntityComponent implements PillagerEntityComponentAPI {
     @Override
     public void readData(ReadView readView) {
         this.setPillatrooper(readView.getBoolean("IsPillatrooper", false));
-        this.setFireworkRocket(readView.getBoolean("HasFireworkRocket", false));
     }
 
     @Override
     public void writeData(WriteView writeView) {
         writeView.putBoolean("IsPillatrooper", this.isPillatrooper);
-        writeView.putBoolean("HasFireworkRocket", this.hasFireworkRocket);
     }
 }

@@ -47,6 +47,7 @@
 * Fix baby drowned being able to ride elder guardians
 * Fix skeleton horse traps knocking the original horse aside when triggered
 * Fix phantoms flying through the world border
+* Fix pillatroopers keeping their firework shots and skipping their cooldown when an air attack is interrupted
 
 ## v1.11.1
 * Translation files are now sent to client, which avoid missing translation

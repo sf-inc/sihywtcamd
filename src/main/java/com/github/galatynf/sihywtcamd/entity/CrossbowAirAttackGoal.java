@@ -87,6 +87,9 @@ public class CrossbowAirAttackGoal<T extends HostileEntity & CrossbowUser & Pill
             this.actor.setCharging(false);
             this.actor.getActiveItem().set(DataComponentTypes.CHARGED_PROJECTILES, ChargedProjectilesComponent.DEFAULT);
         }
+        if (this.stage.ordinal() > Stage.AIR_LAUNCH.ordinal()) {
+            this.endAirAttack();
+        }
     }
 
     @Override
