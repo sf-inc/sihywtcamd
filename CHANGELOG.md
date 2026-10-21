@@ -33,6 +33,7 @@
 * Fix phantoms spawning from end crystals that are not part of the ender dragon fight
 * Fix "Got the Wrong Bird" advancement requiring a meadow instead of the End
 * Fix "Is It a Tower?" advancement data generation requiring one zombie too many
+* Require Minecraft 1.21.11 and Fabric API 0.141.2+, showing a clear error instead of crashing on other versions
 
 ## v1.11.1
 * Translation files are now sent to client, which avoid missing translation
