@@ -41,6 +41,7 @@
 * Fix frozen stray arrows freezing freeze-immune targets (like players wearing leather armor) and stacking freeze time without limit
 * Fix endermen no longer spawning in the upper part of end cities, phantoms now spawn alongside them
 * Fix patrol ravagers being able to spawn inside blocks next to cliffs or tree trunks
+* Toggling the "Mobs don't flee if target is half health" option now applies to already loaded mobs
 
 ## v1.11.1
 * Translation files are now sent to client, which avoid missing translation
