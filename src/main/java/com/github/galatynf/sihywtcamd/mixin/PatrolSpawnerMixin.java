@@ -37,7 +37,8 @@ public class PatrolSpawnerMixin {
         }
 
         if (ModConfig.get().illagers.ravager.spawnInPatrols
-                && random.nextFloat() < 0.05F + 0.05F * world.getLocalDifficulty(pos).getClampedLocalDifficulty()) {
+                && random.nextFloat() < 0.05F + 0.05F * world.getLocalDifficulty(pos).getClampedLocalDifficulty()
+                && world.isSpaceEmpty(EntityType.RAVAGER.getSpawnBox(pos.getX(), pos.getY(), pos.getZ()))) {
             PatrolEntity patrolEntity1 = EntityType.RAVAGER.create(world, SpawnReason.PATROL);
             PatrolEntity patrolEntity2 = captain || random.nextBoolean()
                     ? EntityType.PILLAGER.create(world, SpawnReason.PATROL) : null;

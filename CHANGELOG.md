@@ -40,6 +40,7 @@
 * Fix creeper Mining Fatigue and Weakness going through walls and reaching creative and spectator players
 * Fix frozen stray arrows freezing freeze-immune targets (like players wearing leather armor) and stacking freeze time without limit
 * Fix endermen no longer spawning in the upper part of end cities, phantoms now spawn alongside them
+* Fix patrol ravagers being able to spawn inside blocks next to cliffs or tree trunks
 
 ## v1.11.1
 * Translation files are now sent to client, which avoid missing translation
