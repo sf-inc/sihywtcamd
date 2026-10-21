@@ -65,6 +65,7 @@
 * Fix endermite teleport attacks sending players onto the Nether roof, and make them succeed more often
 * Fix endermite teleport attacks knocking players off their mount without teleporting them
 * Fix magma cubes setting entities on fire through glass panes, bars or doors, or when their attack fails
+* The zombie horse speed bonus now only applies to zombie horse trap horses, not to vanilla zombie horsemen
 
 ## v1.11.1
 * Translation files are now sent to client, which avoid missing translation

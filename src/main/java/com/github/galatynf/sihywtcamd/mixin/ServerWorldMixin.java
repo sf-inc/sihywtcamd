@@ -47,6 +47,7 @@ public abstract class ServerWorldMixin extends World {
         if (canSpawn && (zombieHorseEntity = EntityType.ZOMBIE_HORSE.create(this, SpawnReason.TRIGGERED)) != null) {
             lightningEntity.setCosmetic(true);
             ((ZombieHorseIMixin) zombieHorseEntity).sihywtcamd$setTrapped(true);
+            ((ZombieHorseIMixin) zombieHorseEntity).sihywtcamd$setTrapHorse(true);
             zombieHorseEntity.setBreedingAge(0);
             zombieHorseEntity.setPersistent();
             zombieHorseEntity.setPosition(blockPos.getX(), blockPos.getY(), blockPos.getZ());

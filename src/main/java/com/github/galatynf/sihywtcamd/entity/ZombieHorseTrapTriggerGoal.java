@@ -91,6 +91,7 @@ public class ZombieHorseTrapTriggerGoal extends Goal {
             zombieHorseEntity.setPersistent();
             zombieHorseEntity.setTame(true);
             zombieHorseEntity.setBreedingAge(0);
+            ((ZombieHorseIMixin) zombieHorseEntity).sihywtcamd$setTrapHorse(true);
         }
         return zombieHorseEntity;
     }

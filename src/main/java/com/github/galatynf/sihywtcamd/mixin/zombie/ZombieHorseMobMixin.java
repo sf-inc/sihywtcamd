@@ -20,6 +20,8 @@ public abstract class ZombieHorseMobMixin extends MobEntityMixin implements Zomb
     @Unique
     private boolean trapped = false;
     @Unique
+    private boolean trapHorse = false;
+    @Unique
     private int trapTime = -1;
 
     protected ZombieHorseMobMixin(EntityType<? extends LivingEntity> entityType, World world) {
@@ -36,12 +38,14 @@ public abstract class ZombieHorseMobMixin extends MobEntityMixin implements Zomb
     @Override
     protected void readModData(ReadView readView, CallbackInfo ci) {
         this.sihywtcamd$setTrapped(readView.getBoolean("ZombieTrap", false));
+        this.trapHorse = readView.getBoolean("ZombieTrapHorse", this.trapped);
         this.trapTime = readView.getInt("ZombieTrapTime", 0);
     }
 
     @Override
     protected void writeModData(WriteView writeView, CallbackInfo ci) {
         writeView.putBoolean("ZombieTrap", this.trapped);
+        writeView.putBoolean("ZombieTrapHorse", this.trapHorse);
         writeView.putInt("ZombieTrapTime", this.trapTime);
     }
 
@@ -56,5 +60,15 @@ public abstract class ZombieHorseMobMixin extends MobEntityMixin implements Zomb
         } else {
             this.goalSelector.remove(this.trapTriggerGoal);
         }
+    }
+
+    @Override
+    public void sihywtcamd$setTrapHorse(boolean trapHorse) {
+        this.trapHorse = trapHorse;
+    }
+
+    @Override
+    public boolean sihywtcamd$isTrapHorse() {
+        return this.trapHorse;
     }
 }

@@ -1,6 +1,7 @@
 package com.github.galatynf.sihywtcamd.mixin;
 
 import com.github.galatynf.sihywtcamd.config.ModConfig;
+import com.github.galatynf.sihywtcamd.imixin.ZombieHorseIMixin;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.entity.Entity;
@@ -70,7 +71,8 @@ public abstract class LivingEntityMixin extends Entity {
                     && this.getType().equals(EntityType.SKELETON_HORSE)) {
                 return movementInput.multiply(1.0, 1.0, 2.0);
             } else if (ModConfig.get().zombies.zombieHorse.increasedSpeed
-                    && this.getType().equals(EntityType.ZOMBIE_HORSE)) {
+                    && this.getType().equals(EntityType.ZOMBIE_HORSE)
+                    && ((ZombieHorseIMixin) this).sihywtcamd$isTrapHorse()) {
                 return movementInput.multiply(1.0, 1.0, 2.5);
             }
         }

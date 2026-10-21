@@ -48,7 +48,7 @@
   "text.autoconfig.sihywtcamd.option.zombies.zombifiedPiglin.bruteVariant": "Zombified Piglins can spawn as brutes",
   "text.autoconfig.sihywtcamd.option.zombies.zombieHorse": "Zombie horse",
   "text.autoconfig.sihywtcamd.option.zombies.zombieHorse.zombieHorseTrap": "Zombie horse trap can spawn during thunder",
-  "text.autoconfig.sihywtcamd.option.zombies.zombieHorse.increasedSpeed": "Mobs ride them at higher speed",
+  "text.autoconfig.sihywtcamd.option.zombies.zombieHorse.increasedSpeed": "Mobs ride trap horses at higher speed",
 
   "text.autoconfig.sihywtcamd.category.skeletons": "Skeletons",
   "text.autoconfig.sihywtcamd.option.skeletons.general": "General skeletons",

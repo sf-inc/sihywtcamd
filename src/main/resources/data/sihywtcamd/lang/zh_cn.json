@@ -48,7 +48,7 @@
   "text.autoconfig.sihywtcamd.option.zombies.zombifiedPiglin.bruteVariant": "生成手持金斧头的变种",
   "text.autoconfig.sihywtcamd.option.zombies.zombieHorse": "僵尸马",
   "text.autoconfig.sihywtcamd.option.zombies.zombieHorse.zombieHorseTrap": "雷雨时生成僵尸马陷阱",
-  "text.autoconfig.sihywtcamd.option.zombies.zombieHorse.increasedSpeed": "提高被骑乘时的移动速度",
+  "text.autoconfig.sihywtcamd.option.zombies.zombieHorse.increasedSpeed": "提高陷阱僵尸马被骑乘时的移动速度",
 
   "text.autoconfig.sihywtcamd.category.skeletons": "骷髅",
   "text.autoconfig.sihywtcamd.option.skeletons.general": "骷髅类怪物",

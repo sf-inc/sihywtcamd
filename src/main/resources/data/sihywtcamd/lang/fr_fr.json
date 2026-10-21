@@ -48,7 +48,7 @@
   "text.autoconfig.sihywtcamd.option.zombies.zombifiedPiglin.bruteVariant": "Les piglins zombifiés peuvent apparaître en tant que brutes",
   "text.autoconfig.sihywtcamd.option.zombies.zombieHorse": "Le cheval zombie",
   "text.autoconfig.sihywtcamd.option.zombies.zombieHorse.zombieHorseTrap": "Un piège de cheval zombie peut apparaître lors d'orages",
-  "text.autoconfig.sihywtcamd.option.zombies.zombieHorse.increasedSpeed": "Les mobs les chevauchent plus vite",
+  "text.autoconfig.sihywtcamd.option.zombies.zombieHorse.increasedSpeed": "Les mobs chevauchent les chevaux du piège plus vite",
 
   "text.autoconfig.sihywtcamd.category.skeletons": "Les squelettes",
   "text.autoconfig.sihywtcamd.option.skeletons.general": "Les squelettes en général",
