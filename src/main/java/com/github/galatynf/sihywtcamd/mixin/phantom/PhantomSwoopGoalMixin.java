@@ -1,9 +1,10 @@
 package com.github.galatynf.sihywtcamd.mixin.phantom;
 
 import com.github.galatynf.sihywtcamd.config.ModConfig;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.entity.mob.PhantomEntity;
 import net.minecraft.entity.passive.CatEntity;
-import net.minecraft.predicate.entity.EntityPredicates;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -16,32 +17,25 @@ import java.util.List;
 @Mixin(targets = "net.minecraft.entity.mob.PhantomEntity$SwoopMovementGoal")
 public abstract class PhantomSwoopGoalMixin {
     @Final @Shadow PhantomEntity field_7333;
-    @Shadow private boolean catsNearby;
 
     @Inject(method = "shouldContinue()Z", at = @At("HEAD"), cancellable = true)
     private void fearLight(CallbackInfoReturnable<Boolean> cir) {
-        // Reset to ensure further check validity
-        this.catsNearby = false;
-
         if (ModConfig.get().undead.phantom.lightFear
                 && this.field_7333.getEntityWorld().getLightLevel(this.field_7333.getBlockPos()) > 10) {
             cir.setReturnValue(false);
         }
     }
 
-    @Inject(method = "shouldContinue()Z", at = @At("TAIL"), cancellable = true)
-    private void removeCatFear(CallbackInfoReturnable<Boolean> cir) {
-        if (ModConfig.get().general.mobsLessFear && this.catsNearby) {
-            boolean shouldContinue = true;
-            List<CatEntity> list = this.field_7333.getEntityWorld().getEntitiesByClass(CatEntity.class, this.field_7333.getBoundingBox().expand(16.0), EntityPredicates.VALID_ENTITY);
+    @WrapOperation(method = "shouldContinue()Z", at = @At(value = "INVOKE", target = "Ljava/util/List;isEmpty()Z"))
+    private boolean removeCatFear(List<CatEntity> list, Operation<Boolean> original) {
+        if (ModConfig.get().general.mobsLessFear) {
             for (CatEntity catEntity : list) {
                 if (catEntity.getHealth() > catEntity.getMaxHealth() / 2.0F) {
-                    shouldContinue = false;
-                    break;
+                    return false;
                 }
             }
-
-            cir.setReturnValue(shouldContinue);
+            return true;
         }
+        return original.call(list);
     }
 }
