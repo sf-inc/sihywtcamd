@@ -17,6 +17,7 @@
 * Fix creepers being ignited by wind charges and by explosions out of their blast radius
 * Fix pillagers riding patrol ravagers having no crossbow and no captain banner
 * Fix zombie horse traps despawning before they can be triggered
+* Fix zombie horse traps spawning on oxidized or waxed lightning rods
 
 ## v1.11.1
 * Translation files are now sent to client, which avoid missing translation

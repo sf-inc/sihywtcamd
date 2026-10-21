@@ -2,7 +2,6 @@ package com.github.galatynf.sihywtcamd.mixin;
 
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import com.github.galatynf.sihywtcamd.imixin.ZombieHorseIMixin;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LightningEntity;
 import net.minecraft.entity.SpawnReason;
@@ -10,6 +9,7 @@ import net.minecraft.entity.mob.ZombieHorseEntity;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.LocalDifficulty;
@@ -43,7 +43,7 @@ public abstract class ServerWorldMixin extends World {
         boolean canSpawn = !lightningEntity.cosmetic
                 && this.getGameRules().getValue(GameRules.DO_MOB_SPAWNING)
                 && this.random.nextDouble() < localDifficulty.getLocalDifficulty() * 0.01
-                && !this.getBlockState(blockPos.down()).isOf(Blocks.LIGHTNING_ROD);
+                && !this.getBlockState(blockPos.down()).isIn(BlockTags.LIGHTNING_RODS);
         if (canSpawn && (zombieHorseEntity = EntityType.ZOMBIE_HORSE.create(this, SpawnReason.TRIGGERED)) != null) {
             lightningEntity.setCosmetic(true);
             ((ZombieHorseIMixin) zombieHorseEntity).sihywtcamd$setTrapped(true);
