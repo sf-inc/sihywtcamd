@@ -24,6 +24,7 @@ public abstract class MobEntityMixin extends LivingEntity {
     @Shadow @Final protected GoalSelector goalSelector;
 
     @Shadow public abstract void setPathfindingPenalty(PathNodeType nodeType, float penalty);
+    @Shadow public abstract LivingEntity getTarget();
 
     protected MobEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
