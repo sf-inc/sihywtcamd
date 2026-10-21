@@ -54,6 +54,7 @@ public abstract class SlimeMixin extends MobEntity {
 
         SlimeEntity thisSlime = (SlimeEntity) (Object) this;
         if (!this.getEntityWorld().isClient()
+                && this.isAlive()
                 && ModConfig.get().overworld.slime.magmaConversion
                 && !(thisSlime instanceof MagmaCubeEntity)
                 && this.getEntityWorld().getRegistryKey().equals(World.NETHER)

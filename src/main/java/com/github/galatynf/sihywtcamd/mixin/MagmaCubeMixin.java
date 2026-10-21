@@ -33,6 +33,7 @@ public abstract class MagmaCubeMixin extends SlimeMixin {
     @Override
     protected void onTick(CallbackInfo ci) {
         if (!this.getEntityWorld().isClient()
+                && this.isAlive()
                 && ModConfig.get().nether.magmaCube.slimeConversion
                 && this.getEntityWorld().getRegistryKey().equals(World.OVERWORLD)
                 && this.getFluidHeight(FluidTags.WATER) > 0.0) {
