@@ -26,7 +26,10 @@ public class BiomeSpawn {
         }
         if (ModConfig.get().skeletons.stray.coldBiomeSpawn) {
             Predicate<BiomeSelectionContext> coldPredicate = context -> context.getBiome().getTemperature() < 0.15f;
-            Predicate<BiomeSelectionContext> biomePredicate = coldPredicate.and(BiomeSelectors.spawnsOneOf(EntityType.STRAY).negate());
+            Predicate<BiomeSelectionContext> biomePredicate = coldPredicate
+                    .and(BiomeSelectors.spawnsOneOf(EntityType.SKELETON))
+                    .and(BiomeSelectors.spawnsOneOf(EntityType.STRAY).negate())
+                    .and(BiomeSelectors.foundInOverworld());
 
             removeSpawn(biomePredicate, EntityType.SKELETON);
             BiomeModifications.addSpawn(
