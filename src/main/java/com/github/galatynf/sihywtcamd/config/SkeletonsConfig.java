@@ -26,6 +26,7 @@ public class SkeletonsConfig implements ConfigData {
 
     public static class Stray {
         public boolean frozenArrows = true;
+        @ConfigEntry.Gui.RequiresRestart
         public boolean coldBiomeSpawn = true;
     }
     @ConfigEntry.Gui.CollapsibleObject

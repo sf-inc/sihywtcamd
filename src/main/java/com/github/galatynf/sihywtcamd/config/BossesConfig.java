@@ -20,6 +20,7 @@ public class BossesConfig implements ConfigData {
     public Wither wither = new Wither();
 
     public static class Wither {
+        @ConfigEntry.Gui.RequiresRestart
         public boolean increasedHealth = true;
         public boolean stormyWeather = true;
         public boolean explosion = true;

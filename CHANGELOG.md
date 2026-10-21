@@ -35,6 +35,7 @@
 * Fix "Is It a Tower?" advancement data generation requiring one zombie too many
 * Require Minecraft 1.21.11 and Fabric API 0.141.2+, showing a clear error instead of crashing on other versions
 * Fix cave spider jockeys triggering nearby sculk sensors when spawning
+* Startup-only options (stray cold biome spawns, infested stone everywhere, blaze follow range, ghast/evoker/wither health) now ask for a restart when changed
 
 ## v1.11.1
 * Translation files are now sent to client, which avoid missing translation

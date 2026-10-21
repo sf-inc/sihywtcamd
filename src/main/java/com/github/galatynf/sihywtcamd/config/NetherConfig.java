@@ -11,6 +11,7 @@ public class NetherConfig implements ConfigData {
 
     public static class Blaze {
         public boolean fireAttack = true;
+        @ConfigEntry.Gui.RequiresRestart
         public boolean reducedFollowRange = true;
     }
 
@@ -18,6 +19,7 @@ public class NetherConfig implements ConfigData {
     public Ghast ghast = new Ghast();
 
     public static class Ghast {
+        @ConfigEntry.Gui.RequiresRestart
         public boolean increasedHealth = true;
     }
 

@@ -26,6 +26,7 @@ public class IllagersConfig implements ConfigData {
 
     public static class Evoker {
         public boolean stopArrows = true;
+        @ConfigEntry.Gui.RequiresRestart
         public boolean increasedHealth = true;
     }
 

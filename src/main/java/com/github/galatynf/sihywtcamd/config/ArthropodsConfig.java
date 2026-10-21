@@ -17,6 +17,7 @@ public class ArthropodsConfig implements ConfigData {
     public Silverfish silverfish = new Silverfish();
 
     public static class Silverfish {
+        @ConfigEntry.Gui.RequiresRestart
         public boolean infestedEverywhere = true;
     }
 
