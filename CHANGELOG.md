@@ -54,6 +54,7 @@
 * Fix pillatroopers' air attack cooldown resetting when they are reloaded
 * Reduce the pathfinding cost of pillatroopers chasing their target
 * Fix pillatroopers losing their slow falling mid-air when falling through vines or cobwebs
+* Fix vexes sometimes surviving the death of their evoker
 
 ## v1.11.1
 * Translation files are now sent to client, which avoid missing translation

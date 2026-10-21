@@ -10,6 +10,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -20,15 +21,23 @@ public abstract class VexMixin extends HostileEntity {
         super(entityType, world);
     }
 
+    @Unique
+    @Nullable
+    private MobEntity lastOwner;
+
     @Shadow @Nullable public abstract MobEntity getOwner();
 
     @Inject(method = "tick", at = @At("HEAD"))
     private void killWithMaster(CallbackInfo ci) {
         if (ModConfig.get().overworld.vex.dieWithEvoker
-                && this.getEntityWorld() instanceof ServerWorld world
-                && this.getOwner() != null
-                && this.getOwner().isDead()) {
-            this.kill(world);
+                && this.getEntityWorld() instanceof ServerWorld world) {
+            MobEntity owner = this.getOwner();
+            if (owner != null) {
+                this.lastOwner = owner;
+            }
+            if (this.lastOwner != null && this.lastOwner.isDead()) {
+                this.kill(world);
+            }
         }
     }
 }
