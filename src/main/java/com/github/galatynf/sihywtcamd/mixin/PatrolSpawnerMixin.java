@@ -43,16 +43,20 @@ public class PatrolSpawnerMixin {
                     ? EntityType.PILLAGER.create(world, SpawnReason.PATROL) : null;
 
             if (patrolEntity1 != null) {
+                patrolEntity1.setPosition(pos.getX(), pos.getY(), pos.getZ());
+                patrolEntity1.initialize(world, world.getLocalDifficulty(pos), SpawnReason.PATROL, null);
+
                 if (patrolEntity2 != null) {
-                    patrolEntity2.startRiding(patrolEntity1);
+                    patrolEntity2.setPosition(pos.getX(), pos.getY(), pos.getZ());
                     if (captain) {
                         patrolEntity2.setPatrolLeader(true);
                         patrolEntity2.setRandomPatrolTarget();
                     }
+
+                    patrolEntity2.startRiding(patrolEntity1);
+                    patrolEntity2.initialize(world, world.getLocalDifficulty(pos), SpawnReason.PATROL, null);
                 }
 
-                patrolEntity1.setPosition(pos.getX(), pos.getY(), pos.getZ());
-                patrolEntity1.initialize(world, world.getLocalDifficulty(pos), SpawnReason.PATROL, null);
                 world.spawnEntityAndPassengers(patrolEntity1);
                 cir.setReturnValue(true);
             } else {
