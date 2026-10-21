@@ -1,6 +1,7 @@
 package com.github.galatynf.sihywtcamd.mixin.piglin;
 
 import com.github.galatynf.sihywtcamd.config.ModConfig;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
@@ -12,7 +13,6 @@ import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -21,10 +21,13 @@ import java.util.List;
 
 @Mixin(PiglinEntity.class)
 public abstract class PiglinMixin extends AbstractPiglinEntity {
-    @Shadow protected abstract void setCannotHunt(boolean cannotHunt);
-
     public PiglinMixin(EntityType<? extends AbstractPiglinEntity> entityType, World world) {
         super(entityType, world);
+    }
+
+    @ModifyReturnValue(method = "canHunt", at = @At("RETURN"))
+    private boolean cannotHuntWhileRidingHoglin(boolean original) {
+        return original && !(this.getVehicle() instanceof HoglinEntity);
     }
 
     @Inject(method = "initialize", at = @At("TAIL"))
@@ -32,8 +35,8 @@ public abstract class PiglinMixin extends AbstractPiglinEntity {
                                EntityData entityData, CallbackInfoReturnable<EntityData> cir) {
         if (ModConfig.get().nether.piglin.rideHoglin && !this.hasVehicle()
                 && world.getRandom().nextFloat() < 0.05F + 0.05F * difficulty.getClampedLocalDifficulty()) {
-            this.setCannotHunt(true);
-            List<HoglinEntity> list = world.getEntitiesByClass(HoglinEntity.class, this.getBoundingBox().expand(5.0D, 3.0D, 5.0D), EntityPredicates.NOT_MOUNTED);
+            List<HoglinEntity> list = world.getEntitiesByClass(HoglinEntity.class, this.getBoundingBox().expand(5.0D, 3.0D, 5.0D),
+                    hoglin -> EntityPredicates.NOT_MOUNTED.test(hoglin) && hoglin.isBaby() == this.isBaby() && !hoglin.isLeashed());
             if (!list.isEmpty()) {
                 HoglinEntity hoglinEntity = list.getFirst();
                 this.startRiding(hoglinEntity);
@@ -42,6 +45,7 @@ public abstract class PiglinMixin extends AbstractPiglinEntity {
                 if (hoglinEntity2 != null) {
                     hoglinEntity2.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), this.getYaw(), 0.0F);
                     hoglinEntity2.initialize(world, difficulty, SpawnReason.JOCKEY, null);
+                    hoglinEntity2.setBaby(this.isBaby());
                     this.startRiding(hoglinEntity2);
                     world.spawnEntity(hoglinEntity2);
                 }

@@ -58,6 +58,7 @@
 * Evokers can now be hit by piercing and burning projectiles
 * Fix Withers with increased health ending their spawn sequence without full health
 * Fix Wither skeletons summoned at half health spawning inside blocks or high above the ground
+* Fix piglins spawned riding a hoglin never hunting hoglins again after losing their mount, and riding leashed hoglins or hoglins of a different age
 
 ## v1.11.1
 * Translation files are now sent to client, which avoid missing translation
