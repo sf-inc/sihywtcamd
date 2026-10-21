@@ -180,19 +180,31 @@ public class CrossbowAirAttackGoal<T extends HostileEntity & CrossbowUser & Pill
                 if (--this.chargedTicksLeft == 0) {
                     this.stage = Stage.READY_TO_ATTACK;
                 }
-            } else if (this.stage == Stage.READY_TO_ATTACK && bl) {
-                this.actor.shootAt(livingEntity,1.0F);
-                if (isInAir) {
-                    this.stage = Stage.UNCHARGED;
-                } else {
-                    this.stage = Stage.MOVE;
-                    this.actor.sihywtcamd$resetDelay();
-
-                    Optional<PillagerEntityComponentAPI> pillagerComponent = MyComponents.PILLAGER_COMPONENT.maybeGet(this.actor);
-                    pillagerComponent.ifPresent(pillagerComponent2 -> pillagerComponent2.setFireworkRocket(false));
+            } else if (this.stage == Stage.READY_TO_ATTACK) {
+                if (bl) {
+                    this.actor.shootAt(livingEntity, 1.0F);
+                    if (isInAir && this.actor.hasStatusEffect(StatusEffects.SLOW_FALLING)) {
+                        this.stage = Stage.UNCHARGED;
+                    } else {
+                        this.endAirAttack();
+                    }
+                } else if (!isInAir) {
+                    if (this.seeingTargetTicker < -40) {
+                        this.endAirAttack();
+                    } else {
+                        this.actor.getNavigation().startMovingTo(livingEntity, this.speed);
+                    }
                 }
             }
         }
+    }
+
+    private void endAirAttack() {
+        this.stage = Stage.MOVE;
+        this.actor.sihywtcamd$resetDelay();
+
+        Optional<PillagerEntityComponentAPI> pillagerComponent = MyComponents.PILLAGER_COMPONENT.maybeGet(this.actor);
+        pillagerComponent.ifPresent(pillagerComponent2 -> pillagerComponent2.setFireworkRocket(false));
     }
 
     private static ItemStack getFirework() {

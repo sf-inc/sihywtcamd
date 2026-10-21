@@ -27,6 +27,7 @@
 * Fix pillatroopers launching from any distance after their first air attack
 * Fix pillatroopers falling to their death when their air attack is interrupted mid-flight
 * Fix pillatroopers chasing and aiming at a target they no longer have
+* Fix pillatroopers standing still forever when landing out of sight of their target
 
 ## v1.11.1
 * Translation files are now sent to client, which avoid missing translation
