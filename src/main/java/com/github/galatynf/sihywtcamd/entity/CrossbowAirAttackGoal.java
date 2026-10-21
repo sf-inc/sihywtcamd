@@ -8,6 +8,7 @@ import net.minecraft.component.type.ChargedProjectilesComponent;
 import net.minecraft.component.type.FireworksComponent;
 import net.minecraft.entity.CrossbowUser;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.goal.CrossbowAttackGoal;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
@@ -40,6 +41,7 @@ public class CrossbowAirAttackGoal<T extends HostileEntity & CrossbowUser & Pill
     private final float squaredRange;
     private int seeingTargetTicker;
     private int chargedTicksLeft;
+    private int cooldown;
 
     private static final Identifier REDUCED_GRAVITY_ID = id("reduced_gravity");
 
@@ -74,6 +76,7 @@ public class CrossbowAirAttackGoal<T extends HostileEntity & CrossbowUser & Pill
         super.start();
         this.stage = Stage.MOVE;
         this.chargedTicksLeft = 0;
+        this.cooldown = 0;
     }
 
     @Override
@@ -135,8 +138,9 @@ public class CrossbowAirAttackGoal<T extends HostileEntity & CrossbowUser & Pill
                 double d = this.actor.squaredDistanceTo(livingEntity);
                 boolean bl3 = (d > (double)this.squaredRange || this.seeingTargetTicker < 5) && this.chargedTicksLeft == 0;
                 if (bl3) {
-                    this.actor.getNavigation().startMovingTo(livingEntity, this.speed);
+                    this.moveTowards(livingEntity);
                 } else {
+                    this.cooldown = 0;
                     this.actor.getNavigation().stop();
                     this.stage = Stage.AIR_LAUNCH;
                 }
@@ -198,10 +202,17 @@ public class CrossbowAirAttackGoal<T extends HostileEntity & CrossbowUser & Pill
                     if (this.seeingTargetTicker < -40) {
                         this.endAirAttack();
                     } else {
-                        this.actor.getNavigation().startMovingTo(livingEntity, this.speed);
+                        this.moveTowards(livingEntity);
                     }
                 }
             }
+        }
+    }
+
+    private void moveTowards(LivingEntity target) {
+        if (--this.cooldown <= 0) {
+            this.actor.getNavigation().startMovingTo(target, this.speed);
+            this.cooldown = CrossbowAttackGoal.COOLDOWN_RANGE.get(this.actor.getRandom());
         }
     }
 
