@@ -21,6 +21,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Optional;
@@ -31,6 +32,8 @@ public abstract class WitherMixin extends HostileEntity {
 
     @Unique
     static private final int sihywtcamd_SKELETONS_SPAWN_DISTANCE = 5;
+    @Unique
+    static private final float sihywtcamd_VANILLA_MAX_HEALTH = 300.0F;
 
     protected WitherMixin(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
@@ -42,6 +45,14 @@ public abstract class WitherMixin extends HostileEntity {
             original.add(EntityAttributes.MAX_HEALTH, 400.0);
         }
         return original;
+    }
+
+    @ModifyArg(method = "mobTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/boss/WitherEntity;heal(F)V", ordinal = 0))
+    private float scaleSpawnHeal(float amount) {
+        if (!ModConfig.get().bosses.wither.increasedHealth) {
+            return amount;
+        }
+        return amount * this.getMaxHealth() / sihywtcamd_VANILLA_MAX_HEALTH;
     }
 
     @Inject(method = "mobTick", at = @At("HEAD"))

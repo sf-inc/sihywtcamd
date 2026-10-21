@@ -56,6 +56,7 @@
 * Fix pillatroopers losing their slow falling mid-air when falling through vines or cobwebs
 * Fix vexes sometimes surviving the death of their evoker
 * Evokers can now be hit by piercing and burning projectiles
+* Fix Withers with increased health ending their spawn sequence without full health
 
 ## v1.11.1
 * Translation files are now sent to client, which avoid missing translation
