@@ -11,11 +11,12 @@ import net.minecraft.item.equipment.trim.ArmorTrim;
 import net.minecraft.item.equipment.trim.ArmorTrimMaterial;
 import net.minecraft.item.equipment.trim.ArmorTrimPattern;
 import net.minecraft.registry.DynamicRegistryManager;
-import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.LocalDifficulty;
+
+import java.util.Optional;
 
 public class EntityUtils {
     public static void trimEntityArmor(ServerWorld world, MobEntity mob, EquipmentSlot slot,
@@ -24,12 +25,11 @@ public class EntityUtils {
         if (armorStack.isEmpty()) return;
 
         DynamicRegistryManager drm = world.getRegistryManager();
-        Registry<ArmorTrimMaterial> trimMaterialRegistry = drm.getOrThrow(RegistryKeys.TRIM_MATERIAL);
-        Registry<ArmorTrimPattern> trimPatternRegistry = drm.getOrThrow(RegistryKeys.TRIM_PATTERN);
+        Optional<RegistryEntry.Reference<ArmorTrimMaterial>> trimMaterial = drm.getOptionalEntry(material);
+        Optional<RegistryEntry.Reference<ArmorTrimPattern>> trimPattern = drm.getOptionalEntry(pattern);
+        if (trimMaterial.isEmpty() || trimPattern.isEmpty()) return;
 
-        armorStack.set(DataComponentTypes.TRIM, new ArmorTrim(
-                trimMaterialRegistry.getEntry(trimMaterialRegistry.get(material)),
-                trimPatternRegistry.getEntry(trimPatternRegistry.get(pattern))));
+        armorStack.set(DataComponentTypes.TRIM, new ArmorTrim(trimMaterial.get(), trimPattern.get()));
     }
 
     public static void trimEntityArmor(ServerWorld world, MobEntity mob, RegistryKey<ArmorTrimMaterial> material,
