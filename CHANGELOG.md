@@ -25,6 +25,7 @@
 * Fix named slimes disappearing when merging with another slime
 * Fix missing particles when slimes merge
 * Fix pillatroopers launching from any distance after their first air attack
+* Fix pillatroopers falling to their death when their air attack is interrupted mid-flight
 
 ## v1.11.1
 * Translation files are now sent to client, which avoid missing translation

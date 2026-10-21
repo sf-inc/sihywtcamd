@@ -58,6 +58,9 @@ public abstract class PillagerMixin extends IllagerEntity implements Pillatroope
         if (this.getTarget() != null && this.airAttackDelay > 0) {
             this.airAttackDelay--;
         }
+        if (!this.getEntityWorld().isClient()) {
+            CrossbowAirAttackGoal.removeAirEffectsOnGround(this);
+        }
     }
 
     @ModifyArg(method = "enchantMainHandItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/random/Random;nextInt(I)I"))

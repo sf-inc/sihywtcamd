@@ -54,7 +54,8 @@ public class CrossbowAirAttackGoal<T extends HostileEntity & CrossbowUser & Pill
     @Override
     public boolean canStart() {
         this.target = this.actor.getTarget();
-        return this.hasAliveTarget() && this.isEntityHoldingCrossbow() && this.actor.sihywtcamd$canUseAirAttack();
+        return this.hasAliveTarget() && this.isEntityHoldingCrossbow() && this.actor.sihywtcamd$canUseAirAttack()
+                && !this.actor.getSteppingBlockState().isAir();
     }
 
     private boolean isEntityHoldingCrossbow() {
@@ -71,6 +72,13 @@ public class CrossbowAirAttackGoal<T extends HostileEntity & CrossbowUser & Pill
     }
 
     @Override
+    public void start() {
+        super.start();
+        this.stage = Stage.MOVE;
+        this.chargedTicksLeft = 0;
+    }
+
+    @Override
     public void stop() {
         super.stop();
         this.actor.setAttacking(false);
@@ -80,11 +88,6 @@ public class CrossbowAirAttackGoal<T extends HostileEntity & CrossbowUser & Pill
             this.actor.clearActiveItem();
             this.actor.setCharging(false);
             this.actor.getActiveItem().set(DataComponentTypes.CHARGED_PROJECTILES, ChargedProjectilesComponent.DEFAULT);
-        }
-        this.actor.removeStatusEffect(StatusEffects.SLOW_FALLING);
-        EntityAttributeInstance gravity = this.actor.getAttributeInstance(EntityAttributes.GRAVITY);
-        if (gravity != null) {
-            gravity.removeModifier(REDUCED_GRAVITY_ID);
         }
     }
 
@@ -122,13 +125,6 @@ public class CrossbowAirAttackGoal<T extends HostileEntity & CrossbowUser & Pill
                             this.actor.getRandom().nextGaussian() * 0.5,
                             0.05
                     );
-                }
-                if (!isInAir) {
-                    this.actor.removeStatusEffect(StatusEffects.SLOW_FALLING);
-                    EntityAttributeInstance gravity = this.actor.getAttributeInstance(EntityAttributes.GRAVITY);
-                    if (gravity != null) {
-                        gravity.removeModifier(REDUCED_GRAVITY_ID);
-                    }
                 }
             }
 
@@ -204,6 +200,15 @@ public class CrossbowAirAttackGoal<T extends HostileEntity & CrossbowUser & Pill
         ItemStack itemStack = new ItemStack(Items.FIREWORK_ROCKET);
         itemStack.set(DataComponentTypes.FIREWORKS, new FireworksComponent(2, List.of()));
         return itemStack;
+    }
+
+    public static void removeAirEffectsOnGround(LivingEntity entity) {
+        EntityAttributeInstance gravity = entity.getAttributeInstance(EntityAttributes.GRAVITY);
+        if (gravity != null && gravity.hasModifier(REDUCED_GRAVITY_ID)
+                && !entity.hasVehicle() && !entity.getSteppingBlockState().isAir()) {
+            gravity.removeModifier(REDUCED_GRAVITY_ID);
+            entity.removeStatusEffect(StatusEffects.SLOW_FALLING);
+        }
     }
 
     enum Stage {
