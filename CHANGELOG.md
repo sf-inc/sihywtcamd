@@ -57,6 +57,7 @@
 * Fix vexes sometimes surviving the death of their evoker
 * Evokers can now be hit by piercing and burning projectiles
 * Fix Withers with increased health ending their spawn sequence without full health
+* Fix Wither skeletons summoned at half health spawning inside blocks or high above the ground
 
 ## v1.11.1
 * Translation files are now sent to client, which avoid missing translation

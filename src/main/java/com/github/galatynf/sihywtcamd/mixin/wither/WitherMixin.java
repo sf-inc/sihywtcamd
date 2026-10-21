@@ -13,6 +13,7 @@ import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.World;
@@ -74,9 +75,12 @@ public abstract class WitherMixin extends HostileEntity {
                 for (int i=0; i < nbWitherSkeletons; ++i) {
                     int x = MathHelper.floor(sihywtcamd_SKELETONS_SPAWN_DISTANCE * MathHelper.cos(i * deltaAngle));
                     int z = MathHelper.floor(sihywtcamd_SKELETONS_SPAWN_DISTANCE * MathHelper.sin(i * deltaAngle));
-                    Optional<BlockPos> blockPos = BlockPos.findClosest(this.getBlockPos().add(x, 0, z), 3, 3,
-                            pos -> this.getEntityWorld().getBlockState(pos).isAir());
-                    blockPos.ifPresent(pos -> EntityType.WITHER_SKELETON.spawn((ServerWorld) this.getEntityWorld(), pos, SpawnReason.EVENT));
+                    BlockPos center = this.getBlockPos().add(x, 0, z);
+                    Optional<BlockPos> blockPos = BlockPos.findClosest(center, 3, 6,
+                                    pos -> serverWorld.getBlockState(pos.down()).isSideSolidFullSquare(serverWorld, pos.down(), Direction.UP)
+                                            && this.hasRoomForSkeleton(serverWorld, pos))
+                            .or(() -> BlockPos.findClosest(center, 3, 3, pos -> this.hasRoomForSkeleton(serverWorld, pos)));
+                    blockPos.ifPresent(pos -> EntityType.WITHER_SKELETON.spawn(serverWorld, pos, SpawnReason.EVENT));
                 }
             }
 
@@ -89,5 +93,10 @@ public abstract class WitherMixin extends HostileEntity {
         if (ModConfig.get().bosses.wither.stormyWeather) {
             ((ServerWorld) this.getEntityWorld()).setWeather(0, 50, true, true);
         }
+    }
+
+    @Unique
+    private boolean hasRoomForSkeleton(ServerWorld world, BlockPos pos) {
+        return world.isSpaceEmpty(null, EntityType.WITHER_SKELETON.getSpawnBox(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5), true);
     }
 }
