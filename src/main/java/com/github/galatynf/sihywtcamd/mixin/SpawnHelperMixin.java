@@ -1,14 +1,17 @@
 package com.github.galatynf.sihywtcamd.mixin;
 
 import com.github.galatynf.sihywtcamd.config.ModConfig;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.collection.Pool;
+import net.minecraft.util.collection.Weighted;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.SpawnHelper;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.StructureAccessor;
@@ -19,32 +22,36 @@ import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Mixin(SpawnHelper.class)
 public abstract class SpawnHelperMixin {
 
     @Unique
-    private static final Pool<SpawnSettings.SpawnEntry> END_PHANTOMS_SPAWNS = Pool.of(new SpawnSettings.SpawnEntry(EntityType.PHANTOM, 2, 3));
+    private static final Weighted<SpawnSettings.SpawnEntry> END_PHANTOMS_SPAWN = new Weighted<>(new SpawnSettings.SpawnEntry(EntityType.PHANTOM, 2, 3), 10);
 
-    @Inject(method = "getSpawnEntries", at = @At("HEAD"), cancellable = true)
-    private static void addPhantomSpawnInEnd(ServerWorld world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator,
-                                               SpawnGroup spawnGroup, BlockPos pos, @Nullable RegistryEntry<Biome> biomeEntry,
-                                               CallbackInfoReturnable<Pool<SpawnSettings.SpawnEntry>> cir) {
+    @ModifyReturnValue(method = "getSpawnEntries", at = @At("RETURN"))
+    private static Pool<SpawnSettings.SpawnEntry> addPhantomSpawnInEnd(Pool<SpawnSettings.SpawnEntry> original, ServerWorld world,
+                                                                      StructureAccessor structureAccessor, ChunkGenerator chunkGenerator,
+                                                                      SpawnGroup spawnGroup, BlockPos pos, @Nullable RegistryEntry<Biome> biomeEntry) {
         if (ModConfig.get().undead.phantom.spawnInEndCities
-                && shouldUseEndCitySpawns(pos, spawnGroup, structureAccessor)) {
-            cir.setReturnValue(END_PHANTOMS_SPAWNS);
+                && shouldUseEndCitySpawns(world, pos, spawnGroup, structureAccessor)) {
+            List<Weighted<SpawnSettings.SpawnEntry>> entries = new ArrayList<>(original.getEntries());
+            entries.add(END_PHANTOMS_SPAWN);
+            return Pool.of(entries);
         }
+        return original;
     }
 
     @Unique
-    private static boolean shouldUseEndCitySpawns(BlockPos pos, SpawnGroup spawnGroup, StructureAccessor structureAccessor) {
+    private static boolean shouldUseEndCitySpawns(ServerWorld world, BlockPos pos, SpawnGroup spawnGroup, StructureAccessor structureAccessor) {
         if (spawnGroup != SpawnGroup.MONSTER) {
             return false;
         }
 
-        if (pos.getY() < 85) {
+        if (pos.getY() < 85 || world.getRegistryKey() != World.END) {
             return false;
         }
 
