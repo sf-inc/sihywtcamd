@@ -1,6 +1,7 @@
 package com.github.galatynf.sihywtcamd.mixin.zombie;
 
 import com.github.galatynf.sihywtcamd.config.ModConfig;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
@@ -17,6 +18,7 @@ import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
@@ -27,6 +29,11 @@ import java.util.List;
 
 @Mixin(DrownedEntity.class)
 public abstract class DrownedMixin extends ZombieEntity {
+    @Unique
+    private static final int TRIDENT_CHANCE = 15;
+    @Unique
+    private static final float VANILLA_TRIDENT_CHANCE = 0.1F * 10 / 16;
+
     public DrownedMixin(EntityType<? extends ZombieEntity> entityType, World world) {
         super(entityType, world);
     }
@@ -35,13 +42,21 @@ public abstract class DrownedMixin extends ZombieEntity {
     public void changeProbability(Random random, LocalDifficulty localDifficulty, CallbackInfo ci) {
         if (ModConfig.get().zombies.drowned.tridentSpawn) {
             int rand = random.nextInt(100);
-            if (rand < 15) {
+            if (rand < TRIDENT_CHANCE) {
                 this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.TRIDENT));
             } else if (rand < 18) {
                 this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.FISHING_ROD));
             }
             ci.cancel();
         }
+    }
+
+    @ModifyExpressionValue(method = "initialize", at = @At(value = "CONSTANT", args = "floatValue=0.5"))
+    private float keepVanillaNautilusJockeyChance(float original) {
+        if (ModConfig.get().zombies.drowned.tridentSpawn) {
+            return original * VANILLA_TRIDENT_CHANCE / (TRIDENT_CHANCE / 100.0F);
+        }
+        return original;
     }
 
     @Inject(method = "initialize", at = @At("TAIL"))

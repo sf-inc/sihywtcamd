@@ -66,6 +66,7 @@
 * Fix endermite teleport attacks knocking players off their mount without teleporting them
 * Fix magma cubes setting entities on fire through glass panes, bars or doors, or when their attack fails
 * The zombie horse speed bonus now only applies to zombie horse trap horses, not to vanilla zombie horsemen
+* Fix drowned spawning more often with a trident also making zombie nautilus jockeys more common than in vanilla
 
 ## v1.11.1
 * Translation files are now sent to client, which avoid missing translation
