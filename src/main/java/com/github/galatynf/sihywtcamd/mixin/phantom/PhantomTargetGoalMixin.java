@@ -36,7 +36,7 @@ public class PhantomTargetGoalMixin {
                 : original.call(instance, world, target, predicate);
     }
 
-    @WrapOperation(method = "canStart()Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/PhantomEntity;testTargetPredicate(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/entity/ai/TargetPredicate;)Z"))
+    @WrapOperation(method = "shouldContinue()Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/PhantomEntity;testTargetPredicate(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/entity/ai/TargetPredicate;)Z"))
     private boolean changePredicateContinue(PhantomEntity instance, ServerWorld world, LivingEntity target,
                                           TargetPredicate predicate, Operation<Boolean> original) {
         return ModConfig.get().undead.phantom.throughBlocks
