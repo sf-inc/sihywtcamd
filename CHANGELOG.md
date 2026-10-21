@@ -29,6 +29,7 @@
 * Fix pillatroopers chasing and aiming at a target they no longer have
 * Fix pillatroopers standing still forever when landing out of sight of their target
 * Fix ravager-riding pillagers jumping off their ravager to air attack
+* Fix the ender dragon re-summoning crystals outside of the End fight, and sometimes skipping a re-summon
 
 ## v1.11.1
 * Translation files are now sent to client, which avoid missing translation

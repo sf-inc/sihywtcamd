@@ -34,16 +34,17 @@ public class EnderDragonMixin extends MobEntity {
         int summonedCrystals = MyComponents.ENDER_DRAGON_COMPONENT.get(this).getNumberOfSummonedCrystals();
 
         if (!this.getEntityWorld().isClient()
+                && ((EnderDragonEntity) (Object) this).getFight() != null
                 && crystalsToSummon > 0
                 && summonedCrystals < crystalsToSummon) {
             ServerWorld world = (ServerWorld) this.getEntityWorld();
             float healthRatio = (float) (crystalsToSummon - summonedCrystals) / (crystalsToSummon + 1);
 
-            if (this.getHealth() < healthRatio * this.getMaxHealth()) {
-                MyComponents.ENDER_DRAGON_COMPONENT.get(this).incrementNumberOfSummonedCrystals();
-
+            if (this.age % 20 == 0 && this.getHealth() < healthRatio * this.getMaxHealth()) {
                 EndSpikeFeature.Spike spike = this.getSpikeWithoutCrystal(world);
                 if (spike == null) return;
+
+                MyComponents.ENDER_DRAGON_COMPONENT.get(this).incrementNumberOfSummonedCrystals();
 
                 for (BlockPos blockPos : BlockPos.iterate(new BlockPos(spike.getCenterX() - 10, spike.getHeight() - 10, spike.getCenterZ() - 10), new BlockPos(spike.getCenterX() + 10, spike.getHeight() + 10, spike.getCenterZ() + 10))) {
                     world.removeBlock(blockPos, false);
