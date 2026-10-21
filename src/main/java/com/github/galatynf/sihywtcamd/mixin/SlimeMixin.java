@@ -126,7 +126,7 @@ public abstract class SlimeMixin extends MobEntity {
         });
     }
 
-    @Inject(method = "damage", at = @At("HEAD"))
+    @Inject(method = "damage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/SlimeEntity;playSound(Lnet/minecraft/sound/SoundEvent;FF)V"))
     protected void onDamage(LivingEntity target, CallbackInfo ci) {
 
     }

@@ -64,6 +64,7 @@
 * Fix endermen near the landed ender dragon targeting creative players, or dropping their target when no player is nearby
 * Fix endermite teleport attacks sending players onto the Nether roof, and make them succeed more often
 * Fix endermite teleport attacks knocking players off their mount without teleporting them
+* Fix magma cubes setting entities on fire through glass panes, bars or doors, or when their attack fails
 
 ## v1.11.1
 * Translation files are now sent to client, which avoid missing translation
