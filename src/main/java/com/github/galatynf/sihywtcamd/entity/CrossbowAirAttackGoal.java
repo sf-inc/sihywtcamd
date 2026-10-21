@@ -141,20 +141,23 @@ public class CrossbowAirAttackGoal<T extends HostileEntity & CrossbowUser & Pill
                     this.stage = Stage.AIR_LAUNCH;
                 }
             } else if (this.stage == Stage.AIR_LAUNCH) {
-                this.actor.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, -1, 0, false, false));
-                double multiplier = -0.90;
-                EntityAttributeInstance gravity = this.actor.getAttributeInstance(EntityAttributes.GRAVITY);
-                if (gravity != null && !gravity.hasModifier(REDUCED_GRAVITY_ID)) {
-                    gravity.addPersistentModifier(new EntityAttributeModifier(
-                            REDUCED_GRAVITY_ID, multiplier, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE));
-                }
-
                 FireworkRocketEntity fireworkRocketEntity = new FireworkRocketEntity(this.actor.getEntityWorld(), this.actor,
                         this.actor.getX(), this.actor.getY(), this.actor.getZ(), getFirework());
                 this.actor.getEntityWorld().spawnEntity(fireworkRocketEntity);
-                this.actor.startRiding(fireworkRocketEntity);
+                if (this.actor.startRiding(fireworkRocketEntity)) {
+                    this.actor.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, -1, 0, false, false));
+                    double multiplier = -0.90;
+                    EntityAttributeInstance gravity = this.actor.getAttributeInstance(EntityAttributes.GRAVITY);
+                    if (gravity != null && !gravity.hasModifier(REDUCED_GRAVITY_ID)) {
+                        gravity.addPersistentModifier(new EntityAttributeModifier(
+                                REDUCED_GRAVITY_ID, multiplier, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+                    }
 
-                this.stage = Stage.AIR_FLY;
+                    this.stage = Stage.AIR_FLY;
+                } else {
+                    fireworkRocketEntity.discard();
+                    this.endAirAttack();
+                }
             } else if (this.stage == Stage.AIR_FLY) {
                 if (!this.actor.hasVehicle()) {
                     this.stage = Stage.UNCHARGED;
