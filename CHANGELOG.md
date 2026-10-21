@@ -49,6 +49,7 @@
 * Fix phantoms flying through the world border
 * Fix pillatroopers keeping their firework shots and skipping their cooldown when an air attack is interrupted
 * Fix pillatroopers that just left a vehicle sending off a riderless firework and shooting fireworks from the ground
+* Fix pillatrooper firework shots starting at their feet and sometimes exploding on themselves
 
 ## v1.11.1
 * Translation files are now sent to client, which avoid missing translation

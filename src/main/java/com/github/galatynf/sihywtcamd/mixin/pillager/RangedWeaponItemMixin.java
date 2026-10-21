@@ -47,6 +47,6 @@ public class RangedWeaponItemMixin {
                 DataComponentTypes.FIREWORKS,
                 new FireworksComponent(2, List.of(explosion)));
 
-        return new FireworkRocketEntity(world, firework, shooter, shooter.getX(), shooter.getY(), shooter.getZ(), true);
+        return new FireworkRocketEntity(world, firework, shooter, shooter.getX(), shooter.getEyeY() - 0.1F, shooter.getZ(), true);
     }
 }
