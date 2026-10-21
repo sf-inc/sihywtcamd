@@ -17,6 +17,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.World;
+import net.minecraft.world.rule.GameRules;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -90,8 +91,9 @@ public abstract class WitherMixin extends HostileEntity {
                 this.setCustomNameVisible(true);
             }
         }
-        if (ModConfig.get().bosses.wither.stormyWeather) {
-            ((ServerWorld) this.getEntityWorld()).setWeather(0, 50, true, true);
+        if (ModConfig.get().bosses.wither.stormyWeather
+                && serverWorld.getGameRules().getValue(GameRules.ADVANCE_WEATHER)) {
+            serverWorld.setWeather(0, 50, true, true);
         }
     }
 
