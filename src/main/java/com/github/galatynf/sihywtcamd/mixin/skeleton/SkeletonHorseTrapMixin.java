@@ -87,7 +87,9 @@ public abstract class SkeletonHorseTrapMixin {
         EntityUtils.enchantEquipment(skeletonEntity, EquipmentSlot.MAINHAND, localDifficulty);
         EntityUtils.enchantEquipment(skeletonEntity, EquipmentSlot.HEAD, localDifficulty);
 
-        vehicle.addVelocity(this.skeletonHorse.getRandom().nextTriangular(0.0, 1.1485), 0.0, this.skeletonHorse.getRandom().nextTriangular(0.0, 1.1485));
+        if (vehicle != this.skeletonHorse) {
+            vehicle.addVelocity(this.skeletonHorse.getRandom().nextTriangular(0.0, 1.1485), 0.0, this.skeletonHorse.getRandom().nextTriangular(0.0, 1.1485));
+        }
         skeletonEntity.startRiding(vehicle);
     }
 }
