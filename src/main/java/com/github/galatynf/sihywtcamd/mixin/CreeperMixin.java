@@ -6,7 +6,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.CreeperEntity;
-import net.minecraft.world.explosion.Explosion;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -20,8 +19,6 @@ public abstract class CreeperMixin extends EntityMixin {
     @Shadow private int explosionRadius;
 
     @Shadow public abstract boolean isCharged();
-
-    @Shadow public abstract void ignite();
 
     @Inject(method = "explode", at = @At("HEAD"))
     private void effectToEntities(CallbackInfo ci) {
@@ -48,18 +45,6 @@ public abstract class CreeperMixin extends EntityMixin {
                 livingEntity.addStatusEffect(new StatusEffectInstance(
                         StatusEffects.WEAKNESS, (int) (weaknessDuration * multiplier)), thisEntity);
             }
-        }
-    }
-
-    @Override
-    public boolean updateImmunityToExplosion(boolean original, Explosion explosion) {
-        if (ModConfig.get().overworld.creeper.chainExplosions
-                && (!(explosion.getCausingEntity() instanceof CreeperEntity creeper)
-                || !creeper.isCharged())) {
-            this.ignite();
-            return true;
-        } else {
-            return original;
         }
     }
 }

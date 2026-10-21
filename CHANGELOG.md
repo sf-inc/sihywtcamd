@@ -14,6 +14,7 @@
 * Fix undead not healing when hitting players, and make them heal by the damage actually dealt
 * Fix phantoms making tamed wolves and trader llamas target mobs through blocks
 * Fix phantoms dropping their target behind blocks when set to see through them
+* Fix creepers being ignited by wind charges and by explosions out of their blast radius
 
 ## v1.11.1
 * Translation files are now sent to client, which avoid missing translation

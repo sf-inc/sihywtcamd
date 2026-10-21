@@ -7,7 +7,6 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraft.world.explosion.Explosion;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -20,11 +19,6 @@ public abstract class EntityMixin {
 
     @ModifyReturnValue(method = "isAlwaysInvulnerableTo", at = @At("RETURN"))
     protected boolean updateInvulnerableTo(boolean original, DamageSource damageSource) {
-        return original;
-    }
-
-    @ModifyReturnValue(method = "isImmuneToExplosion", at = @At("RETURN"))
-    protected boolean updateImmunityToExplosion(boolean original, Explosion explosion) {
         return original;
     }
 
