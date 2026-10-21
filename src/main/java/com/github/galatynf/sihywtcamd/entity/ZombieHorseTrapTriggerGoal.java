@@ -37,6 +37,7 @@ public class ZombieHorseTrapTriggerGoal extends Goal {
         ((ZombieHorseIMixin) this.zombieHorse).sihywtcamd$setTrapped(false);
         this.zombieHorse.setTame(true);
         this.zombieHorse.setBreedingAge(0);
+        this.zombieHorse.setPersistent();
         LightningEntity lightningEntity = EntityType.LIGHTNING_BOLT.create(serverWorld, SpawnReason.TRIGGERED);
         if (lightningEntity == null) {
             return;
