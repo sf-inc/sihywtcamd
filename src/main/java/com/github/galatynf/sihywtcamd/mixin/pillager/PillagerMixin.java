@@ -14,6 +14,8 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.PillagerEntity;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 import net.minecraft.text.Text;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
@@ -62,6 +64,16 @@ public abstract class PillagerMixin extends MobEntityMixin implements Pillatroop
         if (!this.getEntityWorld().isClient()) {
             CrossbowAirAttackGoal.removeAirEffectsOnGround(this);
         }
+    }
+
+    @Override
+    protected void readModData(ReadView view, CallbackInfo ci) {
+        this.airAttackDelay = view.getInt("AirAttackDelay", 0);
+    }
+
+    @Override
+    protected void writeModData(WriteView view, CallbackInfo ci) {
+        view.putInt("AirAttackDelay", this.airAttackDelay);
     }
 
     @ModifyArg(method = "enchantMainHandItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/random/Random;nextInt(I)I"))

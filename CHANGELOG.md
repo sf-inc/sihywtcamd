@@ -51,6 +51,7 @@
 * Fix pillatroopers that just left a vehicle sending off a riderless firework and shooting fireworks from the ground
 * Fix pillatrooper firework shots starting at their feet and sometimes exploding on themselves
 * Fix illusioners in woodland mansions sometimes spawning inside a terrain block
+* Fix pillatroopers' air attack cooldown resetting when they are reloaded
 
 ## v1.11.1
 * Translation files are now sent to client, which avoid missing translation
