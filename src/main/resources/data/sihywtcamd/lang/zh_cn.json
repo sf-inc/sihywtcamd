@@ -36,7 +36,6 @@
   "text.autoconfig.sihywtcamd.option.zombies.general": "僵尸类怪物",
   "text.autoconfig.sihywtcamd.option.zombies.general.moreKnockbackResistance": "更高的击退抗性",
   "text.autoconfig.sihywtcamd.option.zombies.general.spawnMoreReinforcement": "更高的增援概率",
-  "text.autoconfig.sihywtcamd.option.zombies.general.sameTypeReinforcement": "增援同种僵尸类型",
   "text.autoconfig.sihywtcamd.option.zombies.general.attributeVariations": "属性变种",
   "text.autoconfig.sihywtcamd.option.zombies.general.babyTowerHeight": "幼年僵尸可以骑乘多只其他幼年僵尸",
   "text.autoconfig.sihywtcamd.option.zombies.husk": "尸壳",
