@@ -10,7 +10,7 @@
             "predicate": {
               "type": "minecraft:phantom",
               "location": {
-                "biomes": "minecraft:meadow"
+                "biomes": "minecraft:the_end"
               }
             }
           }

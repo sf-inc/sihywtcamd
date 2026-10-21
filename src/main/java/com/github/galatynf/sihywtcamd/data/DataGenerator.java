@@ -142,7 +142,7 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                     .criterion("kill_phantom_end", OnKilledCriterion.Conditions.createPlayerKilledEntity(
                             EntityPredicate.Builder.create()
                                     .type(EntityTypePredicate.create(entityTypeLookup, EntityType.PHANTOM))
-                                    .location(LocationPredicate.Builder.createBiome(biomeLookup.getOrThrow(BiomeKeys.MEADOW)))))
+                                    .location(LocationPredicate.Builder.createBiome(biomeLookup.getOrThrow(BiomeKeys.THE_END)))))
                     .build(consumer, Sihywtcamd.MOD_ID + "/kill_phantom_end");
 
             EntityPredicate.Builder babyZombiePredicate = EntityPredicate.Builder.create()

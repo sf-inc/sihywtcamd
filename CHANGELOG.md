@@ -31,6 +31,7 @@
 * Fix ravager-riding pillagers jumping off their ravager to air attack
 * Fix the ender dragon re-summoning crystals outside of the End fight, and sometimes skipping a re-summon
 * Fix phantoms spawning from end crystals that are not part of the ender dragon fight
+* Fix "Got the Wrong Bird" advancement requiring a meadow instead of the End
 
 ## v1.11.1
 * Translation files are now sent to client, which avoid missing translation
