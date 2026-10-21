@@ -18,6 +18,7 @@
 * Fix pillagers riding patrol ravagers having no crossbow and no captain banner
 * Fix zombie horse traps despawning before they can be triggered
 * Fix zombie horse traps spawning on oxidized or waxed lightning rods
+* Fix Tank zombies spawning without their bonus health and door breaking ability
 
 ## v1.11.1
 * Translation files are now sent to client, which avoid missing translation

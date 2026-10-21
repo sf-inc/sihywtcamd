@@ -36,7 +36,6 @@ public abstract class ZombieLivingMixin extends LivingEntityMixin {
     @Unique
     private static final Identifier UNSTOPPABLE_BONUS_ID = id("unstoppable_zombie_bonus");
 
-    @Shadow public abstract boolean canBreakDoors();
     @Shadow public abstract boolean isBaby();
 
     @Shadow public abstract void setCanBreakDoors(boolean canBreakDoors);
@@ -87,10 +86,11 @@ public abstract class ZombieLivingMixin extends LivingEntityMixin {
                         new EntityAttributeModifier(CALLER_BONUS_ID, value, EntityAttributeModifier.Operation.ADD_VALUE));
             } else if (random < 0.3f) {
                 name = "Tank";
-                this.setCanBreakDoors(this.canBreakDoors());
+                this.setCanBreakDoors(true);
                 double value = 0.5 + 1.0 * chanceMultiplier + this.random.nextDouble();
                 this.getAttributeInstance(EntityAttributes.MAX_HEALTH).addPersistentModifier(
                         new EntityAttributeModifier(TANK_BONUS_ID, value, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+                this.setHealth(this.getMaxHealth());
             } else if (random < 0.5f) {
                 name = "Runner";
                 double value = 0.2 + 0.15 * chanceMultiplier + 0.15 * this.random.nextDouble();

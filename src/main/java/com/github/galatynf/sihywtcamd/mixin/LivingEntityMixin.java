@@ -37,6 +37,8 @@ public abstract class LivingEntityMixin extends Entity {
     @Shadow public abstract boolean isBaby();
     @Shadow @Nullable public abstract LivingEntity getAttacker();
     @Shadow @Nullable public abstract EntityAttributeInstance getAttributeInstance(RegistryEntry<EntityAttribute> attribute);
+    @Shadow public abstract float getMaxHealth();
+    @Shadow public abstract void setHealth(float health);
 
     @Inject(method = "computeFallDamage", at = @At("HEAD"), cancellable = true)
     private void cancelArthropodFallDamage(double fallDistance, float damagePerDistance, CallbackInfoReturnable<Integer> cir) {
