@@ -37,11 +37,13 @@ public abstract class EndermiteMixin extends MobEntityMixin {
         if (ModConfig.get().end.endermite.teleportAttack
                 && entity instanceof LivingEntity target) {
             BlockPos oldPos = target.getBlockPos();
+            Entity vehicle = target.getVehicle();
+            boolean teleported = false;
+            if (vehicle != null) {
+                target.stopRiding();
+            }
             int maxY = world.getBottomY() + world.getLogicalHeight() - 1;
             for (BlockPos pos : BlockPos.iterateRandomly(this.random, 16, oldPos, 8)) {
-                if (target.hasVehicle()) {
-                    target.stopRiding();
-                }
                 int y = MathHelper.clamp(pos.getY(), world.getBottomY(), maxY);
                 if (!target.teleport(pos.getX() + 0.5, y, pos.getZ() + 0.5, true)) {
                     continue;
@@ -52,7 +54,11 @@ public abstract class EndermiteMixin extends MobEntityMixin {
                 this.getEntityWorld().playSound(null, oldPos.getX(), oldPos.getY(), oldPos.getZ(), soundEvent, SoundCategory.PLAYERS, 1.0f, 1.0f);
                 target.playSound(soundEvent, 1.0f, 1.0f);
                 target.onLanding();
+                teleported = true;
                 break;
+            }
+            if (!teleported && vehicle != null && vehicle.isAlive()) {
+                target.startRiding(vehicle, true, false);
             }
         }
     }

@@ -63,6 +63,7 @@
 * Fix the "Cool It Down" and "Warm It Up" advancements only being granted to the player the mob was attacking, they are now granted to nearby players who see the conversion
 * Fix endermen near the landed ender dragon targeting creative players, or dropping their target when no player is nearby
 * Fix endermite teleport attacks sending players onto the Nether roof, and make them succeed more often
+* Fix endermite teleport attacks knocking players off their mount without teleporting them
 
 ## v1.11.1
 * Translation files are now sent to client, which avoid missing translation
