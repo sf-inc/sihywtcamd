@@ -35,7 +35,6 @@ import static com.github.galatynf.sihywtcamd.Sihywtcamd.id;
  * */
 public class CrossbowAirAttackGoal<T extends HostileEntity & CrossbowUser & PillatrooperIMixin> extends Goal {
     private final T actor;
-    private LivingEntity target;
     private Stage stage = Stage.MOVE;
     private final double speed;
     private final float squaredRange;
@@ -53,7 +52,6 @@ public class CrossbowAirAttackGoal<T extends HostileEntity & CrossbowUser & Pill
 
     @Override
     public boolean canStart() {
-        this.target = this.actor.getTarget();
         return this.hasAliveTarget() && this.isEntityHoldingCrossbow() && this.actor.sihywtcamd$canUseAirAttack()
                 && !this.actor.getSteppingBlockState().isAir();
     }
@@ -68,7 +66,7 @@ public class CrossbowAirAttackGoal<T extends HostileEntity & CrossbowUser & Pill
     }
 
     private boolean hasAliveTarget() {
-        return this.target != null && this.target.isAlive();
+        return this.actor.getTarget() != null && this.actor.getTarget().isAlive();
     }
 
     @Override
@@ -98,8 +96,9 @@ public class CrossbowAirAttackGoal<T extends HostileEntity & CrossbowUser & Pill
 
     @Override
     public void tick() {
-        if (this.target != null) {
-            boolean bl = this.actor.getVisibilityCache().canSee(this.target);
+        LivingEntity livingEntity = this.actor.getTarget();
+        if (livingEntity != null) {
+            boolean bl = this.actor.getVisibilityCache().canSee(livingEntity);
             boolean bl2 = this.seeingTargetTicker > 0;
             if (bl != bl2) {
                 this.seeingTargetTicker = 0;
@@ -128,12 +127,12 @@ public class CrossbowAirAttackGoal<T extends HostileEntity & CrossbowUser & Pill
                 }
             }
 
-            this.actor.getLookControl().lookAt(this.target, 30.0F, 30.0F);
+            this.actor.getLookControl().lookAt(livingEntity, 30.0F, 30.0F);
             if (this.stage == Stage.MOVE) {
-                double d = this.actor.squaredDistanceTo(this.target);
+                double d = this.actor.squaredDistanceTo(livingEntity);
                 boolean bl3 = (d > (double)this.squaredRange || this.seeingTargetTicker < 5) && this.chargedTicksLeft == 0;
                 if (bl3) {
-                    this.actor.getNavigation().startMovingTo(this.target, this.speed);
+                    this.actor.getNavigation().startMovingTo(livingEntity, this.speed);
                 } else {
                     this.actor.getNavigation().stop();
                     this.stage = Stage.AIR_LAUNCH;
@@ -182,7 +181,7 @@ public class CrossbowAirAttackGoal<T extends HostileEntity & CrossbowUser & Pill
                     this.stage = Stage.READY_TO_ATTACK;
                 }
             } else if (this.stage == Stage.READY_TO_ATTACK && bl) {
-                this.actor.shootAt(this.target, 1.0F);
+                this.actor.shootAt(livingEntity,1.0F);
                 if (isInAir) {
                     this.stage = Stage.UNCHARGED;
                 } else {
