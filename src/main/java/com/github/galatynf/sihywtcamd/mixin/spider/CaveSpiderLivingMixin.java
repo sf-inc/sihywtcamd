@@ -32,7 +32,7 @@ public abstract class CaveSpiderLivingMixin extends LivingEntityMixin {
             if (skeletonEntity != null) {
                 skeletonEntity.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), this.getYaw(), 0.0F);
                 skeletonEntity.initialize(world, difficulty, spawnReason, null);
-                skeletonEntity.startRiding(this);
+                skeletonEntity.startRiding(this, false, false);
             }
         }
     }
