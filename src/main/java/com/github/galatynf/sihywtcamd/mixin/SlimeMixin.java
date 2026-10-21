@@ -68,9 +68,9 @@ public abstract class SlimeMixin extends MobEntity {
             if (magmaCube != null) {
                 magmaCube.setSize(size, true);
                 this.playSound(SoundEvents.ENTITY_GENERIC_EXTINGUISH_FIRE, 0.7F, 1.6F + (this.random.nextFloat() - this.random.nextFloat()) * 0.4F);
-                if (this.getTarget() instanceof ServerPlayerEntity target) {
-                    AdvancementRegistry.SLIME_TO_MAGMA_CONVERSION.trigger(target);
-                }
+                this.getEntityWorld().getEntitiesByClass(ServerPlayerEntity.class, magmaCube.getBoundingBox().expand(16.0),
+                                player -> !player.isSpectator() && player.canSee(magmaCube))
+                        .forEach(AdvancementRegistry.SLIME_TO_MAGMA_CONVERSION::trigger);
             }
         }
     }

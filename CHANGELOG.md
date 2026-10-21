@@ -60,6 +60,7 @@
 * Fix Wither skeletons summoned at half health spawning inside blocks or high above the ground
 * Fix piglins spawned riding a hoglin never hunting hoglins again after losing their mount, and riding leashed hoglins or hoglins of a different age
 * Fix the Wither's storm never ending when the weather cycle is disabled (the storm is no longer forced in that case)
+* Fix the "Cool It Down" and "Warm It Up" advancements only being granted to the player the mob was attacking, they are now granted to nearby players who see the conversion
 
 ## v1.11.1
 * Translation files are now sent to client, which avoid missing translation

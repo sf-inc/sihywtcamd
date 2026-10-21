@@ -45,9 +45,9 @@ public abstract class MagmaCubeMixin extends SlimeMixin {
             if (slime != null) {
                 slime.setSize(size, true);
                 this.playSound(SoundEvents.ENTITY_GENERIC_EXTINGUISH_FIRE, 0.7F, 1.6F + (this.random.nextFloat() - this.random.nextFloat()) * 0.4F);
-                if (this.getTarget() instanceof ServerPlayerEntity target) {
-                    AdvancementRegistry.MAGMA_TO_SLIME_CONVERSION.trigger(target);
-                }
+                this.getEntityWorld().getEntitiesByClass(ServerPlayerEntity.class, slime.getBoundingBox().expand(16.0),
+                                player -> !player.isSpectator() && player.canSee(slime))
+                        .forEach(AdvancementRegistry.MAGMA_TO_SLIME_CONVERSION::trigger);
             }
         }
     }
