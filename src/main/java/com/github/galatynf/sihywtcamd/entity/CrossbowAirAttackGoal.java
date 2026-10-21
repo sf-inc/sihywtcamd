@@ -178,11 +178,11 @@ public class CrossbowAirAttackGoal<T extends HostileEntity & CrossbowUser & Pill
                 if (i >= CrossbowItem.getPullTime(itemStack, this.actor)) {
                     this.actor.stopUsingItem();
                     this.stage = Stage.CHARGED;
-                    this.chargedTicksLeft = this.actor.getRandom().nextInt(20);
+                    this.chargedTicksLeft = 1 + this.actor.getRandom().nextInt(20);
                     this.actor.setCharging(false);
                 }
             } else if (this.stage == Stage.CHARGED) {
-                if (this.chargedTicksLeft-- <= 0) {
+                if (--this.chargedTicksLeft == 0) {
                     this.stage = Stage.READY_TO_ATTACK;
                 }
             } else if (this.stage == Stage.READY_TO_ATTACK && bl) {

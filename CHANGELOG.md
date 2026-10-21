@@ -24,6 +24,7 @@
 * Fix dead slimes and magma cubes coming back to life when converted in lava or water
 * Fix named slimes disappearing when merging with another slime
 * Fix missing particles when slimes merge
+* Fix pillatroopers launching from any distance after their first air attack
 
 ## v1.11.1
 * Translation files are now sent to client, which avoid missing translation
