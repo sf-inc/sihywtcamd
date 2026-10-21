@@ -28,6 +28,7 @@
 * Fix pillatroopers falling to their death when their air attack is interrupted mid-flight
 * Fix pillatroopers chasing and aiming at a target they no longer have
 * Fix pillatroopers standing still forever when landing out of sight of their target
+* Fix ravager-riding pillagers jumping off their ravager to air attack
 
 ## v1.11.1
 * Translation files are now sent to client, which avoid missing translation

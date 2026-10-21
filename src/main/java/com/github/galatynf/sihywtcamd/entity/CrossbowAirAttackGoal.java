@@ -53,7 +53,7 @@ public class CrossbowAirAttackGoal<T extends HostileEntity & CrossbowUser & Pill
     @Override
     public boolean canStart() {
         return this.hasAliveTarget() && this.isEntityHoldingCrossbow() && this.actor.sihywtcamd$canUseAirAttack()
-                && !this.actor.getSteppingBlockState().isAir();
+                && !this.actor.hasVehicle() && !this.actor.getSteppingBlockState().isAir();
     }
 
     private boolean isEntityHoldingCrossbow() {
