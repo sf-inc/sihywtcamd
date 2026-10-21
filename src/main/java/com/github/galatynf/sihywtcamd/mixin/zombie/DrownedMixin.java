@@ -6,6 +6,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.mob.DrownedEntity;
+import net.minecraft.entity.mob.ElderGuardianEntity;
 import net.minecraft.entity.mob.GuardianEntity;
 import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.item.ItemStack;
@@ -48,7 +49,8 @@ public abstract class DrownedMixin extends ZombieEntity {
                                           EntityData entityData, CallbackInfoReturnable<EntityData> cir) {
         if (ModConfig.get().zombies.drowned.guardianJockeySpawn && this.isBaby() && !this.hasVehicle()
                 && world.getRandom().nextFloat() < 0.1F + 0.1F * difficulty.getClampedLocalDifficulty()) {
-            List<GuardianEntity> list = world.getEntitiesByClass(GuardianEntity.class, this.getBoundingBox().expand(5.0D, 3.0D, 5.0D), EntityPredicates.NOT_MOUNTED);
+            List<GuardianEntity> list = world.getEntitiesByClass(GuardianEntity.class, this.getBoundingBox().expand(5.0D, 3.0D, 5.0D),
+                    guardian -> EntityPredicates.NOT_MOUNTED.test(guardian) && !(guardian instanceof ElderGuardianEntity));
             if (!list.isEmpty()) {
                 GuardianEntity guardianEntity = list.getFirst();
                 this.startRiding(guardianEntity);
