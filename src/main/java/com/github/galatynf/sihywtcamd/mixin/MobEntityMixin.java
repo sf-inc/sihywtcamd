@@ -46,11 +46,6 @@ public abstract class MobEntityMixin extends LivingEntity {
 
     }
 
-    @Inject(method = "setBaby", at = @At("TAIL"))
-    protected void onSetBaby(boolean baby, CallbackInfo ci) {
-
-    }
-
     @Inject(method = "readCustomData", at = @At("TAIL"))
     protected void readModData(ReadView view, CallbackInfo ci) {
 

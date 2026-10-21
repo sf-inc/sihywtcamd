@@ -1,7 +1,6 @@
 package com.github.galatynf.sihywtcamd.mixin;
 
 import com.github.galatynf.sihywtcamd.config.ModConfig;
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.entity.Entity;
@@ -86,15 +85,5 @@ public abstract class LivingEntityMixin extends Entity {
     @Inject(method = "pushAwayFrom", at = @At("TAIL"))
     protected void onPushAwayFrom(Entity entity, CallbackInfo ci) {
 
-    }
-
-    @ModifyReturnValue(method = "isBaby", at = @At("RETURN"))
-    protected boolean updateBaby(boolean original) {
-        return original;
-    }
-
-    @ModifyReturnValue(method = "getScaleFactor", at = @At("RETURN"))
-    protected float updateScaleFactor(float original) {
-        return original;
     }
 }
