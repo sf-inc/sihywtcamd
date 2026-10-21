@@ -54,7 +54,8 @@ public abstract class ZombifiedPiglinMixin extends LivingEntityMixin {
         MobEntity thisMob = (MobEntity) (Object) this;
         if (MyComponents.ZOMBIFIED_PIGLIN_COMPONENT.get(this).isBrute()
                 && entity instanceof ServerPlayerEntity player
-                && thisMob.getTarget() == null) {
+                && thisMob.getTarget() == null
+                && thisMob.canTarget(player)) {
             this.setTarget(player);
             AdvancementRegistry.ZOMBIFIED_PIGLIN_BRUTE_COLLISION.trigger(player);
         }

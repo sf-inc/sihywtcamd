@@ -43,6 +43,7 @@
 * Fix patrol ravagers being able to spawn inside blocks next to cliffs or tree trunks
 * Toggling the "Mobs don't flee if target is half health" option now applies to already loaded mobs
 * Fix zombie horse trap riders sometimes spawning a chicken jockey and leaving the chicken behind
+* Fix zombified piglin brutes targeting creative players who bump into them, and granting them the collision advancement
 
 ## v1.11.1
 * Translation files are now sent to client, which avoid missing translation
