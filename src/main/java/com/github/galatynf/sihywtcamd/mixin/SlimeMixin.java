@@ -87,6 +87,8 @@ public abstract class SlimeMixin extends MobEntity {
                 && MyComponents.SLIME_COMPONENT.get(otherSlime).canMerge()
                 && this.isAlive()
                 && otherSlime.isAlive()
+                && !otherSlime.hasCustomName()
+                && !otherSlime.isPersistent()
                 && this.getSize() < 4
                 && this.getSize() == otherSlime.getSize()) {
             MyComponents.SLIME_COMPONENT.get(this).setMerged();
