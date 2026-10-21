@@ -6,6 +6,8 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.CreeperEntity;
+import net.minecraft.predicate.entity.EntityPredicates;
+import net.minecraft.world.explosion.ExplosionImpl;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -32,10 +34,13 @@ public abstract class CreeperMixin extends EntityMixin {
         final int explosionRadius = this.explosionRadius * (this.isCharged() ? 3 : 2);
         List<Entity> entityList = this.getEntityWorld().getOtherEntities(thisEntity,
                 this.getBoundingBox().expand(explosionRadius),
-                entity -> entity instanceof LivingEntity && this.distanceTo(entity) < explosionRadius);
+                entity -> entity instanceof LivingEntity && EntityPredicates.EXCEPT_CREATIVE_OR_SPECTATOR.test(entity)
+                        && this.distanceTo(entity) < explosionRadius);
 
         for (Entity entity : entityList) {
-            final double multiplier = Math.sqrt(1.0 - (this.distanceTo(entity) / explosionRadius));
+            final double multiplier = Math.sqrt(1.0 - (this.distanceTo(entity) / explosionRadius))
+                    * ExplosionImpl.calculateReceivedDamage(thisEntity.getEntityPos(), entity);
+            if (multiplier <= 0.0) continue;
             LivingEntity livingEntity = (LivingEntity) entity;
             if (fatigueDuration > 0) {
                 livingEntity.addStatusEffect(new StatusEffectInstance(
