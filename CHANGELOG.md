@@ -11,6 +11,7 @@
 * Debug info is now a hidden config option (`enableDebugInfo`), disabled by default
 * Fix the Mod Menu config screen integration
 * Skeleton horse traps now spawn a parched instead of a wither skeleton
+* Fix undead not healing when hitting players, and make them heal by the damage actually dealt
 
 ## v1.11.1
 * Translation files are now sent to client, which avoid missing translation

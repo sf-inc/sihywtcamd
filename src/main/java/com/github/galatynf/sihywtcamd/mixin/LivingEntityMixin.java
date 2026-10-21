@@ -2,6 +2,8 @@ package com.github.galatynf.sihywtcamd.mixin;
 
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -33,7 +35,6 @@ public abstract class LivingEntityMixin extends Entity {
     @Shadow public float bodyYaw;
 
     @Shadow public abstract boolean isBaby();
-    @Shadow public abstract boolean isInvulnerableTo(ServerWorld world, DamageSource source);
     @Shadow @Nullable public abstract LivingEntity getAttacker();
     @Shadow @Nullable public abstract EntityAttributeInstance getAttributeInstance(RegistryEntry<EntityAttribute> attribute);
 
@@ -44,19 +45,19 @@ public abstract class LivingEntityMixin extends Entity {
         }
     }
 
-    @Inject(method = "applyDamage", at = @At("HEAD"))
-    private void healUndeadAttacker(ServerWorld world, DamageSource source, float amount, CallbackInfo ci) {
-        if (this.isInvulnerableTo(world, source)) return;
+    @WrapOperation(method = "damage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;applyDamage(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/entity/damage/DamageSource;F)V"))
+    private void healUndeadAttacker(LivingEntity instance, ServerWorld world, DamageSource source, float amount,
+                                    Operation<Void> original) {
+        float healthBefore = instance.getHealth() + instance.getAbsorptionAmount();
+        original.call(instance, world, source, amount);
 
-        if (ModConfig.get().undead.general.attackHeal && amount > 0) {
-            LivingEntity attacker = source.getAttacker() instanceof LivingEntity
-                    ? (LivingEntity) source.getAttacker()
-                    : null;
-
-            if (attacker != null
-                    && attacker.getType().isIn(EntityTypeTags.UNDEAD)
-                    && !(attacker instanceof WitherEntity)) {
-                attacker.heal(amount);
+        if (ModConfig.get().undead.general.attackHeal
+                && source.getAttacker() instanceof LivingEntity attacker
+                && attacker.getType().isIn(EntityTypeTags.UNDEAD)
+                && !(attacker instanceof WitherEntity)) {
+            float healthLost = healthBefore - instance.getHealth() - instance.getAbsorptionAmount();
+            if (healthLost > 0) {
+                attacker.heal(healthLost);
             }
         }
     }
