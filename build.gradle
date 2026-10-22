@@ -42,6 +42,10 @@ processResources {
     filesMatching("fabric.mod.json") {
         expand "version": project.version
     }
+
+    from("src/main/resources/data/sihywtcamd/lang") {
+        into("assets/sihywtcamd/lang")
+    }
 }
 
 loom {
@@ -80,10 +84,6 @@ java {
 jar {
     from("LICENSE") {
         rename { "${it}_${project.archivesBaseName}"}
-    }
-
-    from("src/main/resources/data/sihywtcamd/lang") {
-        into("assets/sihywtcamd/lang")
     }
 }
 
