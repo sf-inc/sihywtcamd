@@ -12,13 +12,24 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.function.Predicate;
 
 @Mixin(FleeEntityGoal.class)
 public class FleeGoalMixin<T extends LivingEntity> {
+    @Shadow @Final protected PathAwareEntity mob;
     @Mutable
     @Shadow @Final private TargetPredicate withinRangePredicate;
+
+    // The goal keeps the navigation the mob had when created, not the vehicle one used while riding:
+    // the vehicle never reaches the end of the path, and spins there forever
+    @Inject(method = "canStart", at = @At("HEAD"), cancellable = true)
+    private void cancelFleeWhileRiding(CallbackInfoReturnable<Boolean> cir) {
+        if (this.mob.hasVehicle()) {
+            cir.setReturnValue(false);
+        }
+    }
 
     @Inject(method = "<init>(Lnet/minecraft/entity/mob/PathAwareEntity;Ljava/lang/Class;Ljava/util/function/Predicate;FDDLjava/util/function/Predicate;)V", at = @At("TAIL"))
     private void changeFleePredicate(PathAwareEntity mob, Class<T> fleeFromType, Predicate<LivingEntity> extraInclusionSelector, float distance,
