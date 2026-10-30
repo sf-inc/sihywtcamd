@@ -6,6 +6,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.monster.PatrollingMonster;
 import net.minecraft.world.level.levelgen.PatrolSpawner;
 import org.spongepowered.asm.mixin.Mixin;
@@ -19,7 +20,7 @@ public class PatrolSpawnerMixin {
     private void spawnVindicatorOrRavager(ServerLevel world, BlockPos pos, RandomSource random, boolean captain, CallbackInfoReturnable<Boolean> cir) {
         if (ModConfig.get().illagers.vindicator.spawnInPatrols
                 && random.nextFloat() < 0.1F + 0.1F * world.getCurrentDifficultyAt(pos).getSpecialMultiplier()) {
-            PatrollingMonster patrolEntity = EntityType.VINDICATOR.create(world, EntitySpawnReason.PATROL);
+            PatrollingMonster patrolEntity = EntityTypes.VINDICATOR.create(world, EntitySpawnReason.PATROL);
             if (patrolEntity != null) {
                 if (captain) {
                     patrolEntity.setPatrolLeader(true);
@@ -38,10 +39,10 @@ public class PatrolSpawnerMixin {
 
         if (ModConfig.get().illagers.ravager.spawnInPatrols
                 && random.nextFloat() < 0.05F + 0.05F * world.getCurrentDifficultyAt(pos).getSpecialMultiplier()
-                && world.noCollision(EntityType.RAVAGER.getSpawnAABB(pos.getX(), pos.getY(), pos.getZ()))) {
-            PatrollingMonster patrolEntity1 = EntityType.RAVAGER.create(world, EntitySpawnReason.PATROL);
+                && world.noCollision(EntityTypes.RAVAGER.getSpawnAABB(pos.getX(), pos.getY(), pos.getZ()))) {
+            PatrollingMonster patrolEntity1 = EntityTypes.RAVAGER.create(world, EntitySpawnReason.PATROL);
             PatrollingMonster patrolEntity2 = captain || random.nextBoolean()
-                    ? EntityType.PILLAGER.create(world, EntitySpawnReason.PATROL) : null;
+                    ? EntityTypes.PILLAGER.create(world, EntitySpawnReason.PATROL) : null;
 
             if (patrolEntity1 != null) {
                 patrolEntity1.setPos(pos.getX(), pos.getY(), pos.getZ());

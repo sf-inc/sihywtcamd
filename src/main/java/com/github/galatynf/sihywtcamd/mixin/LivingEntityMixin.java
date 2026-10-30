@@ -11,6 +11,7 @@ import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -74,7 +75,7 @@ public abstract class LivingEntityMixin extends Entity {
     @Inject(method = "aiStep", at = @At("HEAD"))
     private void updateRiddenHorseSpeed(CallbackInfo ci) {
         if (this.level().isClientSide()
-                || !(this.getType().equals(EntityType.SKELETON_HORSE) || this.getType().equals(EntityType.ZOMBIE_HORSE))) {
+                || !(this.getType().equals(EntityTypes.SKELETON_HORSE) || this.getType().equals(EntityTypes.ZOMBIE_HORSE))) {
             return;
         }
         AttributeInstance movementSpeed = this.getAttribute(Attributes.MOVEMENT_SPEED);
@@ -96,10 +97,10 @@ public abstract class LivingEntityMixin extends Entity {
     private double getRiddenHorseSpeedMultiplier() {
         if (this.hasControllingPassenger() && this.getFirstPassenger() instanceof Mob) {
             if (ModConfig.get().skeletons.skeletonHorse.increasedSpeed
-                    && this.getType().equals(EntityType.SKELETON_HORSE)) {
+                    && this.getType().equals(EntityTypes.SKELETON_HORSE)) {
                 return 2.0;
             } else if (ModConfig.get().zombies.zombieHorse.increasedSpeed
-                    && this.getType().equals(EntityType.ZOMBIE_HORSE)
+                    && this.getType().equals(EntityTypes.ZOMBIE_HORSE)
                     && ((ZombieHorseIMixin) this).sihywtcamd$isTrapHorse()) {
                 return 2.5;
             }

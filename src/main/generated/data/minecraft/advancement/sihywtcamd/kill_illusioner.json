@@ -8,7 +8,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "minecraft:illusioner"
+              "minecraft:entity_type": "minecraft:illusioner"
             }
           }
         ],
@@ -17,7 +17,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "effects": {
+              "minecraft:effects": {
                 "minecraft:invisibility": {}
               }
             }

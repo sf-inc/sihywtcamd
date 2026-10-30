@@ -6,6 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
@@ -27,7 +28,7 @@ public class HostileMixin extends PathfinderMob {
                                               RandomSource random) {
         return original &&
                 (!spawnReason.equals(EntitySpawnReason.NATURAL)
-                        || !type.equals(EntityType.CAVE_SPIDER)
+                        || !type.equals(EntityTypes.CAVE_SPIDER)
                         || canCaveSpiderSpawn(world, pos, random));
     }
 

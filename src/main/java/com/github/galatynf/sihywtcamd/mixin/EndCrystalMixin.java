@@ -6,6 +6,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.boss.enderdragon.EndCrystal;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
@@ -31,7 +32,7 @@ public abstract class EndCrystalMixin extends Entity {
         if (ModConfig.get().bosses.enderDragon.crystalDestructionSpawnsPhantom
                 && this.isPillarCrystalDuringFight(world)
                 && this.random.nextFloat() < 0.66F) {
-            Phantom phantom = EntityType.PHANTOM.spawn(world, this.blockPosition(), EntitySpawnReason.TRIGGERED);
+            Phantom phantom = EntityTypes.PHANTOM.spawn(world, this.blockPosition(), EntitySpawnReason.TRIGGERED);
             if (phantom != null && source.getEntity() instanceof LivingEntity attacker) {
                 phantom.setTarget(attacker);
             }

@@ -4,7 +4,7 @@ import com.github.galatynf.sihywtcamd.cardinal.api.*;
 import com.github.galatynf.sihywtcamd.cardinal.impl.*;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.boss.wither.WitherBoss;
-import net.minecraft.world.entity.monster.Slime;
+import net.minecraft.world.entity.monster.cubemob.Slime;
 import net.minecraft.world.entity.monster.illager.Pillager;
 import net.minecraft.world.entity.monster.skeleton.Skeleton;
 import net.minecraft.world.entity.monster.zombie.ZombifiedPiglin;

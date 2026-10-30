@@ -15,7 +15,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.random.Weighted;
 import net.minecraft.util.random.WeightedList;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.NaturalSpawner;
@@ -30,7 +30,7 @@ import net.minecraft.world.level.levelgen.structure.Structure;
 public abstract class SpawnHelperMixin {
 
     @Unique
-    private static final Weighted<MobSpawnSettings.SpawnerData> END_PHANTOMS_SPAWN = new Weighted<>(new MobSpawnSettings.SpawnerData(EntityType.PHANTOM, 2, 3), 10);
+    private static final Weighted<MobSpawnSettings.SpawnerData> END_PHANTOMS_SPAWN = new Weighted<>(new MobSpawnSettings.SpawnerData(EntityTypes.PHANTOM, 2, 3), 10);
 
     @ModifyReturnValue(method = "mobsAt", at = @At("RETURN"))
     private static WeightedList<MobSpawnSettings.SpawnerData> addPhantomSpawnInEnd(WeightedList<MobSpawnSettings.SpawnerData> original, ServerLevel world,

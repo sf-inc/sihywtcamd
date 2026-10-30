@@ -10,20 +10,20 @@ import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.AdvancementType;
-import net.minecraft.advancements.criterion.DamagePredicate;
-import net.minecraft.advancements.criterion.DamageSourcePredicate;
-import net.minecraft.advancements.criterion.EntityFlagsPredicate;
-import net.minecraft.advancements.criterion.EntityHurtPlayerTrigger;
-import net.minecraft.advancements.criterion.EntityPredicate;
-import net.minecraft.advancements.criterion.EntityTypePredicate;
-import net.minecraft.advancements.criterion.InventoryChangeTrigger;
-import net.minecraft.advancements.criterion.ItemPredicate;
-import net.minecraft.advancements.criterion.KilledTrigger;
-import net.minecraft.advancements.criterion.LocationPredicate;
-import net.minecraft.advancements.criterion.MobEffectsPredicate;
-import net.minecraft.advancements.criterion.PlayerPredicate;
-import net.minecraft.advancements.criterion.StartRidingTrigger;
-import net.minecraft.advancements.criterion.UsingItemTrigger;
+import net.minecraft.advancements.predicates.DamagePredicate;
+import net.minecraft.advancements.predicates.DamageSourcePredicate;
+import net.minecraft.advancements.predicates.entity.EntityFlagsPredicate;
+import net.minecraft.advancements.triggers.EntityHurtPlayerTrigger;
+import net.minecraft.advancements.predicates.entity.EntityPredicate;
+import net.minecraft.advancements.predicates.entity.EntityTypePredicate;
+import net.minecraft.advancements.triggers.InventoryChangeTrigger;
+import net.minecraft.advancements.predicates.ItemPredicate;
+import net.minecraft.advancements.triggers.KilledTrigger;
+import net.minecraft.advancements.predicates.LocationPredicate;
+import net.minecraft.advancements.predicates.MobEffectsPredicate;
+import net.minecraft.advancements.predicates.entity.PlayerPredicate;
+import net.minecraft.advancements.triggers.StartRidingTrigger;
+import net.minecraft.advancements.triggers.UsingItemTrigger;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentPatch;
@@ -34,6 +34,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
@@ -113,11 +114,11 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                                                     .direct(EntityPredicate.Builder.entity()
                                                             .entityType(EntityTypePredicate.of(
                                                                     entityTypeLookup,
-                                                                    EntityType.FIREWORK_ROCKET)))
+                                                                    EntityTypes.FIREWORK_ROCKET)))
                                                     .source(EntityPredicate.Builder.entity()
                                                             .entityType(EntityTypePredicate.of(
                                                                     entityTypeLookup,
-                                                                    EntityType.PILLAGER))))
+                                                                    EntityTypes.PILLAGER))))
                                             .blocked(true)
                             ))
                     .save(consumer, Sihywtcamd.MOD_ID + "/deflect_firework_rocket");
@@ -140,7 +141,7 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                             EntityPredicate.Builder.entity().effects(
                                     MobEffectsPredicate.Builder.effects().and(MobEffects.INVISIBILITY)),
                             EntityPredicate.Builder.entity().entityType(
-                                    EntityTypePredicate.of(entityTypeLookup, EntityType.ILLUSIONER))))
+                                    EntityTypePredicate.of(entityTypeLookup, EntityTypes.ILLUSIONER))))
                     .rewards(AdvancementRewards.Builder.experience(50))
                     .save(consumer, Sihywtcamd.MOD_ID + "/kill_illusioner");
 
@@ -158,7 +159,7 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                     )
                     .addCriterion("kill_phantom_end", KilledTrigger.TriggerInstance.playerKilledEntity(
                             EntityPredicate.Builder.entity()
-                                    .entityType(EntityTypePredicate.of(entityTypeLookup, EntityType.PHANTOM))
+                                    .entityType(EntityTypePredicate.of(entityTypeLookup, EntityTypes.PHANTOM))
                                     .located(LocationPredicate.Builder.inBiome(biomeLookup.getOrThrow(Biomes.THE_END)))))
                     .save(consumer, Sihywtcamd.MOD_ID + "/kill_phantom_end");
 
@@ -176,7 +177,7 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                     )
                     .addCriterion("spyglass_at_baby_1", UsingItemTrigger.TriggerInstance.lookingAt(
                             EntityPredicate.Builder.entity()
-                                    .subPredicate(PlayerPredicate.Builder.player()
+                                    .player(PlayerPredicate.Builder.player()
                                             .setLookingAt(babyZombie(entityTypeLookup)
                                                     .passenger(babyZombie(entityTypeLookup)))
                                             .build()),
@@ -198,7 +199,7 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                     )
                     .addCriterion("spyglass_at_baby_4", UsingItemTrigger.TriggerInstance.lookingAt(
                             EntityPredicate.Builder.entity()
-                                    .subPredicate(PlayerPredicate.Builder.player()
+                                    .player(PlayerPredicate.Builder.player()
                                             .setLookingAt(babyZombie(entityTypeLookup)
                                                     .passenger(babyZombie(entityTypeLookup)
                                                             .passenger(babyZombie(entityTypeLookup)
@@ -225,7 +226,7 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                     .addCriterion("ride_zombie_horse", StartRidingTrigger.TriggerInstance.playerStartsRiding(
                             EntityPredicate.Builder.entity()
                                     .vehicle(EntityPredicate.Builder.entity()
-                                            .entityType(EntityTypePredicate.of(entityTypeLookup, EntityType.ZOMBIE_HORSE)))))
+                                            .entityType(EntityTypePredicate.of(entityTypeLookup, EntityTypes.ZOMBIE_HORSE)))))
                     .rewards(AdvancementRewards.Builder.experience(10))
                     .save(consumer, Sihywtcamd.MOD_ID + "/ride_zombie_horse");
 

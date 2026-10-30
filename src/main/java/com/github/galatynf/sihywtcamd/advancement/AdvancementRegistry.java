@@ -2,11 +2,13 @@ package com.github.galatynf.sihywtcamd.advancement;
 
 import com.github.galatynf.sihywtcamd.Sihywtcamd;
 import java.util.Optional;
-import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.advancements.Criterion;
-import net.minecraft.advancements.criterion.EntityPredicate;
-import net.minecraft.advancements.criterion.KilledTrigger;
-import net.minecraft.advancements.criterion.PlayerTrigger;
+import net.minecraft.advancements.predicates.entity.EntityPredicate;
+import net.minecraft.advancements.triggers.CriteriaTriggers;
+import net.minecraft.advancements.triggers.Criterion;
+import net.minecraft.advancements.triggers.KilledTrigger;
+import net.minecraft.advancements.triggers.PlayerTrigger;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 
 public class AdvancementRegistry {
     public static PlayerTrigger MAGMA_TO_SLIME_CONVERSION = new PlayerTrigger();
@@ -14,9 +16,9 @@ public class AdvancementRegistry {
     public static PlayerTrigger ZOMBIFIED_PIGLIN_BRUTE_COLLISION = new PlayerTrigger();
 
     public static void init() {
-        CriteriaTriggers.register(Sihywtcamd.MOD_ID + "/magma_to_slime_conversion", MAGMA_TO_SLIME_CONVERSION);
-        CriteriaTriggers.register(Sihywtcamd.MOD_ID + "/slime_to_magma_conversion", SLIME_TO_MAGMA_CONVERSION);
-        CriteriaTriggers.register(Sihywtcamd.MOD_ID + "/zombified_piglin_brute_collision", ZOMBIFIED_PIGLIN_BRUTE_COLLISION);
+        Registry.register(BuiltInRegistries.TRIGGER_TYPES, Sihywtcamd.MOD_ID + "/magma_to_slime_conversion", MAGMA_TO_SLIME_CONVERSION);
+        Registry.register(BuiltInRegistries.TRIGGER_TYPES, Sihywtcamd.MOD_ID + "/slime_to_magma_conversion", SLIME_TO_MAGMA_CONVERSION);
+        Registry.register(BuiltInRegistries.TRIGGER_TYPES, Sihywtcamd.MOD_ID + "/zombified_piglin_brute_collision", ZOMBIFIED_PIGLIN_BRUTE_COLLISION);
     }
 
     public static Criterion<PlayerTrigger.TriggerInstance> createMagmaToSlime() {

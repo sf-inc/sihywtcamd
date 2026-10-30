@@ -4,7 +4,7 @@ import com.github.galatynf.sihywtcamd.imixin.ZombieHorseIMixin;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntitySpawnReason;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.ai.goal.Goal;
@@ -38,7 +38,7 @@ public class ZombieHorseTrapTriggerGoal extends Goal {
         this.zombieHorse.setTamed(true);
         this.zombieHorse.setAge(0);
         this.zombieHorse.setPersistenceRequired();
-        LightningBolt lightningEntity = EntityType.LIGHTNING_BOLT.create(serverWorld, EntitySpawnReason.TRIGGERED);
+        LightningBolt lightningEntity = EntityTypes.LIGHTNING_BOLT.create(serverWorld, EntitySpawnReason.TRIGGERED);
         if (lightningEntity == null) {
             return;
         }
@@ -47,7 +47,7 @@ public class ZombieHorseTrapTriggerGoal extends Goal {
         serverWorld.addFreshEntity(lightningEntity);
 
         // Spawn zombie
-        Zombie zombieEntity = EntityType.ZOMBIE.create(this.zombieHorse.level(), EntitySpawnReason.TRIGGERED);
+        Zombie zombieEntity = EntityTypes.ZOMBIE.create(this.zombieHorse.level(), EntitySpawnReason.TRIGGERED);
         if (zombieEntity == null) return;
         this.initZombie(zombieEntity, localDifficulty, Items.IRON_SWORD, this.zombieHorse);
         EntityUtils.trimEntityArmor(serverWorld, zombieEntity, TrimMaterials.LAPIS, TrimPatterns.SHAPER);
@@ -56,21 +56,21 @@ public class ZombieHorseTrapTriggerGoal extends Goal {
         AbstractHorse abstractHorseEntity;
         // Spawn husk
         if ((abstractHorseEntity = this.getHorse(localDifficulty)) != null
-                && (zombieEntity = EntityType.HUSK.create(this.zombieHorse.level(), EntitySpawnReason.TRIGGERED)) != null) {
+                && (zombieEntity = EntityTypes.HUSK.create(this.zombieHorse.level(), EntitySpawnReason.TRIGGERED)) != null) {
             this.initZombie(zombieEntity, localDifficulty, Items.IRON_SHOVEL, abstractHorseEntity);
             EntityUtils.trimEntityArmor(serverWorld, zombieEntity, TrimMaterials.COPPER, TrimPatterns.DUNE);
             serverWorld.addFreshEntityWithPassengers(abstractHorseEntity);
         }
         // Spawn drowned
         if ((abstractHorseEntity = this.getHorse(localDifficulty)) != null
-                && (zombieEntity = EntityType.DROWNED.create(this.zombieHorse.level(), EntitySpawnReason.TRIGGERED)) != null) {
+                && (zombieEntity = EntityTypes.DROWNED.create(this.zombieHorse.level(), EntitySpawnReason.TRIGGERED)) != null) {
             this.initZombie(zombieEntity, localDifficulty, Items.TRIDENT, abstractHorseEntity);
             EntityUtils.trimEntityArmor(serverWorld, zombieEntity, TrimMaterials.DIAMOND, TrimPatterns.COAST);
             serverWorld.addFreshEntityWithPassengers(abstractHorseEntity);
         }
         // Spawn zombie villager
         if ((abstractHorseEntity = this.getHorse(localDifficulty)) != null
-                && (zombieEntity = EntityType.ZOMBIE_VILLAGER.create(this.zombieHorse.level(), EntitySpawnReason.TRIGGERED)) != null) {
+                && (zombieEntity = EntityTypes.ZOMBIE_VILLAGER.create(this.zombieHorse.level(), EntitySpawnReason.TRIGGERED)) != null) {
             this.initZombie(zombieEntity, localDifficulty, Items.IRON_AXE, abstractHorseEntity);
             zombieEntity.setItemSlot(EquipmentSlot.CHEST, new ItemStack(Items.DIAMOND_CHESTPLATE));
             zombieEntity.setDropChance(EquipmentSlot.CHEST, 0.f);
@@ -82,7 +82,7 @@ public class ZombieHorseTrapTriggerGoal extends Goal {
 
     @Nullable
     private AbstractHorse getHorse(DifficultyInstance localDifficulty) {
-        ZombieHorse zombieHorseEntity = EntityType.ZOMBIE_HORSE.create(this.zombieHorse.level(), EntitySpawnReason.TRIGGERED);
+        ZombieHorse zombieHorseEntity = EntityTypes.ZOMBIE_HORSE.create(this.zombieHorse.level(), EntitySpawnReason.TRIGGERED);
         if (zombieHorseEntity != null) {
             zombieHorseEntity.finalizeSpawn((ServerLevel) this.zombieHorse.level(), localDifficulty, EntitySpawnReason.TRIGGERED, null);
             zombieHorseEntity.setPos(this.zombieHorse.getX(), this.zombieHorse.getY(), this.zombieHorse.getZ());

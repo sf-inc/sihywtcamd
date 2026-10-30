@@ -10,7 +10,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntitySpawnReason;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.animal.equine.ZombieHorse;
 import net.minecraft.world.level.Level;
@@ -44,7 +44,7 @@ public abstract class ServerWorldMixin extends Level {
                 && this.getGameRules().get(GameRules.SPAWN_MOBS)
                 && this.random.nextDouble() < localDifficulty.getEffectiveDifficulty() * 0.01
                 && !this.getBlockState(blockPos.below()).is(BlockTags.LIGHTNING_RODS);
-        if (canSpawn && (zombieHorseEntity = EntityType.ZOMBIE_HORSE.create(this, EntitySpawnReason.TRIGGERED)) != null) {
+        if (canSpawn && (zombieHorseEntity = EntityTypes.ZOMBIE_HORSE.create(this, EntitySpawnReason.TRIGGERED)) != null) {
             lightningEntity.setVisualOnly(true);
             ((ZombieHorseIMixin) zombieHorseEntity).sihywtcamd$setTrapped(true);
             ((ZombieHorseIMixin) zombieHorseEntity).sihywtcamd$setTrapHorse(true);

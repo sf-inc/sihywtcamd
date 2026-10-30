@@ -16,6 +16,7 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.monster.ElderGuardian;
@@ -70,7 +71,7 @@ public abstract class DrownedMixin extends Zombie {
                 Guardian guardianEntity = list.getFirst();
                 this.startRiding(guardianEntity);
             } else {
-                Guardian guardianEntity = EntityType.GUARDIAN.create(this.level(), EntitySpawnReason.JOCKEY);
+                Guardian guardianEntity = EntityTypes.GUARDIAN.create(this.level(), EntitySpawnReason.JOCKEY);
                 if (guardianEntity != null) {
                     guardianEntity.snapTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
                     guardianEntity.finalizeSpawn(world, difficulty, EntitySpawnReason.JOCKEY, null);

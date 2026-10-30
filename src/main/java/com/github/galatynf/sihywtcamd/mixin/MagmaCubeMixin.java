@@ -7,10 +7,11 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.ConversionParams;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.monster.MagmaCube;
-import net.minecraft.world.entity.monster.Slime;
+import net.minecraft.world.entity.monster.cubemob.MagmaCube;
+import net.minecraft.world.entity.monster.cubemob.Slime;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -39,7 +40,7 @@ public abstract class MagmaCubeMixin extends SlimeMixin {
                 && this.getFluidHeight(FluidTags.WATER) > 0.0) {
             int size = this.getSize();
             Slime slime = this.convertTo(
-                    EntityType.SLIME,
+                    EntityTypes.SLIME,
                     ConversionParams.single(this, false, true),
                     magmaCube -> {});
             if (slime != null) {

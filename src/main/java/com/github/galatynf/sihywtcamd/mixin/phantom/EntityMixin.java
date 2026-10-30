@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.List;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.level.border.WorldBorder;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -26,7 +27,7 @@ public abstract class EntityMixin {
 
     @Inject(method = "collide(Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/phys/Vec3;", at = @At("HEAD"), cancellable = true)
     private void noCollisionForPhantom(Vec3 movement, CallbackInfoReturnable<Vec3> cir) {
-        if (this.getType().equals(EntityType.PHANTOM) && ModConfig.get().undead.phantom.throughBlocks) {
+        if (this.getType().equals(EntityTypes.PHANTOM) && ModConfig.get().undead.phantom.throughBlocks) {
             Entity entity = (Entity) (Object) this;
             AABB box = entity.getBoundingBox();
             WorldBorder worldBorder = entity.level().getWorldBorder();

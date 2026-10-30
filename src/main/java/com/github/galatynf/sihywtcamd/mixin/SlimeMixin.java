@@ -1,6 +1,5 @@
 package com.github.galatynf.sihywtcamd.mixin;
 
-import com.github.galatynf.sihywtcamd.Sihywtcamd;
 import com.github.galatynf.sihywtcamd.advancement.AdvancementRegistry;
 import com.github.galatynf.sihywtcamd.cardinal.MyComponents;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
@@ -16,11 +15,13 @@ import net.minecraft.world.entity.ConversionParams;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.SpawnGroupData;
-import net.minecraft.world.entity.monster.MagmaCube;
-import net.minecraft.world.entity.monster.Slime;
+import net.minecraft.world.entity.monster.cubemob.AbstractCubeMob;
+import net.minecraft.world.entity.monster.cubemob.MagmaCube;
+import net.minecraft.world.entity.monster.cubemob.Slime;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import org.spongepowered.asm.mixin.Mixin;
@@ -30,10 +31,11 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(Slime.class)
+// Slimes, magma cubes and sulfur cubes share AbstractCubeMob since 26.2: slime only behaviours check for Slime
+@Mixin(AbstractCubeMob.class)
 public abstract class SlimeMixin extends Mob {
     @Shadow public abstract int getSize();
-    @Shadow public abstract EntityType<? extends Slime> getType();
+    @Shadow public abstract EntityType<? extends AbstractCubeMob> getType();
     @Shadow protected abstract ParticleOptions getParticleType();
 
     @Shadow public abstract void setSize(int size, boolean heal);
@@ -42,12 +44,11 @@ public abstract class SlimeMixin extends Mob {
         super(entityType, world);
     }
 
-    @Inject(method = "finalizeSpawn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Mob;finalizeSpawn(Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/DifficultyInstance;Lnet/minecraft/world/entity/EntitySpawnReason;Lnet/minecraft/world/entity/SpawnGroupData;)Lnet/minecraft/world/entity/SpawnGroupData;"))
+    @Inject(method = "finalizeSpawn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/monster/cubemob/AbstractCubeMob;setSpawnSize(Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/DifficultyInstance;)V", shift = At.Shift.AFTER))
     private void spawnBigger(ServerLevelAccessor world, DifficultyInstance difficulty, EntitySpawnReason spawnReason,
                              SpawnGroupData entityData, CallbackInfoReturnable<SpawnGroupData> cir) {
-        Slime slime = (Slime) (Object) this;
         if (ModConfig.get().overworld.slime.biggerSize
-                && !(slime instanceof MagmaCube)
+                && (Object) this instanceof Slime
                 && this.random.nextFloat() < 0.05f + 0.05f * difficulty.getSpecialMultiplier()) {
             this.setSize(8, true);
         }
@@ -55,18 +56,18 @@ public abstract class SlimeMixin extends Mob {
 
     @Inject(method = "tick", at = @At("HEAD"))
     protected void onTick(CallbackInfo ci) {
+        if (!((Object) this instanceof Slime)) return;
+
         MyComponents.SLIME_COMPONENT.get(this).updateMerged();
 
-        Slime thisSlime = (Slime) (Object) this;
         if (!this.level().isClientSide()
                 && this.isAlive()
                 && ModConfig.get().overworld.slime.magmaConversion
-                && !(thisSlime instanceof MagmaCube)
                 && this.level().dimension().equals(Level.NETHER)
                 && this.isInLava()) {
             int size = this.getSize();
             MagmaCube magmaCube = this.convertTo(
-                    EntityType.MAGMA_CUBE,
+                    EntityTypes.MAGMA_CUBE,
                     ConversionParams.single(this, false, true),
                     slime -> {});
             if (magmaCube != null) {
@@ -81,12 +82,11 @@ public abstract class SlimeMixin extends Mob {
 
     @Inject(method = "push(Lnet/minecraft/world/entity/Entity;)V", at = @At("TAIL"))
     private void tryToMerge(Entity entity, CallbackInfo ci) {
-        if (!this.getType().equals(entity.getType())) return;
+        if (!((Object) this instanceof Slime)
+                || !(entity instanceof Slime otherSlime)
+                || !this.getType().equals(entity.getType())) return;
 
-        Slime thisSlime = (Slime) (Object) this;
-        Slime otherSlime = (Slime) entity;
         if (!this.level().isClientSide()
-                && !(thisSlime instanceof MagmaCube)
                 && ModConfig.get().overworld.slime.canMerge
                 && MyComponents.SLIME_COMPONENT.get(this).canMerge()
                 && MyComponents.SLIME_COMPONENT.get(otherSlime).canMerge()
@@ -111,12 +111,16 @@ public abstract class SlimeMixin extends Mob {
         }
     }
 
-    @WrapOperation(method = "remove", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/monster/Slime;convertTo(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ConversionParams;Lnet/minecraft/world/entity/EntitySpawnReason;Lnet/minecraft/world/entity/ConversionParams$AfterConversion;)Lnet/minecraft/world/entity/Mob;"))
-    private Mob transferMergedGene(Slime instance, EntityType<?> entityType,
-                                         ConversionParams entityConversionContext, EntitySpawnReason spawnReason,
-                                         ConversionParams.AfterConversion<Slime> finalizer, Operation<Mob> original) {
+    @WrapOperation(method = "remove", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/monster/cubemob/AbstractCubeMob;convertTo(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ConversionParams;Lnet/minecraft/world/entity/EntitySpawnReason;Lnet/minecraft/world/entity/ConversionParams$AfterConversion;)Lnet/minecraft/world/entity/Mob;"))
+    private Mob transferMergedGene(AbstractCubeMob instance, EntityType<?> entityType,
+                                   ConversionParams entityConversionContext, EntitySpawnReason spawnReason,
+                                   ConversionParams.AfterConversion<AbstractCubeMob> finalizer, Operation<Mob> original) {
+        if (!(instance instanceof Slime)) {
+            return original.call(instance, entityType, entityConversionContext, spawnReason, finalizer);
+        }
+
         return original.call(instance, entityType, entityConversionContext, spawnReason,
-                (ConversionParams.AfterConversion<Slime>) slime -> {
+                (ConversionParams.AfterConversion<AbstractCubeMob>) slime -> {
             finalizer.finalizeConversion(slime);
             boolean hasMerged = MyComponents.SLIME_COMPONENT.get(instance).hasMerged();
             if (hasMerged) {
@@ -130,7 +134,7 @@ public abstract class SlimeMixin extends Mob {
         });
     }
 
-    @Inject(method = "dealDamage", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/monster/Slime;playSound(Lnet/minecraft/sounds/SoundEvent;FF)V"))
+    @Inject(method = "dealDamage", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/monster/cubemob/AbstractCubeMob;playSound(Lnet/minecraft/sounds/SoundEvent;FF)V"))
     protected void onDamage(LivingEntity target, CallbackInfo ci) {
 
     }

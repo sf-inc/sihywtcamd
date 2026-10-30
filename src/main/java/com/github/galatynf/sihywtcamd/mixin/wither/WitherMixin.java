@@ -12,6 +12,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.boss.wither.WitherBoss;
@@ -81,7 +82,7 @@ public abstract class WitherMixin extends Monster {
                                     pos -> serverWorld.getBlockState(pos.below()).isFaceSturdy(serverWorld, pos.below(), Direction.UP)
                                             && this.hasRoomForSkeleton(serverWorld, pos))
                             .or(() -> BlockPos.findClosestMatch(center, 3, 3, pos -> this.hasRoomForSkeleton(serverWorld, pos)));
-                    blockPos.ifPresent(pos -> EntityType.WITHER_SKELETON.spawn(serverWorld, pos, EntitySpawnReason.EVENT));
+                    blockPos.ifPresent(pos -> EntityTypes.WITHER_SKELETON.spawn(serverWorld, pos, EntitySpawnReason.EVENT));
                 }
             }
 
@@ -99,6 +100,6 @@ public abstract class WitherMixin extends Monster {
 
     @Unique
     private boolean hasRoomForSkeleton(ServerLevel world, BlockPos pos) {
-        return world.noCollision(null, EntityType.WITHER_SKELETON.getSpawnAABB(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5), true);
+        return world.noCollision(null, EntityTypes.WITHER_SKELETON.getSpawnAABB(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5), true);
     }
 }

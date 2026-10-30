@@ -5,6 +5,7 @@ import com.github.galatynf.sihywtcamd.mixin.LivingEntityMixin;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.monster.skeleton.Skeleton;
 import net.minecraft.world.entity.monster.spider.CaveSpider;
@@ -28,7 +29,7 @@ public abstract class CaveSpiderLivingMixin extends LivingEntityMixin {
                 && !this.isPassenger()
                 && !EntitySpawnReason.isSpawner(spawnReason)
                 && world.getRandom().nextInt(50) == 0) {
-            Skeleton skeletonEntity = EntityType.SKELETON.create(this.level(), EntitySpawnReason.JOCKEY);
+            Skeleton skeletonEntity = EntityTypes.SKELETON.create(this.level(), EntitySpawnReason.JOCKEY);
             if (skeletonEntity != null) {
                 skeletonEntity.snapTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
                 skeletonEntity.finalizeSpawn(world, difficulty, spawnReason, null);

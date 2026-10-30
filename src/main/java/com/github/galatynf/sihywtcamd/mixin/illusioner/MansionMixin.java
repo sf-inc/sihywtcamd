@@ -11,7 +11,7 @@ import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntitySpawnReason;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
@@ -24,7 +24,7 @@ public class MansionMixin {
         if (ModConfig.get().illagers.illusioner.spawnInMansions
                 && metadata.equals("Mage")
                 && random.nextFloat() < 0.4f) {
-            Mob illusioner = EntityType.ILLUSIONER.create(world.getLevel(), EntitySpawnReason.STRUCTURE);
+            Mob illusioner = EntityTypes.ILLUSIONER.create(world.getLevel(), EntitySpawnReason.STRUCTURE);
             if (illusioner != null) {
                 if (random.nextFloat() < 0.8f) {
                     list.clear();

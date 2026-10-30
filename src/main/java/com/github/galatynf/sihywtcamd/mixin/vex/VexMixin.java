@@ -3,7 +3,7 @@ package com.github.galatynf.sihywtcamd.mixin.vex;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.Vex;
 import net.minecraft.world.level.Level;
@@ -23,15 +23,15 @@ public abstract class VexMixin extends Monster {
 
     @Unique
     @Nullable
-    private Mob lastOwner;
+    private LivingEntity lastOwner;
 
-    @Shadow @Nullable public abstract Mob getOwner();
+    @Shadow @Nullable public abstract LivingEntity getOwner();
 
     @Inject(method = "tick", at = @At("HEAD"))
     private void killWithMaster(CallbackInfo ci) {
         if (ModConfig.get().overworld.vex.dieWithEvoker
                 && this.level() instanceof ServerLevel world) {
-            Mob owner = this.getOwner();
+            LivingEntity owner = this.getOwner();
             if (owner != null) {
                 this.lastOwner = owner;
             }

@@ -6,7 +6,7 @@ import com.github.galatynf.sihywtcamd.entity.EntityUtils;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntitySpawnReason;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.animal.equine.AbstractHorse;
 import net.minecraft.world.entity.animal.equine.SkeletonHorse;
@@ -40,7 +40,7 @@ public abstract class SkeletonHorseTrapMixin {
 
 
         // Spawn spectral skeleton
-        AbstractSkeleton skeletonEntity = EntityType.SKELETON.create(this.horse.level(), EntitySpawnReason.TRIGGERED);
+        AbstractSkeleton skeletonEntity = EntityTypes.SKELETON.create(this.horse.level(), EntitySpawnReason.TRIGGERED);
         if (skeletonEntity == null) return;
         this.initSkeleton(skeletonEntity, localDifficulty, this.horse);
         MyComponents.SKELETON_COMPONENT.get(skeletonEntity).setSpectral();
@@ -50,21 +50,21 @@ public abstract class SkeletonHorseTrapMixin {
         AbstractHorse abstractHorseEntity;
         // Spawn stray
         if ((abstractHorseEntity = this.createHorse(localDifficulty)) != null
-                && (skeletonEntity = EntityType.STRAY.create(this.horse.level(), EntitySpawnReason.TRIGGERED)) != null) {
+                && (skeletonEntity = EntityTypes.STRAY.create(this.horse.level(), EntitySpawnReason.TRIGGERED)) != null) {
             this.initSkeleton(skeletonEntity, localDifficulty, abstractHorseEntity);
             EntityUtils.trimEntityArmor(serverWorld, skeletonEntity, TrimMaterials.DIAMOND, TrimPatterns.SHAPER);
             serverWorld.addFreshEntityWithPassengers(abstractHorseEntity);
         }
         // Spawn bogged
         if ((abstractHorseEntity = this.createHorse(localDifficulty)) != null
-                && (skeletonEntity = EntityType.BOGGED.create(this.horse.level(), EntitySpawnReason.TRIGGERED)) != null) {
+                && (skeletonEntity = EntityTypes.BOGGED.create(this.horse.level(), EntitySpawnReason.TRIGGERED)) != null) {
             this.initSkeleton(skeletonEntity, localDifficulty, abstractHorseEntity);
             EntityUtils.trimEntityArmor(serverWorld, skeletonEntity, TrimMaterials.EMERALD, TrimPatterns.HOST);
             serverWorld.addFreshEntityWithPassengers(abstractHorseEntity);
         }
         // Spawn parched
         if ((abstractHorseEntity = this.createHorse(localDifficulty)) != null
-                && (skeletonEntity = EntityType.PARCHED.create(this.horse.level(), EntitySpawnReason.TRIGGERED)) != null) {
+                && (skeletonEntity = EntityTypes.PARCHED.create(this.horse.level(), EntitySpawnReason.TRIGGERED)) != null) {
             this.initSkeleton(skeletonEntity, localDifficulty, abstractHorseEntity);
             EntityUtils.trimEntityArmor(serverWorld, skeletonEntity, TrimMaterials.COPPER, TrimPatterns.DUNE);
             serverWorld.addFreshEntityWithPassengers(abstractHorseEntity);

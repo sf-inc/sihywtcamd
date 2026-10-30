@@ -12,6 +12,7 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.monster.hoglin.Hoglin;
 import net.minecraft.world.entity.monster.piglin.AbstractPiglin;
@@ -41,7 +42,7 @@ public abstract class PiglinMixin extends AbstractPiglin {
                 Hoglin hoglinEntity = list.getFirst();
                 this.startRiding(hoglinEntity);
             } else {
-                Hoglin hoglinEntity2 = EntityType.HOGLIN.create(this.level(), EntitySpawnReason.JOCKEY);
+                Hoglin hoglinEntity2 = EntityTypes.HOGLIN.create(this.level(), EntitySpawnReason.JOCKEY);
                 if (hoglinEntity2 != null) {
                     hoglinEntity2.snapTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
                     hoglinEntity2.finalizeSpawn(world, difficulty, EntitySpawnReason.JOCKEY, null);

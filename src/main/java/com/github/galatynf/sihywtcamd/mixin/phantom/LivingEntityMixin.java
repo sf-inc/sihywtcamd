@@ -6,6 +6,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
@@ -22,7 +23,7 @@ public abstract class LivingEntityMixin extends Entity {
     @Inject(method = "hurtServer", at = @At("HEAD"), cancellable = true)
     private void cancelSuffocationDamagePhantom(ServerLevel world, DamageSource source, float amount,
                                                 CallbackInfoReturnable<Boolean> cir) {
-        if (ModConfig.get().undead.phantom.throughBlocks && this.getType().equals(EntityType.PHANTOM)
+        if (ModConfig.get().undead.phantom.throughBlocks && this.getType().equals(EntityTypes.PHANTOM)
                 && (source.is(DamageTypes.IN_WALL) || source.is(DamageTypes.FLY_INTO_WALL))) {
             cir.setReturnValue(false);
         }
