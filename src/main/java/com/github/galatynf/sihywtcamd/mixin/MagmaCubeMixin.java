@@ -2,22 +2,22 @@ package com.github.galatynf.sihywtcamd.mixin;
 
 import com.github.galatynf.sihywtcamd.advancement.AdvancementRegistry;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.conversion.EntityConversionContext;
-import net.minecraft.entity.mob.MagmaCubeEntity;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.mob.SlimeEntity;
-import net.minecraft.registry.tag.FluidTags;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.world.World;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.world.entity.ConversionParams;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.monster.MagmaCube;
+import net.minecraft.world.entity.monster.Slime;
+import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(MagmaCubeEntity.class)
+@Mixin(MagmaCube.class)
 public abstract class MagmaCubeMixin extends SlimeMixin {
-    protected MagmaCubeMixin(EntityType<? extends MobEntity> entityType, World world) {
+    protected MagmaCubeMixin(EntityType<? extends Mob> entityType, Level world) {
         super(entityType, world);
     }
 
@@ -25,28 +25,28 @@ public abstract class MagmaCubeMixin extends SlimeMixin {
     protected void onDamage(LivingEntity target, CallbackInfo ci) {
         if (ModConfig.get().nether.magmaCube.fireCollision
                 && this.isAlive() && !target.isBlocking()
-                && this.squaredDistanceTo(target) < 0.36 * this.getSize() * this.getSize()) {
-            target.setOnFireFor(this.getSize());
+                && this.distanceToSqr(target) < 0.36 * this.getSize() * this.getSize()) {
+            target.igniteForSeconds(this.getSize());
         }
     }
 
     @Override
     protected void onTick(CallbackInfo ci) {
-        if (!this.getEntityWorld().isClient()
+        if (!this.level().isClientSide()
                 && this.isAlive()
                 && ModConfig.get().nether.magmaCube.slimeConversion
-                && this.getEntityWorld().getRegistryKey().equals(World.OVERWORLD)
+                && this.level().dimension().equals(Level.OVERWORLD)
                 && this.getFluidHeight(FluidTags.WATER) > 0.0) {
             int size = this.getSize();
-            SlimeEntity slime = this.convertTo(
+            Slime slime = this.convertTo(
                     EntityType.SLIME,
-                    EntityConversionContext.create(this, false, true),
+                    ConversionParams.single(this, false, true),
                     magmaCube -> {});
             if (slime != null) {
                 slime.setSize(size, true);
-                this.playSound(SoundEvents.ENTITY_GENERIC_EXTINGUISH_FIRE, 0.7F, 1.6F + (this.random.nextFloat() - this.random.nextFloat()) * 0.4F);
-                this.getEntityWorld().getEntitiesByClass(ServerPlayerEntity.class, slime.getBoundingBox().expand(16.0),
-                                player -> !player.isSpectator() && player.canSee(slime))
+                this.playSound(SoundEvents.GENERIC_EXTINGUISH_FIRE, 0.7F, 1.6F + (this.random.nextFloat() - this.random.nextFloat()) * 0.4F);
+                this.level().getEntitiesOfClass(ServerPlayer.class, slime.getBoundingBox().inflate(16.0),
+                                player -> !player.isSpectator() && player.hasLineOfSight(slime))
                         .forEach(AdvancementRegistry.MAGMA_TO_SLIME_CONVERSION::trigger);
             }
         }

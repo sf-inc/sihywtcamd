@@ -1,8 +1,8 @@
 package com.github.galatynf.sihywtcamd.cardinal.impl;
 
 import com.github.galatynf.sihywtcamd.cardinal.api.ArrowEntityComponentAPI;
-import net.minecraft.storage.ReadView;
-import net.minecraft.storage.WriteView;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 
 public class ArrowEntityComponent implements ArrowEntityComponentAPI {
     private boolean isFrozen = false;
@@ -18,12 +18,12 @@ public class ArrowEntityComponent implements ArrowEntityComponentAPI {
     }
 
     @Override
-    public void readData(ReadView readView) {
-        this.isFrozen = readView.getBoolean ("IsFrozen", false);
+    public void readData(ValueInput readView) {
+        this.isFrozen = readView.getBooleanOr ("IsFrozen", false);
     }
 
     @Override
-    public void writeData(WriteView writeView) {
+    public void writeData(ValueOutput writeView) {
         writeView.putBoolean("IsFrozen", this.isFrozen);
     }
 }

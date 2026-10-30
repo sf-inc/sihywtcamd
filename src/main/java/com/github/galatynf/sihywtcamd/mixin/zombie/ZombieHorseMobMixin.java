@@ -3,20 +3,20 @@ package com.github.galatynf.sihywtcamd.mixin.zombie;
 import com.github.galatynf.sihywtcamd.entity.ZombieHorseTrapTriggerGoal;
 import com.github.galatynf.sihywtcamd.imixin.ZombieHorseIMixin;
 import com.github.galatynf.sihywtcamd.mixin.MobEntityMixin;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.mob.ZombieHorseEntity;
-import net.minecraft.storage.ReadView;
-import net.minecraft.storage.WriteView;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.animal.equine.ZombieHorse;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(ZombieHorseEntity.class)
+@Mixin(ZombieHorse.class)
 public abstract class ZombieHorseMobMixin extends MobEntityMixin implements ZombieHorseIMixin {
     @Unique
-    private final ZombieHorseTrapTriggerGoal trapTriggerGoal = new ZombieHorseTrapTriggerGoal((ZombieHorseEntity)(Object) this);
+    private final ZombieHorseTrapTriggerGoal trapTriggerGoal = new ZombieHorseTrapTriggerGoal((ZombieHorse)(Object) this);
     @Unique
     private boolean trapped = false;
     @Unique
@@ -24,7 +24,7 @@ public abstract class ZombieHorseMobMixin extends MobEntityMixin implements Zomb
     @Unique
     private int trapTime = -1;
 
-    protected ZombieHorseMobMixin(EntityType<? extends LivingEntity> entityType, World world) {
+    protected ZombieHorseMobMixin(EntityType<? extends LivingEntity> entityType, Level world) {
         super(entityType, world);
     }
 
@@ -36,14 +36,14 @@ public abstract class ZombieHorseMobMixin extends MobEntityMixin implements Zomb
     }
 
     @Override
-    protected void readModData(ReadView readView, CallbackInfo ci) {
-        this.sihywtcamd$setTrapped(readView.getBoolean("ZombieTrap", false));
-        this.trapHorse = readView.getBoolean("ZombieTrapHorse", this.trapped);
-        this.trapTime = readView.getInt("ZombieTrapTime", 0);
+    protected void readModData(ValueInput readView, CallbackInfo ci) {
+        this.sihywtcamd$setTrapped(readView.getBooleanOr("ZombieTrap", false));
+        this.trapHorse = readView.getBooleanOr("ZombieTrapHorse", this.trapped);
+        this.trapTime = readView.getIntOr("ZombieTrapTime", 0);
     }
 
     @Override
-    protected void writeModData(WriteView writeView, CallbackInfo ci) {
+    protected void writeModData(ValueOutput writeView, CallbackInfo ci) {
         writeView.putBoolean("ZombieTrap", this.trapped);
         writeView.putBoolean("ZombieTrapHorse", this.trapHorse);
         writeView.putInt("ZombieTrapTime", this.trapTime);
@@ -56,9 +56,9 @@ public abstract class ZombieHorseMobMixin extends MobEntityMixin implements Zomb
         }
         this.trapped = trapped;
         if (trapped) {
-            this.goalSelector.add(1, this.trapTriggerGoal);
+            this.goalSelector.addGoal(1, this.trapTriggerGoal);
         } else {
-            this.goalSelector.remove(this.trapTriggerGoal);
+            this.goalSelector.removeGoal(this.trapTriggerGoal);
         }
     }
 

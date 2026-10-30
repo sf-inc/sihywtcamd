@@ -1,38 +1,38 @@
 package com.github.galatynf.sihywtcamd.mixin;
 
 import com.github.galatynf.sihywtcamd.config.ModConfig;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.ai.pathing.PathNodeMaker;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.chunk.ChunkCache;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.level.PathNavigationRegion;
+import net.minecraft.world.level.pathfinder.NodeEvaluator;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(PathNodeMaker.class)
+@Mixin(NodeEvaluator.class)
 public class PathNodeMakerMixin {
-    @Shadow protected int entityBlockXSize;
-    @Shadow protected int entityBlockYSize;
-    @Shadow protected int entityBlockZSize;
+    @Shadow protected int entityWidth;
+    @Shadow protected int entityHeight;
+    @Shadow protected int entityDepth;
 
-    @Inject(method = "init", at = @At("TAIL"))
-    private void updateMobSize(ChunkCache cachedWorld, MobEntity entity, CallbackInfo ci) {
-        if (!ModConfig.get().general.pathPassengerAware || !entity.hasPassengers()) return;
+    @Inject(method = "prepare", at = @At("TAIL"))
+    private void updateMobSize(PathNavigationRegion cachedWorld, Mob entity, CallbackInfo ci) {
+        if (!ModConfig.get().general.pathPassengerAware || !entity.isVehicle()) return;
 
         Entity rider = entity;
-        float height = (float) -entity.getEntityPos().y;
-        float maxWidth = entity.getWidth();
-        while (rider.hasPassengers()) {
+        float height = (float) -entity.position().y;
+        float maxWidth = entity.getBbWidth();
+        while (rider.isVehicle()) {
             rider = rider.getFirstPassenger();
-            maxWidth = Math.max(maxWidth, rider.getWidth());
+            maxWidth = Math.max(maxWidth, rider.getBbWidth());
         }
-        height += (float) (rider.getHeight() + rider.getEntityPos().y);
+        height += (float) (rider.getBbHeight() + rider.position().y);
 
-        this.entityBlockXSize = MathHelper.ceil(maxWidth);
-        this.entityBlockYSize = MathHelper.ceil(height);
-        this.entityBlockZSize = this.entityBlockXSize;
+        this.entityWidth = Mth.ceil(maxWidth);
+        this.entityHeight = Mth.ceil(height);
+        this.entityDepth = this.entityWidth;
     }
 }

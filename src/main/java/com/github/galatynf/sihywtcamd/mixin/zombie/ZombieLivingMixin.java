@@ -3,18 +3,18 @@ package com.github.galatynf.sihywtcamd.mixin.zombie;
 import com.github.galatynf.sihywtcamd.Sihywtcamd;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import com.github.galatynf.sihywtcamd.mixin.LivingEntityMixin;
-import net.minecraft.entity.EntityData;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.mob.PathAwareEntity;
-import net.minecraft.entity.mob.ZombieEntity;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
-import net.minecraft.world.LocalDifficulty;
-import net.minecraft.world.ServerWorldAccess;
-import net.minecraft.world.World;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.entity.EntitySpawnReason;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.zombie.Zombie;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -25,7 +25,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import static com.github.galatynf.sihywtcamd.Sihywtcamd.id;
 
-@Mixin(ZombieEntity.class)
+@Mixin(Zombie.class)
 public abstract class ZombieLivingMixin extends LivingEntityMixin {
     @Unique
     private static final Identifier CALLER_BONUS_ID = id("caller_zombie_bonus");
@@ -40,31 +40,31 @@ public abstract class ZombieLivingMixin extends LivingEntityMixin {
 
     @Shadow public abstract void setCanBreakDoors(boolean canBreakDoors);
 
-    public ZombieLivingMixin(EntityType<?> type, World world) {
+    public ZombieLivingMixin(EntityType<?> type, Level world) {
         super(type, world);
     }
 
-    @Inject(method = "initialize", at = @At("TAIL"))
-    private void spawnBabyTowers(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason,
-                                 EntityData entityData, CallbackInfoReturnable<EntityData> cir) {
+    @Inject(method = "finalizeSpawn", at = @At("TAIL"))
+    private void spawnBabyTowers(ServerLevelAccessor world, DifficultyInstance difficulty, EntitySpawnReason spawnReason,
+                                 SpawnGroupData entityData, CallbackInfoReturnable<SpawnGroupData> cir) {
         if (ModConfig.get().zombies.general.babyTowerHeight > 0
-                && spawnReason != SpawnReason.CONVERSION
+                && spawnReason != EntitySpawnReason.CONVERSION
                 && this.isBaby()
-                && !this.hasVehicle()
+                && !this.isPassenger()
                 && world.getRandom().nextFloat() < 0.2f) {
             final float random = world.getRandom().nextFloat();
-            ZombieEntity lastBaby = (ZombieEntity) (Object) this;
-            ZombieEntity.ZombieData babyData = new ZombieEntity.ZombieData(true, false);
+            Zombie lastBaby = (Zombie) (Object) this;
+            Zombie.ZombieGroupData babyData = new Zombie.ZombieGroupData(true, false);
 
             for (int i = 0; i < ModConfig.get().zombies.general.babyTowerHeight; ++i) {
                 if (random < 1.f / Math.pow(2.f, i)) {
-                    ZombieEntity newBaby = (ZombieEntity) this.getType().create(world.toServerWorld(), SpawnReason.JOCKEY);
+                    Zombie newBaby = (Zombie) this.getType().create(world.getLevel(), EntitySpawnReason.JOCKEY);
                     if (newBaby == null) {
                         break;
                     }
-                    newBaby.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), this.getYaw(), 0.0f);
+                    newBaby.snapTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0f);
                     newBaby.startRiding(lastBaby, false, false);
-                    newBaby.initialize(world, difficulty, SpawnReason.JOCKEY, babyData);
+                    newBaby.finalizeSpawn(world, difficulty, EntitySpawnReason.JOCKEY, babyData);
                     newBaby.setBaby(true);
 
                     lastBaby = newBaby;
@@ -75,7 +75,7 @@ public abstract class ZombieLivingMixin extends LivingEntityMixin {
         }
     }
 
-    @Inject(method = "applyAttributeModifiers", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/ZombieEntity;initAttributes()V", shift = At.Shift.AFTER), cancellable = true)
+    @Inject(method = "handleAttributes", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/monster/zombie/Zombie;randomizeReinforcementsChance()V", shift = At.Shift.AFTER), cancellable = true)
     private void applyDifferentAttributes(float chanceMultiplier, CallbackInfo ci) {
         float random = this.random.nextFloat();
         if (ModConfig.get().zombies.general.attributeVariations && !this.isBaby()) {
@@ -83,50 +83,50 @@ public abstract class ZombieLivingMixin extends LivingEntityMixin {
             if (random < 0.1f) {
                 name = "Caller";
                 double value = 0.2 + 0.15 * chanceMultiplier + 0.15 * this.random.nextDouble();
-                this.getAttributeInstance(EntityAttributes.SPAWN_REINFORCEMENTS).overwritePersistentModifier(
-                        new EntityAttributeModifier(CALLER_BONUS_ID, value, EntityAttributeModifier.Operation.ADD_VALUE));
+                this.getAttribute(Attributes.SPAWN_REINFORCEMENTS_CHANCE).addOrReplacePermanentModifier(
+                        new AttributeModifier(CALLER_BONUS_ID, value, AttributeModifier.Operation.ADD_VALUE));
             } else if (random < 0.3f) {
                 name = "Tank";
                 this.setCanBreakDoors(true);
                 double value = 0.5 + 1.0 * chanceMultiplier + this.random.nextDouble();
-                this.getAttributeInstance(EntityAttributes.MAX_HEALTH).overwritePersistentModifier(
-                        new EntityAttributeModifier(TANK_BONUS_ID, value, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+                this.getAttribute(Attributes.MAX_HEALTH).addOrReplacePermanentModifier(
+                        new AttributeModifier(TANK_BONUS_ID, value, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
                 this.setHealth(this.getMaxHealth());
             } else if (random < 0.5f) {
                 name = "Runner";
                 double value = 0.2 + 0.15 * chanceMultiplier + 0.15 * this.random.nextDouble();
-                this.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED).overwritePersistentModifier(
-                        new EntityAttributeModifier(RUNNER_BONUS_ID, value, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+                this.getAttribute(Attributes.MOVEMENT_SPEED).addOrReplacePermanentModifier(
+                        new AttributeModifier(RUNNER_BONUS_ID, value, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
             } else if (random < 0.7f) {
                 name = "Unstoppable";
                 double value = 0.2 + 0.15 * chanceMultiplier + 0.15 * this.random.nextDouble();
-                this.getAttributeInstance(EntityAttributes.KNOCKBACK_RESISTANCE).overwritePersistentModifier(
-                        new EntityAttributeModifier(UNSTOPPABLE_BONUS_ID, value, EntityAttributeModifier.Operation.ADD_VALUE));
+                this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).addOrReplacePermanentModifier(
+                        new AttributeModifier(UNSTOPPABLE_BONUS_ID, value, AttributeModifier.Operation.ADD_VALUE));
             }
 
             if (ModConfig.get().general.enableDebugInfo && name != null) {
-                this.setCustomName(Text.of(name));
+                this.setCustomName(Component.nullToEmpty(name));
                 this.setCustomNameVisible(true);
             }
             ci.cancel();
         }
     }
 
-    @Inject(method = "initAttributes", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "randomizeReinforcementsChance", at = @At("HEAD"), cancellable = true)
     private void initWithIncreasedAttributes(CallbackInfo ci) {
         if (ModConfig.get().zombies.general.moreKnockbackResistance) {
-            this.getAttributeInstance(EntityAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.2 + 0.2 * this.random.nextDouble());
+            this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(0.2 + 0.2 * this.random.nextDouble());
         }
         if (ModConfig.get().zombies.general.spawnMoreReinforcement) {
-            this.getAttributeInstance(EntityAttributes.SPAWN_REINFORCEMENTS).setBaseValue(0.2 + 0.2 * this.random.nextDouble());
+            this.getAttribute(Attributes.SPAWN_REINFORCEMENTS_CHANCE).setBaseValue(0.2 + 0.2 * this.random.nextDouble());
             ci.cancel();
         }
     }
 
     @Override
     protected void onTickRiding(CallbackInfo ci) {
-        if (this.getVehicle() instanceof PathAwareEntity pathAwareEntity) {
-            this.bodyYaw = pathAwareEntity.bodyYaw;
+        if (this.getVehicle() instanceof PathfinderMob pathAwareEntity) {
+            this.yBodyRot = pathAwareEntity.yBodyRot;
         }
     }
 }

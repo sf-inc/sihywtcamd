@@ -4,20 +4,20 @@ import com.github.galatynf.sihywtcamd.Sihywtcamd;
 import com.github.galatynf.sihywtcamd.cardinal.MyComponents;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.boss.WitherEntity;
-import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.text.Text;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
 import net.minecraft.world.Difficulty;
-import net.minecraft.world.World;
-import net.minecraft.world.rule.GameRules;
+import net.minecraft.world.entity.EntitySpawnReason;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.boss.wither.WitherBoss;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.gamerules.GameRules;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -28,28 +28,28 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Optional;
 
-@Mixin(WitherEntity.class)
-public abstract class WitherMixin extends HostileEntity {
-    @Shadow public abstract int getInvulnerableTimer();
+@Mixin(WitherBoss.class)
+public abstract class WitherMixin extends Monster {
+    @Shadow public abstract int getInvulnerableTicks();
 
     @Unique
     static private final int sihywtcamd_SKELETONS_SPAWN_DISTANCE = 5;
     @Unique
     static private final float sihywtcamd_VANILLA_MAX_HEALTH = 300.0F;
 
-    protected WitherMixin(EntityType<? extends HostileEntity> entityType, World world) {
+    protected WitherMixin(EntityType<? extends Monster> entityType, Level world) {
         super(entityType, world);
     }
 
-    @ModifyReturnValue(method = "createWitherAttributes", at = @At("RETURN"))
-    private static DefaultAttributeContainer.Builder increaseHealth(DefaultAttributeContainer.Builder original) {
+    @ModifyReturnValue(method = "createAttributes", at = @At("RETURN"))
+    private static AttributeSupplier.Builder increaseHealth(AttributeSupplier.Builder original) {
         if (ModConfig.get().bosses.wither.increasedHealth) {
-            original.add(EntityAttributes.MAX_HEALTH, 400.0);
+            original.add(Attributes.MAX_HEALTH, 400.0);
         }
         return original;
     }
 
-    @ModifyArg(method = "mobTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/boss/WitherEntity;heal(F)V", ordinal = 0))
+    @ModifyArg(method = "customServerAiStep", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/boss/wither/WitherBoss;heal(F)V", ordinal = 0))
     private float scaleSpawnHeal(float amount) {
         if (!ModConfig.get().bosses.wither.increasedHealth) {
             return amount;
@@ -57,48 +57,48 @@ public abstract class WitherMixin extends HostileEntity {
         return amount * this.getMaxHealth() / sihywtcamd_VANILLA_MAX_HEALTH;
     }
 
-    @Inject(method = "mobTick", at = @At("HEAD"))
+    @Inject(method = "customServerAiStep", at = @At("HEAD"))
     private void spawnWitherSkeletons(CallbackInfo ci) {
-        if (!(this.getEntityWorld() instanceof ServerWorld serverWorld)) {
+        if (!(this.level() instanceof ServerLevel serverWorld)) {
             return;
         }
-        if ((this.getEntityWorld().getDifficulty().equals(Difficulty.NORMAL)
-                    || this.getEntityWorld().getDifficulty().equals(Difficulty.HARD))
-                && this.getInvulnerableTimer() < 1
+        if ((this.level().getDifficulty().equals(Difficulty.NORMAL)
+                    || this.level().getDifficulty().equals(Difficulty.HARD))
+                && this.getInvulnerableTicks() < 1
                 && !MyComponents.WITHER_COMPONENT.get(this).wasHalfHealthReached()
                 && this.getHealth() < this.getMaxHealth() / 2.0D) {
             if (ModConfig.get().bosses.wither.explosion) {
-                this.getEntityWorld().createExplosion(this, this.getX(), this.getEyeY(), this.getZ(), 7.0f, false, World.ExplosionSourceType.MOB);
+                this.level().explode(this, this.getX(), this.getEyeY(), this.getZ(), 7.0f, false, Level.ExplosionInteraction.MOB);
             }
             if (ModConfig.get().bosses.wither.skeletonsSpawn) {
-                int nbWitherSkeletons = 3 + Math.round(2 * serverWorld.getLocalDifficulty(this.getBlockPos()).getClampedLocalDifficulty());
-                float deltaAngle = (2 * MathHelper.PI) / nbWitherSkeletons;
+                int nbWitherSkeletons = 3 + Math.round(2 * serverWorld.getCurrentDifficultyAt(this.blockPosition()).getSpecialMultiplier());
+                float deltaAngle = (2 * Mth.PI) / nbWitherSkeletons;
                 for (int i=0; i < nbWitherSkeletons; ++i) {
-                    int x = MathHelper.floor(sihywtcamd_SKELETONS_SPAWN_DISTANCE * MathHelper.cos(i * deltaAngle));
-                    int z = MathHelper.floor(sihywtcamd_SKELETONS_SPAWN_DISTANCE * MathHelper.sin(i * deltaAngle));
-                    BlockPos center = this.getBlockPos().add(x, 0, z);
-                    Optional<BlockPos> blockPos = BlockPos.findClosest(center, 3, 6,
-                                    pos -> serverWorld.getBlockState(pos.down()).isSideSolidFullSquare(serverWorld, pos.down(), Direction.UP)
+                    int x = Mth.floor(sihywtcamd_SKELETONS_SPAWN_DISTANCE * Mth.cos(i * deltaAngle));
+                    int z = Mth.floor(sihywtcamd_SKELETONS_SPAWN_DISTANCE * Mth.sin(i * deltaAngle));
+                    BlockPos center = this.blockPosition().offset(x, 0, z);
+                    Optional<BlockPos> blockPos = BlockPos.findClosestMatch(center, 3, 6,
+                                    pos -> serverWorld.getBlockState(pos.below()).isFaceSturdy(serverWorld, pos.below(), Direction.UP)
                                             && this.hasRoomForSkeleton(serverWorld, pos))
-                            .or(() -> BlockPos.findClosest(center, 3, 3, pos -> this.hasRoomForSkeleton(serverWorld, pos)));
-                    blockPos.ifPresent(pos -> EntityType.WITHER_SKELETON.spawn(serverWorld, pos, SpawnReason.EVENT));
+                            .or(() -> BlockPos.findClosestMatch(center, 3, 3, pos -> this.hasRoomForSkeleton(serverWorld, pos)));
+                    blockPos.ifPresent(pos -> EntityType.WITHER_SKELETON.spawn(serverWorld, pos, EntitySpawnReason.EVENT));
                 }
             }
 
             MyComponents.WITHER_COMPONENT.get(this).setHalfHealthReached();
             if (ModConfig.get().general.enableDebugInfo) {
-                this.setCustomName(Text.of("Half Health Reached"));
+                this.setCustomName(Component.nullToEmpty("Half Health Reached"));
                 this.setCustomNameVisible(true);
             }
         }
         if (ModConfig.get().bosses.wither.stormyWeather
-                && serverWorld.getGameRules().getValue(GameRules.ADVANCE_WEATHER)) {
-            serverWorld.setWeather(0, 50, true, true);
+                && serverWorld.getGameRules().get(GameRules.ADVANCE_WEATHER)) {
+            serverWorld.setWeatherParameters(0, 50, true, true);
         }
     }
 
     @Unique
-    private boolean hasRoomForSkeleton(ServerWorld world, BlockPos pos) {
-        return world.isSpaceEmpty(null, EntityType.WITHER_SKELETON.getSpawnBox(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5), true);
+    private boolean hasRoomForSkeleton(ServerLevel world, BlockPos pos) {
+        return world.noCollision(null, EntityType.WITHER_SKELETON.getSpawnAABB(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5), true);
     }
 }

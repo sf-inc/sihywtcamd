@@ -2,18 +2,18 @@ package com.github.galatynf.sihywtcamd.mixin.ghast;
 
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.mob.GhastEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.Ghast;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(GhastEntity.class)
+@Mixin(Ghast.class)
 public class GhastMixin {
-    @ModifyReturnValue(method = "createGhastAttributes", at = @At("RETURN"))
-    private static DefaultAttributeContainer.Builder increaseHealth(DefaultAttributeContainer.Builder original) {
+    @ModifyReturnValue(method = "createAttributes", at = @At("RETURN"))
+    private static AttributeSupplier.Builder increaseHealth(AttributeSupplier.Builder original) {
         if (ModConfig.get().nether.ghast.increasedHealth) {
-            original.add(EntityAttributes.MAX_HEALTH, 30.0);
+            original.add(Attributes.MAX_HEALTH, 30.0);
         }
         return original;
     }

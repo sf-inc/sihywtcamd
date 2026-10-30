@@ -2,52 +2,52 @@ package com.github.galatynf.sihywtcamd.mixin.piglin;
 
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import net.minecraft.entity.EntityData;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.mob.AbstractPiglinEntity;
-import net.minecraft.entity.mob.HoglinEntity;
-import net.minecraft.entity.mob.PiglinEntity;
-import net.minecraft.predicate.entity.EntityPredicates;
-import net.minecraft.world.LocalDifficulty;
-import net.minecraft.world.ServerWorldAccess;
-import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
+import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.entity.EntitySelector;
+import net.minecraft.world.entity.EntitySpawnReason;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.monster.hoglin.Hoglin;
+import net.minecraft.world.entity.monster.piglin.AbstractPiglin;
+import net.minecraft.world.entity.monster.piglin.Piglin;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 
-@Mixin(PiglinEntity.class)
-public abstract class PiglinMixin extends AbstractPiglinEntity {
-    public PiglinMixin(EntityType<? extends AbstractPiglinEntity> entityType, World world) {
+@Mixin(Piglin.class)
+public abstract class PiglinMixin extends AbstractPiglin {
+    public PiglinMixin(EntityType<? extends AbstractPiglin> entityType, Level world) {
         super(entityType, world);
     }
 
     @ModifyReturnValue(method = "canHunt", at = @At("RETURN"))
     private boolean cannotHuntWhileRidingHoglin(boolean original) {
-        return original && !(this.getVehicle() instanceof HoglinEntity);
+        return original && !(this.getVehicle() instanceof Hoglin);
     }
 
-    @Inject(method = "initialize", at = @At("TAIL"))
-    private void spawnOnHoglin(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason,
-                               EntityData entityData, CallbackInfoReturnable<EntityData> cir) {
-        if (ModConfig.get().nether.piglin.rideHoglin && !this.hasVehicle()
-                && world.getRandom().nextFloat() < 0.05F + 0.05F * difficulty.getClampedLocalDifficulty()) {
-            List<HoglinEntity> list = world.getEntitiesByClass(HoglinEntity.class, this.getBoundingBox().expand(5.0D, 3.0D, 5.0D),
-                    hoglin -> EntityPredicates.NOT_MOUNTED.test(hoglin) && hoglin.isBaby() == this.isBaby() && !hoglin.isLeashed());
+    @Inject(method = "finalizeSpawn", at = @At("TAIL"))
+    private void spawnOnHoglin(ServerLevelAccessor world, DifficultyInstance difficulty, EntitySpawnReason spawnReason,
+                               SpawnGroupData entityData, CallbackInfoReturnable<SpawnGroupData> cir) {
+        if (ModConfig.get().nether.piglin.rideHoglin && !this.isPassenger()
+                && world.getRandom().nextFloat() < 0.05F + 0.05F * difficulty.getSpecialMultiplier()) {
+            List<Hoglin> list = world.getEntitiesOfClass(Hoglin.class, this.getBoundingBox().inflate(5.0D, 3.0D, 5.0D),
+                    hoglin -> EntitySelector.ENTITY_NOT_BEING_RIDDEN.test(hoglin) && hoglin.isBaby() == this.isBaby() && !hoglin.isLeashed());
             if (!list.isEmpty()) {
-                HoglinEntity hoglinEntity = list.getFirst();
+                Hoglin hoglinEntity = list.getFirst();
                 this.startRiding(hoglinEntity);
             } else {
-                HoglinEntity hoglinEntity2 = EntityType.HOGLIN.create(this.getEntityWorld(), SpawnReason.JOCKEY);
+                Hoglin hoglinEntity2 = EntityType.HOGLIN.create(this.level(), EntitySpawnReason.JOCKEY);
                 if (hoglinEntity2 != null) {
-                    hoglinEntity2.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), this.getYaw(), 0.0F);
-                    hoglinEntity2.initialize(world, difficulty, SpawnReason.JOCKEY, null);
+                    hoglinEntity2.snapTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
+                    hoglinEntity2.finalizeSpawn(world, difficulty, EntitySpawnReason.JOCKEY, null);
                     hoglinEntity2.setBaby(this.isBaby());
                     this.startRiding(hoglinEntity2);
-                    world.spawnEntity(hoglinEntity2);
+                    world.addFreshEntity(hoglinEntity2);
                 }
             }
         }

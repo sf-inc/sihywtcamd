@@ -1,8 +1,8 @@
 package com.github.galatynf.sihywtcamd.cardinal.impl;
 
 import com.github.galatynf.sihywtcamd.cardinal.api.SlimeEntityComponentAPI;
-import net.minecraft.storage.ReadView;
-import net.minecraft.storage.WriteView;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 
 public class SlimeEntityComponent implements SlimeEntityComponentAPI {
     private int mergeDelay = 50;
@@ -30,12 +30,12 @@ public class SlimeEntityComponent implements SlimeEntityComponentAPI {
     }
 
     @Override
-    public void readData(ReadView readView) {
-        this.mergeDelay = readView.getInt("MergeDelay", 50);
+    public void readData(ValueInput readView) {
+        this.mergeDelay = readView.getIntOr("MergeDelay", 50);
     }
 
     @Override
-    public void writeData(WriteView writeView) {
+    public void writeData(ValueOutput writeView) {
         writeView.putInt("MergeDelay", this.mergeDelay);
     }
 }

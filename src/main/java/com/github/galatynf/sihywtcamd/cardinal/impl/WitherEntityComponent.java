@@ -1,8 +1,8 @@
 package com.github.galatynf.sihywtcamd.cardinal.impl;
 
 import com.github.galatynf.sihywtcamd.cardinal.api.WitherEntityComponentAPI;
-import net.minecraft.storage.ReadView;
-import net.minecraft.storage.WriteView;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 
 public class WitherEntityComponent implements WitherEntityComponentAPI {
     private boolean halfHealthReached = false;
@@ -18,12 +18,12 @@ public class WitherEntityComponent implements WitherEntityComponentAPI {
     }
 
     @Override
-    public void readData(ReadView readView) {
-        this.halfHealthReached = readView.getBoolean("HalfHealthReached", false);
+    public void readData(ValueInput readView) {
+        this.halfHealthReached = readView.getBooleanOr("HalfHealthReached", false);
     }
 
     @Override
-    public void writeData(WriteView writeView) {
+    public void writeData(ValueOutput writeView) {
         writeView.putBoolean("HalfHealthReached", this.halfHealthReached);
     }
 }

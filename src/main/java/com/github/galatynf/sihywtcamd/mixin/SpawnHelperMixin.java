@@ -2,22 +2,6 @@ package com.github.galatynf.sihywtcamd.mixin;
 
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnGroup;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.collection.Pool;
-import net.minecraft.util.collection.Weighted;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.SpawnHelper;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.SpawnSettings;
-import net.minecraft.world.gen.StructureAccessor;
-import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.structure.Structure;
-import net.minecraft.world.gen.structure.StructureKeys;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -25,41 +9,57 @@ import org.spongepowered.asm.mixin.injection.At;
 
 import java.util.ArrayList;
 import java.util.List;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.random.Weighted;
+import net.minecraft.util.random.WeightedList;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.NaturalSpawner;
+import net.minecraft.world.level.StructureManager;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.MobSpawnSettings;
+import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
+import net.minecraft.world.level.levelgen.structure.Structure;
 
-@Mixin(SpawnHelper.class)
+@Mixin(NaturalSpawner.class)
 public abstract class SpawnHelperMixin {
 
     @Unique
-    private static final Weighted<SpawnSettings.SpawnEntry> END_PHANTOMS_SPAWN = new Weighted<>(new SpawnSettings.SpawnEntry(EntityType.PHANTOM, 2, 3), 10);
+    private static final Weighted<MobSpawnSettings.SpawnerData> END_PHANTOMS_SPAWN = new Weighted<>(new MobSpawnSettings.SpawnerData(EntityType.PHANTOM, 2, 3), 10);
 
-    @ModifyReturnValue(method = "getSpawnEntries", at = @At("RETURN"))
-    private static Pool<SpawnSettings.SpawnEntry> addPhantomSpawnInEnd(Pool<SpawnSettings.SpawnEntry> original, ServerWorld world,
-                                                                      StructureAccessor structureAccessor, ChunkGenerator chunkGenerator,
-                                                                      SpawnGroup spawnGroup, BlockPos pos, @Nullable RegistryEntry<Biome> biomeEntry) {
+    @ModifyReturnValue(method = "mobsAt", at = @At("RETURN"))
+    private static WeightedList<MobSpawnSettings.SpawnerData> addPhantomSpawnInEnd(WeightedList<MobSpawnSettings.SpawnerData> original, ServerLevel world,
+                                                                      StructureManager structureAccessor, ChunkGenerator chunkGenerator,
+                                                                      MobCategory spawnGroup, BlockPos pos, @Nullable Holder<Biome> biomeEntry) {
         if (ModConfig.get().undead.phantom.spawnInEndCities
                 && shouldUseEndCitySpawns(world, pos, spawnGroup, structureAccessor)) {
-            List<Weighted<SpawnSettings.SpawnEntry>> entries = new ArrayList<>(original.getEntries());
+            List<Weighted<MobSpawnSettings.SpawnerData>> entries = new ArrayList<>(original.unwrap());
             entries.add(END_PHANTOMS_SPAWN);
-            return Pool.of(entries);
+            return WeightedList.of(entries);
         }
         return original;
     }
 
     @Unique
-    private static boolean shouldUseEndCitySpawns(ServerWorld world, BlockPos pos, SpawnGroup spawnGroup, StructureAccessor structureAccessor) {
-        if (spawnGroup != SpawnGroup.MONSTER) {
+    private static boolean shouldUseEndCitySpawns(ServerLevel world, BlockPos pos, MobCategory spawnGroup, StructureManager structureAccessor) {
+        if (spawnGroup != MobCategory.MONSTER) {
             return false;
         }
 
-        if (pos.getY() < 85 || world.getRegistryKey() != World.END) {
+        if (pos.getY() < 85 || world.dimension() != Level.END) {
             return false;
         }
 
-        Structure structure = structureAccessor.getRegistryManager().getOrThrow(RegistryKeys.STRUCTURE)
-                .get(StructureKeys.END_CITY);
+        Structure structure = structureAccessor.registryAccess().lookupOrThrow(Registries.STRUCTURE)
+                .getValue(BuiltinStructures.END_CITY);
         if (structure == null) {
             return false;
         }
-        return structureAccessor.getStructureAt(pos, structure).hasChildren();
+        return structureAccessor.getStructureAt(pos, structure).isValid();
     }
 }

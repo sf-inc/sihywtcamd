@@ -1,14 +1,6 @@
 package com.github.galatynf.sihywtcamd.mixin.enderdragon;
 
 import com.github.galatynf.sihywtcamd.config.ModConfig;
-import net.minecraft.entity.boss.dragon.EnderDragonEntity;
-import net.minecraft.entity.boss.dragon.phase.AbstractPhase;
-import net.minecraft.entity.boss.dragon.phase.SittingFlamingPhase;
-import net.minecraft.entity.mob.EndermanEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.predicate.entity.EntityPredicates;
-import net.minecraft.util.TypeFilter;
-import net.minecraft.util.math.Box;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -16,25 +8,33 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
+import net.minecraft.world.entity.EntitySelector;
+import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
+import net.minecraft.world.entity.boss.enderdragon.phases.AbstractDragonPhaseInstance;
+import net.minecraft.world.entity.boss.enderdragon.phases.DragonSittingFlamingPhase;
+import net.minecraft.world.entity.monster.EnderMan;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.entity.EntityTypeTest;
+import net.minecraft.world.phys.AABB;
 
-@Mixin(SittingFlamingPhase.class)
-public abstract class SittingFlamingPhaseMixin extends AbstractPhase {
-    @Shadow private int ticks;
+@Mixin(DragonSittingFlamingPhase.class)
+public abstract class SittingFlamingPhaseMixin extends AbstractDragonPhaseInstance {
+    @Shadow private int flameTicks;
 
-    public SittingFlamingPhaseMixin(EnderDragonEntity dragon) {
+    public SittingFlamingPhaseMixin(EnderDragon dragon) {
         super(dragon);
     }
 
-    @Inject(method = "serverTick", at = @At("TAIL"))
+    @Inject(method = "doServerTick", at = @At("TAIL"))
     private void makeEndermanTargetPlayer(CallbackInfo ci) {
         if (ModConfig.get().bosses.enderDragon.controlEndermanWhenLanding
-                && this.ticks % 20 == 0) {
-            Box box = this.dragon.getBoundingBox().expand(5.0,0.0,5.0).offset(0.0, -3.0, 0.0);
-            List<EndermanEntity> endermen = this.dragon.getEntityWorld().getEntitiesByType(
-                    TypeFilter.instanceOf(EndermanEntity.class), box, EntityPredicates.VALID_ENTITY);
-            for (EndermanEntity enderman : endermen) {
-                if (enderman.getTarget() == null || !enderman.getTarget().isPlayer()) {
-                    PlayerEntity player = this.dragon.getEntityWorld().getClosestPlayer(enderman.getX(), enderman.getY(), enderman.getZ(), 16.0, true);
+                && this.flameTicks % 20 == 0) {
+            AABB box = this.dragon.getBoundingBox().inflate(5.0,0.0,5.0).move(0.0, -3.0, 0.0);
+            List<EnderMan> endermen = this.dragon.level().getEntities(
+                    EntityTypeTest.forClass(EnderMan.class), box, EntitySelector.ENTITY_STILL_ALIVE);
+            for (EnderMan enderman : endermen) {
+                if (enderman.getTarget() == null || !enderman.getTarget().isAlwaysTicking()) {
+                    Player player = this.dragon.level().getNearestPlayer(enderman.getX(), enderman.getY(), enderman.getZ(), 16.0, true);
                     if (player != null) {
                         enderman.setTarget(player);
                         break;

@@ -3,17 +3,6 @@ package com.github.galatynf.sihywtcamd.mixin.enderdragon;
 import com.github.galatynf.sihywtcamd.cardinal.MyComponents;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
 import com.google.common.collect.ImmutableList;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.boss.dragon.EnderDragonEntity;
-import net.minecraft.entity.decoration.EndCrystalEntity;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.EndSpikeFeature;
-import net.minecraft.world.gen.feature.EndSpikeFeatureConfig;
-import net.minecraft.world.gen.feature.Feature;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -21,51 +10,62 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.boss.enderdragon.EndCrystal;
+import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.SpikeFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.SpikeConfiguration;
 
-@Mixin(EnderDragonEntity.class)
-public class EnderDragonMixin extends MobEntity {
-    protected EnderDragonMixin(EntityType<? extends MobEntity> entityType, World world) {
+@Mixin(EnderDragon.class)
+public class EnderDragonMixin extends Mob {
+    protected EnderDragonMixin(EntityType<? extends Mob> entityType, Level world) {
         super(entityType, world);
     }
 
-    @Inject(method = "tickWithEndCrystals", at = @At("HEAD"))
+    @Inject(method = "checkCrystals", at = @At("HEAD"))
     private void resummonSomeCrystals(CallbackInfo ci) {
         int crystalsToSummon = ModConfig.get().bosses.enderDragon.crystalsToSummon;
         int summonedCrystals = MyComponents.ENDER_DRAGON_COMPONENT.get(this).getNumberOfSummonedCrystals();
 
-        if (!this.getEntityWorld().isClient()
-                && ((EnderDragonEntity) (Object) this).getFight() != null
+        if (!this.level().isClientSide()
+                && ((EnderDragon) (Object) this).getDragonFight() != null
                 && crystalsToSummon > 0
                 && summonedCrystals < crystalsToSummon) {
-            ServerWorld world = (ServerWorld) this.getEntityWorld();
+            ServerLevel world = (ServerLevel) this.level();
             float healthRatio = (float) (crystalsToSummon - summonedCrystals) / (crystalsToSummon + 1);
 
-            if (this.age % 20 == 0 && this.getHealth() < healthRatio * this.getMaxHealth()) {
-                EndSpikeFeature.Spike spike = this.getSpikeWithoutCrystal(world);
+            if (this.tickCount % 20 == 0 && this.getHealth() < healthRatio * this.getMaxHealth()) {
+                SpikeFeature.EndSpike spike = this.getSpikeWithoutCrystal(world);
                 if (spike == null) return;
 
                 MyComponents.ENDER_DRAGON_COMPONENT.get(this).incrementNumberOfSummonedCrystals();
 
-                for (BlockPos blockPos : BlockPos.iterate(new BlockPos(spike.getCenterX() - 10, spike.getHeight() - 10, spike.getCenterZ() - 10), new BlockPos(spike.getCenterX() + 10, spike.getHeight() + 10, spike.getCenterZ() + 10))) {
+                for (BlockPos blockPos : BlockPos.betweenClosed(new BlockPos(spike.getCenterX() - 10, spike.getHeight() - 10, spike.getCenterZ() - 10), new BlockPos(spike.getCenterX() + 10, spike.getHeight() + 10, spike.getCenterZ() + 10))) {
                     world.removeBlock(blockPos, false);
                 }
-                world.createExplosion(null, spike.getCenterX() + 0.5, spike.getHeight(), spike.getCenterZ() + 0.5, 5.0f, World.ExplosionSourceType.BLOCK);
-                EndSpikeFeatureConfig endSpikeFeatureConfig = new EndSpikeFeatureConfig(false, ImmutableList.of(spike), null);
-                Feature.END_SPIKE.generateIfValid(endSpikeFeatureConfig, world, world.getChunkManager().getChunkGenerator(), Random.create(), new BlockPos(spike.getCenterX(), 45, spike.getCenterZ()));
+                world.explode(null, spike.getCenterX() + 0.5, spike.getHeight(), spike.getCenterZ() + 0.5, 5.0f, Level.ExplosionInteraction.BLOCK);
+                SpikeConfiguration endSpikeFeatureConfig = new SpikeConfiguration(false, ImmutableList.of(spike), null);
+                Feature.END_SPIKE.place(endSpikeFeatureConfig, world, world.getChunkSource().getGenerator(), RandomSource.create(), new BlockPos(spike.getCenterX(), 45, spike.getCenterZ()));
             }
         }
     }
 
     @Unique
-    private EndSpikeFeature.Spike getSpikeWithoutCrystal(ServerWorld world) {
-        List<EndSpikeFeature.Spike> spikes = EndSpikeFeature.getSpikes(world);
+    private SpikeFeature.EndSpike getSpikeWithoutCrystal(ServerLevel world) {
+        List<SpikeFeature.EndSpike> spikes = SpikeFeature.getSpikesForLevel(world);
         if (spikes.isEmpty()) return null;
 
         int random = this.random.nextInt(spikes.size());
-        EndSpikeFeature.Spike spike;
+        SpikeFeature.EndSpike spike;
         for (int i = 0; i < spikes.size(); ++i) {
             spike = spikes.get((random + i) % spikes.size());
-            if (world.getNonSpectatingEntities(EndCrystalEntity.class, spike.getBoundingBox()).isEmpty()) {
+            if (world.getEntitiesOfClass(EndCrystal.class, spike.getTopBoundingBox()).isEmpty()) {
                 return spike;
             }
         }

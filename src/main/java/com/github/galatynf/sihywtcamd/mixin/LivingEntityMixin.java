@@ -4,21 +4,21 @@ import com.github.galatynf.sihywtcamd.config.ModConfig;
 import com.github.galatynf.sihywtcamd.imixin.ZombieHorseIMixin;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.EntityAttribute;
-import net.minecraft.entity.attribute.EntityAttributeInstance;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.boss.WitherEntity;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.registry.tag.EntityTypeTags;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.Identifier;
-import net.minecraft.world.World;
+import net.minecraft.core.Holder;
+import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.EntityTypeTags;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.boss.wither.WitherBoss;
+import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -35,35 +35,35 @@ public abstract class LivingEntityMixin extends Entity {
     @Unique
     private static final Identifier RIDDEN_HORSE_SPEED_ID = id("ridden_horse_speed");
 
-    public LivingEntityMixin(EntityType<?> type, World world) {
+    public LivingEntityMixin(EntityType<?> type, Level world) {
         super(type, world);
     }
 
-    @Shadow public float bodyYaw;
+    @Shadow public float yBodyRot;
 
     @Shadow public abstract boolean isBaby();
-    @Shadow @Nullable public abstract LivingEntity getAttacker();
-    @Shadow @Nullable public abstract EntityAttributeInstance getAttributeInstance(RegistryEntry<EntityAttribute> attribute);
+    @Shadow @Nullable public abstract LivingEntity getLastHurtByMob();
+    @Shadow @Nullable public abstract AttributeInstance getAttribute(Holder<Attribute> attribute);
     @Shadow public abstract float getMaxHealth();
     @Shadow public abstract void setHealth(float health);
 
-    @Inject(method = "computeFallDamage", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "calculateFallDamage", at = @At("HEAD"), cancellable = true)
     private void cancelArthropodFallDamage(double fallDistance, float damagePerDistance, CallbackInfoReturnable<Integer> cir) {
-        if (ModConfig.get().arthropods.general.noFallDamage && this.getType().isIn(EntityTypeTags.ARTHROPOD)) {
+        if (ModConfig.get().arthropods.general.noFallDamage && this.getType().is(EntityTypeTags.ARTHROPOD)) {
             cir.setReturnValue(0);
         }
     }
 
-    @WrapOperation(method = "damage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;applyDamage(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/entity/damage/DamageSource;F)V"))
-    private void healUndeadAttacker(LivingEntity instance, ServerWorld world, DamageSource source, float amount,
+    @WrapOperation(method = "hurtServer", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;actuallyHurt(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/damagesource/DamageSource;F)V"))
+    private void healUndeadAttacker(LivingEntity instance, ServerLevel world, DamageSource source, float amount,
                                     Operation<Void> original) {
         float healthBefore = instance.getHealth() + instance.getAbsorptionAmount();
         original.call(instance, world, source, amount);
 
         if (ModConfig.get().undead.general.attackHeal
-                && source.getAttacker() instanceof LivingEntity attacker
-                && attacker.getType().isIn(EntityTypeTags.UNDEAD)
-                && !(attacker instanceof WitherEntity)) {
+                && source.getEntity() instanceof LivingEntity attacker
+                && attacker.getType().is(EntityTypeTags.UNDEAD)
+                && !(attacker instanceof WitherBoss)) {
             float healthLost = healthBefore - instance.getHealth() - instance.getAbsorptionAmount();
             if (healthLost > 0) {
                 attacker.heal(healthLost);
@@ -71,21 +71,21 @@ public abstract class LivingEntityMixin extends Entity {
         }
     }
 
-    @Inject(method = "tickMovement", at = @At("HEAD"))
+    @Inject(method = "aiStep", at = @At("HEAD"))
     private void updateRiddenHorseSpeed(CallbackInfo ci) {
-        if (this.getEntityWorld().isClient()
+        if (this.level().isClientSide()
                 || !(this.getType().equals(EntityType.SKELETON_HORSE) || this.getType().equals(EntityType.ZOMBIE_HORSE))) {
             return;
         }
-        EntityAttributeInstance movementSpeed = this.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED);
+        AttributeInstance movementSpeed = this.getAttribute(Attributes.MOVEMENT_SPEED);
         if (movementSpeed == null) return;
 
         double multiplier = this.getRiddenHorseSpeedMultiplier();
         if (multiplier > 1.0) {
             if (!movementSpeed.hasModifier(RIDDEN_HORSE_SPEED_ID)) {
                 // Mob ground velocity scales with the square of the movement speed
-                movementSpeed.addTemporaryModifier(new EntityAttributeModifier(RIDDEN_HORSE_SPEED_ID,
-                        Math.sqrt(multiplier) - 1.0, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+                movementSpeed.addTransientModifier(new AttributeModifier(RIDDEN_HORSE_SPEED_ID,
+                        Math.sqrt(multiplier) - 1.0, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
             }
         } else {
             movementSpeed.removeModifier(RIDDEN_HORSE_SPEED_ID);
@@ -94,7 +94,7 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Unique
     private double getRiddenHorseSpeedMultiplier() {
-        if (this.hasControllingPassenger() && this.getFirstPassenger() instanceof MobEntity) {
+        if (this.hasControllingPassenger() && this.getFirstPassenger() instanceof Mob) {
             if (ModConfig.get().skeletons.skeletonHorse.increasedSpeed
                     && this.getType().equals(EntityType.SKELETON_HORSE)) {
                 return 2.0;
@@ -107,12 +107,12 @@ public abstract class LivingEntityMixin extends Entity {
         return 1.0;
     }
 
-    @Inject(method = "tickRiding", at = @At("TAIL"))
+    @Inject(method = "rideTick", at = @At("TAIL"))
     protected void onTickRiding(CallbackInfo ci) {
 
     }
 
-    @Inject(method = "pushAwayFrom", at = @At("TAIL"))
+    @Inject(method = "push(Lnet/minecraft/world/entity/Entity;)V", at = @At("TAIL"))
     protected void onPushAwayFrom(Entity entity, CallbackInfo ci) {
 
     }

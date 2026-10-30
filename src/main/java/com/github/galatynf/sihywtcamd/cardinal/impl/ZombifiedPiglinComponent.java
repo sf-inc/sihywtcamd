@@ -1,8 +1,8 @@
 package com.github.galatynf.sihywtcamd.cardinal.impl;
 
 import com.github.galatynf.sihywtcamd.cardinal.api.ZombifiedPiglinComponentAPI;
-import net.minecraft.storage.ReadView;
-import net.minecraft.storage.WriteView;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 
 public class ZombifiedPiglinComponent implements ZombifiedPiglinComponentAPI {
     private boolean isBrute = false;
@@ -18,12 +18,12 @@ public class ZombifiedPiglinComponent implements ZombifiedPiglinComponentAPI {
     }
 
     @Override
-    public void readData(ReadView readView) {
-        this.setBrute(readView.getBoolean("IsBrute", false));
+    public void readData(ValueInput readView) {
+        this.setBrute(readView.getBooleanOr("IsBrute", false));
     }
 
     @Override
-    public void writeData(WriteView writeView) {
+    public void writeData(ValueOutput writeView) {
         writeView.putBoolean("IsBrute", this.isBrute);
     }
 }

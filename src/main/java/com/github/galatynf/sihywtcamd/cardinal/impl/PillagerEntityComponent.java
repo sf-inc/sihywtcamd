@@ -2,8 +2,8 @@ package com.github.galatynf.sihywtcamd.cardinal.impl;
 
 import com.github.galatynf.sihywtcamd.cardinal.api.PillagerEntityComponentAPI;
 import com.github.galatynf.sihywtcamd.imixin.PillatrooperIMixin;
-import net.minecraft.storage.ReadView;
-import net.minecraft.storage.WriteView;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 
 public class PillagerEntityComponent implements PillagerEntityComponentAPI {
     private final Object provider;
@@ -33,12 +33,12 @@ public class PillagerEntityComponent implements PillagerEntityComponentAPI {
     }
 
     @Override
-    public void readData(ReadView readView) {
-        this.setPillatrooper(readView.getBoolean("IsPillatrooper", false));
+    public void readData(ValueInput readView) {
+        this.setPillatrooper(readView.getBooleanOr("IsPillatrooper", false));
     }
 
     @Override
-    public void writeData(WriteView writeView) {
+    public void writeData(ValueOutput writeView) {
         writeView.putBoolean("IsPillatrooper", this.isPillatrooper);
     }
 }
