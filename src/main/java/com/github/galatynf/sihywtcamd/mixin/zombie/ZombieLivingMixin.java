@@ -76,7 +76,7 @@ public abstract class ZombieLivingMixin extends LivingEntityMixin {
     }
 
     @Inject(method = "handleAttributes", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/monster/zombie/Zombie;randomizeReinforcementsChance()V", shift = At.Shift.AFTER), cancellable = true)
-    private void applyDifferentAttributes(float chanceMultiplier, CallbackInfo ci) {
+    private void applyDifferentAttributes(float chanceMultiplier, EntitySpawnReason spawnReason, CallbackInfo ci) {
         float random = this.random.nextFloat();
         if (ModConfig.get().zombies.general.attributeVariations && !this.isBaby()) {
             String name = null;

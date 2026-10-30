@@ -19,8 +19,8 @@ import net.minecraft.world.entity.boss.enderdragon.EndCrystal;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.SpikeFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.SpikeConfiguration;
+import net.minecraft.world.level.levelgen.feature.EndSpikeFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.EndSpikeConfiguration;
 
 @Mixin(EnderDragon.class)
 public class EnderDragonMixin extends Mob {
@@ -41,7 +41,7 @@ public class EnderDragonMixin extends Mob {
             float healthRatio = (float) (crystalsToSummon - summonedCrystals) / (crystalsToSummon + 1);
 
             if (this.tickCount % 20 == 0 && this.getHealth() < healthRatio * this.getMaxHealth()) {
-                SpikeFeature.EndSpike spike = this.getSpikeWithoutCrystal(world);
+                EndSpikeFeature.EndSpike spike = this.getSpikeWithoutCrystal(world);
                 if (spike == null) return;
 
                 MyComponents.ENDER_DRAGON_COMPONENT.get(this).incrementNumberOfSummonedCrystals();
@@ -50,19 +50,19 @@ public class EnderDragonMixin extends Mob {
                     world.removeBlock(blockPos, false);
                 }
                 world.explode(null, spike.getCenterX() + 0.5, spike.getHeight(), spike.getCenterZ() + 0.5, 5.0f, Level.ExplosionInteraction.BLOCK);
-                SpikeConfiguration endSpikeFeatureConfig = new SpikeConfiguration(false, ImmutableList.of(spike), null);
+                EndSpikeConfiguration endSpikeFeatureConfig = new EndSpikeConfiguration(false, ImmutableList.of(spike), null);
                 Feature.END_SPIKE.place(endSpikeFeatureConfig, world, world.getChunkSource().getGenerator(), RandomSource.create(), new BlockPos(spike.getCenterX(), 45, spike.getCenterZ()));
             }
         }
     }
 
     @Unique
-    private SpikeFeature.EndSpike getSpikeWithoutCrystal(ServerLevel world) {
-        List<SpikeFeature.EndSpike> spikes = SpikeFeature.getSpikesForLevel(world);
+    private EndSpikeFeature.EndSpike getSpikeWithoutCrystal(ServerLevel world) {
+        List<EndSpikeFeature.EndSpike> spikes = EndSpikeFeature.getSpikesForLevel(world);
         if (spikes.isEmpty()) return null;
 
         int random = this.random.nextInt(spikes.size());
-        SpikeFeature.EndSpike spike;
+        EndSpikeFeature.EndSpike spike;
         for (int i = 0; i < spikes.size(); ++i) {
             spike = spikes.get((random + i) % spikes.size());
             if (world.getEntitiesOfClass(EndCrystal.class, spike.getTopBoundingBox()).isEmpty()) {

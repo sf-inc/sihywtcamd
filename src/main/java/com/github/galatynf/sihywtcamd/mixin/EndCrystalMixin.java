@@ -11,8 +11,8 @@ import net.minecraft.world.entity.boss.enderdragon.EndCrystal;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.monster.Phantom;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.dimension.end.EndDragonFight;
-import net.minecraft.world.level.levelgen.feature.SpikeFeature;
+import net.minecraft.world.level.dimension.end.EnderDragonFight;
+import net.minecraft.world.level.levelgen.feature.EndSpikeFeature;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -40,14 +40,14 @@ public abstract class EndCrystalMixin extends Entity {
 
     @Unique
     private boolean isPillarCrystalDuringFight(ServerLevel world) {
-        EndDragonFight fight = world.getDragonFight();
-        if (fight == null || fight.getDragonUUID() == null
-                || !(world.getEntity(fight.getDragonUUID()) instanceof EnderDragon dragon)
+        EnderDragonFight fight = world.getDragonFight();
+        if (fight == null || fight.dragonUUID() == null
+                || !(world.getEntity(fight.dragonUUID()) instanceof EnderDragon dragon)
                 || !dragon.isAlive()) {
             return false;
         }
 
-        for (SpikeFeature.EndSpike spike : SpikeFeature.getSpikesForLevel(world)) {
+        for (EndSpikeFeature.EndSpike spike : EndSpikeFeature.getSpikesForLevel(world)) {
             if (spike.getTopBoundingBox().intersects(this.getBoundingBox())) {
                 return true;
             }

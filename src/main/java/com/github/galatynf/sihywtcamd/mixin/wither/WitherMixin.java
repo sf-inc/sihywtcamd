@@ -93,7 +93,7 @@ public abstract class WitherMixin extends Monster {
         }
         if (ModConfig.get().bosses.wither.stormyWeather
                 && serverWorld.getGameRules().get(GameRules.ADVANCE_WEATHER)) {
-            serverWorld.setWeatherParameters(0, 50, true, true);
+            serverWorld.getServer().setWeatherParameters(0, 50, true, true);
         }
     }
 

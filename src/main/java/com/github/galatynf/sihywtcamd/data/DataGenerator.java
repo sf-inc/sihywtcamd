@@ -4,7 +4,7 @@ import com.github.galatynf.sihywtcamd.Sihywtcamd;
 import com.github.galatynf.sihywtcamd.advancement.AdvancementRegistry;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
@@ -26,6 +26,8 @@ import net.minecraft.advancements.criterion.StartRidingTrigger;
 import net.minecraft.advancements.criterion.UsingItemTrigger;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponentPatch;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
@@ -33,6 +35,7 @@ import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
@@ -51,7 +54,7 @@ public class DataGenerator implements DataGeneratorEntrypoint {
     }
 
     static class AdvancementsProvider extends FabricAdvancementProvider {
-        protected AdvancementsProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registryLookup) {
+        protected AdvancementsProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registryLookup) {
             super(output, registryLookup);
         }
 
@@ -122,7 +125,9 @@ public class DataGenerator implements DataGeneratorEntrypoint {
             AdvancementHolder killIllusioner = Advancement.Builder.advancement()
                     .parent(Identifier.withDefaultNamespace("adventure/kill_a_mob"))
                     .display(
-                            PotionContents.createItemStack(Items.POTION, Potions.INVISIBILITY),
+                            new ItemStackTemplate(Items.POTION, DataComponentPatch.builder()
+                                    .set(DataComponents.POTION_CONTENTS, new PotionContents(Potions.INVISIBILITY))
+                                    .build()),
                             Component.translatable("advancements.kill_illusioner.title"),
                             Component.translatable("advancements.kill_illusioner.description"),
                             null,

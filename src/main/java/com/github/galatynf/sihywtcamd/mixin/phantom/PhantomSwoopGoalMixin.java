@@ -16,12 +16,12 @@ import net.minecraft.world.entity.monster.Phantom;
 
 @Mixin(targets = "net.minecraft.world.entity.monster.Phantom$PhantomSweepAttackGoal")
 public abstract class PhantomSwoopGoalMixin {
-    @Final @Shadow Phantom field_7333;
+    @Final @Shadow Phantom this$0;
 
     @Inject(method = "canContinueToUse()Z", at = @At("HEAD"), cancellable = true)
     private void fearLight(CallbackInfoReturnable<Boolean> cir) {
         if (ModConfig.get().undead.phantom.lightFear
-                && this.field_7333.level().getMaxLocalRawBrightness(this.field_7333.blockPosition(), 15) > 10) {
+                && this.this$0.level().getMaxLocalRawBrightness(this.this$0.blockPosition(), 15) > 10) {
             cir.setReturnValue(false);
         }
     }

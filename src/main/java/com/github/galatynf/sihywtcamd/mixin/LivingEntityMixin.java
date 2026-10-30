@@ -49,7 +49,7 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(method = "calculateFallDamage", at = @At("HEAD"), cancellable = true)
     private void cancelArthropodFallDamage(double fallDistance, float damagePerDistance, CallbackInfoReturnable<Integer> cir) {
-        if (ModConfig.get().arthropods.general.noFallDamage && this.getType().is(EntityTypeTags.ARTHROPOD)) {
+        if (ModConfig.get().arthropods.general.noFallDamage && this.is(EntityTypeTags.ARTHROPOD)) {
             cir.setReturnValue(0);
         }
     }
@@ -62,7 +62,7 @@ public abstract class LivingEntityMixin extends Entity {
 
         if (ModConfig.get().undead.general.attackHeal
                 && source.getEntity() instanceof LivingEntity attacker
-                && attacker.getType().is(EntityTypeTags.UNDEAD)
+                && attacker.is(EntityTypeTags.UNDEAD)
                 && !(attacker instanceof WitherBoss)) {
             float healthLost = healthBefore - instance.getHealth() - instance.getAbsorptionAmount();
             if (healthLost > 0) {

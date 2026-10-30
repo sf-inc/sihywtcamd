@@ -78,6 +78,6 @@ public class BiomeSpawn {
         Preconditions.checkState(BuiltInRegistries.ENTITY_TYPE.getResourceKey(entityType).isPresent(), "Unregistered entity type: %s", entityType);
 
         BiomeModifications.create(id).add(ModificationPhase.ADDITIONS, biomeSelector,
-                context -> context.getSpawnSettings().removeSpawnsOfEntityType(entityType));
+                context -> context.getMobSpawnSettings().removeSpawnsOfEntityType(entityType));
     }
 }

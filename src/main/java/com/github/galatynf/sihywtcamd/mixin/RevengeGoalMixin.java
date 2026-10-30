@@ -19,9 +19,9 @@ public abstract class RevengeGoalMixin extends TargetGoal {
     @Inject(method = "canUse", at = @At("HEAD"), cancellable = true)
     private void ignoreUndeadAttacks(CallbackInfoReturnable<Boolean> cir) {
         if (ModConfig.get().undead.general.ignoreUndeadAttacks
-                && this.mob.getType().is(EntityTypeTags.UNDEAD)
+                && this.mob.is(EntityTypeTags.UNDEAD)
                 && this.mob.getLastHurtByMob() != null
-                && this.mob.getLastHurtByMob().getType().is(EntityTypeTags.UNDEAD)) {
+                && this.mob.getLastHurtByMob().is(EntityTypeTags.UNDEAD)) {
             cir.setReturnValue(false);
         }
     }

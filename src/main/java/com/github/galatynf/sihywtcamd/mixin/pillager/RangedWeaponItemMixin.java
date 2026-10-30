@@ -29,7 +29,7 @@ public class RangedWeaponItemMixin {
         Optional<PillagerEntityComponentAPI> pillagerComponent = MyComponents.PILLAGER_COMPONENT.maybeGet(shooter);
         if (pillagerComponent.isEmpty() || !pillagerComponent.get().hasFireworkRocket()) return original;
 
-        if (world.random.nextBoolean()) {
+        if (world.getRandom().nextBoolean()) {
             pillagerComponent.get().setFireworkRocket(false);
         }
 
