@@ -9,25 +9,32 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.EntityTypeTags;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import static com.github.galatynf.sihywtcamd.Sihywtcamd.id;
+
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
+    @Unique
+    private static final Identifier RIDDEN_HORSE_SPEED_ID = id("ridden_horse_speed");
+
     public LivingEntityMixin(EntityType<?> type, World world) {
         super(type, world);
     }
@@ -64,19 +71,40 @@ public abstract class LivingEntityMixin extends Entity {
         }
     }
 
-    @ModifyVariable(method = "applyMovementInput", at = @At("HEAD"), argsOnly = true)
-    private Vec3d updateHorseInput(Vec3d movementInput) {
+    @Inject(method = "tickMovement", at = @At("HEAD"))
+    private void updateRiddenHorseSpeed(CallbackInfo ci) {
+        if (this.getEntityWorld().isClient()
+                || !(this.getType().equals(EntityType.SKELETON_HORSE) || this.getType().equals(EntityType.ZOMBIE_HORSE))) {
+            return;
+        }
+        EntityAttributeInstance movementSpeed = this.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED);
+        if (movementSpeed == null) return;
+
+        double multiplier = this.getRiddenHorseSpeedMultiplier();
+        if (multiplier > 1.0) {
+            if (!movementSpeed.hasModifier(RIDDEN_HORSE_SPEED_ID)) {
+                // Mob ground velocity scales with the square of the movement speed
+                movementSpeed.addTemporaryModifier(new EntityAttributeModifier(RIDDEN_HORSE_SPEED_ID,
+                        Math.sqrt(multiplier) - 1.0, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+            }
+        } else {
+            movementSpeed.removeModifier(RIDDEN_HORSE_SPEED_ID);
+        }
+    }
+
+    @Unique
+    private double getRiddenHorseSpeedMultiplier() {
         if (this.hasControllingPassenger() && this.getFirstPassenger() instanceof MobEntity) {
             if (ModConfig.get().skeletons.skeletonHorse.increasedSpeed
                     && this.getType().equals(EntityType.SKELETON_HORSE)) {
-                return movementInput.multiply(1.0, 1.0, 2.0);
+                return 2.0;
             } else if (ModConfig.get().zombies.zombieHorse.increasedSpeed
                     && this.getType().equals(EntityType.ZOMBIE_HORSE)
                     && ((ZombieHorseIMixin) this).sihywtcamd$isTrapHorse()) {
-                return movementInput.multiply(1.0, 1.0, 2.5);
+                return 2.5;
             }
         }
-        return movementInput;
+        return 1.0;
     }
 
     @Inject(method = "tickRiding", at = @At("TAIL"))

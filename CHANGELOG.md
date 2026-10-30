@@ -69,6 +69,7 @@
 * Fix drowned spawning more often with a trident also making zombie nautilus jockeys more common than in vanilla
 * Fix phantom never targeting players in the end due to end skylight
 * Fix skeleton horse trap riders making their horse spin in place forever when fleeing a player
+* Mob-ridden horse speed bonuses no longer make them overshoot their path
 
 ## v1.11.1
 * Translation files are now sent to client, which avoid missing translation
