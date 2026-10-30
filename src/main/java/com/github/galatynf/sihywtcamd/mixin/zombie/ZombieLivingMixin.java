@@ -2,14 +2,22 @@ package com.github.galatynf.sihywtcamd.mixin.zombie;
 
 import com.github.galatynf.sihywtcamd.Sihywtcamd;
 import com.github.galatynf.sihywtcamd.config.ModConfig;
+import com.github.galatynf.sihywtcamd.imixin.ZombieIMixin;
 import com.github.galatynf.sihywtcamd.mixin.LivingEntityMixin;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.entity.ConversionParams;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.zombie.Zombie;
@@ -26,7 +34,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import static com.github.galatynf.sihywtcamd.Sihywtcamd.id;
 
 @Mixin(Zombie.class)
-public abstract class ZombieLivingMixin extends LivingEntityMixin {
+public abstract class ZombieLivingMixin extends LivingEntityMixin implements ZombieIMixin {
     @Unique
     private static final Identifier CALLER_BONUS_ID = id("caller_zombie_bonus");
     @Unique
@@ -35,6 +43,9 @@ public abstract class ZombieLivingMixin extends LivingEntityMixin {
     private static final Identifier TANK_BONUS_ID = id("tank_zombie_bonus");
     @Unique
     private static final Identifier UNSTOPPABLE_BONUS_ID = id("unstoppable_zombie_bonus");
+
+    @Unique
+    private boolean inheritsAttributes = false;
 
     @Shadow public abstract boolean isBaby();
 
@@ -79,6 +90,11 @@ public abstract class ZombieLivingMixin extends LivingEntityMixin {
     private void applyDifferentAttributes(float chanceMultiplier, EntitySpawnReason spawnReason, CallbackInfo ci) {
         float random = this.random.nextFloat();
         if (ModConfig.get().zombies.general.attributeVariations && !this.isBaby()) {
+            if (this.inheritsAttributes) {
+                ci.cancel();
+                return;
+            }
+
             String name = null;
             if (random < 0.1f) {
                 name = "Caller";
@@ -112,8 +128,56 @@ public abstract class ZombieLivingMixin extends LivingEntityMixin {
         }
     }
 
+    @WrapOperation(method = "convertToZombieType", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/monster/zombie/Zombie;convertTo(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ConversionParams;Lnet/minecraft/world/entity/ConversionParams$AfterConversion;)Lnet/minecraft/world/entity/Mob;"))
+    private Mob keepAttributesOnConversion(Zombie instance, EntityType<?> entityType, ConversionParams conversionParams,
+                                          ConversionParams.AfterConversion<Zombie> finalizer, Operation<Mob> original) {
+        return original.call(instance, entityType, conversionParams,
+                (ConversionParams.AfterConversion<Zombie>) zombie -> {
+            copyBaseValue(instance, zombie, Attributes.KNOCKBACK_RESISTANCE);
+            copyBaseValue(instance, zombie, Attributes.SPAWN_REINFORCEMENTS_CHANCE);
+            copyVariationModifier(instance, zombie, Attributes.SPAWN_REINFORCEMENTS_CHANCE, CALLER_BONUS_ID);
+            copyVariationModifier(instance, zombie, Attributes.MOVEMENT_SPEED, RUNNER_BONUS_ID);
+            copyVariationModifier(instance, zombie, Attributes.KNOCKBACK_RESISTANCE, UNSTOPPABLE_BONUS_ID);
+            if (copyVariationModifier(instance, zombie, Attributes.MAX_HEALTH, TANK_BONUS_ID)) {
+                zombie.setCanBreakDoors(true);
+                zombie.setHealth(zombie.getMaxHealth());
+            }
+            ((ZombieIMixin) zombie).sihywtcamd$setInheritsAttributes(true);
+            finalizer.finalizeConversion(zombie);
+        });
+    }
+
+    @Unique
+    private static void copyBaseValue(Zombie from, Zombie to, Holder<Attribute> attribute) {
+        AttributeInstance fromInstance = from.getAttribute(attribute);
+        AttributeInstance toInstance = to.getAttribute(attribute);
+        if (fromInstance == null || toInstance == null) return;
+
+        toInstance.setBaseValue(fromInstance.getBaseValue());
+    }
+
+    @Unique
+    private static boolean copyVariationModifier(Zombie from, Zombie to, Holder<Attribute> attribute, Identifier id) {
+        AttributeInstance fromInstance = from.getAttribute(attribute);
+        AttributeInstance toInstance = to.getAttribute(attribute);
+        AttributeModifier modifier = fromInstance == null ? null : fromInstance.getModifier(id);
+        if (modifier == null || toInstance == null) return false;
+
+        toInstance.addOrReplacePermanentModifier(modifier);
+        return true;
+    }
+
+    @Override
+    public void sihywtcamd$setInheritsAttributes(boolean inheritsAttributes) {
+        this.inheritsAttributes = inheritsAttributes;
+    }
+
     @Inject(method = "randomizeReinforcementsChance", at = @At("HEAD"), cancellable = true)
     private void initWithIncreasedAttributes(CallbackInfo ci) {
+        if (this.inheritsAttributes) {
+            ci.cancel();
+            return;
+        }
         if (ModConfig.get().zombies.general.moreKnockbackResistance) {
             this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(0.2 + 0.2 * this.random.nextDouble());
         }
