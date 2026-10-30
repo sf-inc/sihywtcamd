@@ -21,7 +21,7 @@ public abstract class PhantomSwoopGoalMixin {
     @Inject(method = "shouldContinue()Z", at = @At("HEAD"), cancellable = true)
     private void fearLight(CallbackInfoReturnable<Boolean> cir) {
         if (ModConfig.get().undead.phantom.lightFear
-                && this.field_7333.getEntityWorld().getLightLevel(this.field_7333.getBlockPos()) > 10) {
+                && this.field_7333.getEntityWorld().getLightLevel(this.field_7333.getBlockPos(), 15) > 10) {
             cir.setReturnValue(false);
         }
     }
