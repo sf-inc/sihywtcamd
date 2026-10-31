@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
+import java.util.Optional;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -18,9 +19,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.boss.enderdragon.EndCrystal;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.EndSpikeFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.EndSpikeConfiguration;
 
 @Mixin(EnderDragon.class)
 public class EnderDragonMixin extends Mob {
@@ -50,8 +49,8 @@ public class EnderDragonMixin extends Mob {
                     world.removeBlock(blockPos, false);
                 }
                 world.explode(null, spike.getCenterX() + 0.5, spike.getHeight(), spike.getCenterZ() + 0.5, 5.0f, Level.ExplosionInteraction.BLOCK);
-                EndSpikeConfiguration endSpikeFeatureConfig = new EndSpikeConfiguration(false, ImmutableList.of(spike), null);
-                Feature.END_SPIKE.place(endSpikeFeatureConfig, world, world.getChunkSource().getGenerator(), RandomSource.create(), new BlockPos(spike.getCenterX(), 45, spike.getCenterZ()));
+                EndSpikeFeature endSpikeFeature = new EndSpikeFeature(ImmutableList.of(spike), false, Optional.empty());
+                endSpikeFeature.place(world, world.getChunkSource().getGenerator(), RandomSource.create(), new BlockPos(spike.getCenterX(), 45, spike.getCenterZ()));
             }
         }
     }

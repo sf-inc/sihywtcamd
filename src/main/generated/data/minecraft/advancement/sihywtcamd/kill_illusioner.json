@@ -3,26 +3,22 @@
   "criteria": {
     "kill_illusioner": {
       "conditions": {
-        "entity": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "minecraft:entity_type": "minecraft:illusioner"
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:illusioner"
+          }
+        },
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:effects": {
+              "minecraft:invisibility": {}
             }
           }
-        ],
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "minecraft:effects": {
-                "minecraft:invisibility": {}
-              }
-            }
-          }
-        ]
+        }
       },
       "trigger": "minecraft:player_killed_entity"
     }

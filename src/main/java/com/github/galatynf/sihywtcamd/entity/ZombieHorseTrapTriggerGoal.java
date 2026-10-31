@@ -87,7 +87,7 @@ public class ZombieHorseTrapTriggerGoal extends Goal {
             zombieHorseEntity.finalizeSpawn((ServerLevel) this.zombieHorse.level(), localDifficulty, EntitySpawnReason.TRIGGERED, null);
             zombieHorseEntity.setPos(this.zombieHorse.getX(), this.zombieHorse.getY(), this.zombieHorse.getZ());
             zombieHorseEntity.push(this.zombieHorse.getRandom().triangle(0.0, 1.1485), 0.0, this.zombieHorse.getRandom().triangle(0.0, 1.1485));
-            zombieHorseEntity.invulnerableTime = 60;
+            zombieHorseEntity.setInvulnerableTime(60);
             zombieHorseEntity.setPersistenceRequired();
             zombieHorseEntity.setTamed(true);
             zombieHorseEntity.setAge(0);
@@ -102,7 +102,7 @@ public class ZombieHorseTrapTriggerGoal extends Goal {
         zombieEntity.finalizeSpawn((ServerLevel) vehicle.level(), localDifficulty, EntitySpawnReason.TRIGGERED,
                 new Zombie.ZombieGroupData(Zombie.getSpawnAsBabyOdds(zombieEntity.getRandom()), false));
         zombieEntity.setPos(vehicle.getX(), vehicle.getY(), vehicle.getZ());
-        zombieEntity.invulnerableTime = 60;
+        zombieEntity.setInvulnerableTime(60);
         zombieEntity.setPersistenceRequired();
 
         zombieEntity.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(item));

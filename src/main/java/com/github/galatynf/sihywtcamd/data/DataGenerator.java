@@ -71,7 +71,6 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                             Items.GOLDEN_CHESTPLATE,
                             Component.translatable("advancements.full_golden_armor.title"),
                             Component.translatable("advancements.full_golden_armor.description"),
-                            null,
                             AdvancementType.GOAL,
                             true,
                             true,
@@ -79,7 +78,7 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                     )
                     .addCriterion("full_golden_armor", InventoryChangeTrigger.TriggerInstance.hasItems(
                             Items.GOLDEN_HELMET, Items.GOLDEN_CHESTPLATE, Items.GOLDEN_LEGGINGS, Items.GOLDEN_BOOTS))
-                    .save(consumer, Sihywtcamd.MOD_ID + "/full_golden_armor");
+                    .save(consumer, Identifier.withDefaultNamespace(Sihywtcamd.MOD_ID + "/full_golden_armor"));
 
             AdvancementHolder bruteCollision = Advancement.Builder.advancement()
                     .parent(Identifier.withDefaultNamespace("nether/root"))
@@ -87,7 +86,6 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                             Items.GOLDEN_AXE,
                             Component.translatable("advancements.zombified_piglin_brute_collision.title"),
                             Component.translatable("advancements.zombified_piglin_brute_collision.description"),
-                            null,
                             AdvancementType.CHALLENGE,
                             true,
                             true,
@@ -95,7 +93,7 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                     )
                     .addCriterion("zombified_piglin_brute_collision", AdvancementRegistry.createBruteCollision())
                     .rewards(AdvancementRewards.Builder.experience(100))
-                    .save(consumer, Sihywtcamd.MOD_ID + "/zombified_piglin_brute_collision");
+                    .save(consumer, Identifier.withDefaultNamespace(Sihywtcamd.MOD_ID + "/zombified_piglin_brute_collision"));
 
             AdvancementHolder deflectFireworkRocket = Advancement.Builder.advancement()
                     .parent(Identifier.withDefaultNamespace("story/deflect_arrow"))
@@ -103,7 +101,6 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                             Items.FIREWORK_ROCKET,
                             Component.translatable("advancements.deflect_firework_rocket.title"),
                             Component.translatable("advancements.deflect_firework_rocket.description"),
-                            null,
                             AdvancementType.TASK,
                             true,
                             true,
@@ -121,7 +118,7 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                                                                     EntityTypes.PILLAGER))))
                                             .blocked(true)
                             ))
-                    .save(consumer, Sihywtcamd.MOD_ID + "/deflect_firework_rocket");
+                    .save(consumer, Identifier.withDefaultNamespace(Sihywtcamd.MOD_ID + "/deflect_firework_rocket"));
 
             AdvancementHolder killIllusioner = Advancement.Builder.advancement()
                     .parent(Identifier.withDefaultNamespace("adventure/kill_a_mob"))
@@ -131,7 +128,6 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                                     .build()),
                             Component.translatable("advancements.kill_illusioner.title"),
                             Component.translatable("advancements.kill_illusioner.description"),
-                            null,
                             AdvancementType.CHALLENGE,
                             true,
                             true,
@@ -143,7 +139,7 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                             EntityPredicate.Builder.entity().entityType(
                                     EntityTypePredicate.of(entityTypeLookup, EntityTypes.ILLUSIONER))))
                     .rewards(AdvancementRewards.Builder.experience(50))
-                    .save(consumer, Sihywtcamd.MOD_ID + "/kill_illusioner");
+                    .save(consumer, Identifier.withDefaultNamespace(Sihywtcamd.MOD_ID + "/kill_illusioner"));
 
             AdvancementHolder killPhantomEnd = Advancement.Builder.advancement()
                     .parent(Identifier.withDefaultNamespace("end/root"))
@@ -151,7 +147,6 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                             Items.PHANTOM_MEMBRANE,
                             Component.translatable("advancements.kill_phantom_end.title"),
                             Component.translatable("advancements.kill_phantom_end.description"),
-                            null,
                             AdvancementType.TASK,
                             true,
                             true,
@@ -161,7 +156,7 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                             EntityPredicate.Builder.entity()
                                     .entityType(EntityTypePredicate.of(entityTypeLookup, EntityTypes.PHANTOM))
                                     .located(LocationPredicate.Builder.inBiome(biomeLookup.getOrThrow(Biomes.THE_END)))))
-                    .save(consumer, Sihywtcamd.MOD_ID + "/kill_phantom_end");
+                    .save(consumer, Identifier.withDefaultNamespace(Sihywtcamd.MOD_ID + "/kill_phantom_end"));
 
             AdvancementHolder babyZombiesTower1 = Advancement.Builder.advancement()
                     .parent(Identifier.withDefaultNamespace("adventure/spyglass_at_parrot"))
@@ -169,7 +164,6 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                             Items.SPYGLASS,
                             Component.translatable("advancements.spyglass_at_baby_1.title"),
                             Component.translatable("advancements.spyglass_at_baby_1.description"),
-                            null,
                             AdvancementType.TASK,
                             true,
                             true,
@@ -183,7 +177,7 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                                             .build()),
                             ItemPredicate.Builder.item().of(itemLookup, Items.SPYGLASS))
                     )
-                    .save(consumer, Sihywtcamd.MOD_ID + "/spyglass_at_baby_1");
+                    .save(consumer, Identifier.withDefaultNamespace(Sihywtcamd.MOD_ID + "/spyglass_at_baby_1"));
 
             AdvancementHolder babyZombiesTower4 = Advancement.Builder.advancement()
                     .parent(babyZombiesTower1)
@@ -191,7 +185,6 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                             Items.SPYGLASS,
                             Component.translatable("advancements.spyglass_at_baby_4.title"),
                             Component.translatable("advancements.spyglass_at_baby_4.description"),
-                            null,
                             AdvancementType.CHALLENGE,
                             true,
                             true,
@@ -209,7 +202,7 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                             ItemPredicate.Builder.item().of(itemLookup, Items.SPYGLASS))
                     )
                     .rewards(AdvancementRewards.Builder.experience(25))
-                    .save(consumer, Sihywtcamd.MOD_ID + "/spyglass_at_baby_4");
+                    .save(consumer, Identifier.withDefaultNamespace(Sihywtcamd.MOD_ID + "/spyglass_at_baby_4"));
 
             AdvancementHolder rideZombieHorse = Advancement.Builder.advancement()
                     .parent(Identifier.withDefaultNamespace("adventure/root"))
@@ -217,7 +210,6 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                             Items.SADDLE,
                             Component.translatable("advancements.ride_zombie_horse.title"),
                             Component.translatable("advancements.ride_zombie_horse.description"),
-                            null,
                             AdvancementType.CHALLENGE,
                             true,
                             true,
@@ -228,7 +220,7 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                                     .vehicle(EntityPredicate.Builder.entity()
                                             .entityType(EntityTypePredicate.of(entityTypeLookup, EntityTypes.ZOMBIE_HORSE)))))
                     .rewards(AdvancementRewards.Builder.experience(10))
-                    .save(consumer, Sihywtcamd.MOD_ID + "/ride_zombie_horse");
+                    .save(consumer, Identifier.withDefaultNamespace(Sihywtcamd.MOD_ID + "/ride_zombie_horse"));
 
             AdvancementHolder convertMagma = Advancement.Builder.advancement()
                     .parent(Identifier.withDefaultNamespace("nether/root"))
@@ -236,7 +228,6 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                             Items.SLIME_BALL,
                             Component.translatable("advancements.convert_magma.title"),
                             Component.translatable("advancements.convert_magma.description"),
-                            null,
                             AdvancementType.CHALLENGE,
                             true,
                             true,
@@ -244,7 +235,7 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                     )
                     .addCriterion("convert_magma", AdvancementRegistry.createMagmaToSlime())
                     .rewards(AdvancementRewards.Builder.experience(20))
-                    .save(consumer, Sihywtcamd.MOD_ID + "/convert_magma");
+                    .save(consumer, Identifier.withDefaultNamespace(Sihywtcamd.MOD_ID + "/convert_magma"));
 
             AdvancementHolder convertSlime = Advancement.Builder.advancement()
                     .parent(convertMagma)
@@ -252,7 +243,6 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                             Items.MAGMA_CREAM,
                             Component.translatable("advancements.convert_slime.title"),
                             Component.translatable("advancements.convert_slime.description"),
-                            null,
                             AdvancementType.CHALLENGE,
                             true,
                             true,
@@ -260,7 +250,7 @@ public class DataGenerator implements DataGeneratorEntrypoint {
                     )
                     .addCriterion("convert_slime", AdvancementRegistry.createSlimeToMagma())
                     .rewards(AdvancementRewards.Builder.experience(30))
-                    .save(consumer, Sihywtcamd.MOD_ID + "/convert_slime");
+                    .save(consumer, Identifier.withDefaultNamespace(Sihywtcamd.MOD_ID + "/convert_slime"));
         }
 
         private static EntityPredicate.Builder babyZombie(HolderGetter<EntityType<?>> entityTypeLookup) {

@@ -12,7 +12,7 @@ import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.boss.enderdragon.phases.AbstractDragonPhaseInstance;
 import net.minecraft.world.entity.boss.enderdragon.phases.DragonSittingFlamingPhase;
-import net.minecraft.world.entity.monster.EnderMan;
+import net.minecraft.world.entity.monster.Enderman;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.entity.EntityTypeTest;
 import net.minecraft.world.phys.AABB;
@@ -30,9 +30,9 @@ public abstract class SittingFlamingPhaseMixin extends AbstractDragonPhaseInstan
         if (ModConfig.get().bosses.enderDragon.controlEndermanWhenLanding
                 && this.flameTicks % 20 == 0) {
             AABB box = this.dragon.getBoundingBox().inflate(5.0,0.0,5.0).move(0.0, -3.0, 0.0);
-            List<EnderMan> endermen = this.dragon.level().getEntities(
-                    EntityTypeTest.forClass(EnderMan.class), box, EntitySelector.ENTITY_STILL_ALIVE);
-            for (EnderMan enderman : endermen) {
+            List<Enderman> endermen = this.dragon.level().getEntities(
+                    EntityTypeTest.forClass(Enderman.class), box, EntitySelector.ENTITY_STILL_ALIVE);
+            for (Enderman enderman : endermen) {
                 if (enderman.getTarget() == null || !enderman.getTarget().isAlwaysTicking()) {
                     Player player = this.dragon.level().getNearestPlayer(enderman.getX(), enderman.getY(), enderman.getZ(), 16.0, true);
                     if (player != null) {

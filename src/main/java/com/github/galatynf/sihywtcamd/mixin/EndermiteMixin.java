@@ -4,6 +4,7 @@ import com.github.galatynf.sihywtcamd.config.ModConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -42,7 +43,7 @@ public abstract class EndermiteMixin extends MobEntityMixin {
             int maxY = world.getMinY() + world.getLogicalHeight() - 1;
             for (BlockPos pos : BlockPos.randomInCube(this.random, 16, oldPos, 8)) {
                 int y = Mth.clamp(pos.getY(), world.getMinY(), maxY);
-                if (!target.randomTeleport(pos.getX() + 0.5, y, pos.getZ() + 0.5, true)) {
+                if (!target.randomTeleport(pos.getX() + 0.5, y, pos.getZ() + 0.5, true, BlockTags.CONSUMABLE_DOES_NOT_TELEPORT_TO)) {
                     continue;
                 }
 

@@ -78,10 +78,11 @@ public abstract class WitherMixin extends Monster {
                     int x = Mth.floor(sihywtcamd_SKELETONS_SPAWN_DISTANCE * Mth.cos(i * deltaAngle));
                     int z = Mth.floor(sihywtcamd_SKELETONS_SPAWN_DISTANCE * Mth.sin(i * deltaAngle));
                     BlockPos center = this.blockPosition().offset(x, 0, z);
-                    Optional<BlockPos> blockPos = BlockPos.findClosestMatch(center, 3, 6,
+                    Optional<BlockPos> blockPos = serverWorld.findBlocksInBoxByManhattanDistance(center, 3, 6).filterPos(
                                     pos -> serverWorld.getBlockState(pos.below()).isFaceSturdy(serverWorld, pos.below(), Direction.UP)
-                                            && this.hasRoomForSkeleton(serverWorld, pos))
-                            .or(() -> BlockPos.findClosestMatch(center, 3, 3, pos -> this.hasRoomForSkeleton(serverWorld, pos)));
+                                            && this.hasRoomForSkeleton(serverWorld, pos)).findFirst()
+                            .or(() -> serverWorld.findBlocksInBoxByManhattanDistance(center, 3, 3)
+                                    .filterPos(pos -> this.hasRoomForSkeleton(serverWorld, pos)).findFirst());
                     blockPos.ifPresent(pos -> EntityTypes.WITHER_SKELETON.spawn(serverWorld, pos, EntitySpawnReason.EVENT));
                 }
             }

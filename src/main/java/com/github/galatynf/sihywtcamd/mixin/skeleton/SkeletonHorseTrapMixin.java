@@ -79,7 +79,7 @@ public abstract class SkeletonHorseTrapMixin {
 
         skeletonEntity.finalizeSpawn((ServerLevel) vehicle.level(), localDifficulty, EntitySpawnReason.TRIGGERED, null);
         skeletonEntity.setPos(vehicle.getX(), vehicle.getY(), vehicle.getZ());
-        skeletonEntity.invulnerableTime = 60;
+        skeletonEntity.setInvulnerableTime(60);
         skeletonEntity.setPersistenceRequired();
 
         if (skeletonEntity.getItemBySlot(EquipmentSlot.HEAD).isEmpty()) {

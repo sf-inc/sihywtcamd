@@ -53,6 +53,7 @@
     "vex.VexMixin",
     "wither.WitherMixin",
     "wither.WitherSkullMixin",
+    "zombie.ConversionTrackerMixin",
     "zombie.DrownedMixin",
     "zombie.HuskMixin",
     "zombie.ZombieHorseMobMixin",

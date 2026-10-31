@@ -6,28 +6,26 @@
         "item": {
           "items": "minecraft:spyglass"
         },
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "minecraft:type_specific/player": {
-                "looking_at": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:type_specific/player": {
+              "looking_at": {
+                "minecraft:entity_type": "#minecraft:zombies",
+                "minecraft:flags": {
+                  "is_baby": true
+                },
+                "minecraft:passenger": {
                   "minecraft:entity_type": "#minecraft:zombies",
                   "minecraft:flags": {
                     "is_baby": true
-                  },
-                  "minecraft:passenger": {
-                    "minecraft:entity_type": "#minecraft:zombies",
-                    "minecraft:flags": {
-                      "is_baby": true
-                    }
                   }
                 }
               }
             }
           }
-        ]
+        }
       },
       "trigger": "minecraft:using_item"
     }

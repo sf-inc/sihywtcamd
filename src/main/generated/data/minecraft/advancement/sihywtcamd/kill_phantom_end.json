@@ -3,18 +3,16 @@
   "criteria": {
     "kill_phantom_end": {
       "conditions": {
-        "entity": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "minecraft:entity_type": "minecraft:phantom",
-              "minecraft:location": {
-                "biomes": "minecraft:the_end"
-              }
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:phantom",
+            "minecraft:location": {
+              "biomes": "minecraft:the_end"
             }
           }
-        ]
+        }
       },
       "trigger": "minecraft:player_killed_entity"
     }
